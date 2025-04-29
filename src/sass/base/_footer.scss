@@ -1,0 +1,55 @@
+.footer {
+    background-color: $color-primary;
+    padding: 0.5rem 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+  
+.nav-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+  
+.footer-link {
+    flex: 1;
+    text-align: center;
+    color: $color-white;
+    text-decoration: none;
+    font-family: $font-body;
+    font-size: 0.7rem;
+
+    i {
+        display: block;
+        font-size: 1.6rem;
+        margin-bottom: 0.1rem; 
+        line-height: 1;
+    }
+
+}
+
+.add-btn {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-white;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+  
