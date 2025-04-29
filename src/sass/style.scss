@@ -6,6 +6,7 @@ Table of Contents
 4. Header
 5. Footer
 6. Media Queries
+7. Elements
 */
 
 /* 1. Variables =================== */
@@ -25,3 +26,6 @@ Table of Contents
 
 /* 6. Media Queries =============== */
 @import "media/media";
+
+/* 7. Elements =============== */
+@import "base/elements";

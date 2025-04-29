@@ -1,22 +1,21 @@
-import express from 'express';
-import path from 'path';
-const ejsMate = require('ejs-mate');
 import bodyParser from "body-parser";
+import express from "express";
+import path from "path";
+const ejsMate = require("ejs-mate");
 
 const app = express();
 const port = 3000;
 
-app.engine('ejs', ejsMate); 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.engine("ejs", ejsMate);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("home", { content: "buying" });
+  res.render("home", { content: "buying", title: "Home" });
 });
 
 app.get("/buying", (req, res) => {
@@ -28,6 +27,5 @@ app.get("/renting", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`); 
-
+  console.log(`Server running on http://localhost:${port}`);
 });
