@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "build": "tsc",
     "sass": "sass src/sass/style.scss public/css/style.css --watch",
     "start": "tsx watch src/app.ts"
   },
@@ -25,9 +27,12 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+
+    "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }
 }
+
