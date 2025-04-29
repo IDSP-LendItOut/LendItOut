@@ -1,0 +1,175 @@
+/*
+Table of Contents
+1. Variables
+2. Reset
+3. Typography
+4. Header
+5. Footer
+6. Media Queries
+*/
+/* 1. Variables =================== */
+/* 2. Reset ======================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* 3. Typography ================== */
+/* 4. Header ====================== */
+.header {
+  background-color: #556C40;
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.header .header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 1rem;
+}
+.header .header-top .header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.header .header-top .header-left .app-name {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+.header .header-top .header-left .page-title {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0.2rem;
+}
+.header .header-top .header-icons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+}
+.header .header-top .header-icons .icon {
+  color: white;
+  font-size: 2rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.header .search-bar {
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+.header .search-bar input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 5. Footer ====================== */
+.footer {
+  background-color: #556C40;
+  padding: 0.5rem 0;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.nav-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.footer-link {
+  flex: 1;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 0.7rem;
+}
+.footer-link i {
+  display: block;
+  font-size: 1.6rem;
+  margin-bottom: 0.1rem;
+  line-height: 1;
+}
+
+.add-btn {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: #556C40;
+  border: 2px solid #556C40;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+/* 6. Media Queries =============== */
+
+/*# sourceMappingURL=style.css.map */
