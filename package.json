@@ -1,22 +1,33 @@
 {
-  "name": "idsp_sooah",
+  "name": "idsp",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
+    "sass": "sass src/sass/style.scss public/css/style.css --watch",
     "start": "tsx watch src/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IDSP-LendItOut/LendItOut.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/IDSP-LendItOut/LendItOut/issues"
+  },
+  "homepage": "https://github.com/IDSP-LendItOut/LendItOut#readme",
   "dependencies": {
-    "body-parser": "^2.2.0",
     "ejs": "^3.1.10",
+    "ejs-mate": "^4.0.0",
     "express": "^5.1.0"
   },
   "devDependencies": {
+
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.3",
@@ -24,3 +35,4 @@
     "typescript": "^5.8.3"
   }
 }
+
