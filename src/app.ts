@@ -66,8 +66,27 @@ const items = [
 ];
 
 app.get("/listings", (req, res) => {
-  res.render("hs", { items });
+  res.render("hs", { items })});
+
+const users = [
+  {
+    name: "Matheus",
+    rating: 5,
+    review: "The camera I purchased was in excellent condition. Thanks!",
+    image: "https://picsum.photos/300/300"
+  },
+  {
+    name: "John",
+    rating: 4,
+    review: "The camera I purchased was in excellent condition. Thanks!",
+    image: "https://picsum.photos/300/300"
+  }
+]
+
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: "Profile", content: "profile" , items, users });
 });
+
 
 // home
 app.get("/", (req, res) => {
@@ -82,13 +101,6 @@ app.get("/renting", (req, res) => {
   res.render("home", { title: "Home", content: "renting", items });
 });
 
-app.get("/buying-page", (req, res) => {
-  res.render("home/buying", { title: "Home", content: "buying" });
-});
-
-app.get("/renting-page", (req, res) => {
-  res.render("home/renting", { title: "Home", content: "renting" });
-});
 
 // profile
 app.get("/profile", (req, res) => {

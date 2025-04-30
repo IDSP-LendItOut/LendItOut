@@ -10,7 +10,7 @@ Table of Contents
 8. Cards
 9. Grid Layout
 10. Content
-
+11. Reviews
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -236,6 +236,7 @@ video {
 }
 .filter-rent-and-buy .tab-buttons button:not(.active) {
   color: #888;
+  width: 100%;
 }
 
 .profile-header .profile-background img {
@@ -391,4 +392,52 @@ video {
   text-decoration: underline;
 }
 
-/*# sourceMappingURL=style.css.map */
+/* 11. Reviews =================== */
+.listings .section-header a {
+  color: black;
+  text-decoration: none;
+}
+
+.listings .section-header a:hover {
+  text-decoration: underline;
+}
+
+.reviews-grid {
+  display: flex; /* Use flexbox for the grid */
+  flex-wrap: wrap; /* Allow wrapping of cards */
+  gap: 12px; /* Space between cards */
+  justify-content: center; /* Center the cards */
+}
+
+.review-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: calc(50% - 12px); /* Two cards per row on mobile */
+  max-width: 280px;
+}
+.review-card .review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.review-card .review-details .review-name {
+  font-weight: 600;
+  margin: 0;
+}
+.review-card .review-details .review-rating {
+  font-size: 14px;
+  color: #ffc107;
+  margin: 2px 0;
+}
+.review-card .review-details .review-text {
+  font-size: 10px;
+  color: #333;
+  margin: 0;
+}/*# sourceMappingURL=style.css.map */
