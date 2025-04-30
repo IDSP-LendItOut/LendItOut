@@ -70,29 +70,34 @@ video {
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .header .header-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-left: 1rem;
 }
+
 .header .header-top .header-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+
 .header .header-top .header-left .app-name {
   font-family: "Helvetica Neue", sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
   margin: 0;
 }
+
 .header .header-top .header-left .page-title {
   font-family: "Helvetica Neue", sans-serif;
   font-size: 2rem;
   font-weight: bold;
   margin-top: 0.2rem;
 }
+
 .header .header-top .header-icons {
   display: flex;
   align-items: center;
@@ -100,16 +105,19 @@ video {
   margin-top: 0.5rem;
   margin-right: 1rem;
 }
+
 .header .header-top .header-icons .icon {
   color: white;
   font-size: 2rem;
   text-decoration: none;
   transition: color 0.2s ease;
 }
+
 .header .search-bar {
   margin-top: 1rem;
   padding: 0 1rem;
 }
+
 .header .search-bar input {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -148,6 +156,7 @@ video {
   font-family: "Helvetica Neue", sans-serif;
   font-size: 0.7rem;
 }
+
 .footer-link i {
   display: block;
   font-size: 1.6rem;
@@ -180,14 +189,17 @@ video {
 .filter-rent-and-buy {
   width: 100%;
 }
-.filter-rent-and-buy .category-top {
+
+.category-top {
   display: flex;
   justify-content: space-between;
   margin: 10px;
 }
+
 .filter-rent-and-buy .category-top p {
   font-size: 12px;
 }
+
 .filter-rent-and-buy .category-image {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -196,22 +208,26 @@ video {
   text-align: center;
   margin: 10px;
 }
+
 .filter-rent-and-buy .category-image div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .filter-rent-and-buy .category-image img {
   border-radius: 100%;
   width: 4rem;
   height: 4rem;
 }
+
 .filter-rent-and-buy .category-image p {
   width: 5rem;
   font-size: 10px;
   justify-content: center;
   text-align: center;
 }
+
 .filter-rent-and-buy .tab-buttons {
   display: flex;
   background-color: #f0f0f0;
@@ -220,6 +236,7 @@ video {
   width: 15rem;
   margin: 20px auto;
 }
+
 .filter-rent-and-buy .tab-buttons button {
   border: none;
   background: none;
@@ -229,11 +246,13 @@ video {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
+
 .filter-rent-and-buy .tab-buttons button.active {
   background-color: white;
   font-weight: bold;
   color: black;
 }
+
 .filter-rent-and-buy .tab-buttons button:not(.active) {
   color: #888;
 }
@@ -243,20 +262,24 @@ video {
   height: 100px;
   object-fit: cover;
 }
+
 .profile-header .profile-info {
   display: flex;
   margin-left: 1rem;
 }
+
 .profile-header .profile-info .profile-img {
   flex-shrink: 0;
   margin-top: -50px;
 }
+
 .profile-header .profile-info img {
   border-radius: 100%;
   width: 100px;
   height: 100px;
   border: 1px solid black;
 }
+
 .profile-header .rating {
   display: flex;
   justify-content: center;
@@ -268,27 +291,34 @@ video {
   border-radius: 15px;
   padding: 0.3rem 0;
 }
+
 .profile-header .rating .star {
   color: #FFD700;
 }
+
 .profile-header .user-details {
   margin: 0.5rem auto auto 0.8rem;
 }
+
 .profile-header .user-details h3 {
   font-size: 1.3rem;
 }
+
 .profile-header .user-details p {
   font-size: 0.9rem;
 }
+
 .profile-header .user-details .user-stats {
   display: flex;
   gap: 1rem;
   margin-top: 0.5rem;
 }
+
 .profile-header .profile-more-btn {
   margin: 0.3rem 1rem;
   font-size: 1.2rem;
 }
+
 .profile-header .profile-btns {
   display: flex;
   gap: 0.5rem;
@@ -298,6 +328,7 @@ video {
   font-size: 0.9rem;
   justify-content: center;
 }
+
 .profile-header .profile-btns button {
   padding: 0.3rem;
   border: 1px solid black;
@@ -307,9 +338,11 @@ video {
   text-align: center;
   flex-shrink: 1;
 }
+
 .profile-header .profile-btns .edit {
   flex: 0 0 calc(40% - 0.25rem);
 }
+
 .profile-header .profile-btns .insight,
 .profile-header .profile-btns .contract {
   flex: 0 0 calc(20% - 0.25rem);
@@ -317,78 +350,99 @@ video {
 
 /* 8. Cards ======================= */
 .item-card {
-  flex: 0 0 auto; /* Prevent shrinking and ensure cards maintain their size */
-  width: 150px; /* Set a fixed width for each card */
+  flex: 0 0 auto;
+  /* Prevent shrinking and ensure cards maintain their size */
+  width: 150px;
+  /* Set a fixed width for each card */
   background: white;
   border-radius: 10px;
   padding: 10px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .item-card img {
   width: 100%;
   height: 100px;
   object-fit: cover;
   border-radius: 8px;
 }
+
 .item-card .item-details {
   margin-top: 10px;
 }
+
 .item-card .item-details .item-name {
   font-size: 14px;
   font-weight: bold;
   color: #333;
   margin: 5px 0;
 }
+
 .item-card .item-details .item-price {
   font-size: 14px;
   color: #666;
 }
+
 .item-card .item-details .item-status {
   font-size: 12px;
   margin-top: 5px;
 }
+
 .item-card .item-details .item-status.for-sale {
   color: green;
 }
+
 .item-card .item-details .item-status.for-rent {
   color: orange;
 }
 
 /* 9. Grid Layout ================= */
 .scroll-container {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  overflow-x: auto;
+  /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
   padding: 10px 0;
 }
+
 .scroll-container .item-grid {
-  display: flex; /* Arrange items in a row */
-  flex-wrap: nowrap; /* Prevent wrapping */
-  gap: 16px; /* Add spacing between cards */
+  display: flex;
+  /* Arrange items in a row */
+  flex-wrap: nowrap;
+  /* Prevent wrapping */
+  gap: 16px;
+  /* Add spacing between cards */
 }
 
 /* 10. Content ================= */
 .listings {
   padding: 20px;
 }
+
 .listings .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
+
 .listings .section-header h2 {
   font-size: 24px;
   font-weight: bold;
   color: #333;
 }
+
 .listings .section-header a {
   font-size: 14px;
   color: #007bff;
   text-decoration: none;
 }
+
 .listings .section-header a:hover {
   text-decoration: underline;
 }
+
+
 
 /*# sourceMappingURL=style.css.map */
