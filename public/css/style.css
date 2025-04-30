@@ -311,25 +311,19 @@ video {
 .logout-section {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
+  margin: 2rem 0;
 }
 .logout-section .logout-btn {
-  background-color: #556C40;
+  background-color: #5b6d45;
   color: white;
   border: none;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 2rem;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 .logout-section .logout-btn:hover {
-  background-color: #8D9D7F;
+  background-color: #495837;
 }
 
 /* 8. Cards ======================= */
@@ -408,21 +402,26 @@ video {
   text-decoration: underline;
 }
 
-.profile-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-top: 2rem;
+.profile-settings-card {
+  margin: 1.5rem;
+  overflow: hidden;
 }
-.profile-actions .action-link {
+.profile-settings-card .profile-setting-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
   font-size: 1rem;
-  color: black;
   text-decoration: none;
-  background-color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  width: 200px;
-  text-align: center;
-  border-top: 1px solid #CFCFCF;
+  border-bottom: 1px solid lightgray;
+}
+.profile-settings-card .profile-setting-link:last-child {
+  border-bottom: none;
+}
+.profile-settings-card .profile-setting-link span:hover {
+  color: #495837;
+}
+.profile-settings-card .profile-setting-link i {
+  color: grey;
+  font-size: 0.9rem;
 }/*# sourceMappingURL=style.css.map */
