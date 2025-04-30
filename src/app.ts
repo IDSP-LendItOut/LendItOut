@@ -67,6 +67,25 @@ const items = [
   }
 ];
 
+const users = [
+  {
+    name: "Matheus",
+    rating: 5,
+    review: "The camera I purchased was in excellent condition. Thanks!",
+    image: "https://picsum.photos/300/300"
+  },
+  {
+    name: "John",
+    rating: 4,
+    review: "The camera I purchased was in excellent condition. Thanks!",
+    image: "https://picsum.photos/300/300"
+  }
+]
+
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: "Profile", content: "profile" , items, users });
+});
+
 app.get('/listings', (req, res) => {
   res.render('hs', { items }); 
 });
