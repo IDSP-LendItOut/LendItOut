@@ -6,9 +6,11 @@ Table of Contents
 4. Header
 5. Footer
 6. Media Queries
+7. Elements
 8. Cards
-8. Grid Layout
-9. Content
+9. Grid Layout
+10. Content
+
 */
 
 /* 1. Variables =================== */
@@ -29,14 +31,15 @@ Table of Contents
 /* 6. Media Queries =============== */
 @import "media/media";
 
-/* 7. Cards ======================= */
+/* 7. Elements =============== */
+@import "base/elements";
+
+/* 8. Cards ======================= */
 @import "components/cards";
 
-/* 8. Grid Layout ================= */
+/* 9. Grid Layout ================= */
 @import "components/grid";
 
-/* 9. Content ================= */
+/* 10. Content ================= */
 @import "layout/content";
 
-/* 10. Elements ================== */
-@import "base/elements";
