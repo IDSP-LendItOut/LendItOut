@@ -1,3 +1,54 @@
-<% layout('layout') %>
+    <% layout('layout') %>
 
-<h2>Welcome</h2>
+
+    <div class="filter-rent-and-buy">
+  
+      <div class="tab-buttons">
+        <button id="buyingBtn" class="active">Buying</button>
+        <button id="rentingBtn">Renting</button>
+        <!-- <form action="/buying" method="get" style="display: inline;">
+          <button type="submit" id="buyingBtn">Buying</button>
+        </form>
+  
+        <form action="/renting" method="get" style="display: inline;">
+          <button type="submit" id="rentingBtn">Renting</button>
+        </form> -->
+      </div>
+  
+      <div class="category-box">
+        <div class="category-top">
+          <p>Categories</p>
+          <p><a href="/">See all categories</a></p>
+        </div>
+        <div class="category-image">
+          <div>
+            <img src="https://picsum.photos/300/300" alt="Electronics & Gadgets">
+            <p>Electronics & Gadgets</p>
+          </div>
+          <div>
+            <img src="https://picsum.photos/300/300" alt="Fashion & Apparel">
+            <p>Fashion & Apparel</p>
+          </div>
+          <div>
+            <img src="https://picsum.photos/300/300" alt="Home & Furniture">
+            <p>Home & Furniture</p>
+          </div>
+          <div>
+            <img src="https://picsum.photos/300/300" alt="Beauty & Personal Care">
+            <p>Beauty & Personal Care</p>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  
+    <div id="content">
+      <% if (content === 'buying') { %>
+      <h3>buying content</h3>
+      <% } else { %>
+      <h3>renting content</h3>
+      <% } %>
+
+      <%- include('hs', { items }) %>
+    </div>

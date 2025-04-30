@@ -6,6 +6,9 @@ Table of Contents
 4. Header
 5. Footer
 6. Media Queries
+8. Cards
+8. Grid Layout
+9. Content
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -171,5 +174,148 @@ video {
 }
 
 /* 6. Media Queries =============== */
+/* 7. Cards ======================= */
+.item-card {
+  flex: 0 0 auto; /* Prevent shrinking and ensure cards maintain their size */
+  width: 150px; /* Set a fixed width for each card */
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.item-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.item-card .item-details {
+  margin-top: 10px;
+}
+.item-card .item-details .item-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0;
+}
+.item-card .item-details .item-price {
+  font-size: 14px;
+  color: #666;
+}
+.item-card .item-details .item-status {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.item-card .item-details .item-status.for-sale {
+  color: green;
+}
+.item-card .item-details .item-status.for-rent {
+  color: orange;
+}
+
+/* 8. Grid Layout ================= */
+.scroll-container {
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  padding: 10px 0;
+}
+.scroll-container .item-grid {
+  display: flex; /* Arrange items in a row */
+  flex-wrap: nowrap; /* Prevent wrapping */
+  gap: 16px; /* Add spacing between cards */
+}
+
+/* 9. Content ================= */
+.listings {
+  padding: 20px;
+}
+.listings .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.listings .section-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+.listings .section-header a {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+.listings .section-header a:hover {
+  text-decoration: underline;
+}
+
+/* 10. Elements ================== */
+.filter-rent-and-buy {
+  width: 100%;
+}
+
+.category-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+.category-top p {
+  font-size: 12px;
+}
+
+.category-image {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+}
+.category-image div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.category-image img {
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+}
+.category-image p {
+  width: 5rem;
+  font-size: 10px;
+  justify-content: center;
+  text-align: center;
+}
+
+.tab-buttons {
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 25px;
+  padding: 5px;
+  width: 15rem;
+  margin: 20px auto;
+}
+
+.tab-buttons button {
+  border: none;
+  background: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-buttons button.active {
+  background-color: white;
+  font-weight: bold;
+  color: black;
+}
+
+.tab-buttons button:not(.active) {
+  color: #888;
+}
 
 /*# sourceMappingURL=style.css.map */
