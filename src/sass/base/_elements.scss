@@ -71,11 +71,10 @@
   
   .tab-buttons button:not(.active) {
     color: #888;
+    width: 100%;
+    // margin: auto;
   }
-=======
-  width: 100%;
-  // margin: auto;
-}
+
 
 .category-top {
   display: flex;
