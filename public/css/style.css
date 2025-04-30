@@ -308,6 +308,30 @@ video {
   color: #888;
 }
 
+.logout-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.logout-section .logout-btn {
+  background-color: #556C40;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.logout-section .logout-btn:hover {
+  background-color: #8D9D7F;
+}
+
 /* 8. Cards ======================= */
 .item-card {
   flex: 0 0 auto; /* Prevent shrinking and ensure cards maintain their size */
@@ -382,4 +406,23 @@ video {
 }
 .listings .section-header a:hover {
   text-decoration: underline;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.profile-actions .action-link {
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  width: 200px;
+  text-align: center;
+  border-top: 1px solid #CFCFCF;
 }/*# sourceMappingURL=style.css.map */
