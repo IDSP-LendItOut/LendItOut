@@ -1,3 +1,60 @@
 <% layout('layout') %>
 
-<%- include('listingspp', { items }) %>
+<div class="profile-header">
+  <div class="profile-background">
+    <img src="https://picsum.photos/600/200" alt="profile-background">
+  </div>
+
+  <div class="profile-info">
+    <div class="profile-img">
+      <img src="https://picsum.photos/100" alt="profile-img">
+
+      <div class="rating">
+        <span class="star">★</span>
+        <span class="score">5.0</span>
+        <span class="count">(10)</span>
+      </div>
+
+    </div>
+
+
+    <div class="user-details">
+      <h3>Marissa Clark</h3>
+      <p>Joined in 2020</p>
+      <p>Richmond, BC</p>
+
+      <div class="user-stats">
+
+        <div>
+          <p>40</p>
+          <p>Listings</p>
+        </div>
+
+        <div>
+          <p>40</p>
+          <p>Followers</p>
+        </div>
+
+        <div>
+          <p>40</p>
+          <p>Following</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="profile-more-btn">
+      <button id="profile-more">
+        <i class="fas fa-ellipsis-h"></i>
+      </button>
+    </div> -->
+
+  </div>
+
+
+  <div class="profile-btns" id="profile-btns">
+    <button class="edit" data-route="/editProfile"><i class="fas fa-pen"></i> Edit Profile</button>
+    <button class="insight" data-route="/insight"><i class="fas fa-chart-line"></i> Insights</button>
+    <button class="contract" data-route="/contract"><i class="fas fa-file-contract"></i> Contracts</button>
+  </div>
+
+</div>
