@@ -1,22 +1,20 @@
-import express from 'express';
-import path from 'path';
-import ejsMate from 'ejs-mate';
-import bodyParser from 'body-parser';
+import bodyParser from "body-parser";
+import ejsMate from "ejs-mate";
+import express from "express";
+import path from "path";
 
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
 const app = express();
 const port = 6563;
 
-app.engine('ejs', ejsMate as any); 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
+app.engine("ejs", ejsMate as any);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 
@@ -28,44 +26,47 @@ const items = [
     name: "Item 4",
     price: "$69.99",
     status: "For Sale",
-    statusClass: "for-sale"
+    statusClass: "for-sale",
   },
   {
     image: "https://picsum.photos/300/300",
     name: "Item 5",
     price: "$190",
     status: "For Sale",
-    statusClass: "for-sale"
+    statusClass: "for-sale",
   },
   {
     image: "https://picsum.photos/300/300",
     name: "Item 6",
     price: "$80/day",
     status: "For Rent",
-    statusClass: "for-rent"
+    statusClass: "for-rent",
   },
   {
     image: "https://picsum.photos/300/300",
     name: "Item 6",
     price: "$80/day",
     status: "For Rent",
-    statusClass: "for-rent"
+    statusClass: "for-rent",
   },
   {
     image: "https://picsum.photos/300/300",
     name: "Item 6",
     price: "$80/day",
     status: "For Rent",
-    statusClass: "for-rent"
+    statusClass: "for-rent",
   },
   {
     image: "https://picsum.photos/300/300",
     name: "Item 6",
     price: "$80/day",
     status: "For Rent",
-    statusClass: "for-rent"
-  }
+    statusClass: "for-rent",
+  },
 ];
+
+app.get("/listings", (req, res) => {
+  res.render("hs", { items })});
 
 const users = [
   {
@@ -86,13 +87,10 @@ app.get('/profile', (req, res) => {
   res.render('profile', { title: "Profile", content: "profile" , items, users });
 });
 
-app.get('/listings', (req, res) => {
-  res.render('hs', { items }); 
-});
 
+// home
 app.get("/", (req, res) => {
-
-  res.render("home", { content: "buying", title: "Home", items });
+  res.render("home", { title: "Home", content: "buying", items });
 });
 
 app.get("/buying", (req, res) => {
@@ -101,6 +99,22 @@ app.get("/buying", (req, res) => {
 
 app.get("/renting", (req, res) => {
   res.render("home", { title: "Home", content: "renting", items });
+});
+
+
+// profile
+app.get("/profile", (req, res) => {
+  res.render("profile", { title: "Profile" });
+});
+
+app.get("/editProfile", (req, res) => {
+  res.render("profile/editProfile", { title: "Profile" });
+});
+app.get("/insight", (req, res) => {
+  res.render("profile/insight", { title: "Profile" });
+});
+app.get("/contract", (req, res) => {
+  res.render("profile/contract", { title: "Profile" });
 });
 
 app.listen(port, () => {
