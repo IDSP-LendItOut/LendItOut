@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script defer src="/scripts/event.js"></script>
+
+</head>
+
+<body>
+  <div class="page-container">
+
+
+    <main class="main-content">
+      <form action="/home" method="post">
+
+        <input type="username" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <p><a href="/"><strong>Forgot my Password</strong></a></p>
+        <button>Login</button>
+      </form>
+
+      <p><strong>Don't have an account? <a href="/register">Register Now!</a></strong></p>
+    </main>
+
+
+  </div>
+
+</body>
+
+</html>
