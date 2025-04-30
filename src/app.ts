@@ -9,6 +9,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+
 const app = express();
 const port = 6563;
 
@@ -17,7 +18,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -71,18 +72,18 @@ app.get('/listings', (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("home", { title: "Buying page", content: "buying", items });
+
+  res.render("home", { content: "buying", title: "Home", items });
 });
 
 app.get("/buying", (req, res) => {
-  res.render("home", { title: "Renting page", content: "buying", items });
+  res.render("home", { title: "Home", content: "buying", items });
 });
 
 app.get("/renting", (req, res) => {
-  res.render("home", { content: "renting", items });
+  res.render("home", { title: "Home", content: "renting", items });
 });
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`); 
-
+  console.log(`Server running on http://localhost:${port}`);
 });
