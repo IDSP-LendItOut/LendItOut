@@ -24,3 +24,29 @@
     }
   }
 }
+
+.profile-settings-card {
+  margin: 1.5rem;
+  overflow: hidden;
+
+  .profile-setting-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    text-decoration: none;
+    border-bottom: 1px solid lightgray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+    span:hover{
+      color: #495837;
+    }
+    i {
+      color: grey;
+      font-size: 0.9rem;
+    }
+  }
+} 

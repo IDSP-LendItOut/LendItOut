@@ -3,8 +3,10 @@ import ejsMate from "ejs-mate";
 import express from "express";
 import path from "path";
 
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { title } from 'process';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -65,6 +67,7 @@ const items = [
   },
 ];
 
+
 app.get("/listings", (req, res) => {
   res.render("hs", { items })});
 
@@ -100,6 +103,20 @@ app.get("/buying", (req, res) => {
 app.get("/renting", (req, res) => {
   res.render("home", { title: "Home", content: "renting", items });
 });
+
+
+app.get('/orders', (req, res) => {
+  res.render('orders', { title: 'Your Orders' });
+});
+
+app.get('/bookmarks', (req, res) => {
+  res.render('bookmarks', { title: 'Bookmarks' });
+});
+
+app.get('/settings', (req, res) => {
+  res.render('settings', { title: 'Settings' });
+});
+
 
 
 // profile

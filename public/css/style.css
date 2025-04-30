@@ -316,6 +316,24 @@ video {
   flex: 0 0 calc(20% - 0.25rem);
 }
 
+.logout-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.logout-section .logout-btn {
+  background-color: #5b6d45;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.logout-section .logout-btn:hover {
+  background-color: #495837;
+}
+
 /* 8. Cards ======================= */
 .item-card {
   flex: 0 0 auto; /* Prevent shrinking and ensure cards maintain their size */
@@ -392,6 +410,30 @@ video {
   text-decoration: underline;
 }
 
+<<<<<<< HEAD
+.profile-settings-card {
+  margin: 1.5rem;
+  overflow: hidden;
+}
+.profile-settings-card .profile-setting-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  text-decoration: none;
+  border-bottom: 1px solid lightgray;
+}
+.profile-settings-card .profile-setting-link:last-child {
+  border-bottom: none;
+}
+.profile-settings-card .profile-setting-link span:hover {
+  color: #495837;
+}
+.profile-settings-card .profile-setting-link i {
+  color: grey;
+  font-size: 0.9rem;
+=======
 /* 11. Reviews =================== */
 .listings .section-header a {
   color: black;
@@ -440,4 +482,5 @@ video {
   font-size: 10px;
   color: #333;
   margin: 0;
+>>>>>>> dev
 }/*# sourceMappingURL=style.css.map */
