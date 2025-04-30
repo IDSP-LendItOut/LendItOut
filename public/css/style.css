@@ -10,7 +10,7 @@ Table of Contents
 8. Cards
 9. Grid Layout
 10. Content
-
+11. Reviews
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -177,8 +177,71 @@ video {
 
 /* 6. Media Queries =============== */
 /* 7. Elements =============== */
-
 .filter-rent-and-buy {
+  width: 100%;
+}
+
+.category-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+.category-top p {
+  font-size: 12px;
+}
+
+.category-image {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+}
+.category-image div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.category-image img {
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+}
+.category-image p {
+  width: 5rem;
+  font-size: 10px;
+  justify-content: center;
+  text-align: center;
+}
+
+.tab-buttons {
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 25px;
+  padding: 5px;
+  width: 15rem;
+  margin: 20px auto;
+}
+
+.tab-buttons button {
+  border: none;
+  background: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-buttons button.active {
+  background-color: white;
+  font-weight: bold;
+  color: black;
+}
+
+.tab-buttons button:not(.active) {
+  color: #888;
   width: 100%;
 }
 
@@ -321,6 +384,52 @@ video {
   text-decoration: underline;
 }
 
+/* 11. Reviews =================== */
+.listings .section-header a {
+  color: black;
+  text-decoration: none;
+}
 
+.listings .section-header a:hover {
+  text-decoration: underline;
+}
 
-/*# sourceMappingURL=style.css.map */
+.reviews-grid {
+  display: flex; /* Use flexbox for the grid */
+  flex-wrap: wrap; /* Allow wrapping of cards */
+  gap: 12px; /* Space between cards */
+  justify-content: center; /* Center the cards */
+}
+
+.review-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: calc(50% - 12px); /* Two cards per row on mobile */
+  max-width: 280px;
+}
+.review-card .review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.review-card .review-details .review-name {
+  font-weight: 600;
+  margin: 0;
+}
+.review-card .review-details .review-rating {
+  font-size: 14px;
+  color: #ffc107;
+  margin: 2px 0;
+}
+.review-card .review-details .review-text {
+  font-size: 10px;
+  color: #333;
+  margin: 0;
+}/*# sourceMappingURL=style.css.map */
