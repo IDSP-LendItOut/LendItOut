@@ -1,0 +1,45 @@
+.item-card {
+  flex: 0 0 auto; /* Prevent shrinking and ensure cards maintain their size */
+  width: 150px; /* Set a fixed width for each card */
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .item-details {
+    margin-top: 10px;
+
+    .item-name {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      margin: 5px 0;
+    }
+
+    .item-price {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .item-status {
+      font-size: 12px;
+      margin-top: 5px;
+
+      &.for-sale {
+        color: green;
+      }
+
+      &.for-rent {
+        color: orange;
+      }
+    }
+  }
+}
