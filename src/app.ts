@@ -69,6 +69,7 @@ app.get("/listings", (req, res) => {
   res.render("hs", { items });
 });
 
+// home
 app.get("/", (req, res) => {
   res.render("home", { title: "Home", content: "buying", items });
 });
