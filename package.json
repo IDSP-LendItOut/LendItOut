@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/IDSP-LendItOut/LendItOut#readme",
   "dependencies": {
+    "@prisma/client": "^6.7.0",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
     "express": "^5.1.0"
@@ -29,6 +30,7 @@
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.3",
+    "prisma": "^6.7.0",
     "sass": "^1.87.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
