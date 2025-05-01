@@ -1,3 +1,4 @@
+
 <% layout('layout') %>
 
 <div class="profile-header">
@@ -31,3 +32,34 @@
 
 
 </div>
+
+<% layout('editprofileLayout') %>
+
+<body>
+
+  <div class="banner">
+    <img src="https://picsum.photos/300/300" alt="Profile" class="profile-pic"/>
+    <img src="https://picsum.photos/300/100" alt="header" class="header-pic"/>
+  </div>
+
+  <main class="main">
+    <form action="/profile/save" method="POST">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Name" />
+
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" placeholder="Username" />
+
+      <label for="pronouns">Pronouns</label>
+      <input id="pronouns" name="pronouns" type="text" placeholder="They/Them" />
+
+      <label for="location">Location</label>
+      <input id="location" name="location" type="text" placeholder="Richmond, BC" />
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </main>
+
+</body>
+</html>
+

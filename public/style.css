@@ -494,7 +494,6 @@ video {
   text-decoration: underline;
 }
 
-
 .headerEP {
   display: flex;
   justify-content: center;
@@ -600,7 +599,7 @@ body {
   text-decoration: none;
 }
 .header .back-arrow:hover {
-  color: #88a76b;
+  color: rgb(135.6279069767, 167.1860465116, 106.8139534884);
 }
 
 .banner {
@@ -677,5 +676,7 @@ body {
   transition: background-color 0.3s ease;
 }
 .main form button:hover {
-  background-color: #3c4c2d;
-}/*# sourceMappingURL=style.css.map */
+  background-color: rgb(59.7965116279, 75.976744186, 45.023255814);
+}
+
+/*# sourceMappingURL=style.css.map */
