@@ -12,6 +12,8 @@ model User {
   name            String
   email           String            @unique
   password        String?
+  profilePic      String?
+  banner          String?
   listings        Listing[]
   reviewsGiven    ReviewOnUser[]    @relation("Reviewer")
   reviewsReceived ReviewOnUser[]    @relation("Target")
@@ -28,6 +30,7 @@ model Listing {
   available   Boolean           @default(true)
   userId      Int
   user        User              @relation(fields: [userId], references: [id])
+  media       Media[]
   reviews     ReviewOnListing[]
   createdAt   DateTime          @default(now())
 }
@@ -55,7 +58,21 @@ model ReviewOnListing {
   listing  Listing @relation(fields: [listingId], references: [id])
 }
 
+model Media {
+  id         Int      @id @default(autoincrement())
+  url        String   // points to S3, Cloudinary, or local
+  type       MediaType
+  listingId  Int
+  listing    Listing @relation(fields: [listingId], references: [id])
+}
+
 enum ListingType {
   RENT
   PURCHASE
+}
+
+
+enum MediaType {
+  IMAGE
+  VIDEO
 }
