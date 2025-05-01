@@ -25,6 +25,15 @@
   }
 }
 
+.headerEP {
+  display: flex; 
+  justify-content: center; 
+
+  h2 {
+    margin: 0; 
+  }
+}
+
 .profile-settings-card {
   margin: 1.5rem;
   overflow: hidden;

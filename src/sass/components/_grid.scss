@@ -1,11 +1,11 @@
 .scroll-container {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch; 
   padding: 10px 0;
 
   .item-grid {
-    display: flex; /* Arrange items in a row */
-    flex-wrap: nowrap; /* Prevent wrapping */
-    gap: 16px; /* Add spacing between cards */
+    display: flex; 
+    flex-wrap: nowrap; 
+    gap: 16px; 
   }
 }
