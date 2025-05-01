@@ -3,10 +3,8 @@ import ejsMate from "ejs-mate";
 import express from "express";
 import path from "path";
 
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { title } from 'process';
-
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -67,29 +65,28 @@ const items = [
   },
 ];
 
-
 app.get("/listings", (req, res) => {
-  res.render("hs", { items })});
+  res.render("hs", { items });
+});
 
 const users = [
   {
     name: "Matheus",
     rating: 5,
     review: "The camera I purchased was in excellent condition. Thanks!",
-    image: "https://picsum.photos/300/300"
+    image: "https://picsum.photos/300/300",
   },
   {
     name: "John",
     rating: 4,
     review: "The camera I purchased was in excellent condition. Thanks!",
-    image: "https://picsum.photos/300/300"
-  }
-]
+    image: "https://picsum.photos/300/300",
+  },
+];
 
-app.get('/profile', (req, res) => {
-  res.render('profile', { title: "Profile", content: "profile" , items, users });
+app.get("/profile", (req, res) => {
+  res.render("profile", { title: "Profile", content: "profile", items, users });
 });
-
 
 // home
 app.get("/", (req, res) => {
@@ -104,20 +101,29 @@ app.get("/renting", (req, res) => {
   res.render("home", { title: "Home", content: "renting", items });
 });
 
-
-app.get('/orders', (req, res) => {
-  res.render('orders', { title: 'Your Orders' });
+app.get("/buying-page", (req, res) => {
+  res.render("home/buying", { title: "Buying", content: "buying" });
 });
 
-app.get('/bookmarks', (req, res) => {
-  res.render('bookmarks', { title: 'Bookmarks' });
+app.get("/renting-page", (req, res) => {
+  res.render("home/renting", { title: "Renting", content: "renting" });
 });
 
-app.get('/settings', (req, res) => {
-  res.render('settings', { title: 'Settings' });
+app.get("/orders", (req, res) => {
+  res.render("orders", { title: "Your Orders" });
 });
 
+app.get("/bookmarks", (req, res) => {
+  res.render("bookmarks", { title: "Bookmarks" });
+});
 
+app.get("/settings", (req, res) => {
+  res.render("settings", { title: "Settings" });
+});
+
+app.get("/explore", (req, res) => {
+  res.render("explore", { title: "Explore", items });
+});
 
 // profile
 app.get("/profile", (req, res) => {
@@ -125,8 +131,13 @@ app.get("/profile", (req, res) => {
 });
 
 app.get("/editProfile", (req, res) => {
-  res.render("profile/editProfile", { title: "Profile" });
+  res.render("profile/editProfile", { title: "Edit Profile" });
 });
+app.post("/editProfile", (req, res) => {
+  console.log(req.body);
+  res.redirect("/");
+});
+
 app.get("/insight", (req, res) => {
   res.render("profile/insight", { title: "Profile" });
 });

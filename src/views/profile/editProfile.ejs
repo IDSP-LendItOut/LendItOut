@@ -1,2 +1,33 @@
 <% layout('layout') %>
-<h1>editProfile page</h1>
+
+<div class="profile-header">
+  <div class="profile-background">
+    <img src="https://picsum.photos/600/200" alt="profile-background">
+    <a href="/editProfile" class="edit-icon"><i class="fas fa-pen"></i></a>
+  </div>
+
+  <div class="profile-info-edit">
+    <div class="profile-img-edit">
+      <img src="https://picsum.photos/100" alt="profile-img">
+    </div>
+  </div>
+
+  <form action="/editProfile" method="post">
+    <label for="name">Name</label>
+    <input required type="text" name="name" placeholder="Name">
+
+    <label for="username">Username</label>
+    <input required type="text" name="username" placeholder="Username">
+
+    <label for="pronouns">Pronouns</label>
+    <input required type="text" name="pronouns" placeholder="They/Them">
+
+    <label for="location">Location</label>
+    <input required type="text" name="location" placeholder="Richmond, BC">
+
+    <button>Save Changes</button>
+  </form>
+
+
+
+</div>

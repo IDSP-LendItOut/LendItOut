@@ -1,0 +1,49 @@
+<div class="filter-rent-and-buy">
+
+  <div class="tab-buttons">
+    <button id="buyingBtn" class="active">Buying</button>
+    <button id="rentingBtn">Renting</button>
+  </div>
+
+  <div class="category-box">
+    <div class="category-top">
+      <h3>Categories</h3>
+      <p>
+        <% if(content === "buying") { %>
+        <a id="link" href="/buying-page">See all categories</a>
+        <% } else { %>
+        <a id="link" href="/renting-page">See all categories</a>
+        <% } %>
+      </p>
+    </div>
+    <div class="category-image">
+      <div>
+        <a href="/"><img src="https://picsum.photos/300/300" alt="Electronics & Gadgets"></a>
+        <p>Electronics & Gadgets</p>
+      </div>
+      <div>
+        <a href="/"><img src="https://picsum.photos/300/300" alt="Fashion & Apparel"></a>
+        <p>Fashion & Apparel</p>
+      </div>
+      <div>
+        <a href="/"><img src="https://picsum.photos/300/300" alt="Home & Furniture"></a>
+        <p>Home & Furniture</p>
+      </div>
+      <div>
+        <a href="/"><img src="https://picsum.photos/300/300" alt="Beauty & Personal Care"></a>
+        <p>Beauty & Personal Care</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div id="content">
+  <% if (content === 'buying') { %>
+  <h3>buying content</h3>
+  <% } else { %>
+  <h3>renting content</h3>
+  <% } %>
+
+</div>
