@@ -1,5 +1,27 @@
 <% layout('layout') %>
 
+
+<div class="profile-settings-card">
+  <a href="/orders" class="profile-setting-link">
+    <span>Orders</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </a>
+  <a href="/bookmarks" class="profile-setting-link">
+    <span>Bookmark</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </a>
+  <a href="/settings" class="profile-setting-link">
+    <span>Settings</span>
+    <i class="fa-solid fa-chevron-right"></i>
+  </a>
+</div>
+
+<div class="logout-section">
+  <form action="/logout" method="POST">
+    <button type="submit" class="logout-btn">Log out</button>
+  </form>
+</div>
+
 <div class="profile-header">
     <div class="profile-background">
       <img src="https://picsum.photos/600/200" alt="profile-background">
@@ -61,6 +83,7 @@
 
 <%- include('listingspp', { items }) %>
 
+
 <div class="profile-settings-card">
   <a href="/orders" class="profile-setting-link">
     <span>Orders</span>
@@ -81,3 +104,4 @@
     <button type="submit" class="logout-btn">Log out</button>
   </form>
 </div>
+
