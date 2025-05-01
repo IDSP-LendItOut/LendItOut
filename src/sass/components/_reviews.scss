@@ -7,10 +7,10 @@
     text-decoration: underline;
   }
 .reviews-grid {
-    display: flex; /* Use flexbox for the grid */
-    flex-wrap: wrap; /* Allow wrapping of cards */
-    gap: 12px; /* Space between cards */
-    justify-content: center; /* Center the cards */
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 12px; 
+    justify-content: center; 
   }
   
   .review-card {
@@ -22,7 +22,7 @@
     border-radius: 12px;
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    width: calc(50% - 12px); /* Two cards per row on mobile */
+    width: calc(50% - 12px); 
     max-width: 280px;
   
     .review-avatar {

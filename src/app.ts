@@ -86,10 +86,6 @@ const users = [
   }
 ]
 
-app.get('/profile', (req, res) => {
-  res.render('profile', { title: "Profile", content: "profile" , items, users });
-});
-
 
 // home
 app.get("/", (req, res) => {
@@ -120,19 +116,20 @@ app.get('/settings', (req, res) => {
 
 
 // profile
-app.get("/profile", (req, res) => {
-  res.render("profile", { title: "Profile" });
+app.get('/profile', (req, res) => {
+  res.render('profile', { title: "Profile", content: "profile" , items, users });
 });
 
-app.get("/editProfile", (req, res) => {
-  res.render("profile/editProfile", { title: "Profile" });
-});
 app.get("/insight", (req, res) => {
   res.render("profile/insight", { title: "Profile" });
 });
 app.get("/contract", (req, res) => {
   res.render("profile/contract", { title: "Profile" });
 });
+
+app.get("/editProfile", (req, res) => {
+  res.render("profile/editProfile", { title: "Profile" });
+})
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
