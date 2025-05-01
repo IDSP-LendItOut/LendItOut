@@ -14,11 +14,7 @@ async function main() {
     where: {
       email: { contains: "alice" }
     },
-    include: { posts: true },
-    cacheStrategy: {
-      swr: 30, // 30 seconds
-      ttl: 60  // 60 seconds
-    }
+    include: { listings: true }
   });
 
   const endTime = performance.now();
