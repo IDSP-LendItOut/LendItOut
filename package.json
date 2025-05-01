@@ -7,7 +7,8 @@
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
     "sass": "sass src/sass/style.scss public/css/style.css --watch",
-    "start": "tsx watch src/app.ts"
+    "start": "tsx watch src/app.ts",
+    "seed": "node --loader ts-node/esm src/seed.ts"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,8 @@
   },
   "homepage": "https://github.com/IDSP-LendItOut/LendItOut#readme",
   "dependencies": {
+    "@faker-js/faker": "^9.7.0",
+    "@prisma/client": "^6.7.0",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
     "express": "^5.1.0"
@@ -29,7 +32,9 @@
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.3",
+    "prisma": "^6.7.0",
     "sass": "^1.87.0",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },

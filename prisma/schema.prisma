@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  name            String
+  email           String            @unique
+  password        String?
+  profilePic      String?
+  banner          String?
+  listings        Listing[]
+  reviewsGiven    ReviewOnUser[]    @relation("Reviewer")
+  reviewsReceived ReviewOnUser[]    @relation("Target")
+  createdAt       DateTime          @default(now())
+  ReviewOnListing ReviewOnListing[]
+}
+
+model Listing {
+  id          Int               @id @default(autoincrement())
+  title       String
+  description String
+  type        ListingType
+  price       Float
+  available   Boolean           @default(true)
+  userId      Int
+  user        User              @relation(fields: [userId], references: [id])
+  media       Media[]
+  reviews     ReviewOnListing[]
+  createdAt   DateTime          @default(now())
+}
+
+model ReviewOnUser {
+  id         Int      @id @default(autoincrement())
+  reviewerId Int
+  targetId   Int
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+  reviewer   User     @relation("Reviewer", fields: [reviewerId], references: [id])
+  target     User     @relation("Target", fields: [targetId], references: [id])
+}
+
+model ReviewOnListing {
+  id         Int      @id @default(autoincrement())
+  reviewerId Int
+  listingId  Int
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+
+  reviewer User    @relation(fields: [reviewerId], references: [id])
+  listing  Listing @relation(fields: [listingId], references: [id])
+}
+
+model Media {
+  id         Int      @id @default(autoincrement())
+  url        String   // points to S3, Cloudinary, or local
+  type       MediaType
+  listingId  Int
+  listing    Listing @relation(fields: [listingId], references: [id])
+}
+
+enum ListingType {
+  RENT
+  PURCHASE
+}
+
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
