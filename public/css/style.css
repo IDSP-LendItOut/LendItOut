@@ -38,6 +38,7 @@ body {
 
 .main-content {
   flex: 1;
+  padding: 10px;
 }
 
 ul,
@@ -69,6 +70,8 @@ video {
   color: white;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 .header .header-top {
   display: flex;
@@ -96,7 +99,7 @@ video {
 .header .header-top .header-icons {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.7rem;
   margin-top: 0.5rem;
   margin-right: 1rem;
 }
@@ -108,28 +111,24 @@ video {
 }
 .header .search-bar {
   margin-top: 1rem;
-  padding: 0 1rem;
 }
 .header .search-bar input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: none;
-  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #ccc;
   font-size: 1rem;
-  font-family: "Helvetica Neue", sans-serif;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* 5. Footer ====================== */
 .footer {
   background-color: #556C40;
   padding: 0.5rem 0;
-  position: relative;
   width: 100%;
   bottom: 0;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  position: sticky;
 }
 
 .nav-footer {
@@ -315,13 +314,12 @@ video {
 .profile-header .profile-btns .contract {
   flex: 0 0 calc(20% - 0.25rem);
 }
-
-.logout-section {
+.profile-header .logout-section {
   display: flex;
   justify-content: center;
   margin: 2rem 0;
 }
-.logout-section .logout-btn {
+.profile-header .logout-section .logout-btn {
   background-color: #5b6d45;
   color: white;
   border: none;
@@ -330,7 +328,7 @@ video {
   border-radius: 8px;
   cursor: pointer;
 }
-.logout-section .logout-btn:hover {
+.profile-header .logout-section .logout-btn:hover {
   background-color: #495837;
 }
 
@@ -410,7 +408,6 @@ video {
   text-decoration: underline;
 }
 
-<<<<<<< HEAD
 .profile-settings-card {
   margin: 1.5rem;
   overflow: hidden;
@@ -433,7 +430,8 @@ video {
 .profile-settings-card .profile-setting-link i {
   color: grey;
   font-size: 0.9rem;
-=======
+}
+
 /* 11. Reviews =================== */
 .listings .section-header a {
   color: black;
@@ -482,5 +480,4 @@ video {
   font-size: 10px;
   color: #333;
   margin: 0;
->>>>>>> dev
 }/*# sourceMappingURL=style.css.map */
