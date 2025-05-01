@@ -84,12 +84,11 @@ const users = [
   },
 ];
 
-<<<<<<< HEAD
+
 app.get("/profile", (req, res) => {
   res.render("profile", { title: "Profile", content: "profile", items, users });
 });
-=======
->>>>>>> 32bcfd7 (MBA-54 edit-profile page)
+
 
 // home
 app.get("/", (req, res) => {
@@ -133,7 +132,7 @@ app.get('/profile', (req, res) => {
   res.render('profile', { title: "Profile", content: "profile" , items, users });
 });
 
-<<<<<<< HEAD
+
 app.get("/editProfile", (req, res) => {
   res.render("profile/editProfile", { title: "Edit Profile" });
 });
@@ -142,8 +141,6 @@ app.post("/editProfile", (req, res) => {
   res.redirect("/");
 });
 
-=======
->>>>>>> 32bcfd7 (MBA-54 edit-profile page)
 app.get("/insight", (req, res) => {
   res.render("profile/insight", { title: "Profile" });
 });
