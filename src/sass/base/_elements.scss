@@ -71,15 +71,16 @@
   .tab-buttons button:not(.active) {
     color: #888;
     width: 100%;
+    // margin: auto;
   }
 
-}
 
+}
 
 // profile - user image, info
 
 .profile-header {
-  position: relative;
+  // position: relative;
 
   .profile-background {
     img {
