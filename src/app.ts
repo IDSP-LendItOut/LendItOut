@@ -85,9 +85,6 @@ const users = [
 ];
 
 
-app.get("/profile", (req, res) => {
-  res.render("profile", { title: "Profile", content: "profile", items, users });
-});
 
 
 // home
@@ -133,6 +130,7 @@ app.get('/profile', (req, res) => {
 });
 
 
+
 app.get("/editProfile", (req, res) => {
   res.render("profile/editProfile", { title: "Edit Profile" });
 });
@@ -147,10 +145,6 @@ app.get("/insight", (req, res) => {
 app.get("/contract", (req, res) => {
   res.render("profile/contract", { title: "Profile" });
 });
-
-app.get("/editProfile", (req, res) => {
-  res.render("profile/editProfile", { title: "Profile" });
-})
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
