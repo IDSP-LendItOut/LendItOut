@@ -65,10 +65,6 @@ const items = [
   },
 ];
 
-app.get("/listings", (req, res) => {
-  res.render("hs", { items });
-});
-
 const users = [
   {
     name: "Matheus",
