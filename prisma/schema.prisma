@@ -8,17 +8,54 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
+  id              Int               @id @default(autoincrement())
+  name            String
+  email           String            @unique
+  password        String?
+  listings        Listing[]
+  reviewsGiven    ReviewOnUser[]    @relation("Reviewer")
+  reviewsReceived ReviewOnUser[]    @relation("Target")
+  createdAt       DateTime          @default(now())
+  ReviewOnListing ReviewOnListing[]
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model Listing {
+  id          Int               @id @default(autoincrement())
+  title       String
+  description String
+  type        ListingType
+  price       Float
+  available   Boolean           @default(true)
+  userId      Int
+  user        User              @relation(fields: [userId], references: [id])
+  reviews     ReviewOnListing[]
+  createdAt   DateTime          @default(now())
+}
+
+model ReviewOnUser {
+  id         Int      @id @default(autoincrement())
+  reviewerId Int
+  targetId   Int
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+  reviewer   User     @relation("Reviewer", fields: [reviewerId], references: [id])
+  target     User     @relation("Target", fields: [targetId], references: [id])
+}
+
+model ReviewOnListing {
+  id         Int      @id @default(autoincrement())
+  reviewerId Int
+  listingId  Int
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+
+  reviewer User    @relation(fields: [reviewerId], references: [id])
+  listing  Listing @relation(fields: [listingId], references: [id])
+}
+
+enum ListingType {
+  RENT
+  PURCHASE
 }
