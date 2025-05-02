@@ -78,6 +78,7 @@
 }
 
 // profile - user image, info
+// edit profile
 
 .profile-header {
   // position: relative;
@@ -258,6 +259,7 @@
   }
 }
 
+// explore
 
 .explore_top {
   position: relative;
@@ -293,6 +295,178 @@
   }
 }
 
+
+// login
+
+.main-content {
+
+  background-color: $color-background;
+
+  .login-content {
+    margin-top: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .logo {
+    width: 300px;
+    margin-bottom: 2rem;
+  }
+
+  .login-form {
+    width: 95%;
+    // max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5rem 0;
+
+
+
+    input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1.5px solid $color-primary;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: $color-line;
+    }
+
+    .forgot {
+      align-self: flex-start;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: $color-primary;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    button {
+      width: 93%;
+      padding: 0.6rem;
+      margin: 1rem 0 4rem 0;
+      font-size: 1rem;
+      text-align: center;
+      background-color: $color-primary;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: $color-primary-light;
+    }
+
+  }
+
+  .register-link {
+    font-size: 0.9rem;
+    text-align: center;
+    color: $color-text;
+    min-width: 350px;
+
+  }
+
+  .underline {
+    color: $color-primary;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .error-msg {
+    color: $color-red;
+    font-style: italic;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    width: 100%;
+    margin: 1rem 0 2rem 0;
+
+    input {
+      flex: 1;
+    }
+
+    span {
+      flex: 8;
+    }
+  }
+}
+
+// forgot password box
+.forgot-password {
+  position: fixed;
+  top: 26rem;
+  // left: 5rem;
+  width: 93%;
+  height: 20rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  background-color: $color-primary-light;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  font-size: .9rem;
+
+
+  .forgot-password-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1rem;
+  }
+
+  p {
+    color: $color-white;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin: 1.5rem 0;
+    color: $color-primary-light;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .resend-btn {
+    color: $color-white;
+    background-color: $color-primary;
+    border-radius: .5rem;
+    text-align: center;
+    padding: .5rem;
+    width: 8rem;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
 .logout-section {
   display: flex;
   justify-content: center;
@@ -311,4 +485,5 @@
       background-color: #495837;
     }
   }
+
 }

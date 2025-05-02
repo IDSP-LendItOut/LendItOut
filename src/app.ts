@@ -4,8 +4,9 @@ import express from "express";
 import path from "path";
 
 import { dirname } from "path";
-import { title } from "process";
 import { fileURLToPath } from "url";
+
+import { userRouter } from "./routes/userRouter";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,8 +19,11 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "..", "public")));
-
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use("/", homeRouter);
+// app.use("/profile", profileRouter);
+app.use("/", userRouter);
 
 const items = [
   {
@@ -81,22 +85,33 @@ const users = [
   },
 ];
 
-
-
-
 // home
 app.get("/", (req, res) => {
-  res.render("home", { title: "Home", content: "buying", items, showSearchbar: true  });
+  res.render("home", {
+    title: "Home",
+    content: "buying",
+    items,
+    showSearchbar: true,
+  });
 });
 
 app.get("/buying", (req, res) => {
-  res.render("home", { title: "Home", content: "buying", items, showSearchbar: true  });
+  res.render("home", {
+    title: "Home",
+    content: "buying",
+    items,
+    showSearchbar: true,
+  });
 });
 
 app.get("/renting", (req, res) => {
-  res.render("home", { title: "Home", content: "renting", items, showSearchbar: true  });
+  res.render("home", {
+    title: "Home",
+    content: "renting",
+    items,
+    showSearchbar: true,
+  });
 });
-
 
 app.get("/orders", (req, res) => {
   res.render("orders", { title: "Your Orders" });
@@ -111,14 +126,20 @@ app.get("/settings", (req, res) => {
 });
 
 app.get("/explore", (req, res) => {
-  res.render("explore", { title: "Explore", items, showSearchbar: true  });
+  res.render("explore", { title: "Explore", items, showSearchbar: true });
 });
 
 // profile
-app.get('/profile', (req, res) => {
-  res.render('profile', { title: "Profile", content: "profile" , items, users, showSearchbar: false });
-});
 
+app.get("/profile", (req, res) => {
+  res.render("profile", {
+    title: "Profile",
+    content: "profile",
+    items,
+    users,
+    showSearchbar: false,
+  });
+});
 
 app.get("/editProfile", (req, res) => {
   res.render("profile/editProfile", { title: "Edit Profile" });
@@ -137,18 +158,19 @@ app.get("/contract", (req, res) => {
 
 app.get("/profilephoto", (req, res) => {
   res.render("profile/addprofilephoto", { title: "Profile" });
-})
+});
 
 // terms and conditions
 app.get("/termsconditions", (req, res) => {
-  res.render("terms&conditions/terms_conditions", { title: "Terms and Conditions" });
-})
-
+  res.render("terms&conditions/terms_conditions", {
+    title: "Terms and Conditions",
+  });
+});
 
 //onboarding
-app.get("/onboarding", (req, res)=>{
-  res.render('onboarding/onboardLayout', {title: "Onboarding"})
-})
+app.get("/onboarding", (req, res) => {
+  res.render("onboarding/onboardLayout", { title: "Onboarding" });
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
