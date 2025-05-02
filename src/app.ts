@@ -116,7 +116,7 @@ app.get("/explore", (req, res) => {
 
 // profile
 app.get('/profile', (req, res) => {
-  res.render('profile', { title: "Profile", content: "profile" , items, users });
+  res.render('profile', { title: "Profile", content: "profile" , items, users, showSearchbar: false });
 });
 
 
