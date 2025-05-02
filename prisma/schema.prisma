@@ -59,18 +59,17 @@ model ReviewOnListing {
 }
 
 model Media {
-  id         Int      @id @default(autoincrement())
-  url        String   // points to S3, Cloudinary, or local
-  type       MediaType
-  listingId  Int
-  listing    Listing @relation(fields: [listingId], references: [id])
+  id        Int       @id @default(autoincrement())
+  url       String // points to S3, Cloudinary, or local
+  type      MediaType
+  listingId Int
+  listing   Listing   @relation(fields: [listingId], references: [id])
 }
 
 enum ListingType {
   RENT
   PURCHASE
 }
-
 
 enum MediaType {
   IMAGE
