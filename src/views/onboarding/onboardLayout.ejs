@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Onboarding</title>
-
-  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/style.css">
   <script defer src="/scripts/onboarding.js"></script>
 </head>
@@ -36,13 +34,19 @@
       description: 'Verified users, built-in messaging, and safe payments make it easy to lend, rent, and sell.',
       index: 2
     }) %>
+
     <div class="pagination-wrapper">
       <div class="pagination">
         <button id="prev"><img src="/images/left-arrow.svg" alt="Previous" /></button>
         <button id="next"><img src="/images/right-arrow.svg" alt="Next" /></button>
       </div>
     </div>
-
+    <div class="dot-indicator">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    
     <a href="/" class="skip-link">Skip</a>
   </div>
 </body>
