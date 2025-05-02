@@ -745,21 +745,25 @@ body {
   margin-bottom: 0.5rem;
 }
 
-h2 {
+.slide-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+}
+.slide-text h2 {
   font-size: 1.4rem;
   color: #556C40;
+  margin-bottom: 0.3rem;
 }
-
-h3 {
+.slide-text h3 {
   font-size: 1.2rem;
   color: #556C40;
   font-weight: 400;
   margin-bottom: 0.3rem;
 }
-
-p {
+.slide-text p {
   font-size: 1.1rem;
-  padding: 1rem;
   margin-bottom: 0.7rem;
 }
 

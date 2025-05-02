@@ -3,9 +3,11 @@
     <img class="slide-image" src="<%= slideImage %>" alt="Slide Image" />
   </div>
 
-  <h2><%= title %></h2>
-  <h3><%= subtitle %></h3>
-  <p><%= description %></p>
+  <div class="slide-text">
+    <h2><%= title %></h2>
+    <h3><%= subtitle %></h3>
+    <p><%= description %></p>
+  </div>
 
   <div class="dot-indicator">
     <span class="<%= index === 0 ? 'active' : '' %>"></span>
