@@ -6,6 +6,8 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
+import { homeRouter } from "./routes/homeRouter";
+import { profileRouter } from "./routes/profileRouter";
 import { userRouter } from "./routes/userRouter";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,8 +23,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use("/", homeRouter);
-// app.use("/profile", profileRouter);
+app.use("/", homeRouter);
+app.use("/profile", profileRouter);
 app.use("/", userRouter);
 
 const items = [
@@ -93,67 +95,6 @@ app.get("/", (req, res) => {
     items,
     showSearchbar: true,
   });
-});
-
-app.get("/buying", (req, res) => {
-  res.render("home", {
-    title: "Home",
-    content: "buying",
-    items,
-    showSearchbar: true,
-  });
-});
-
-app.get("/renting", (req, res) => {
-  res.render("home", {
-    title: "Home",
-    content: "renting",
-    items,
-    showSearchbar: true,
-  });
-});
-
-app.get("/orders", (req, res) => {
-  res.render("orders", { title: "Your Orders" });
-});
-
-app.get("/bookmarks", (req, res) => {
-  res.render("bookmarks", { title: "Bookmarks" });
-});
-
-app.get("/settings", (req, res) => {
-  res.render("settings", { title: "Settings" });
-});
-
-app.get("/explore", (req, res) => {
-  res.render("explore", { title: "Explore", items, showSearchbar: true });
-});
-
-// profile
-
-app.get("/profile", (req, res) => {
-  res.render("profile", {
-    title: "Profile",
-    content: "profile",
-    items,
-    users,
-    showSearchbar: false,
-  });
-});
-
-app.get("/editProfile", (req, res) => {
-  res.render("profile/editProfile", { title: "Edit Profile" });
-});
-app.post("/editProfile", (req, res) => {
-  console.log(req.body);
-  res.redirect("/");
-});
-
-app.get("/insight", (req, res) => {
-  res.render("profile/insight", { title: "Profile" });
-});
-app.get("/contract", (req, res) => {
-  res.render("profile/contract", { title: "Profile" });
 });
 
 app.get("/profilephoto", (req, res) => {

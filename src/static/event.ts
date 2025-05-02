@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (button) {
       const route = button.getAttribute("data-route");
       if (route) {
-        // window.location.href = `profile${route}`;
-        window.location.href = route;
+        window.location.href = `profile${route}`;
+        // window.location.href = route;
       }
     }
   });

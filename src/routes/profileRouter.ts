@@ -3,7 +3,13 @@ import express from "express";
 const profileRouter = express.Router();
 
 profileRouter.get("/", (req, res) => {
-  res.render("profile", { title: "Profile", content: "profile", items, users });
+  res.render("profile", {
+    title: "Profile",
+    content: "profile",
+    items,
+    users,
+    showSearchbar: false,
+  });
 });
 
 profileRouter.get("/editProfile", (req, res) => {
@@ -15,11 +21,23 @@ profileRouter.post("/editProfile", (req, res) => {
 });
 
 profileRouter.get("/insight", (req, res) => {
-  res.render("profile/insight", { title: "Profile" });
+  res.render("profile/insight", { title: "Profile", showSearchbar: false });
 });
 
 profileRouter.get("/contract", (req, res) => {
-  res.render("profile/contract", { title: "Profile" });
+  res.render("profile/contract", { title: "Profile", showSearchbar: false });
+});
+
+profileRouter.get("/orders", (req, res) => {
+  res.render("orders", { title: "Your Orders", showSearchbar: false });
+});
+
+profileRouter.get("/bookmarks", (req, res) => {
+  res.render("bookmarks", { title: "Bookmarks", showSearchbar: false });
+});
+
+profileRouter.get("/settings", (req, res) => {
+  res.render("settings", { title: "Settings", showSearchbar: false });
 });
 
 const items = [
