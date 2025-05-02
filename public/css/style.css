@@ -12,7 +12,9 @@ Table of Contents
 10. Content
 11. Reviews
 12. Edit Profile
-13. Onboarding
+13. Add Profile Photo
+14. Terms & Conditions
+15. Onboarding
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -699,7 +701,7 @@ body {
   background-color: #3c4c2d;
 }
 
-/* 13. Onboarding =============== */
+/* 15. Onboarding =============== */
 .onboarding-container {
   width: 100%;
   max-width: 600px;
@@ -728,30 +730,31 @@ body {
   display: flex;
 }
 
-.slide-image {
-  margin-top: -7rem;
-  width: 500px;
-  height: auto;
-  margin-bottom: 2rem;
+.slide-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+
+  h2 {
+    font-size: 1.4rem;
+    color: #556C40;
+    margin-bottom: 0.3rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    color: #556C40;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+  }
 }
 
-h2 {
-  font-size: 1.4rem;
-  color: #556C40;
-}
-
-h3 {
-  font-size: 1.2rem;
-  color: #556C40;
-  font-weight: 400;
-  margin-bottom: 0.3rem;
-}
-
-p {
-  font-size: 1.1rem;
-  padding: 1rem;
-  margin-bottom: 0.7rem;
-}
 
 .dot-indicator {
   display: flex;
@@ -802,4 +805,163 @@ p {
     opacity: 1;
     transform: translateY(0);
   }
+}
+/* 14. Add Profile Photo ========== */
+.add-profile-photo-page {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-profile-photo-page .container {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+.add-profile-photo-page .skip {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+}
+.add-profile-photo-page .skip a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+.add-profile-photo-page .skip a:hover {
+  text-decoration: underline;
+}
+.add-profile-photo-page .page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+.add-profile-photo-page .photo-icon {
+  margin: 20px auto 30px;
+}
+.add-profile-photo-page .photo-icon .circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.add-profile-photo-page .photo-icon .circle i {
+  font-size: 32px;
+  color: #555;
+}
+.add-profile-photo-page button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  margin: 10px auto;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-profile-photo-page button.add-photo {
+  background-color: #556C40;
+  color: white;
+}
+.add-profile-photo-page button.add-photo:hover {
+  background-color: #8D9D7F;
+}
+.add-profile-photo-page button.continue {
+  background-color: gray;
+  color: white;
+}
+.add-profile-photo-page button.continue:hover {
+  background-color: darkgray;
+}
+
+/* 14. Terms & Conditions ========== */
+.terms-conditions {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+.terms-conditions .tos-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.terms-conditions header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.terms-conditions header a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 18px;
+}
+.terms-conditions header a i {
+  font-size: 24px;
+}
+.terms-conditions header a:hover {
+  color: #0056b3;
+}
+.terms-conditions header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+}
+.terms-conditions .updated {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.terms-conditions .tos-content h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: black;
+}
+.terms-conditions .tos-content p {
+  margin-bottom: 15px;
+}
+.terms-conditions .tos-content .confirm {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+}
+.terms-conditions button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #556C40;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.terms-conditions button:hover {
+  background-color: #8D9D7F;
+
 }/*# sourceMappingURL=style.css.map */
