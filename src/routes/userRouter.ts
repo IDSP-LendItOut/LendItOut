@@ -6,14 +6,13 @@ const userRouter = express.Router();
 userRouter.get("/login", (req, res) => {
   res.render("user/login", { title: "login", error: null });
 });
-
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     const foundUser = await prisma.user.findUnique({
       where: { email },
     });
-    const passwordMatch = foundUser?.password === password;
+    const passwordMatch = (await foundUser?.password) === password;
 
     if (!foundUser || !passwordMatch) {
       return res.render("user/login", {
