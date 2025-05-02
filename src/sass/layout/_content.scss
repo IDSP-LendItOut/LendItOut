@@ -26,11 +26,11 @@
 }
 
 .headerEP {
-  display: flex; 
-  justify-content: center; 
+  display: flex;
+  justify-content: center;
 
   h2 {
-    margin: 0; 
+    margin: 0;
   }
 }
 
@@ -50,12 +50,34 @@
     &:last-child {
       border-bottom: none;
     }
-    span:hover{
+
+    span:hover {
       color: #495837;
     }
+
     i {
       color: grey;
       font-size: 0.9rem;
     }
   }
-} 
+}
+
+
+.logout-section {
+
+  form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  button {
+    color: $color-white;
+    background-color: $color-primary;
+    border-radius: .5rem;
+    text-align: center;
+    padding: .7rem;
+    margin: 1rem 0 2rem 0;
+    width: 80%;
+  }
+}

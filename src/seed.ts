@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma/client';
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 async function main() {
   for (let i = 0; i < 15; i++) {
@@ -15,13 +15,12 @@ async function main() {
       },
     });
 
-    
     for (let j = 0; j < 2; j++) {
       const listing = await prisma.listing.create({
         data: {
           title: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
-          type: j % 2 === 0 ? 'RENT' : 'PURCHASE',
+          type: j % 2 === 0 ? "RENT" : "PURCHASE",
           price: parseFloat(faker.commerce.price()),
           available: true,
           userId: user.id,
@@ -30,19 +29,18 @@ async function main() {
       const mediaData = [
         ...Array.from({ length: 3 }, () => ({
           url: faker.image.urlPicsumPhotos({ width: 600, height: 400 }),
-          type: 'IMAGE' as const,
+          type: "IMAGE" as const,
           listingId: listing.id,
         })),
         {
-          url: faker.internet.url(), 
-          type: 'VIDEO' as const,
+          url: faker.internet.url(),
+          type: "VIDEO" as const,
           listingId: listing.id,
         },
       ];
 
       await prisma.media.createMany({ data: mediaData });
 
-     
       await prisma.reviewOnListing.create({
         data: {
           reviewerId: user.id,
@@ -54,7 +52,7 @@ async function main() {
     }
   }
 
-  console.log('✅ Seed complete.');
+  console.log("✅ Seed complete.");
 }
 
 main()

@@ -6,6 +6,8 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
+import { userRouter } from "./routes/userRouter";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -17,8 +19,11 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "..", "public")));
-
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use("/", homeRouter);
+// app.use("/profile", profileRouter);
+app.use("/", userRouter);
 
 const items = [
   {
@@ -80,9 +85,6 @@ const users = [
   },
 ];
 
-
-
-
 // home
 app.get("/", (req, res) => {
   res.render("home", { title: "Home", content: "buying", items });
@@ -121,11 +123,9 @@ app.get("/explore", (req, res) => {
 });
 
 // profile
-app.get('/profile', (req, res) => {
-  res.render('profile', { title: "Profile", content: "profile" , items, users });
+app.get("/profile", (req, res) => {
+  res.render("profile", { title: "Profile", content: "profile", items, users });
 });
-
-
 
 app.get("/editProfile", (req, res) => {
   res.render("profile/editProfile", { title: "Edit Profile" });

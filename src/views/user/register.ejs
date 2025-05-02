@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script defer src="/scripts/event.js"></script>
+</head>
+
+<body>
+  <div class="page-container">
+    <main class="main-content">
+
+      <div class="login-content">
+        <div class="login_logo">
+          <img src="/logo.png" alt="Lend It Out Logo" class="logo">
+        </div>
+
+        <div class="login-form">
+          <form action="/login" method="POST">
+            <input type="text" name="email" placeholder="Email" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+
+
+            <label for="agree" class="checkbox-label">
+              <input type="checkbox" id="agree" name="agree" class="checkbox" required>
+              <span>I agree to the <a href="/" class="underline">Terms of Service &amp; Privacy Policy</a></span>
+            </label>
+
+
+            <% if(error) {%>
+            <p class="error-msg"><%= error %></p>
+            <%}%>
+            <button>Create Account</button>
+          </form>
+
+          <div class="register-link">
+            Already have an account? <a href="/login" class="underline">Login</a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
