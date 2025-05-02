@@ -4,6 +4,7 @@ import express from "express";
 import path from "path";
 
 import { dirname } from "path";
+import { title } from "process";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -126,7 +127,6 @@ app.get('/profile', (req, res) => {
 });
 
 
-
 app.get("/editProfile", (req, res) => {
   res.render("profile/editProfile", { title: "Edit Profile" });
 });
@@ -149,6 +149,12 @@ app.get("/profilephoto", (req, res) => {
 // terms and conditions
 app.get("/termsconditions", (req, res) => {
   res.render("terms&conditions/terms_conditions", { title: "Terms and Conditions" });
+})
+
+
+//onboarding
+app.get("/onboarding", (req, res)=>{
+  res.render('onboarding/onboardLayout', {title: "Onboarding"})
 })
 
 app.listen(port, () => {
