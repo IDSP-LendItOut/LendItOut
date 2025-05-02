@@ -71,7 +71,8 @@ video {
 .header {
   background-color: #556C40;
   color: white;
-  padding: 1.5rem 1rem 3rem;
+}
+.header.curved {
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
 }
