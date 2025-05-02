@@ -87,23 +87,30 @@ const users = [
 
 // home
 app.get("/", (req, res) => {
-  res.render("home", { title: "Home", content: "buying", items });
+  res.render("home", {
+    title: "Home",
+    content: "buying",
+    items,
+    showSearchbar: true,
+  });
 });
 
 app.get("/buying", (req, res) => {
-  res.render("home", { title: "Home", content: "buying", items });
+  res.render("home", {
+    title: "Home",
+    content: "buying",
+    items,
+    showSearchbar: true,
+  });
 });
 
 app.get("/renting", (req, res) => {
-  res.render("home", { title: "Home", content: "renting", items });
-});
-
-app.get("/buying-page", (req, res) => {
-  res.render("home/buying", { title: "Buying", content: "buying" });
-});
-
-app.get("/renting-page", (req, res) => {
-  res.render("home/renting", { title: "Renting", content: "renting" });
+  res.render("home", {
+    title: "Home",
+    content: "renting",
+    items,
+    showSearchbar: true,
+  });
 });
 
 app.get("/orders", (req, res) => {
@@ -119,12 +126,19 @@ app.get("/settings", (req, res) => {
 });
 
 app.get("/explore", (req, res) => {
-  res.render("explore", { title: "Explore", items });
+  res.render("explore", { title: "Explore", items, showSearchbar: true });
 });
 
 // profile
+
 app.get("/profile", (req, res) => {
-  res.render("profile", { title: "Profile", content: "profile", items, users });
+  res.render("profile", {
+    title: "Profile",
+    content: "profile",
+    items,
+    users,
+    showSearchbar: false,
+  });
 });
 
 app.get("/editProfile", (req, res) => {
@@ -140,6 +154,22 @@ app.get("/insight", (req, res) => {
 });
 app.get("/contract", (req, res) => {
   res.render("profile/contract", { title: "Profile" });
+});
+
+app.get("/profilephoto", (req, res) => {
+  res.render("profile/addprofilephoto", { title: "Profile" });
+});
+
+// terms and conditions
+app.get("/termsconditions", (req, res) => {
+  res.render("terms&conditions/terms_conditions", {
+    title: "Terms and Conditions",
+  });
+});
+
+//onboarding
+app.get("/onboarding", (req, res) => {
+  res.render("onboarding/onboardLayout", { title: "Onboarding" });
 });
 
 app.listen(port, () => {

@@ -12,6 +12,9 @@ Table of Contents
 10. Content
 11. Reviews
 12. Edit Profile
+13. Add Profile Photo
+14. Terms & Conditions
+15. Onboarding
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -68,8 +71,10 @@ video {
 .header {
   background-color: #556C40;
   color: white;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.header.curved {
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 .header .header-top {
   display: flex;
@@ -126,7 +131,7 @@ video {
 .footer {
   background-color: #556C40;
   padding: 0.5rem 0;
-  position: relative;
+  position: sticky;
   width: 100%;
   bottom: 0;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
@@ -559,6 +564,24 @@ video {
   display: none;
 }
 
+.logout-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.logout-section .logout-btn {
+  background-color: #5b6d45;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.logout-section .logout-btn:hover {
+  background-color: #495837;
+}
+
 /* 8. Cards ======================= */
 .item-card {
   flex: 0 0 auto;
@@ -833,4 +856,283 @@ body {
 }
 .main form button:hover {
   background-color: #3c4c2d;
+}
+
+/* 13. Add Profile Photo ========== */
+.add-profile-photo-page {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-profile-photo-page .container {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+.add-profile-photo-page .skip {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+}
+.add-profile-photo-page .skip a {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+.add-profile-photo-page .skip a:hover {
+  text-decoration: underline;
+}
+.add-profile-photo-page .page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+.add-profile-photo-page .photo-icon {
+  margin: 20px auto 30px;
+}
+.add-profile-photo-page .photo-icon .circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.add-profile-photo-page .photo-icon .circle i {
+  font-size: 32px;
+  color: #555;
+}
+.add-profile-photo-page button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  margin: 10px auto;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-profile-photo-page button.add-photo {
+  background-color: #556C40;
+  color: white;
+}
+.add-profile-photo-page button.add-photo:hover {
+  background-color: #8D9D7F;
+}
+.add-profile-photo-page button.continue {
+  background-color: gray;
+  color: white;
+}
+.add-profile-photo-page button.continue:hover {
+  background-color: darkgray;
+}
+
+/* 14. Terms & Conditions ========== */
+.terms-conditions {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+.terms-conditions .tos-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.terms-conditions header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.terms-conditions header a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 18px;
+}
+.terms-conditions header a i {
+  font-size: 24px;
+}
+.terms-conditions header a:hover {
+  color: #0056b3;
+}
+.terms-conditions header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  flex-grow: 1;
+}
+.terms-conditions .updated {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.terms-conditions .tos-content h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: black;
+}
+.terms-conditions .tos-content p {
+  margin-bottom: 15px;
+}
+.terms-conditions .tos-content .confirm {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+}
+.terms-conditions button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #556C40;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.terms-conditions button:hover {
+  background-color: #8D9D7F;
+}
+
+/* 15. Onboarding =============== */
+.onboarding-container {
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #eaefe7;
+  text-align: center;
+  position: relative;
+}
+
+.top-svg {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.onboarding-slide {
+  display: none;
+  flex-direction: column;
+  animation: fadeIn 0.4s ease-in-out;
+}
+.onboarding-slide.active {
+  display: flex;
+}
+.onboarding-slide .slide-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: -7rem;
+}
+.onboarding-slide .image3 .slide-image {
+  width: 350px;
+  margin-top: -4rem;
+}
+.onboarding-slide .slide-image {
+  width: 500px;
+  height: auto;
+}
+.onboarding-slide h2 {
+  font-size: 1.4rem;
+  color: #556C40;
+}
+.onboarding-slide h3 {
+  font-size: 1.2rem;
+  color: #556C40;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+.onboarding-slide p {
+  font-size: 1.1rem;
+  padding: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.dot-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+.dot-indicator .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.dot-indicator .dot.active {
+  width: 40px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: #556C40;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+}
+.pagination button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.pagination button img {
+  width: 55px;
+  height: 55px;
+}
+
+.skip-link {
+  display: block;
+  color: black;
+  font-weight: 200;
+  font-size: 1.1rem;
+  text-decoration: underline;
+  margin-bottom: 3rem;
+  align-self: flex-end;
+  padding-right: 3rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }/*# sourceMappingURL=style.css.map */
