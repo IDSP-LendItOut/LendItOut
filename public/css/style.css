@@ -14,6 +14,7 @@ Table of Contents
 12. Edit Profile
 13. Add Profile Photo
 14. Terms & Conditions
+15. Onboarding
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -128,7 +129,7 @@ video {
 .footer {
   background-color: #556C40;
   padding: 0.5rem 0;
-  position: relative;
+  position: sticky;
   width: 100%;
   bottom: 0;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
@@ -418,6 +419,24 @@ video {
   width: 4rem;
   text-align: center;
   cursor: pointer;
+}
+
+.logout-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.logout-section .logout-btn {
+  background-color: #5b6d45;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.logout-section .logout-btn:hover {
+  background-color: #495837;
 }
 
 /* 8. Cards ======================= */
