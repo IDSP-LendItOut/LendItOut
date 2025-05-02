@@ -86,24 +86,17 @@ const users = [
 
 // home
 app.get("/", (req, res) => {
-  res.render("home", { title: "Home", content: "buying", items });
+  res.render("home", { title: "Home", content: "buying", items, showSearchbar: true  });
 });
 
 app.get("/buying", (req, res) => {
-  res.render("home", { title: "Home", content: "buying", items });
+  res.render("home", { title: "Home", content: "buying", items, showSearchbar: true  });
 });
 
 app.get("/renting", (req, res) => {
-  res.render("home", { title: "Home", content: "renting", items });
+  res.render("home", { title: "Home", content: "renting", items, showSearchbar: true  });
 });
 
-app.get("/buying-page", (req, res) => {
-  res.render("home/buying", { title: "Buying", content: "buying" });
-});
-
-app.get("/renting-page", (req, res) => {
-  res.render("home/renting", { title: "Renting", content: "renting" });
-});
 
 app.get("/orders", (req, res) => {
   res.render("orders", { title: "Your Orders" });
@@ -118,7 +111,7 @@ app.get("/settings", (req, res) => {
 });
 
 app.get("/explore", (req, res) => {
-  res.render("explore", { title: "Explore", items });
+  res.render("explore", { title: "Explore", items, showSearchbar: true  });
 });
 
 // profile

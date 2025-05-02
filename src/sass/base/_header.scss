@@ -1,8 +1,9 @@
 .header {
-  background-color: $color-primary;
-  color: $color-white;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #556C40;
+  color: white;
+  padding: 1.5rem 1rem 3rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 
   .header-top {
     display: flex;

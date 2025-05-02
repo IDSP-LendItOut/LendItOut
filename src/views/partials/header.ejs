@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header <%= showSearchbar ? 'curved' : '' %>">
     <div class="header-top">
 
         <div class="header-left">
@@ -15,5 +15,7 @@
             </a>
         </div>
     </div>
-    
+    <% if (typeof showSearchbar !== 'undefined' && showSearchbar) { %>
+        <%- include('searchbar') %>
+      <% } %>
 </header>
