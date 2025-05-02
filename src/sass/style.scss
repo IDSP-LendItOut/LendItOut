@@ -12,7 +12,9 @@ Table of Contents
 10. Content
 11. Reviews
 12. Edit Profile
-13. Onboarding
+13. Add Profile Photo
+14. Terms & Conditions
+15. Onboarding
 */
 
 /* 1. Variables =================== */
@@ -51,5 +53,11 @@ Table of Contents
 /* 12. Edit Profile =============== */
 @import "base/edit-profile";
 
-/* 13. Onboarding =============== */
+/* 13. Add Profile Photo ========== */
+@import "components/addprofilephoto";
+
+/* 14. Terms & Conditions ========== */
+@import "components/terms";
+=======
+/* 15. Onboarding =============== */
 @import "components/onboarding";
