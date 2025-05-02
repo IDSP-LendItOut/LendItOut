@@ -142,6 +142,15 @@ app.get("/contract", (req, res) => {
   res.render("profile/contract", { title: "Profile" });
 });
 
+app.get("/profilephoto", (req, res) => {
+  res.render("profile/addprofilephoto", { title: "Profile" });
+})
+
+// terms and conditions
+app.get("/termsconditions", (req, res) => {
+  res.render("terms&conditions/terms_conditions", { title: "Terms and Conditions" });
+})
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
