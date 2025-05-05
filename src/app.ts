@@ -113,6 +113,16 @@ app.get("/onboarding", (req, res) => {
   res.render("onboarding/onboardLayout", { title: "Onboarding" });
 });
 
+
+// interests view and notifications view
+app.get("/interestsview", (req, res) => {
+  res.render("interests/interestsview", { title: "Interests" });
+})
+
+app.get("/notifications", (req, res) => {
+  res.render("notifications/notifications", { title: "Notifications" });
+})
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
