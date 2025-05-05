@@ -1,7 +1,7 @@
 body {
   font-family: $font-body;
   margin: 0;
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
 }
 
 .header {
@@ -31,10 +31,10 @@ body {
   background-size: cover;
 
   .header-pic {
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    object-fit: cover; 
-    position: absolute; 
+    object-fit: cover;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
@@ -103,6 +103,7 @@ body {
       font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      text-align: center;
 
       &:hover {
         background-color: darken($color-primary, 10%);
