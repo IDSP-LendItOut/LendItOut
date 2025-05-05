@@ -49,54 +49,54 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // login - forgot password btn
-document.addEventListener("DOMContentLoaded", () => {
-  const forgotLink = document.getElementById("forgot-link") as HTMLElement;
-  const forgotBox = document.getElementById(
-    "forgot-password-box"
-  ) as HTMLElement;
-  const forgotBox2 = document.getElementById(
-    "forgot-password-box2"
-  ) as HTMLElement;
-  const closeBtn = document.getElementById("closeBtn") as HTMLElement;
-  const sendBtn = document.getElementById("sendCodeBtn") as HTMLElement;
-  const backBtn = document.getElementById("backBtn") as HTMLElement;
-  const enterBtn = document.getElementById("enterBtn") as HTMLElement;
+// document.addEventListener("DOMContentLoaded", () => {
+//   const forgotLink = document.getElementById("forgot-link") as HTMLElement;
+//   const forgotBox = document.getElementById(
+//     "forgot-password-box"
+//   ) as HTMLElement;
+//   const forgotBox2 = document.getElementById(
+//     "forgot-password-box2"
+//   ) as HTMLElement;
+//   const closeBtn = document.getElementById("closeBtn") as HTMLElement;
+//   const sendBtn = document.getElementById("sendCodeBtn") as HTMLElement;
+//   const backBtn = document.getElementById("backBtn") as HTMLElement;
+//   const enterBtn = document.getElementById("enterBtn") as HTMLElement;
 
-  forgotLink.addEventListener("click", function (e) {
-    e.preventDefault();
-    forgotBox.classList.remove("hidden");
-  });
+//   forgotLink.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     forgotBox.classList.remove("hidden");
+//   });
 
-  closeBtn.addEventListener("click", function () {
-    forgotBox.classList.add("hidden");
-  });
+//   closeBtn.addEventListener("click", function () {
+//     forgotBox.classList.add("hidden");
+//   });
 
-  sendBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const userInput = (
-      document.getElementById("resetInput") as HTMLInputElement
-    )?.value;
-    if (userInput) {
-      const response = await fetch("/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: userInput }),
-      });
-      if (response.ok) {
-        forgotBox.classList.add("hidden");
-        forgotBox2.classList.remove("hidden");
-      }
-    }
-  });
+//   sendBtn.addEventListener("click", async (e) => {
+//     e.preventDefault();
+//     const userInput = (
+//       document.getElementById("resetInput") as HTMLInputElement
+//     )?.value;
+//     if (userInput) {
+//       const response = await fetch("/auth/forgot-password", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ email: userInput }),
+//       });
+//       if (response.ok) {
+//         forgotBox.classList.add("hidden");
+//         forgotBox2.classList.remove("hidden");
+//       }
+//     }
+//   });
 
-  backBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    forgotBox.classList.remove("hidden");
-    forgotBox2.classList.add("hidden");
-  });
+//   backBtn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     forgotBox.classList.remove("hidden");
+//     forgotBox2.classList.add("hidden");
+//   });
 
-  enterBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.location.href = "/auth/password-reset";
-  });
-});
+//   enterBtn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     window.location.href = "/auth/password-reset";
+//   });
+// });
