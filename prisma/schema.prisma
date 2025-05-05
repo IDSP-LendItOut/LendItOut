@@ -21,6 +21,9 @@ model User {
   reviewsReceived              ReviewOnUser[]    @relation("Target")
   createdAt                    DateTime          @default(now())
   ReviewOnListing              ReviewOnListing[]
+  conversations                Conversation[]    @relation("ConversationParticipants")
+  messagesSent                 Message[] @relation("MessageSender")
+
 }
 
 model Listing {
@@ -35,7 +38,7 @@ model Listing {
   user        User              @relation(fields: [userId], references: [id])
   media       Media[]
   reviews     ReviewOnListing[]
-    conversations Conversation[]
+  conversations Conversation[]
 
 }
 
@@ -92,7 +95,7 @@ model Message {
   text           String
   createdAt      DateTime      @default(now())
   senderId       Int
-  sender         User          @relation(fields: [senderId], references: [id])
+  sender User @relation("MessageSender", fields: [senderId], references: [id])
   conversationId Int
   conversation   Conversation  @relation(fields: [conversationId], references: [id])
 }
