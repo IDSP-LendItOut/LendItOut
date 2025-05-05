@@ -1,0 +1,67 @@
+.interests {
+    .header {
+      position: relative;
+      margin-bottom: 1rem;
+      background-color: #f9f9f9;
+  
+      h1 {
+        font-size: 1.75rem;
+        margin: 0;
+        color: black;
+        text-align: left;
+      }
+  
+      .skip {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        font-size: 0.9rem;
+        color: #888;
+        text-decoration: none;
+  
+        &:hover {
+          color: #555;
+        }
+      }
+      
+      p {
+        color: #777;
+        margin-top: 0.5rem;
+        text-align: left;
+      }
+    }
+  
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+  
+      button {
+        border: 1px solid $color-primary;
+        border-radius: 6px;
+        padding: 0.6rem 1rem;
+        background: white;
+        color: black;
+        font-weight: 500;
+        cursor: pointer;
+  
+        &:hover {
+          background: $color-primary;
+          color: white;
+        }
+      }
+    }
+  
+    .continue {
+      width: 100%;
+      margin-top: 2rem;
+      background: $color-primary;
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: center;
+    }
+  }
