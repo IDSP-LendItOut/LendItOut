@@ -704,7 +704,7 @@ video {
 }
 .listings .section-header a {
   font-size: 14px;
-  color: #007bff;
+  color: black;
   text-decoration: none;
 }
 .listings .section-header a:hover {
@@ -932,7 +932,7 @@ body {
 }
 .add-profile-photo-page .skip {
   position: absolute;
-  top: 0px;
+  top: -80px;
   right: 20px;
 }
 .add-profile-photo-page .skip a {
@@ -944,37 +944,30 @@ body {
   text-decoration: underline;
 }
 .add-profile-photo-page .page-title {
-  font-size: 24px;
+  font-size: 34px;
   font-weight: bold;
   margin-bottom: 30px;
   color: #333;
 }
 .add-profile-photo-page .photo-icon {
-  margin: 20px auto 30px;
-}
-.add-profile-photo-page .photo-icon .circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: #ddd;
+  margin: 20px auto 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
 }
-.add-profile-photo-page .photo-icon .circle i {
-  font-size: 32px;
-  color: #555;
+.add-profile-photo-page .photo-icon svg, .add-profile-photo-page .photo-icon img {
+  width: 200px;
+  height: 200px;
 }
 .add-profile-photo-page button {
   display: block;
   width: 100%;
   max-width: 300px;
   padding: 12px;
-  margin: 10px auto;
+  margin: 20px auto;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
 }
 .add-profile-photo-page button.add-photo {
@@ -985,11 +978,12 @@ body {
   background-color: #8D9D7F;
 }
 .add-profile-photo-page button.continue {
-  background-color: gray;
-  color: white;
+  background-color: #eaefe7;
+  color: black;
+  border: 1px solid black;
 }
 .add-profile-photo-page button.continue:hover {
-  background-color: darkgray;
+  background-color: #CFCFCF;
 }
 
 /* 14. Terms & Conditions ========== */
@@ -1017,14 +1011,14 @@ body {
 }
 .terms-conditions header a {
   text-decoration: none;
-  color: #007bff;
-  font-size: 18px;
+  color: black;
+  font-size: 30px;
 }
 .terms-conditions header a i {
   font-size: 24px;
 }
 .terms-conditions header a:hover {
-  color: #0056b3;
+  color: darkslategray;
 }
 .terms-conditions header h1 {
   font-size: 24px;
@@ -1189,4 +1183,149 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+/* 16. Interests ================== */
+.interests .header {
+  position: relative;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+.interests .header h1 {
+  font-size: 1.75rem;
+  margin: 0;
+  color: black;
+  text-align: left;
+}
+.interests .header .skip {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 0.9rem;
+  color: #888;
+  text-decoration: none;
+}
+.interests .header .skip:hover {
+  color: #555;
+}
+.interests .header p {
+  color: #777;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.interests .options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.interests .options button {
+  border: 1px solid #556C40;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  background: white;
+  color: black;
+  font-weight: 500;
+  cursor: pointer;
+}
+.interests .options button:hover {
+  background: #556C40;
+  color: white;
+}
+.interests .continue {
+  width: 100%;
+  margin-top: 2rem;
+  background: #556C40;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* 17. Notifications =========== */
+.top-bar {
+  background: #556C40;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+.top-bar h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+}
+.top-bar .back {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+.top-bar .back:hover {
+  text-decoration: underline;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+.tabs button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  background: #8D9D7F;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.tabs button:hover {
+  background: darkgreen;
+}
+.tabs button.active {
+  background: white;
+  border-bottom: 3px solid #556C40;
+  color: #556C40;
+}
+
+.section {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.section h2 {
+  font-size: 0.9rem;
+  grid-column: span 3;
+}
+.section .notification, .section .listing {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.section .notification:hover, .section .listing:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.section .notification img, .section .listing img {
+  width: 75px !important;
+  height: 75px !important;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+}
+.section .notification p, .section .listing p {
+  font-size: 0.7rem;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+.section .notification .dot, .section .listing .dot {
+  width: 6px;
+  height: 6px;
+  background: #eaefe7;
+  border-radius: 50%;
+  margin-left: 0.5rem;
 }/*# sourceMappingURL=style.css.map */
