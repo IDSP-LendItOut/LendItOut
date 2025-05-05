@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="top-bar">
+    <a href="/" class="back">←</a>
+    <h1>Notifications</h1>
+  </div>
+
+  <div class="tabs">
+    <button id="notifications-tab" class="active" onclick="showSection('notifications')">Notifications</button>
+    <button id="listings-tab" onclick="showSection('listings')">Listings</button>
+  </div>
+
+  <div id="notifications" class="section">
+    <h2>Today</h2>
+    <div class="notification">
+      <img src="https://picsum.photos/300/100" alt="House">
+      <p>You have an upcoming payment for renting item #453432, 3 Bed, 2 Bath house for 2,500/month.</p>
+      <span class="dot"></span>
+    </div>
+
+    <h2>Yesterday</h2>
+    <div class="notification">
+      <img src="https://picsum.photos/300/200" alt="JBL Speaker">
+      <p>Good news! The JBL Go 4 is now back in stock. Grab yours while supplies last.</p>
+    </div>
+  </div>
+
+  <div id="listings" class="section" style="display: none;">
+    <h2>Your Listings</h2>
+    <div class="listing">
+      <img src="https://picsum.photos/300/150" alt="Listing Image">
+      <p>3 Bed, 2 Bath house available for $2,500/month.</p>
+    </div>
+
+    <div class="listing">
+      <img src="https://picsum.photos/300/150" alt="Listing Image">
+      <p>JBL Go 4 Speaker available for $50.</p>
+    </div>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.getElementById('notifications').style.display = 'none';
+      document.getElementById('listings').style.display = 'none';
+
+      document.getElementById('notifications-tab').classList.remove('active');
+      document.getElementById('listings-tab').classList.remove('active');
+
+      document.getElementById(sectionId).style.display = 'block';
+
+      document.getElementById(sectionId + '-tab').classList.add('active');
+    }
+  </script>
+</body>
+</html>

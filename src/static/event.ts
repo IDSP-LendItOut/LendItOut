@@ -54,21 +54,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const forgotBox = document.getElementById(
     "forgot-password-box"
   ) as HTMLElement;
+  const forgotBox2 = document.getElementById(
+    "forgot-password-box2"
+  ) as HTMLElement;
   const closeBtn = document.getElementById("closeBtn") as HTMLElement;
-  forgotLink.addEventListener("click", () => {
+  const sendBtn = document.getElementById("sendCodeBtn") as HTMLElement;
+  const backBtn = document.getElementById("backBtn") as HTMLElement;
+  const enterBtn = document.getElementById("enterBtn") as HTMLElement;
+
+  forgotLink.addEventListener("click", function (e) {
+    e.preventDefault();
     forgotBox.classList.remove("hidden");
   });
 
-  closeBtn.addEventListener("click", () => {
+  closeBtn.addEventListener("click", function () {
     forgotBox.classList.add("hidden");
   });
-});
 
-// <div id="forgot-password-box" class="forgot-password hidden">
-//           <div class="forgot-password-content">
-//             <button class="close-btn" id="closeBtn"><i class="fas fa-chevron-left"></i></button>
-//             <p>Forgot your Password? Check your email for a link to reset your password</p>
-//             <input type="text" id="resetInput" placeholder="Email/Phone Number" />
-//             <button class="resend-btn" id="resendEmailBtn">Resend Email</button>
-//           </div>
-//         </div>
+  sendBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const userInput = (
+      document.getElementById("resetInput") as HTMLInputElement
+    )?.value;
+    if (userInput) {
+      const response = await fetch("/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: userInput }),
+      });
+      if (response.ok) {
+        forgotBox.classList.add("hidden");
+        forgotBox2.classList.remove("hidden");
+      }
+    }
+  });
+
+  backBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    forgotBox.classList.remove("hidden");
+    forgotBox2.classList.add("hidden");
+  });
+
+  enterBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "/auth/password-reset";
+  });
+});

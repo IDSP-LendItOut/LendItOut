@@ -324,7 +324,7 @@ video {
 }
 .profile-header .profile-more-btn {
   margin: 0.3rem 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .profile-header .profile-btns {
   display: flex;
@@ -332,7 +332,7 @@ video {
   flex-wrap: nowrap;
   max-width: 600px;
   margin: 1rem auto;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   justify-content: center;
 }
 .profile-header .profile-btns button {
@@ -584,6 +584,59 @@ video {
   background-color: #495837;
 }
 
+.forgot-password2 {
+  position: fixed;
+  top: 26rem;
+  width: 93%;
+  height: 20rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  background-color: #8D9D7F;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  font-size: 0.9rem;
+}
+.forgot-password2 .close-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1rem;
+}
+.forgot-password2 p {
+  color: white;
+  text-align: center;
+}
+.forgot-password2 .codebox-group {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.forgot-password2 .codebox-group input {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #CFCFCF;
+  border-radius: 5px;
+  margin: 0 0.3rem;
+  text-align: center;
+}
+.forgot-password2 .resend-btn {
+  color: white;
+  background-color: #556C40;
+  border-radius: 0.5rem;
+  text-align: center;
+  padding: 0.5rem;
+  width: 8rem;
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+.hidden {
+  display: none;
+}
+
 /* 8. Cards ======================= */
 .item-card {
   flex: 0 0 auto;
@@ -653,7 +706,7 @@ video {
 }
 .listings .section-header a {
   font-size: 14px;
-  color: #007bff;
+  color: black;
   text-decoration: none;
 }
 .listings .section-header a:hover {
@@ -855,6 +908,7 @@ body {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-align: center;
 }
 .main form button:hover {
   background-color: #3c4c2d;
@@ -880,7 +934,7 @@ body {
 }
 .add-profile-photo-page .skip {
   position: absolute;
-  top: 0px;
+  top: -80px;
   right: 20px;
 }
 .add-profile-photo-page .skip a {
@@ -892,37 +946,30 @@ body {
   text-decoration: underline;
 }
 .add-profile-photo-page .page-title {
-  font-size: 24px;
+  font-size: 34px;
   font-weight: bold;
   margin-bottom: 30px;
   color: #333;
 }
 .add-profile-photo-page .photo-icon {
-  margin: 20px auto 30px;
-}
-.add-profile-photo-page .photo-icon .circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: #ddd;
+  margin: 20px auto 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
 }
-.add-profile-photo-page .photo-icon .circle i {
-  font-size: 32px;
-  color: #555;
+.add-profile-photo-page .photo-icon svg, .add-profile-photo-page .photo-icon img {
+  width: 200px;
+  height: 200px;
 }
 .add-profile-photo-page button {
   display: block;
   width: 100%;
   max-width: 300px;
   padding: 12px;
-  margin: 10px auto;
+  margin: 20px auto;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
 }
 .add-profile-photo-page button.add-photo {
@@ -933,11 +980,12 @@ body {
   background-color: #8D9D7F;
 }
 .add-profile-photo-page button.continue {
-  background-color: gray;
-  color: white;
+  background-color: #eaefe7;
+  color: black;
+  border: 1px solid black;
 }
 .add-profile-photo-page button.continue:hover {
-  background-color: darkgray;
+  background-color: #CFCFCF;
 }
 
 /* 14. Terms & Conditions ========== */
@@ -965,14 +1013,14 @@ body {
 }
 .terms-conditions header a {
   text-decoration: none;
-  color: #007bff;
-  font-size: 18px;
+  color: black;
+  font-size: 30px;
 }
 .terms-conditions header a i {
   font-size: 24px;
 }
 .terms-conditions header a:hover {
-  color: #0056b3;
+  color: darkslategray;
 }
 .terms-conditions header h1 {
   font-size: 24px;
@@ -1138,7 +1186,7 @@ body {
     transform: translateY(0);
   }
 }
-/* 16. Messages =============== */
+/* 19. Messages =============== */
 .messages-page {
   width: 430px;
   margin: 0 auto;
@@ -1221,7 +1269,7 @@ body {
   align-self: flex-start;
 }
 
-/* 17. Chat view =============== */
+/* 18. Chat view =============== */
 .chat-page {
   width: 430px;
   margin: 0 auto;
@@ -1460,7 +1508,153 @@ body {
   border-radius: 12px;
   padding: 1.5rem;
   width: 100%;
-  max-width: 90vw; /* limits width on mobile */
+  max-width: 90vw; 
   box-sizing: border-box;
   text-align: center;
+}
+/* 16. Interests ================== */
+.interests .header {
+  position: relative;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+.interests .header h1 {
+  font-size: 1.75rem;
+  margin: 0;
+  color: black;
+  text-align: left;
+}
+.interests .header .skip {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 0.9rem;
+  color: #888;
+  text-decoration: none;
+}
+.interests .header .skip:hover {
+  color: #555;
+}
+.interests .header p {
+  color: #777;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.interests .options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.interests .options button {
+  border: 1px solid #556C40;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  background: white;
+  color: black;
+  font-weight: 500;
+  cursor: pointer;
+}
+.interests .options button:hover {
+  background: #556C40;
+  color: white;
+}
+.interests .continue {
+  width: 100%;
+  margin-top: 2rem;
+  background: #556C40;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* 17. Notifications =========== */
+.top-bar {
+  background: #556C40;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+.top-bar h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+}
+.top-bar .back {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+.top-bar .back:hover {
+  text-decoration: underline;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+.tabs button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  background: #8D9D7F;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.tabs button:hover {
+  background: darkgreen;
+}
+.tabs button.active {
+  background: white;
+  border-bottom: 3px solid #556C40;
+  color: #556C40;
+}
+
+.section {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.section h2 {
+  font-size: 0.9rem;
+  grid-column: span 3;
+}
+.section .notification, .section .listing {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.section .notification:hover, .section .listing:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.section .notification img, .section .listing img {
+  width: 75px !important;
+  height: 75px !important;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+}
+.section .notification p, .section .listing p {
+  font-size: 0.7rem;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+.section .notification .dot, .section .listing .dot {
+  width: 6px;
+  height: 6px;
+  background: #eaefe7;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+
 }/*# sourceMappingURL=style.css.map */
