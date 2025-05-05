@@ -20,7 +20,7 @@
 
 
     <div class="user-details">
-      <h3>Marissa Clark</h3>
+      <h3><%= user.name %></h3>
       <p>Joined in 2020</p>
       <p>Richmond, BC</p>
 
@@ -80,7 +80,7 @@
 </div>
 
 <div class="logout-section">
-  <form action="/logout" method="POST">
+  <form action="/auth/logout" method="POST">
     <button type="submit" class="logout-btn">Log out</button>
   </form>
 </div>

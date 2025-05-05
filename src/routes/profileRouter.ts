@@ -1,15 +1,33 @@
 import express from "express";
+import { requireLogin } from "../middleware/requireLogin";
+import { prisma } from "../seed";
 
 const profileRouter = express.Router();
 
-profileRouter.get("/", (req, res) => {
-  res.render("profile", {
-    title: "Profile",
-    content: "profile",
-    items,
-    users,
-    showSearchbar: false,
-  });
+profileRouter.get("/", requireLogin, async (req, res) => {
+  const userId = req.session.userId;
+  try {
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    console.log(user);
+    if (!user) {
+      return res.render("auth/login", {
+        title: "login",
+        error: null,
+      });
+    } else {
+      res.render("profile", {
+        title: "Profile",
+        content: "profile",
+        items,
+        users,
+        showSearchbar: false,
+        user: user,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 profileRouter.get("/editProfile", (req, res) => {
