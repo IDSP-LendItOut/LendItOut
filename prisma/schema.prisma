@@ -8,17 +8,19 @@ datasource db {
 }
 
 model User {
-  id              Int               @id @default(autoincrement())
-  name            String
-  email           String            @unique
-  password        String?
-  profilePic      String?
-  banner          String?
-  listings        Listing[]
-  reviewsGiven    ReviewOnUser[]    @relation("Reviewer")
-  reviewsReceived ReviewOnUser[]    @relation("Target")
-  createdAt       DateTime          @default(now())
-  ReviewOnListing ReviewOnListing[]
+  id                           Int               @id @default(autoincrement())
+  name                         String
+  email                        String            @unique
+  password                     String?
+  profilePic                   String?
+  banner                       String?
+  passwordResetCode            String?
+  passwordResetCodeExpirations DateTime?
+  listings                     Listing[]
+  reviewsGiven                 ReviewOnUser[]    @relation("Reviewer")
+  reviewsReceived              ReviewOnUser[]    @relation("Target")
+  createdAt                    DateTime          @default(now())
+  ReviewOnListing              ReviewOnListing[]
 }
 
 model Listing {

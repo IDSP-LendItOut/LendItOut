@@ -172,7 +172,7 @@
 
   .profile-more-btn {
     margin: .3rem 1rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
 
@@ -183,7 +183,7 @@
     flex-wrap: nowrap;
     max-width: 600px;
     margin: 1rem auto;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     justify-content: center;
   }
 
@@ -388,6 +388,8 @@
     font-style: italic;
   }
 
+
+
   .checkbox-label {
     display: flex;
     align-items: flex-start;
@@ -486,4 +488,64 @@
     }
   }
 
+}
+
+.forgot-password2 {
+  position: fixed;
+  top: 26rem;
+  // left: 5rem;
+  width: 93%;
+  height: 20rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  background-color: $color-primary-light;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  font-size: .9rem;
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1rem;
+  }
+
+  p {
+    color: $color-white;
+    text-align: center;
+  }
+
+  .codebox-group {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+
+    input {
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid $color-line;
+      border-radius: 5px;
+      margin: 0 .3rem;
+      text-align: center;
+    }
+  }
+
+  .resend-btn {
+    color: $color-white;
+    background-color: $color-primary;
+    border-radius: .5rem;
+    text-align: center;
+    padding: .5rem;
+    width: 8rem;
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+  }
+
+}
+
+.hidden {
+  display: none;
 }
