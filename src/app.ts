@@ -13,7 +13,7 @@ import { fileURLToPath } from "url";
 import { authRouter } from "./routes/authRouter";
 import { homeRouter } from "./routes/homeRouter";
 import { profileRouter } from "./routes/profileRouter";
-import { userRouter } from "./routes/userRouter";
+
 import messagesRouter from "./routes/messagesRouter"
 
 
@@ -45,7 +45,6 @@ app.use(
 app.use("/", homeRouter);
 app.use("/profile", profileRouter);
 
-app.use("/", userRouter);
 app.use("/messages", messagesRouter)
 
 app.use("/auth", authRouter);
