@@ -1,14 +1,18 @@
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import ejsMate from "ejs-mate";
 import express from "express";
+import session from "express-session";
 import path from "path";
+
+dotenv.config();
 
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
+import { authRouter } from "./routes/authRouter";
 import { homeRouter } from "./routes/homeRouter";
 import { profileRouter } from "./routes/profileRouter";
-import { userRouter } from "./routes/userRouter";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,10 +26,22 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 
 app.use("/", homeRouter);
 app.use("/profile", profileRouter);
-app.use("/", userRouter);
+app.use("/auth", authRouter);
 
 const items = [
   {
