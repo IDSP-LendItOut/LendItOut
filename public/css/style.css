@@ -15,6 +15,8 @@ Table of Contents
 13. Add Profile Photo
 14. Terms & Conditions
 15. Onboarding
+16. Messages
+17. Chat view
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -1135,4 +1137,330 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+/* 16. Messages =============== */
+.messages-page {
+  width: 430px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: white;
+  min-height: 100vh;
+  font-family: "Helvetica Neue", sans-serif;
+}
+.messages-page .messages-header {
+  background-color: #586c3d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.messages-page .messages-header i {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.messages-page .messages-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+.messages-page .search-chat {
+  width: 90%;
+  margin: 1rem auto;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 1px solid rgb(155, 155, 155);
+  display: block;
+}
+.messages-page .requests-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  text-align: right;
+  border-bottom: 1px solid #eee;
+}
+.messages-page .chat-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.messages-page .chat-list li .chat-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.75rem;
+}
+.messages-page .chat-list li .chat-content {
+  flex: 1;
+}
+.messages-page .chat-list li .chat-content h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.messages-page .chat-list li .chat-content p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.2;
+}
+.messages-page .chat-list li .chat-time {
+  font-size: 0.75rem;
+  color: #999;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+  align-self: flex-start;
+}
+
+/* 17. Chat view =============== */
+.chat-page {
+  width: 430px;
+  margin: 0 auto;
+  background-color: #fff;
+  font-family: "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+.chat-header {
+  background-color: #556C40;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.back-btn {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.chat-user {
+  flex-grow: 1;
+  text-align: center;
+  font-weight: bold;
+}
+
+.chat-actions {
+  position: relative;
+}
+
+.chat-options {
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  padding: 0.5rem;
+  width: 180px;
+}
+.chat-options a, .chat-options button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+}
+.chat-options a:hover, .chat-options button:hover {
+  background-color: #f3f3f3;
+}
+.chat-options .delete-link {
+  color: #e53935;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.modal-box {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+}
+
+.modal-box p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.modal-cancel {
+  background-color: #ccc;
+  color: black;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-delete {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-close {
+  margin-top: 1rem;
+  background-color: #4d6335;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chat-item-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+.chat-item-info img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.chat-item-info .item-details {
+  display: flex;
+  flex-direction: column;
+}
+.chat-item-info .item-details .title {
+  font-weight: bold;
+}
+.chat-item-info .item-details .price {
+  color: #4d6335;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+
+.message {
+  background-color: #f1f1f1;
+  padding: 12px 16px;
+  margin: 6px 0;
+  border-radius: 16px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.sent {
+  background-color: #556C40;
+  color: white;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+
+.chat-input {
+  display: flex;
+  padding: 12px 16px;
+  background-color: #f2f2f2;
+  border-top: 1px solid #ddd;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  background-color: white;
+}
+
+.chat-input .send-btn {
+  background: none;
+  border: none;
+  color: #5A6D3B;
+  font-size: 1.5rem;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.modal-box {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 90vw; /* limits width on mobile */
+  box-sizing: border-box;
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */

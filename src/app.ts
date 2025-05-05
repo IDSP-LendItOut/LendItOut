@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 import { homeRouter } from "./routes/homeRouter";
 import { profileRouter } from "./routes/profileRouter";
 import { userRouter } from "./routes/userRouter";
+import messagesRouter from "./routes/messagesRouter"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", homeRouter);
 app.use("/profile", profileRouter);
 app.use("/", userRouter);
-
+app.use("/messages", messagesRouter)
 const items = [
   {
     image: "https://picsum.photos/300/300",
@@ -69,21 +70,6 @@ const items = [
     price: "$80/day",
     status: "For Rent",
     statusClass: "for-rent",
-  },
-];
-
-const users = [
-  {
-    name: "Matheus",
-    rating: 5,
-    review: "The camera I purchased was in excellent condition. Thanks!",
-    image: "https://picsum.photos/300/300",
-  },
-  {
-    name: "John",
-    rating: 4,
-    review: "The camera I purchased was in excellent condition. Thanks!",
-    image: "https://picsum.photos/300/300",
   },
 ];
 

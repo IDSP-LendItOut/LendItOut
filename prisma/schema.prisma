@@ -8,17 +8,21 @@ datasource db {
 }
 
 model User {
-  id              Int               @id @default(autoincrement())
-  name            String
-  email           String            @unique
-  password        String?
-  profilePic      String?
-  banner          String?
-  listings        Listing[]
-  reviewsGiven    ReviewOnUser[]    @relation("Reviewer")
-  reviewsReceived ReviewOnUser[]    @relation("Target")
-  createdAt       DateTime          @default(now())
-  ReviewOnListing ReviewOnListing[]
+  id                           Int               @id @default(autoincrement())
+  email                        String            @unique
+  name                         String
+  createdAt                    DateTime          @default(now())
+  password                     String?
+  banner                       String?
+  profilePic                   String?
+  passwordResetCode            String?
+  passwordResetCodeExpirations DateTime?
+  listings                     Listing[]
+  conversations Conversation[] @relation("ConversationParticipants")
+  messages      Message[]
+  ReviewOnListing              ReviewOnListing[]
+  reviewsGiven                 ReviewOnUser[]    @relation("Reviewer")
+  reviewsReceived              ReviewOnUser[]    @relation("Target")
 }
 
 model Listing {
@@ -29,10 +33,12 @@ model Listing {
   price       Float
   available   Boolean           @default(true)
   userId      Int
+  createdAt   DateTime          @default(now())
   user        User              @relation(fields: [userId], references: [id])
   media       Media[]
   reviews     ReviewOnListing[]
-  createdAt   DateTime          @default(now())
+    conversations Conversation[]
+
 }
 
 model ReviewOnUser {
@@ -53,14 +59,13 @@ model ReviewOnListing {
   rating     Int
   comment    String
   createdAt  DateTime @default(now())
-
-  reviewer User    @relation(fields: [reviewerId], references: [id])
-  listing  Listing @relation(fields: [listingId], references: [id])
+  listing    Listing  @relation(fields: [listingId], references: [id])
+  reviewer   User     @relation(fields: [reviewerId], references: [id])
 }
 
 model Media {
   id        Int       @id @default(autoincrement())
-  url       String // points to S3, Cloudinary, or local
+  url       String
   type      MediaType
   listingId Int
   listing   Listing   @relation(fields: [listingId], references: [id])
@@ -74,4 +79,22 @@ enum ListingType {
 enum MediaType {
   IMAGE
   VIDEO
+}
+model Conversation {
+  id           Int        @id @default(autoincrement())
+  listingId    Int
+  listing      Listing    @relation(fields: [listingId], references: [id])
+  participants User[]     @relation("ConversationParticipants")
+  messages     Message[]
+  createdAt    DateTime   @default(now())
+}
+
+model Message {
+  id             Int           @id @default(autoincrement())
+  text           String
+  createdAt      DateTime      @default(now())
+  senderId       Int
+  sender         User          @relation(fields: [senderId], references: [id])
+  conversationId Int
+  conversation   Conversation  @relation(fields: [conversationId], references: [id])
 }
