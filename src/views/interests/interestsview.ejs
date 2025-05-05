@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Interests</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="interests">
+    <div class="header">
+      <h1>What are you interested in?</h1>
+      <a href="/" class="skip">Skip</a>
+      <p>Select all that apply</p>
+    </div>
+
+    <div class="options">
+      <% [
+        'Electronics', 'Home Appliances', 'Clothing & Accessories',
+        'Sports & Fitness', 'Party Supplies', 'Outdoor & Camping Gear',
+        'Tools & Equipment', 'Pet Supplies', 'Books & Media',
+        'Stationery', 'Arts & Crafts', 'Beauty & Personal Care',
+        'Season & Holiday'
+      ].forEach(category => { %>
+        <button><%= category %></button>
+      <% }); %>
+    </div>
+
+    <a href="/">
+    <button class="continue">Continue</button>
+    </a>
+
+  </div>
+</body>
+</html>

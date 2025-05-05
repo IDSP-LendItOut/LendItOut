@@ -9,7 +9,9 @@
 <body class="terms-conditions">
   <div class="tos-container">
     <header>
-      <a href="#"><i class="fas fa-chevron-left"></i></a>
+      <a href="/profile">
+        <span class="fa back-arrow">&#8592;</span>
+      </a>
       <h1>Terms of Service</h1>
     </header>
 
@@ -62,5 +64,13 @@
 
     <button onclick="scrollToTop()">Back to Top</button>
   </div>
+  <script>
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 </body>
 </html>
