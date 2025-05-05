@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="messages-page">
+
+    <div class="messages-header">
+      <a href="/profile" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <h2>Messages</h2>
+      <i class="fa-regular fa-pen-to-square"></i>
+    </div>
+
+    <input type="text" placeholder="Search conversation" class="search-chat" />
+
+    <div class="requests-bar">Requests</div>
+
+    <ul class="chat-list">
+      <% conversations.forEach(chat => { %>
+        <% if (chat.id) { %>
+          <li onclick="location.href='/messages/<%= chat.id %>'">
+            <img src="<%= chat.listing.media[0]?.url || '/images/default.jpg' %>" alt="listing" class="chat-img" />
+            <div class="chat-content">
+              <h3><%= chat.listing.title %></h3>
+              <p><%= chat.messages[0]?.text || 'No messages' %></p>
+            </div>
+            <div class="chat-time">Yesterday 3:00 pm</div>
+          </li>
+        <% } %>
+      <% }) %>
+    </ul>    
+
+  </div>
+</body>
+</html>
