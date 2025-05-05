@@ -8,7 +8,7 @@ profileRouter.get("/", requireLogin, async (req, res) => {
   const userId = req.session.userId;
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
-    console.log(user);
+
     if (!user) {
       return res.render("auth/login", {
         title: "login",
@@ -30,31 +30,47 @@ profileRouter.get("/", requireLogin, async (req, res) => {
   }
 });
 
-profileRouter.get("/editProfile", (req, res) => {
-  res.render("profile/editProfile", { title: "Edit Profile" });
+profileRouter.get("/editProfile", requireLogin, async (req, res) => {
+  const userId = req.session.userId;
+
+  try {
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+
+    if (!user) {
+      return res.render("auth/login", {
+        title: "login",
+        error: null,
+      });
+    } else {
+      res.render("profile/editProfile", { title: "Edit Profile", user: user });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
-profileRouter.post("/editProfile", (req, res) => {
+profileRouter.post("/editProfile", requireLogin, (req, res) => {
   console.log(req.body);
   res.redirect("/");
 });
 
-profileRouter.get("/insight", (req, res) => {
+profileRouter.get("/insight", requireLogin, (req, res) => {
   res.render("profile/insight", { title: "Profile", showSearchbar: false });
 });
 
-profileRouter.get("/contract", (req, res) => {
+profileRouter.get("/contract", requireLogin, (req, res) => {
   res.render("profile/contract", { title: "Profile", showSearchbar: false });
 });
 
-profileRouter.get("/orders", (req, res) => {
+profileRouter.get("/orders", requireLogin, (req, res) => {
   res.render("orders", { title: "Your Orders", showSearchbar: false });
 });
 
-profileRouter.get("/bookmarks", (req, res) => {
+profileRouter.get("/bookmarks", requireLogin, (req, res) => {
   res.render("bookmarks", { title: "Bookmarks", showSearchbar: false });
 });
 
-profileRouter.get("/settings", (req, res) => {
+profileRouter.get("/settings", requireLogin, (req, res) => {
   res.render("settings", { title: "Settings", showSearchbar: false });
 });
 

@@ -131,7 +131,7 @@ authRouter.post("/forgot-password", async (req, res) => {
     //     error: "Failed to send email. Try again later.",
     //   });
     // }
-    // 2. render verification code page => pass email as variable and add that as hidden input in forgot-password-validation page
+
     res.render("auth/forgot-password-validation", {
       title: "forgot",
       email: email,
@@ -148,8 +148,6 @@ authRouter.post("/forgot-password-validation", async (req, res) => {
     (req.body["code_2"] || "") +
     (req.body["code_3"] || "") +
     (req.body["code_4"] || "");
-
-  console.log("@@");
   console.log(email);
   console.log(code);
   const user = await prisma.user.findUnique({
@@ -221,13 +219,13 @@ authRouter.post("/password-reset", async (req, res) => {
       } else {
         res.render("auth/forgot-password", {
           title: "forgot",
-          error: "111",
+          error: "password-reset is failed",
         });
       }
     } else {
       res.render("auth/forgot-password", {
         title: "forgot",
-        error: "222",
+        error: "password-reset is failed",
       });
     }
   }
