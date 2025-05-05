@@ -1,5 +1,6 @@
-<header class="header <%= showSearchbar ? 'curved' : '' %>">
-    <div class="header-top">
+<% const show = typeof showSearchbar !== 'undefined' ? showSearchbar : false; %>
+    <header class="header <%= show ? 'curved' : '' %>">
+        <div class="header-top">
 
         <div class="header-left">
             <h1 class="app-name">LendItOut</h1>
@@ -10,12 +11,12 @@
             <a href="/notifications" class="icon notification-icon">
                 <i class="fa-regular fa-bell"></i>
             </a>
-            <a href="/chat" class="icon chat-icon">
+            <a href="/messages" class="icon messages-icon">
                 <i class="fa-regular fa-comment"></i>
             </a>
         </div>
     </div>
-    <% if (typeof showSearchbar !== 'undefined' && showSearchbar) { %>
+    <% if (show) { %>
         <%- include('searchbar') %>
       <% } %>
 </header>

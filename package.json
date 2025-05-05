@@ -8,7 +8,7 @@
     "build": "tsc",
     "sass": "sass src/sass/style.scss public/css/style.css --watch",
     "start": "tsx watch src/app.ts",
-    "seed": "node --loader ts-node/esm src/seed.ts"
+    "seed": "npx tsx src/seed.ts"
   },
   "repository": {
     "type": "git",
