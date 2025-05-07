@@ -21,6 +21,7 @@ Table of Contents
 18. Chat view
 20. Cart
 21. Carousel
+22. Listings
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -1190,87 +1191,150 @@ body {
     transform: translateY(0);
   }
 }
-/* 19. Messages =============== */
-.messages-page {
-  width: 430px;
-  margin: 0 auto;
-  overflow: hidden;
-  background-color: white;
-  min-height: 100vh;
-  font-family: "Helvetica Neue", sans-serif;
+/* 16. Interests ================== */
+.interests .header {
+  position: relative;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
 }
-.messages-page .messages-header {
-  background-color: #586c3d;
-  color: white;
+.interests .header h1 {
+  font-size: 1.75rem;
+  margin: 0;
+  color: black;
+  text-align: left;
+}
+.interests .header .skip {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 0.9rem;
+  color: #888;
+  text-decoration: none;
+}
+.interests .header .skip:hover {
+  color: #555;
+}
+.interests .header p {
+  color: #777;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.interests .options {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
-.messages-page .messages-header i {
-  font-size: 1.2rem;
+.interests .options button {
+  border: 1px solid #556C40;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  background: white;
+  color: black;
+  font-weight: 500;
   cursor: pointer;
 }
-.messages-page .messages-header h2 {
-  font-size: 1.2rem;
-  margin: 0;
+.interests .options button:hover {
+  background: #556C40;
+  color: white;
 }
-.messages-page .search-chat {
-  width: 90%;
-  margin: 1rem auto;
-  padding: 0.8rem 1rem;
+.interests .continue {
+  width: 100%;
+  margin-top: 2rem;
+  background: #556C40;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 25px;
   font-size: 1rem;
-  border-radius: 15px;
-  border: 1px solid rgb(155, 155, 155);
-  display: block;
+  cursor: pointer;
+  text-align: center;
 }
-.messages-page .requests-bar {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 1rem;
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-  text-align: right;
-  border-bottom: 1px solid #eee;
-}
-.messages-page .chat-list li {
+
+/* 17. Notifications =========== */
+.top-bar {
+  background: #556C40;
+  color: white;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+.top-bar h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+}
+.top-bar .back {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+}
+.top-bar .back:hover {
+  text-decoration: underline;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+.tabs button {
+  flex: 1;
   padding: 1rem;
-  border-bottom: 1px solid #eee;
+  border: none;
+  background: #8D9D7F;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
 }
-.messages-page .chat-list li .chat-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.tabs button:hover {
+  background: darkgreen;
+}
+.tabs button.active {
+  background: white;
+  border-bottom: 3px solid #556C40;
+  color: #556C40;
+}
+
+.section {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.section h2 {
+  font-size: 0.9rem;
+  grid-column: span 3;
+}
+.section .notification, .section .listing {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.section .notification:hover, .section .listing:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.section .notification img, .section .listing img {
+  width: 75px !important;
+  height: 75px !important;
   object-fit: cover;
-  margin-right: 0.75rem;
+  border-radius: 6px;
+  margin-right: 0.5rem;
 }
-.messages-page .chat-list li .chat-content {
+.section .notification p, .section .listing p {
+  font-size: 0.7rem;
+  color: #333;
+  margin: 0;
   flex: 1;
 }
-.messages-page .chat-list li .chat-content h3 {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-}
-.messages-page .chat-list li .chat-content p {
-  margin: 0.25rem 0 0;
-  font-size: 0.9rem;
-  color: #555;
-  line-height: 1.2;
-}
-.messages-page .chat-list li .chat-time {
-  font-size: 0.75rem;
-  color: #999;
-  white-space: nowrap;
+.section .notification .dot, .section .listing .dot {
+  width: 6px;
+  height: 6px;
+  background: #eaefe7;
+  border-radius: 50%;
   margin-left: 0.5rem;
-  align-self: flex-start;
 }
 
 /* 18. Chat view =============== */
@@ -1517,150 +1581,87 @@ body {
   text-align: center;
 }
 
-/* 16. Interests ================== */
-.interests .header {
-  position: relative;
-  margin-bottom: 1rem;
-  background-color: #f9f9f9;
+/* 19. Messages =============== */
+.messages-page {
+  width: 430px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: white;
+  min-height: 100vh;
+  font-family: "Helvetica Neue", sans-serif;
 }
-.interests .header h1 {
-  font-size: 1.75rem;
-  margin: 0;
-  color: black;
-  text-align: left;
-}
-.interests .header .skip {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  font-size: 0.9rem;
-  color: #888;
-  text-decoration: none;
-}
-.interests .header .skip:hover {
-  color: #555;
-}
-.interests .header p {
-  color: #777;
-  margin-top: 0.5rem;
-  text-align: left;
-}
-.interests .options {
+.messages-page .messages-header {
+  background-color: #586c3d;
+  color: white;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-.interests .options button {
-  border: 1px solid #556C40;
-  border-radius: 6px;
-  padding: 0.6rem 1rem;
-  background: white;
-  color: black;
-  font-weight: 500;
+.messages-page .messages-header i {
+  font-size: 1.2rem;
   cursor: pointer;
 }
-.interests .options button:hover {
-  background: #556C40;
-  color: white;
+.messages-page .messages-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
 }
-.interests .continue {
-  width: 100%;
-  margin-top: 2rem;
-  background: #556C40;
-  color: white;
-  padding: 1rem;
-  border: none;
-  border-radius: 25px;
+.messages-page .search-chat {
+  width: 90%;
+  margin: 1rem auto;
+  padding: 0.8rem 1rem;
   font-size: 1rem;
-  cursor: pointer;
-  text-align: center;
+  border-radius: 15px;
+  border: 1px solid rgb(155, 155, 155);
+  display: block;
 }
-
-/* 17. Notifications =========== */
-.top-bar {
-  background: #556C40;
-  color: white;
-  padding: 1rem;
+.messages-page .requests-bar {
   display: flex;
-  align-items: center;
-}
-.top-bar h1 {
-  flex: 1;
-  text-align: center;
-  margin: 0;
-  font-size: 1.25rem;
-}
-.top-bar .back {
-  color: white;
-  text-decoration: none;
-  font-size: 1.25rem;
-}
-.top-bar .back:hover {
-  text-decoration: underline;
-}
-
-.tabs {
-  display: flex;
-  border-bottom: 1px solid #ccc;
-}
-.tabs button {
-  flex: 1;
-  padding: 1rem;
-  border: none;
-  background: #8D9D7F;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-.tabs button:hover {
-  background: darkgreen;
-}
-.tabs button.active {
-  background: white;
-  border-bottom: 3px solid #556C40;
-  color: #556C40;
-}
-
-.section {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-}
-.section h2 {
+  justify-content: flex-end;
+  padding: 0 1rem;
   font-size: 0.9rem;
-  grid-column: span 3;
+  color: #555;
+  margin-bottom: 0.5rem;
+  text-align: right;
+  border-bottom: 1px solid #eee;
 }
-.section .notification, .section .listing {
+.messages-page .chat-list li {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
-  background: #fafafa;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
 }
-.section .notification:hover, .section .listing:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-.section .notification img, .section .listing img {
-  width: 75px !important;
-  height: 75px !important;
+.messages-page .chat-list li .chat-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   object-fit: cover;
-  border-radius: 6px;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
-.section .notification p, .section .listing p {
-  font-size: 0.7rem;
-  color: #333;
-  margin: 0;
+.messages-page .chat-list li .chat-content {
   flex: 1;
 }
-.section .notification .dot, .section .listing .dot {
-  width: 6px;
-  height: 6px;
-  background: #eaefe7;
-  border-radius: 50%;
+.messages-page .chat-list li .chat-content h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.messages-page .chat-list li .chat-content p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.2;
+}
+.messages-page .chat-list li .chat-time {
+  font-size: 0.75rem;
+  color: #999;
+  white-space: nowrap;
   margin-left: 0.5rem;
+  align-self: flex-start;
 }
 
 /* 20. Cart ======================= */
@@ -1844,7 +1845,60 @@ body {
   box-sizing: border-box;
 }
 
-/* 19. Listings =========== */
+/* 21. Carousel =========== */
+.carousel-container {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.carousel-container .carousel-main-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+}
+.carousel-container .carousel-main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel-container .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 2;
+}
+.carousel-container .carousel-arrow.left {
+  left: 10px;
+}
+.carousel-container .carousel-arrow.right {
+  right: 10px;
+}
+.carousel-container .carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+  gap: 6px;
+}
+.carousel-container .carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 50%;
+}
+.carousel-container .carousel-dots .dot.active {
+  background: #333;
+}
+
+/* 22. Listings =========== */
 .buy-page {
   background: #fafafa;
   font-family: "Segoe UI", sans-serif;
@@ -2045,7 +2099,6 @@ body {
   padding: 0 0.5rem 0.5rem;
 }
 
-/* 21. Carousel =========== */
 .more-options-modal {
   position: fixed;
   top: 70px;
@@ -2092,55 +2145,202 @@ body {
   text-decoration: underline;
 }
 
-/* 20. Carousel =========== */
-.carousel-container {
-  width: 100%;
-  padding: 0;
-  margin: 0;
+.buy-page {
+  background: #fafafa;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  padding-bottom: 2rem;
 }
-.carousel-container .carousel-main-wrapper {
+.buy-page .buy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #556C40;
+  color: white;
+  border-bottom: 1px solid #eee;
+}
+.buy-page .buy-header .header-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.buy-page .buy-header .buy-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.buy-page .product-box {
+  padding: 1rem;
+}
+.buy-page .product-box .product-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.buy-page .product-box .product-price {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.buy-page .product-box .product-description {
+  font-size: 0.9rem;
+}
+.buy-page .product-box .product-description strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.buy-page .product-box .product-description small {
+  display: block;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+.buy-page .product-box .product-description a {
+  font-size: 0.85rem;
+  color: #007bff;
+}
+.buy-page .product-box .message-box {
+  background: #f0f1e9;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+.buy-page .product-box .message-box p {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.buy-page .product-box .message-box .message-inner {
+  display: flex;
+  gap: 0.5rem;
+}
+.buy-page .product-box .message-box .message-inner input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  background: #cfcece;
+}
+.buy-page .product-box .message-box .message-inner button {
+  background: #8ca186;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+.buy-page .product-box .condition-box {
+  background: #f0f1e9;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.buy-page .product-box .condition-box .badge {
+  color: #4d7c4d;
+  font-weight: bold;
+}
+.buy-page .product-box .seller-box {
+  background: #f0f1e9;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
   position: relative;
-  width: 100%;
-  padding-top: 100%;
-  overflow: hidden;
 }
-.carousel-container .carousel-main-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.buy-page .product-box .seller-box .seller-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
   object-fit: cover;
 }
-.carousel-container .carousel-arrow {
+.buy-page .product-box .seller-box .verified-icon {
+  color: #3c9f3c;
+  margin-left: 4px;
+}
+.buy-page .product-box .seller-box .stars {
+  color: gold;
+  font-size: 0.9rem;
+}
+.buy-page .product-box .seller-box .details-link {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  padding: 0.5rem;
-  border-radius: 50%;
-  font-size: 1rem;
-  cursor: pointer;
-  z-index: 2;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.8rem;
+  color: #777;
 }
-.carousel-container .carousel-arrow.left {
-  left: 10px;
+.buy-page .product-box .map-fake {
+  height: 120px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  margin-bottom: 1rem;
 }
-.carousel-container .carousel-arrow.right {
-  right: 10px;
+.buy-page .product-box .info-box {
+  background: #f0f1e9;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
-.carousel-container .carousel-dots {
+.buy-page .product-box .review-row {
   display: flex;
-  justify-content: center;
-  margin-top: 0.75rem;
-  gap: 6px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
-.carousel-container .carousel-dots .dot {
-  width: 8px;
-  height: 8px;
-  background: #ccc;
+.buy-page .product-box .review-row .review-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f0f1e9;
+  border-radius: 12px;
+  width: calc(50% - 0.5rem);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+.buy-page .product-box .review-row .review-card .review-avatar {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
+  object-fit: cover;
 }
-.carousel-container .carousel-dots .dot.active {
-  background: #333;
+.buy-page .product-box .review-row .review-card .stars {
+  color: gold;
+  font-size: 0.9rem;
+}
+.buy-page .product-box .review-row .review-card p {
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.buy-page .product-box .related-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.buy-page .product-box .related-grid .related-card {
+  width: calc(50% - 0.5rem);
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.buy-page .product-box .related-grid .related-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+.buy-page .product-box .related-grid .related-card p {
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+  padding: 0 0.5rem;
+}
+.buy-page .product-box .related-grid .related-card small {
+  display: block;
+  font-size: 0.75rem;
+  color: #4b8153;
+  padding: 0 0.5rem 0.5rem;
 }/*# sourceMappingURL=style.css.map */
