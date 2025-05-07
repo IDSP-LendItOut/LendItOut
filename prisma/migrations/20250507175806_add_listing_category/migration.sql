@@ -7,7 +7,7 @@
 
 */
 -- CreateEnum
-CREATE TYPE "Category" AS ENUM ('ELECTRONICS', 'FASHION', 'HOME', 'FURNITURE', 'BOOKS', 'BABY', 'CLOTHING', 'OFFICE', 'SPORTS', 'TOOLS', 'TOYS', 'BEAUTY');
+CREATE TYPE "Groups" AS ENUM ('ELECTRONICS', 'FASHION', 'HOME', 'FURNITURE', 'BOOKS', 'BABY', 'CLOTHING', 'OFFICE', 'SPORTS', 'TOOLS', 'TOYS', 'BEAUTY');
 
 -- CreateEnum
 CREATE TYPE "Condition" AS ENUM ('BAD', 'ADEQUATE', 'GOOD', 'GREAT', 'NEW');
@@ -17,7 +17,7 @@ CREATE TYPE "RentalDuration" AS ENUM ('HOUR', 'DAY', 'WEEK', 'MONTH', 'YEAR');
 
 -- AlterTable
 ALTER TABLE "Listing" DROP COLUMN "price",
-ADD COLUMN     "category" "Category" NOT NULL,
+ADD COLUMN     "group" "Groups" NOT NULL,
 ADD COLUMN     "condition" "Condition" NOT NULL,
 ADD COLUMN     "rentalDuration" "RentalDuration",
 ADD COLUMN     "rentalPrice" DOUBLE PRECISION,
