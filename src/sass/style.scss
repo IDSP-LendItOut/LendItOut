@@ -22,6 +22,7 @@ Table of Contents
 20. Cart
 21. Carousel
 22. Checkout
+23. Listings
 */
 
 /* 1. Variables =================== */
@@ -69,25 +70,25 @@ Table of Contents
 /* 15. Onboarding =============== */
 @import "components/onboarding";
 
-/* 19. Messages =============== */
-@import "layout/messages";
-
-/* 18. Chat view =============== */
-@import "layout/chatView";
-
 /* 16. Interests ================== */
 @import "components/interests";
 
 /* 17. Notifications =========== */
 @import "components/notifications";
 
+/* 18. Chat view =============== */
+@import "layout/chatView";
+
+/* 19. Messages =============== */
+@import "layout/messages";
+
 /* 20. Cart ======================= */
 @import "components/cart";
-/* 19. Listings =========== */
-@import "media/listings";
 
 /* 21. Carousel =========== */
 @import "components/carousel";
 
 /* 22. Checkout =========== */
 @import "components/checkout";
+/* 23. Listings =========== */
+@import "media/listings";
