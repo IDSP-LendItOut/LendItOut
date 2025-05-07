@@ -17,6 +17,8 @@ Table of Contents
 15. Onboarding
 16. Messages
 17. Chat view
+19. Listings
+20. Carousel
 */
 
 /* 1. Variables =================== */
@@ -75,3 +77,9 @@ Table of Contents
 
 /* 17. Notifications =========== */
 @import "components/notifications";
+
+/* 19. Listings =========== */
+@import "media/listings";
+
+/* 20. Carousel =========== */
+@import "components/carousel";
