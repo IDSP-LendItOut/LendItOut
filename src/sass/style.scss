@@ -15,8 +15,11 @@ Table of Contents
 13. Add Profile Photo
 14. Terms & Conditions
 15. Onboarding
-16. Messages
-17. Chat view
+16. Interests
+17. Notifications
+19. Messages
+18. Chat view
+20. Cart
 */
 
 /* 1. Variables =================== */
@@ -64,14 +67,17 @@ Table of Contents
 /* 15. Onboarding =============== */
 @import "components/onboarding";
 
-
 /* 19. Messages =============== */
 @import "layout/messages";
 
 /* 18. Chat view =============== */
 @import "layout/chatView";
+
 /* 16. Interests ================== */
 @import "components/interests";
 
 /* 17. Notifications =========== */
 @import "components/notifications";
+
+/* 20. Cart ======================= */
+@import "components/cart";

@@ -15,8 +15,11 @@ Table of Contents
 13. Add Profile Photo
 14. Terms & Conditions
 15. Onboarding
-16. Messages
-17. Chat view
+16. Interests
+17. Notifications
+19. Messages
+18. Chat view
+20. Cart
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -1508,10 +1511,11 @@ body {
   border-radius: 12px;
   padding: 1.5rem;
   width: 100%;
-  max-width: 90vw; 
+  max-width: 90vw;
   box-sizing: border-box;
   text-align: center;
 }
+
 /* 16. Interests ================== */
 .interests .header {
   position: relative;
@@ -1656,5 +1660,185 @@ body {
   background: #eaefe7;
   border-radius: 50%;
   margin-left: 0.5rem;
+}
 
+/* 20. Cart ======================= */
+.cart-container {
+  max-width: 100%;
+  margin: auto;
+  padding: 15px;
+}
+.cart-container .header {
+  background-color: #4b5e33;
+  color: white;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+.cart-container .header .header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.cart-container .header .header-bar .back-arrow {
+  position: absolute;
+  left: 15px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cart-container .header .header-bar .back-arrow:hover {
+  color: #d4d4d4;
+}
+.cart-container .header .header-bar .header-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.cart-container .item-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+.cart-container .item-card img {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+  object-fit: cover;
+}
+.cart-container .item-card .checkbox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin: 0;
+  z-index: 1;
+}
+.cart-container .item-card .checkbox input[type=checkbox] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.cart-container .item-card .checkbox input[type=checkbox]:checked {
+  background-color: #556C40;
+  border-color: #556C40;
+}
+.cart-container .item-card .checkbox input[type=checkbox]:hover {
+  border-color: #999;
+}
+.cart-container .item-card .details {
+  flex: 1;
+  overflow: hidden;
+}
+.cart-container .item-card .details h4 {
+  margin: 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cart-container .item-card .details .price {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px;
+}
+.cart-container .item-card .details .quantity-control {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+.cart-container .item-card .details .quantity-control button {
+  background: #556C40;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+}
+.cart-container .item-card .details .actions {
+  margin-top: 10px;
+}
+.cart-container .item-card .details .actions button {
+  background: #556C40;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.cart-container .item-card .checkbox {
+  margin-left: auto;
+}
+.cart-container .item-card .insurance {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.cart-container .item-card .insurance input[type=checkbox] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.cart-container .item-card .insurance input[type=checkbox]:checked {
+  background-color: #556C40;
+  border-color: #556C40;
+}
+.cart-container .item-card .insurance input[type=checkbox]:hover {
+  border-color: #999;
+}
+.cart-container .item-card .insurance label {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+.cart-container .item-card .contracts {
+  margin-top: 10px;
+}
+.cart-container .item-card .contracts span {
+  display: inline-block;
+  background: #eee;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+.cart-container .summary {
+  background: white;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+.cart-container .summary .total-line {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+.cart-container .summary .checkout-btn {
+  margin-top: 10px;
+  background: #556C40;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
 }/*# sourceMappingURL=style.css.map */
