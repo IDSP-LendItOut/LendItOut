@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+
+<!-- Header Section -->
+<header class="header">
+    <div class="header-bar">
+        <a href="/">
+            <span class="fa back-arrow">&#8592;</span>
+        </a>
+        <span class="header-title">Cart</span>
+    </div>      
+</header>
+
+<div class="cart-container">
+    <% cartItems.forEach(item => { %>
+      <div class="item-card">
+        <div class="checkbox">
+          <input type="checkbox" checked />
+        </div>
+        <img src="<%= item.image %>" alt="<%= item.name %>" />
+        <div class="details">
+          <h4><%= item.name %></h4>
+          <div class="price"><%= item.priceLabel %></div>
+          <div class="quantity-control">
+            <button class="decrease-btn" data-id="<%= item.id %>">-</button>
+            <span class="quantity" id="quantity-<%= item.id %>"><%= item.quantity %></span>
+            <button class="increase-btn" data-id="<%= item.id %>">+</button>
+          </div>
+          <div class="actions">
+            <% if (item.canRent) { %><button>Rent</button><% } %>
+            <% if (item.canBuy) { %><button>Buy</button><% } %>
+          </div>
+          <div class="contracts">
+            <% item.contracts.forEach(contract => { %>
+              <span><%= contract %></span>
+            <% }) %>
+          </div>
+          <div class="insurance">
+            <input type="checkbox" id="insurance-<%= item.id %>" <%= item.insuranceSelected ? 'checked' : '' %> />
+            <label for="insurance-<%= item.id %>">Insurance $<%= item.insurance %></label>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  
+    <div class="summary">
+      <div class="total-line"><span>Subtotal Rent</span><span>$<%= subtotalRent %></span></div>
+      <div class="total-line"><span>Subtotal Buy</span><span>$<%= subtotalBuy %></span></div>
+      <div class="total-line"><span>Insurance</span><span>$<%= totalInsurance %></span></div>
+      <div class="total-line"><span>Shipping</span><span>$<%= shipping %></span></div>
+      <hr />
+      <div class="total-line"><strong>Total</strong><strong>$<%= total %></strong></div>
+      <button class="checkout-btn">Check out</button>
+    </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cartContainer = document.querySelector('.cart-container');
+
+    cartContainer.addEventListener('click', (event) => {
+      // Check if the clicked element is an increase button
+      if (event.target.classList.contains('increase-btn')) {
+        const itemId = event.target.getAttribute('data-id'); // Get the item ID
+        const quantityElement = document.getElementById(`quantity-${itemId}`); // Get the quantity span
+        let currentQuantity = parseInt(quantityElement.textContent); // Get the current quantity
+        quantityElement.textContent = currentQuantity + 1; // Increase the quantity
+      }
+
+      // Check if the clicked element is a decrease button
+      if (event.target.classList.contains('decrease-btn')) {
+        const itemId = event.target.getAttribute('data-id'); // Get the item ID
+        const quantityElement = document.getElementById(`quantity-${itemId}`); // Get the quantity span
+        let currentQuantity = parseInt(quantityElement.textContent); // Get the current quantity
+        if (currentQuantity > 1) {
+          quantityElement.textContent = currentQuantity - 1; // Decrease the quantity
+        }
+      }
+    });
+  });
+</script>
+
+<%- include('../partials/footer') %>
