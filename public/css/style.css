@@ -20,6 +20,8 @@ Table of Contents
 19. Messages
 18. Chat view
 20. Cart
+21. Carousel
+22. Listings
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -1589,26 +1591,35 @@ body {
   margin: 1rem auto;
   padding: 0.8rem 1rem;
   font-size: 1rem;
-  border-radius: 15px;
-  border: 1px solid rgb(155, 155, 155);
-  display: block;
+  cursor: pointer;
+  text-align: center;
 }
 
 .messages-page .requests-bar {
   display: flex;
-  justify-content: flex-end;
-  padding: 0 1rem;
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-  text-align: right;
-  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.top-bar h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.top-bar .back {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
 }
 
 .messages-page .chat-list li {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabs button {
+  flex: 1;
   padding: 1rem;
   border-bottom: 1px solid #eee;
 }
@@ -1634,8 +1645,18 @@ body {
 .messages-page .chat-list li .chat-content p {
   margin: 0.25rem 0 0;
   font-size: 0.9rem;
-  color: #555;
-  line-height: 1.2;
+  grid-column: span 3;
+}
+
+.section .notification,
+.section .listing {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
 }
 
 .messages-page .chat-list li .chat-time {
@@ -1643,7 +1664,6 @@ body {
   color: #999;
   white-space: nowrap;
   margin-left: 0.5rem;
-  align-self: flex-start;
 }
 
 /* 18. Chat view =============== */
@@ -2000,12 +2020,19 @@ body {
 .tabs button {
   flex: 1;
   padding: 1rem;
-  border: none;
-  background: #8D9D7F;
-  font-weight: bold;
-  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.messages-page .messages-header i {
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.messages-page .messages-header h2 {
+  font-size: 1.2rem;
+  margin: 0;
 }
 
 .tabs button:hover {
@@ -2025,18 +2052,19 @@ body {
 
 .section h2 {
   font-size: 0.9rem;
-  grid-column: span 3;
+  color: #555;
+  margin-bottom: 0.5rem;
+  text-align: right;
+  border-bottom: 1px solid #eee;
 }
 
 .section .notification,
 .section .listing {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
-  background: #fafafa;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
 }
 
 .section .notification:hover,
@@ -2049,8 +2077,7 @@ body {
   width: 75px !important;
   height: 75px !important;
   object-fit: cover;
-  border-radius: 6px;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 
 .section .notification p,
@@ -2068,8 +2095,6 @@ body {
   background: #eaefe7;
   border-radius: 50%;
   margin-left: 0.5rem;
-
-
 }
 
 /* 20. Cart ======================= */
@@ -2280,7 +2305,6 @@ body {
   font-size: 16px;
   border-radius: 8px;
   box-sizing: border-box;
-
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,7 +1,7 @@
 import express from "express";
 import { requireLogin } from "../middleware/requireLogin";
 // import { prisma } from "../seed";
-import { Category } from "@prisma/client";
+import { Groups } from "@prisma/client";
 
 const postingRouter = express.Router();
 
@@ -12,7 +12,7 @@ postingRouter.get("/create", requireLogin, (req, res) => {
   res.render("posting/posting_layout", {
     title: "Create post",
     currentStep,
-    categories: Object.values(Category),
+    categories: Object.values(Groups),
     listingType: req.session.listingData?.type || [],
     error: null,
   });
@@ -31,7 +31,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
         return res.render("posting/posting_layout", {
           title: "Create post",
           currentStep: 1,
-          categories: Object.values(Category),
+          categories: Object.values(Groups),
           error: "Please select at least one listing type.",
         });
       }
@@ -40,7 +40,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
         return res.render("posting/posting_layout", {
           title: "Create post",
           currentStep: 1,
-          categories: Object.values(Category),
+          categories: Object.values(Groups),
           error: "Please select a category.",
         });
       }
@@ -84,7 +84,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
     res.status(500).render("posting/posting_layout", {
       title: "Create post",
       currentStep: step,
-      categories: Object.values(Category),
+      categories: Object.values(Groups),
       error: "An unexpected error occurred. Please try again.",
     });
   }
@@ -96,7 +96,7 @@ postingRouter.get("/preview", (req, res) => {
     // formData: req.session.listingData || {},
     errors: {},
     currentStep: 5,
-    categories: Object.values(Category),
+    categories: Object.values(Groups),
   });
 });
 export { postingRouter };

@@ -9,20 +9,29 @@ datasource db {
 
 model User {
   id                           Int               @id @default(autoincrement())
-  name                         String
   email                        String            @unique
+  name                         String
+  createdAt                    DateTime          @default(now())
   password                     String?
-  profilePic                   String?
   banner                       String?
+  profilePic                   String?
   passwordResetCode            String?
   passwordResetCodeExpirations DateTime?
   listings                     Listing[]
+  messagesSent                 Message[]         @relation("MessageSender")
+  ReviewOnListing              ReviewOnListing[]
   reviewsGiven                 ReviewOnUser[]    @relation("Reviewer")
   reviewsReceived              ReviewOnUser[]    @relation("Target")
-  createdAt                    DateTime          @default(now())
-  ReviewOnListing              ReviewOnListing[]
   conversations                Conversation[]    @relation("ConversationParticipants")
-  messagesSent                 Message[]         @relation("MessageSender")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  type     String
+  listings Listing[]
+
+  @@unique([name, type])
 }
 
 model Listing {
@@ -30,7 +39,7 @@ model Listing {
   title          String
   description    String
   type           ListingType
-  category       Category
+  group          Groups
   salePrice      Float?
   rentalPrice    Float?
   rentalDuration RentalDuration?
@@ -42,6 +51,8 @@ model Listing {
   media          Media[]
   reviews        ReviewOnListing[]
   conversations  Conversation[]
+  categoryId     Int?
+  category       Category?         @relation(fields: [categoryId], references: [id])
 }
 
 model ReviewOnUser {
@@ -74,6 +85,25 @@ model Media {
   listing   Listing   @relation(fields: [listingId], references: [id])
 }
 
+model Conversation {
+  id           Int       @id @default(autoincrement())
+  listingId    Int
+  createdAt    DateTime  @default(now())
+  listing      Listing   @relation(fields: [listingId], references: [id])
+  messages     Message[]
+  participants User[]    @relation("ConversationParticipants")
+}
+
+model Message {
+  id             Int          @id @default(autoincrement())
+  text           String
+  createdAt      DateTime     @default(now())
+  senderId       Int
+  conversationId Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  sender         User         @relation("MessageSender", fields: [senderId], references: [id])
+}
+
 enum ListingType {
   RENT
   PURCHASE
@@ -84,7 +114,7 @@ enum MediaType {
   VIDEO
 }
 
-enum Category {
+enum Groups {
   ELECTRONICS
   FASHION
   HOME
@@ -113,23 +143,4 @@ enum RentalDuration {
   WEEK
   MONTH
   YEAR
-}
-
-model Conversation {
-  id           Int       @id @default(autoincrement())
-  listingId    Int
-  listing      Listing   @relation(fields: [listingId], references: [id])
-  participants User[]    @relation("ConversationParticipants")
-  messages     Message[]
-  createdAt    DateTime  @default(now())
-}
-
-model Message {
-  id             Int          @id @default(autoincrement())
-  text           String
-  createdAt      DateTime     @default(now())
-  senderId       Int
-  sender         User         @relation("MessageSender", fields: [senderId], references: [id])
-  conversationId Int
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
 }
