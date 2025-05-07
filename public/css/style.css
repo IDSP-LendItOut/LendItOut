@@ -2046,6 +2046,53 @@ body {
 }
 
 /* 21. Carousel =========== */
+.more-options-modal {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background-color: #4a5a34;
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: none; /* <- important */
+  z-index: 1000;
+  width: 240px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.more-options-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.more-options-modal .modal-header .close-icon {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+.more-options-modal hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 12px 0;
+}
+.more-options-modal ul {
+  list-style: none;
+  padding: 0;
+}
+.more-options-modal ul li {
+  margin: 12px 0;
+}
+.more-options-modal ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+.more-options-modal ul li a:hover {
+  text-decoration: underline;
+}
+
+/* 20. Carousel =========== */
 .carousel-container {
   width: 100%;
   padding: 0;
