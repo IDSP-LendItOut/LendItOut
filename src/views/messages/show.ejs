@@ -80,12 +80,6 @@
         <% }) %>
       </div>
 
-      <!-- <form action="/messages/<%= conversation.id %>/send" method="POST" class="chat-input">
-        <input type="text" name="text" placeholder="Type message here..." required>
-        <button type="submit" class="send-btn">
-          <i class="fa-solid fa-paper-plane"></i>
-        </button>
-      </form> -->
       <form id="chat-form" class="chat-input">
         <input type="text" name="text" id="messageInput" placeholder="Type message here..." required>
         <button type="submit" class="send-btn">
@@ -99,43 +93,6 @@
       </div>
     <% } %>
   </div>
-  <script>
-    const chatForm = document.getElementById('chat-form');
-    const messageInput = document.getElementById('messageInput');
-    const chatMessages = document.querySelector('.chat-messages');
-  
-    chatForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-  
-      const text = messageInput.value.trim();
-      if (!text) return;
-  
-      const res = await fetch(window.location.pathname + '/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ text })
-      });
-  
-      if (res.ok) {
-        // Optionally parse new message if returned by backend
-        const data = await res.json();
-  
-        // Append message to chat
-        const div = document.createElement('div');
-        div.className = 'message sent';
-        div.innerText = data.text;
-        chatMessages.appendChild(div);
-  
-        // Scroll to bottom & clear input
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        messageInput.value = '';
-      } else {
-        alert('Failed to send message');
-      }
-    });
-  </script>
   
 </body>
 </html>

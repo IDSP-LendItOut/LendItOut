@@ -20,6 +20,7 @@ Table of Contents
 19. Messages
 18. Chat view
 20. Cart
+21. Carousel
 */
 
 /* 1. Variables =================== */
@@ -81,3 +82,8 @@ Table of Contents
 
 /* 20. Cart ======================= */
 @import "components/cart";
+/* 19. Listings =========== */
+@import "media/listings";
+
+/* 21. Carousel =========== */
+@import "components/carousel";

@@ -35,3 +35,39 @@ document.addEventListener("DOMContentLoaded", () => {
   if (blockBtn) blockBtn.addEventListener("click", () => openModal("block-modal"));
   if (deleteBtn) deleteBtn.addEventListener("click", () => openModal("delete-modal"));
 });
+
+const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('messageInput');
+    const chatMessages = document.querySelector('.chat-messages');
+  
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      const text = messageInput.value.trim();
+      if (!text) return;
+  
+      const res = await fetch(window.location.pathname + '/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text })
+      });
+  
+      if (res.ok) {
+        // Optionally parse new message if returned by backend
+        const data = await res.json();
+  
+        // Append message to chat
+        const div = document.createElement('div');
+        div.className = 'message sent';
+        div.innerText = data.text;
+        chatMessages.appendChild(div);
+  
+        // Scroll to bottom & clear input
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        messageInput.value = '';
+      } else {
+        alert('Failed to send message');
+      }
+    });

@@ -14,6 +14,7 @@ import { authRouter } from "./routes/authRouter";
 import { homeRouter } from "./routes/homeRouter";
 import { profileRouter } from "./routes/profileRouter";
 import messagesRouter from "./routes/messagesRouter"
+import listingsRouter from "./routes/listingsRouter"
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -45,6 +46,7 @@ app.use("/", homeRouter);
 app.use("/profile", profileRouter);app.use("/messages", messagesRouter)
 
 app.use("/auth", authRouter);
+app.use("/listings", listingsRouter)
 
 const items = [
   {
