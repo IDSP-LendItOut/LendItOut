@@ -12,10 +12,9 @@ import { fileURLToPath } from "url";
 
 import { authRouter } from "./routes/authRouter";
 import { homeRouter } from "./routes/homeRouter";
+import messagesRouter from "./routes/messagesRouter";
 import { postingRouter } from "./routes/postingRouter";
 import { profileRouter } from "./routes/profileRouter";
-
-import messagesRouter from "./routes/messagesRouter";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,10 +42,10 @@ app.use(
 );
 
 app.use("/", homeRouter);
-app.use("/auth", authRouter);
 app.use("/profile", profileRouter);
-app.use("/posting", postingRouter);
 app.use("/messages", messagesRouter);
+app.use("/auth", authRouter);
+app.use("/posting", postingRouter);
 
 const items = [
   {
@@ -126,6 +125,53 @@ app.get("/interestsview", (req, res) => {
 
 app.get("/notifications", (req, res) => {
   res.render("notifications/notifications", { title: "Notifications" });
+});
+
+// cart with fake data for now
+app.get("/cart", (req, res) => {
+  res.render("cart/cart", {
+    title: "Cart",
+    cartItems: [
+      {
+        name: "Tennis Rocket",
+        image: "https://picsum.photos/300/300",
+        priceLabel: "$10/hour x 2 = $20",
+        quantity: 2,
+        canRent: true,
+        canBuy: true,
+        contracts: ["Rental Contract", "Buying Contract"],
+        insurance: 10,
+        insuranceSelected: false,
+      },
+      {
+        name: "Viral Sneakers",
+        image: "https://picsum.photos/300/300",
+        priceLabel: "$10/hour x 2 = $20",
+        quantity: 2,
+        canRent: true,
+        canBuy: false,
+        contracts: ["Rental Contract"],
+        insurance: 10,
+        insuranceSelected: true,
+      },
+      {
+        name: "Vintage printing machine",
+        image: "https://picsum.photos/300/300",
+        priceLabel: "$100",
+        quantity: 1,
+        canRent: false,
+        canBuy: true,
+        contracts: ["Purchase Contract"],
+        insurance: 20,
+        insuranceSelected: false,
+      },
+    ],
+    subtotalRent: 40,
+    subtotalBuy: 100,
+    totalInsurance: 10,
+    shipping: 30,
+    total: 180,
+  });
 });
 
 app.listen(port, () => {
