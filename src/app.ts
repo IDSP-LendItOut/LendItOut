@@ -175,6 +175,38 @@ app.get("/cart", (req, res) => {
   });
   });
 
+
+// checkout with fake data for now
+app.get("/cart/checkout", (req, res) => {
+  res.render('cart/checkout', {title: "Checkout",
+    checkoutItems: [
+      {
+        name: "Tennis Rocket and Balls",
+        desc: "Good condition tennis rocket with balls",
+        image: "https://picsum.photos/300/100",
+        price: "$10/hour x 2",
+        total: "$20"
+      },
+      {
+        name: "Viral Sneakers",
+        desc: "TikTok trending sneakers in pink ...",
+        image: "https://picsum.photos/300/100",
+        price: "$10/hour x 2",
+        insurance: "$10",
+        total: "$30"
+      },
+      {
+        name: "Vintage printing machine",
+        desc: "Still working printing machine from ...",
+        image: "https://picsum.photos/300/100",
+        price: "$100",
+        total: "$100"
+      }
+    ],
+    total: "$180"
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
