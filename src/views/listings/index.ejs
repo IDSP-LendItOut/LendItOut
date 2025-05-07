@@ -1,0 +1,11 @@
+<% layout('layout') %>
+
+<h1>All Listings</h1>
+
+<ul>
+  <% listings.forEach(listing => { %>
+    <li>
+      <a href="/listings/<%= listing.id %>"><%= listing.title %> - $<%= listing.price %></a>
+    </li>
+  <% }) %>
+</ul>

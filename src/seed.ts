@@ -4,10 +4,58 @@ import { PrismaClient } from "@prisma/client";
 export const prisma = new PrismaClient();
 
 async function main() {
+  const rentCategories = [
+    'Real Estate & Property',
+    'Vehicles & Transportation',
+    'Equipment & Tools',
+    'Furniture & Home Goods',
+    'Clothing & Fashion',
+    'Technology & Gadgets',
+    'Leisure & Recreation',
+    'Events & Parties',
+    'Photography & Videography',
+    'Health & Fitness',
+    'Office & Business Equipment',
+  ];
+
+  const purchaseCategories = [
+    'Electronics & Gadgets',
+    'Fashion & Apparel',
+    'Home & Furniture',
+    'Beauty & Personal Care',
+    'Health & Wellness',
+    'Sports & Outdoors',
+    'Automotive & Motorcycles',
+    'Baby & Kids',
+    'Groceries & Household Essentials',
+    'Books, Music & Entertainment',
+    'Office & School Supplies',
+    'Hobbies & Collectibles',
+    'Digital Products & Services',
+  ];
+
+  const allCategories = [
+    ...rentCategories.map(name => ({ name, type: 'Rent' })),
+    ...purchaseCategories.map(name => ({ name, type: 'Purchase' })),
+  ];
+
+  await prisma.category.createMany({
+    data: allCategories,
+    skipDuplicates: true,
+  });
+
+  const rentCats = await prisma.category.findMany({ where: { type: 'Rent' } });
+  const purchaseCats = await prisma.category.findMany({ where: { type: 'Purchase' } });
+  if (!rentCats.length || !purchaseCats.length) {
+    console.error("❌ rentCats or purchaseCats is empty!");
+    process.exit(1); // stop script early
+  }
+  
+
   const allUsers = [];
   const allListings = [];
 
-  // Create 15 users, 2 listings each
+  // Create 15 users, each with 2 listings
   for (let i = 0; i < 15; i++) {
     const user = await prisma.user.create({
       data: {
@@ -21,6 +69,10 @@ async function main() {
     allUsers.push(user);
 
     for (let j = 0; j < 2; j++) {
+      const category = j % 2 === 0
+        ? faker.helpers.arrayElement(rentCats)
+        : faker.helpers.arrayElement(purchaseCats);
+
       const listing = await prisma.listing.create({
         data: {
           title: faker.commerce.productName(),
@@ -29,6 +81,7 @@ async function main() {
           price: parseFloat(faker.commerce.price()),
           available: true,
           userId: user.id,
+          categoryId: category.id,
         },
       });
 
@@ -49,11 +102,15 @@ async function main() {
 
       await prisma.media.createMany({ data: mediaData });
 
+      const reviewer = faker.helpers.arrayElement(
+        allUsers.filter(u => u.id !== user.id)
+      );
+
       await prisma.reviewOnListing.create({
         data: {
-          reviewerId: user.id,
+          reviewerId: reviewer.id,
           listingId: listing.id,
-          rating: faker.number.int({ min: 2, max: 10 }),
+          rating: faker.number.int({ min: 4, max: 5 }),
           comment: faker.lorem.sentence(),
         },
       });
@@ -94,7 +151,7 @@ async function main() {
         });
       }
     } catch (err) {
-      console.error("❌ Conversation creation failed:", err);
+      console.error("Conversation creation failed:", err);
     }
   }
 
@@ -102,5 +159,7 @@ async function main() {
 }
 
 main()
-  .catch((e) => console.error("❌ Seed error:", e))
+  .catch((e) => console.error("Seed error:", e))
   .finally(() => prisma.$disconnect());
+
+  
