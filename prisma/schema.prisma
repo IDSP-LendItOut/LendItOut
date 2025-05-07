@@ -22,24 +22,26 @@ model User {
   createdAt                    DateTime          @default(now())
   ReviewOnListing              ReviewOnListing[]
   conversations                Conversation[]    @relation("ConversationParticipants")
-  messagesSent                 Message[] @relation("MessageSender")
-
+  messagesSent                 Message[]         @relation("MessageSender")
 }
 
 model Listing {
-  id          Int               @id @default(autoincrement())
-  title       String
-  description String
-  type        ListingType
-  price       Float
-  available   Boolean           @default(true)
-  userId      Int
-  createdAt   DateTime          @default(now())
-  user        User              @relation(fields: [userId], references: [id])
-  media       Media[]
-  reviews     ReviewOnListing[]
-  conversations Conversation[]
-
+  id             Int               @id @default(autoincrement())
+  title          String
+  description    String
+  type           ListingType
+  category       Category
+  salePrice      Float?
+  rentalPrice    Float?
+  rentalDuration RentalDuration?
+  available      Boolean           @default(true)
+  condition      Condition
+  userId         Int
+  createdAt      DateTime          @default(now())
+  user           User              @relation(fields: [userId], references: [id])
+  media          Media[]
+  reviews        ReviewOnListing[]
+  conversations  Conversation[]
 }
 
 model ReviewOnUser {
@@ -81,21 +83,53 @@ enum MediaType {
   IMAGE
   VIDEO
 }
+
+enum Category {
+  ELECTRONICS
+  FASHION
+  HOME
+  FURNITURE
+  BOOKS
+  BABY
+  CLOTHING
+  OFFICE
+  SPORTS
+  TOOLS
+  TOYS
+  BEAUTY
+}
+
+enum Condition {
+  BAD
+  ADEQUATE
+  GOOD
+  GREAT
+  NEW
+}
+
+enum RentalDuration {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
 model Conversation {
-  id           Int        @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   listingId    Int
-  listing      Listing    @relation(fields: [listingId], references: [id])
-  participants User[]     @relation("ConversationParticipants")
+  listing      Listing   @relation(fields: [listingId], references: [id])
+  participants User[]    @relation("ConversationParticipants")
   messages     Message[]
-  createdAt    DateTime   @default(now())
+  createdAt    DateTime  @default(now())
 }
 
 model Message {
-  id             Int           @id @default(autoincrement())
+  id             Int          @id @default(autoincrement())
   text           String
-  createdAt      DateTime      @default(now())
+  createdAt      DateTime     @default(now())
   senderId       Int
-  sender User @relation("MessageSender", fields: [senderId], references: [id])
+  sender         User         @relation("MessageSender", fields: [senderId], references: [id])
   conversationId Int
-  conversation   Conversation  @relation(fields: [conversationId], references: [id])
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
 }
