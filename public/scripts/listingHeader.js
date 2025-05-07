@@ -19,3 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
+  document.addEventListener("DOMContentLoaded", () => {
+    const closeBtn = document.getElementById("closeButton");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        history.back();
+      });
+    }
+  });
+  
