@@ -1,11 +1,34 @@
 import { faker } from "@faker-js/faker";
-import { PrismaClient } from "@prisma/client";
+import {
+  Category,
+  Condition,
+  PrismaClient,
+  RentalDuration,
+} from "@prisma/client";
 
 export const prisma = new PrismaClient();
 
 async function main() {
   const allUsers = [];
   const allListings = [];
+
+  const categories: Category[] = [
+    "ELECTRONICS",
+    "FASHION",
+    "HOME",
+    "FURNITURE",
+    "BOOKS",
+    "BABY",
+    "CLOTHING",
+    "OFFICE",
+    "SPORTS",
+    "TOOLS",
+    "TOYS",
+    "BEAUTY",
+  ];
+
+  const conditions: Condition[] = ["BAD", "ADEQUATE", "GOOD", "GREAT", "NEW"];
+  const durations: RentalDuration[] = ["HOUR", "DAY", "WEEK", "MONTH", "YEAR"];
 
   // Create 15 users, 2 listings each
   for (let i = 0; i < 15; i++) {
@@ -26,7 +49,11 @@ async function main() {
           title: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
           type: j % 2 === 0 ? "RENT" : "PURCHASE",
-          price: parseFloat(faker.commerce.price()),
+          category: faker.helpers.arrayElement(categories),
+          rentalDuration: faker.helpers.arrayElement(durations),
+          condition: faker.helpers.arrayElement(conditions),
+          salePrice: parseFloat(faker.commerce.price()),
+          rentalPrice: parseFloat(faker.commerce.price()),
           available: true,
           userId: user.id,
         },
@@ -63,7 +90,7 @@ async function main() {
   // Create conversations and messages
   for (let i = 0; i < 10; i++) {
     const listing = faker.helpers.arrayElement(allListings);
-    const seller = allUsers.find(u => u.id === listing.userId)!;
+    const seller = allUsers.find((u) => u.id === listing.userId)!;
     let buyer = faker.helpers.arrayElement(allUsers);
 
     while (buyer.id === seller.id) {

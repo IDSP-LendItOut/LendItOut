@@ -12,10 +12,10 @@ import { fileURLToPath } from "url";
 
 import { authRouter } from "./routes/authRouter";
 import { homeRouter } from "./routes/homeRouter";
+import { postingRouter } from "./routes/postingRouter";
 import { profileRouter } from "./routes/profileRouter";
 
-import messagesRouter from "./routes/messagesRouter"
-
+import messagesRouter from "./routes/messagesRouter";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,11 +43,10 @@ app.use(
 );
 
 app.use("/", homeRouter);
-app.use("/profile", profileRouter);
-
-app.use("/messages", messagesRouter)
-
 app.use("/auth", authRouter);
+app.use("/profile", profileRouter);
+app.use("/posting", postingRouter);
+app.use("/messages", messagesRouter);
 
 const items = [
   {
@@ -120,15 +119,14 @@ app.get("/onboarding", (req, res) => {
   res.render("onboarding/onboardLayout", { title: "Onboarding" });
 });
 
-
 // interests view and notifications view
 app.get("/interestsview", (req, res) => {
   res.render("interests/interestsview", { title: "Interests" });
-})
+});
 
 app.get("/notifications", (req, res) => {
   res.render("notifications/notifications", { title: "Notifications" });
-})
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

@@ -191,6 +191,17 @@ video {
 }
 
 /* 7. Elements =============== */
+.error-msg {
+  color: #ff2f32;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
 .filter-rent-and-buy {
   width: 100%;
 }
@@ -494,10 +505,6 @@ video {
   text-decoration: underline;
   font-weight: bold;
 }
-.main-content .error-msg {
-  color: #ff2f32;
-  font-style: italic;
-}
 .main-content .checkbox-label {
   display: flex;
   align-items: flex-start;
@@ -511,6 +518,24 @@ video {
 }
 .main-content .checkbox-label span {
   flex: 8;
+}
+
+.logout-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.logout-section .logout-btn {
+  background-color: #556C40;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.logout-section .logout-btn:hover {
+  background-color: #8D9D7F;
 }
 
 .forgot-password {
@@ -562,28 +587,6 @@ video {
   margin: 0 auto;
 }
 
-.hidden {
-  display: none;
-}
-
-.logout-section {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
-.logout-section .logout-btn {
-  background-color: #5b6d45;
-  color: white;
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.logout-section .logout-btn:hover {
-  background-color: #495837;
-}
-
 .forgot-password2 {
   position: fixed;
   top: 26rem;
@@ -633,8 +636,194 @@ video {
   margin: 1rem auto;
 }
 
-.hidden {
+.posting {
+  background-color: white;
+}
+.posting .posting-header {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  margin-top: 2rem;
+  z-index: 10;
+}
+.posting .posting-header .stage-back {
+  position: absolute;
+  left: 1rem;
+  top: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: black;
+  cursor: pointer;
+}
+.posting .posting-header .top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.posting .posting-title {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: black;
+}
+.posting .stage-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.5rem;
+}
+.posting .stage-circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #EEF0EC;
+  color: black;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 2.5rem;
+}
+.posting .stage-circle.active {
+  background-color: #4CAF50;
+  color: white;
+}
+.posting .stage-line {
+  width: 2.5rem;
+  height: 0.2rem;
+  background-color: #EEF0EC;
+}
+.posting .stage-line.active {
+  background-color: #4CAF50;
+}
+
+.main-content-posting .subtitle {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.main-content-posting .subdescription {
+  color: black;
+  font-size: 0.8rem;
+}
+.main-content-posting form {
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem 2rem 2rem;
+  border-radius: 8px;
+  background-color: white;
+}
+.main-content-posting form .next-btn {
+  width: 94%;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  background-color: #556C40;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s;
+}
+.main-content-posting form .next-btn:hover {
+  background-color: #8D9D7F;
+}
+.main-content-posting .step1-form .checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.main-content-posting .step1-form .checkbox-group label {
+  font-size: 0.9rem;
+}
+.main-content-posting .step1-form .category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.main-content-posting .step1-form .category-grid .category-option {
+  background-color: #EEF0EC;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #556C40;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.main-content-posting .step1-form .category-grid .category-option input {
   display: none;
+}
+.main-content-posting .step1-form .category-grid .category-option span {
+  width: 100%;
+  text-align: center;
+  padding: 0.7rem;
+}
+.main-content-posting .step1-form .category-grid .category-option input:checked + span {
+  font-weight: bold;
+  color: white;
+  background-color: #556C40;
+}
+.main-content-posting .step2-form .form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.main-content-posting .step2-form .photo-section {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.main-content-posting .step2-form .photo-grid {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.main-content-posting .step2-form .photo-slot {
+  width: 100px;
+  height: 100px;
+  background-color: #EEF0EC;
+  border: 1px solid #556C40;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main-content-posting .step2-form .photo-slot img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.main-content-posting .step2-form input[type=text],
+.main-content-posting .step2-form textarea,
+.main-content-posting .step2-form input[type=number],
+.main-content-posting .step2-form select {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #EEF0EC;
+  font-size: 0.8rem;
+}
+.main-content-posting .step2-form .price-range {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.main-content-posting .step2-form .duration-selection {
+  display: flex;
+  gap: 0.5rem;
+}
+.main-content-posting .step2-form input[type=range] {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+.main-content-posting .step2-form .condition-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
 }
 
 /* 8. Cards ======================= */
@@ -1508,10 +1697,11 @@ body {
   border-radius: 12px;
   padding: 1.5rem;
   width: 100%;
-  max-width: 90vw; 
+  max-width: 90vw;
   box-sizing: border-box;
   text-align: center;
 }
+
 /* 16. Interests ================== */
 .interests .header {
   position: relative;
@@ -1656,5 +1846,4 @@ body {
   background: #eaefe7;
   border-radius: 50%;
   margin-left: 0.5rem;
-
 }/*# sourceMappingURL=style.css.map */
