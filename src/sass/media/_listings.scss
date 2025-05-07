@@ -1,0 +1,236 @@
+.buy-page {
+  background: #fafafa;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  padding-bottom: 2rem;
+
+  .buy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #556C40;
+    color: white;
+    border-bottom: 1px solid #eee;
+
+    .header-btn {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .buy-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+  }
+
+  .product-box {
+    padding: 1rem;
+  
+    .product-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+  
+    .product-price {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+  
+    .product-description {
+      font-size: 0.9rem;
+  
+      strong {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+  
+      small {
+        display: block;
+        color: #555;
+        margin-bottom: 0.5rem;
+      }
+  
+      a {
+        font-size: 0.85rem;
+        color: #007bff;
+      }
+    }
+  
+    .message-box {
+      background: #f0f1e9;
+      border-radius: 12px;
+      padding: 1rem;
+      margin: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+  
+      p {
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+  
+      .message-inner {
+        display: flex;
+        gap: 0.5rem;
+  
+        input {
+          flex: 1;
+          padding: 0.5rem;
+          border-radius: 25px;
+          border: 1px solid #ccc;
+          background: #cfcece;
+        }
+  
+        button {
+          background: #8ca186;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  
+    .condition-box {
+      background: #f0f1e9;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+  
+      .badge {
+        color: #4d7c4d;
+        font-weight: bold;
+      }
+    }
+  
+    .seller-box {
+      background: #f0f1e9;
+      padding: 1rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+  
+      .seller-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+  
+      .verified-icon {
+        color: #3c9f3c;
+        margin-left: 4px;
+      }
+  
+      .stars {
+        color: gold;
+        font-size: 0.9rem;
+      }
+  
+      .details-link {
+        position: absolute;
+        bottom: 8px;
+        right: 12px;
+        font-size: 0.8rem;
+        color: #777;
+      }
+    }
+  
+    .map-fake {
+      height: 120px;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+  
+    .info-box {
+      background: #f0f1e9;
+      padding: 0.75rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+  
+    .review-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+    
+      .review-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: #f0f1e9;
+        border-radius: 12px;
+        width: calc(50% - 0.5rem);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    
+        .review-avatar {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+    
+        .stars {
+          color: gold;
+          font-size: 0.9rem;
+        }
+    
+        p {
+          font-size: 0.85rem;
+          margin-top: 0.25rem;
+        }
+      }
+    }
+    
+    .related-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    
+      .related-card {
+        width: calc(50% - 0.5rem);
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+    
+        img {
+          width: 100%;
+          height: 120px;
+          object-fit: cover;
+          border-bottom: 1px solid #eee;
+        }
+    
+        p {
+          font-size: 0.85rem;
+          margin: 0.5rem 0 0;
+          padding: 0 0.5rem;
+        }
+    
+        small {
+          display: block;
+          font-size: 0.75rem;
+          color: #4b8153;
+          padding: 0 0.5rem 0.5rem;
+        }
+      }
+    }
+    
+  }
+}  
