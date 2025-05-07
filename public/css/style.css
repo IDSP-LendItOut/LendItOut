@@ -20,6 +20,7 @@ Table of Contents
 19. Messages
 18. Chat view
 20. Cart
+21. Carousel
 */
 /* 1. Variables =================== */
 /* 2. Reset ======================= */
@@ -1841,4 +1842,305 @@ body {
   font-size: 16px;
   border-radius: 8px;
   box-sizing: border-box;
+}
+
+/* 19. Listings =========== */
+.buy-page {
+  background: #fafafa;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  padding-bottom: 2rem;
+}
+.buy-page .buy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #556C40;
+  color: white;
+  border-bottom: 1px solid #eee;
+}
+.buy-page .buy-header .header-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.buy-page .buy-header .buy-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.buy-page .product-box {
+  padding: 1rem;
+}
+.buy-page .product-box .product-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.buy-page .product-box .product-price {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.buy-page .product-box .product-description {
+  font-size: 0.9rem;
+}
+.buy-page .product-box .product-description strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.buy-page .product-box .product-description small {
+  display: block;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+.buy-page .product-box .product-description a {
+  font-size: 0.85rem;
+  color: #007bff;
+}
+.buy-page .product-box .message-box {
+  background: #f0f1e9;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+.buy-page .product-box .message-box p {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.buy-page .product-box .message-box .message-inner {
+  display: flex;
+  gap: 0.5rem;
+}
+.buy-page .product-box .message-box .message-inner input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  background: #cfcece;
+}
+.buy-page .product-box .message-box .message-inner button {
+  background: #8ca186;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+.buy-page .product-box .condition-box {
+  background: #f0f1e9;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.buy-page .product-box .condition-box .badge {
+  color: #4d7c4d;
+  font-weight: bold;
+}
+.buy-page .product-box .seller-box {
+  background: #f0f1e9;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.buy-page .product-box .seller-box .seller-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.buy-page .product-box .seller-box .verified-icon {
+  color: #3c9f3c;
+  margin-left: 4px;
+}
+.buy-page .product-box .seller-box .stars {
+  color: gold;
+  font-size: 0.9rem;
+}
+.buy-page .product-box .seller-box .details-link {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.8rem;
+  color: #777;
+}
+.buy-page .product-box .map-fake {
+  height: 120px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+.buy-page .product-box .info-box {
+  background: #f0f1e9;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.buy-page .product-box .review-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.buy-page .product-box .review-row .review-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f0f1e9;
+  border-radius: 12px;
+  width: calc(50% - 0.5rem);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+.buy-page .product-box .review-row .review-card .review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.buy-page .product-box .review-row .review-card .stars {
+  color: gold;
+  font-size: 0.9rem;
+}
+.buy-page .product-box .review-row .review-card p {
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.buy-page .product-box .related-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.buy-page .product-box .related-grid .related-card {
+  width: calc(50% - 0.5rem);
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.buy-page .product-box .related-grid .related-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+.buy-page .product-box .related-grid .related-card p {
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+  padding: 0 0.5rem;
+}
+.buy-page .product-box .related-grid .related-card small {
+  display: block;
+  font-size: 0.75rem;
+  color: #4b8153;
+  padding: 0 0.5rem 0.5rem;
+}
+
+/* 21. Carousel =========== */
+.more-options-modal {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background-color: #4a5a34;
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: none; /* <- important */
+  z-index: 1000;
+  width: 240px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.more-options-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.more-options-modal .modal-header .close-icon {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+.more-options-modal hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 12px 0;
+}
+.more-options-modal ul {
+  list-style: none;
+  padding: 0;
+}
+.more-options-modal ul li {
+  margin: 12px 0;
+}
+.more-options-modal ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+.more-options-modal ul li a:hover {
+  text-decoration: underline;
+}
+
+/* 20. Carousel =========== */
+.carousel-container {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.carousel-container .carousel-main-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+}
+.carousel-container .carousel-main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel-container .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 2;
+}
+.carousel-container .carousel-arrow.left {
+  left: 10px;
+}
+.carousel-container .carousel-arrow.right {
+  right: 10px;
+}
+.carousel-container .carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+  gap: 6px;
+}
+.carousel-container .carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 50%;
+}
+.carousel-container .carousel-dots .dot.active {
+  background: #333;
 }/*# sourceMappingURL=style.css.map */

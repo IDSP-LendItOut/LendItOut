@@ -1,0 +1,21 @@
+<% const images = listing.media.filter(m => m.type === "IMAGE"); %>
+
+<div class="carousel-container">
+  <div class="carousel-container">
+    <div class="carousel-main-wrapper">
+      <img src="<%= images[0]?.url || '/images/fallback.jpg' %>" id="mainImage" class="carousel-main-image" />
+    </div>
+  
+    <% if (images.length > 1) { %>
+      <div class="carousel-dots" id="carouselDots">
+        <% images.forEach((_, i) => { %>
+          <span class="dot <%= i === 0 ? 'active' : '' %>" data-index="<%= i %>"></span>
+        <% }) %>
+      </div>
+    <% } %>
+  
+    <script type="application/json" id="carouselData">
+      <%- JSON.stringify(images) %>
+    </script>
+  </div>
+  
