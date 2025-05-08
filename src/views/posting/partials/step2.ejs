@@ -1,0 +1,69 @@
+<form action="/posting/create/step/2" method="POST" class="step2-form" id="step2-form">
+  <div class="photo-section">
+    <p class="section-title subtitle">Photos</p>
+    <p class="section-description subdescription">Add up to 8 photos.</p>
+    <div class="photo-grid">
+      <div class="photo-slot">
+        <img src="https://picsum.photos/300/300" alt="Photo 1">
+      </div>
+      <div class="photo-slot">
+        <img src="https://picsum.photos/300/300" alt="Photo 2">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="subtitle">Add a title</label>
+    <input type="text" name="title" required>
+  </div>
+
+  <div class="form-group">
+    <label class="subtitle">Provide a description</label>
+    <p class="subdescription">Add details about your item</p>
+    <textarea name="description" rows="4" required></textarea>
+  </div>
+
+  <% if(listingType.includes("PURCHASE")){ %>
+
+  <div class="form-group" id="saleOnly">
+    <label class="subtitle">Choose a price for sale</label>
+    <p class="section-description subdescription">The price range of your product is determined by the category you selected</p>
+    <input type="number" name="salePrice" placeholder="$ 0.00" required>
+  </div>
+  <% }%>
+  <% if(listingType.includes("RENT")){ %>
+  <div class="form-group rental-duration-group" id="rentalOnly">
+    <label class=" subtitle">Choose a price for rental and specify the rental duration</label>
+    <p class="section-description subdescription">This helps renters understand availability and pricing.</p>
+    <div class="duration-selection">
+      <input type="number" name="rentalPrice" placeholder="$ 0.00" required>
+      <select name="rentalDuration">
+        <option value="Per Hour">Per Hour</option>
+        <option value="Per Day">Per Day</option>
+        <option value="Per Week">Per Week</option>
+        <option value="Per Month">Per Month</option>
+        <option value="Per Year">Per Year</option>
+      </select>
+    </div>
+  </div>
+  <% }%>
+
+  <div class="form-group">
+    <label class="subtitle">Condition</label>
+    <p class="section-description subdescription">This can enhance the appeal of your listing.</p>
+    <input type="range" name="condition" min="1" max="5" step="1">
+    <div class="condition-labels">
+      <span>Bad</span>
+      <span>Adequate</span>
+      <span>Good</span>
+      <span>Great</span>
+      <span>New</span>
+    </div>
+  </div>
+
+
+  <button type="submit" class="next-btn" id="posting-next">Next</button>
+</form>
+
+<input type="hidden" id="listingType" value="<%= JSON.stringify(listingType) %>">
