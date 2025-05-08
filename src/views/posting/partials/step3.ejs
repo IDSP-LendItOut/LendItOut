@@ -1,0 +1,148 @@
+<form action="/posting/create/step/3" method="POST" class="step3-form" id="step3-form">
+
+  <div class="form-group">
+    <p class="subtitle">Listing Location</p>
+    <p class="subdescription">Only an approximate location will be shown</p>
+  </div>
+
+  <div class="location-map form-group">
+    <div id="map" style="height: 300px; width: 100%;"></div>
+    <input type="hidden" id="latitude" name="latitude" value="49.2827">
+    <input type="hidden" id="longitude" name="longitude" value="-123.1207">
+  </div>
+
+  <div class="city-selector form-group">
+    <select name="city" id="city" onchange="updateMapLocation()">
+      <option value="" disabled selected>Choose By City</option>
+      <option value="Burnaby">Burnaby</option>
+      <option value="Vancouver">Vancouver</option>
+      <option value="Richmond">Richmond</option>
+      <option value="Surrey">Surrey</option>
+    </select>
+  </div>
+
+  <div class="toggle-switch form-group">
+    <label>
+      <input type="checkbox" name="showInOtherAreas" value="true">
+      <span class="subdescription">Your listing will appear based on your location. Would you like it to show in other areas?</span>
+    </label>
+  </div>
+
+  <p class="subtitle">Delivery Options</p>
+  <p class="subdescription">Let the buyer know your delivery preferences</p>
+  <div class="checkbox-group form-group">
+    <label><input type="checkbox" name="delivery" value="Meet up">
+      <div>
+        Meet up
+        <p class="detailUrl">Meet in a public location. See <a href="/" class="blueText">details...</a></p>
+      </div>
+    </label>
+    <label><input type="checkbox" name="delivery" value="Same-day delivery">
+      <div>Same-day delivery
+        <p class="detailUrl">Use local third-party service.See <a href="/" class="blueText">details...</a></p>
+      </div>
+    </label>
+    <label><input type="checkbox" name="delivery" value="Ship to door">
+      <div>Ship to their door
+        <p class="detailUrl">Ship through Canada Post.See <a href="/" class="blueText">details...</a></p>
+      </div>
+    </label>
+  </div>
+
+  <p class="subtitle">Payment Options</p>
+  <p class="subdescription">Select how you want to receive payment from buyers</p>
+  <div class="checkbox-group form-group">
+    <label><input type="checkbox" name="payment" value="Paypal">
+      <div>
+        Paypal
+        <p class="detailUrl">Securely receive payments.See <a href="/" class="blueText">details...</a></p>
+      </div>
+    </label>
+    <label><input type="checkbox" name="payment" value="Credit card">
+      <div>Visa, Credit, or Mastercard
+        <p class="detailUrl">Payments credited to your account.See <a href="/" class="blueText">details...</a></p>
+      </div>
+    </label>
+  </div>
+
+
+  <p class="subtitle">Promote Listing</p>
+  <div class="promote-listing form-group checkbox-group">
+    <label>
+      <input type="radio" name="promote" value="true">
+      <p class="subdescription promotion">For just <strong>$9.99</strong>, you can feature your listing across multiple areas on LendItOut. Your item will be <strong>highlighted</strong> in <strong>promotional banners</strong> and other high-traffic spots to <strong>increase exposure</strong> and attract more potential renters or buyers.</p>
+    </label>
+  </div>
+
+
+  <%if(error) {%>
+  <p class="error-msg"><%= error %></p>
+  <%}%>
+    <button type="submit" class="next-btn" id="posting-next">Next</button>
+  </form>
+
+
+ <script>
+   window.addEventListener('load', function() {
+     const script = document.createElement('script');
+     script.src = "https://maps.googleapis.com/maps/api/js?key=<%= api %>&callback=initMap";
+  script.async = true;
+  script.defer = true;
+  document.head.appendChild(script);
+  });
+
+  function initMap() {
+  const defaultLocation = {
+  lat: 49.2827,
+  lng: -123.1207
+  };
+  window.map = new google.maps.Map(document.getElementById("map"), {
+  center: defaultLocation,
+  zoom: 12,
+  });
+
+  window.marker = new google.maps.Marker({
+  position: defaultLocation,
+  map: map,
+  draggable: true,
+  title: "Drag to choose your location"
+  });
+
+  google.maps.event.addListener(marker, 'dragend', function() {
+  const position = marker.getPosition();
+  document.getElementById("latitude").value = position.lat();
+  document.getElementById("longitude").value = position.lng();
+  });
+  }
+
+  function updateMapLocation() {
+  const cityCoordinates = {
+  "Burnaby": {
+  lat: 49.2488,
+  lng: -122.9805
+  },
+  "Vancouver": {
+  lat: 49.2827,
+  lng: -123.1207
+  },
+  "Richmond": {
+  lat: 49.1666,
+  lng: -123.1336
+  },
+  "Surrey": {
+  lat: 49.1913,
+  lng: -122.8490
+  }
+  };
+
+  const selectedCity = document.getElementById("city").value;
+  const location = cityCoordinates[selectedCity];
+
+  if (location) {
+  map.setCenter(location);
+  marker.setPosition(location);
+  document.getElementById("latitude").value = location.lat;
+  document.getElementById("longitude").value = location.lng;
+  }
+  }
+  </script>
