@@ -18,25 +18,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (form1) {
-    form1.addEventListener("submit", (event) => {
-      const checkboxes = form.querySelectorAll('input[name="type"]');
-      const category = form.querySelector('input[name="category"]:checked');
+  // if (form1) {
+  //   form1.addEventListener("submit", (event) => {
+  //     const checkboxes = form.querySelectorAll('input[name="type"]');
+  //     const category = form.querySelector('input[name="category"]:checked');
 
-      const isTypeChecked = [...checkboxes].some(
-        (checkbox) => checkbox.checked
-      );
-      if (!isTypeChecked) {
-        event.preventDefault();
-        alert("Please select at least one listing type.");
-        return;
-      }
+  //     const isTypeChecked = [...checkboxes].some(
+  //       (checkbox) => checkbox.checked
+  //     );
+  //     if (!isTypeChecked) {
+  //       event.preventDefault();
+  //       alert("Please select at least one listing type.");
+  //       return;
+  //     }
 
-      if (!category) {
-        event.preventDefault();
-        alert("Please select a category.");
-        return;
-      }
-    });
-  }
+  //     if (!category) {
+  //       event.preventDefault();
+  //       alert("Please select a category.");
+  //       return;
+  //     }
+  //   });
+  // }
 });

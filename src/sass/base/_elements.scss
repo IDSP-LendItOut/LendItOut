@@ -620,13 +620,41 @@
 .main-content-posting {
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
   }
 
   .subdescription {
     color: $color-text;
-    font-size: .8rem;
+    font-size: .9rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    label {
+      font-size: .9rem;
+    }
+
+  }
+
+
+  .detailUrl {
+    font-size: .7rem;
+  }
+
+  .blueText {
+    color: rgb(40, 140, 222);
   }
 
   form {
@@ -655,17 +683,6 @@
   }
 
   .step1-form {
-
-    .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-
-      label {
-        font-size: .9rem;
-      }
-    }
 
     .category-grid {
       display: grid;
@@ -775,6 +792,131 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.85rem;
+
+    }
+
+  }
+
+  .step3-form {
+    img {
+      max-width: 500px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+
+      input {
+        margin-top: .6rem;
+      }
+
+      div {
+        margin-top: .2rem;
+        margin-left: .7rem;
+        font-size: 1rem;
+        ;
+      }
+
+      .promotion {
+        margin-top: .4rem;
+        margin-left: .7rem;
+      }
+    }
+  }
+
+  .city-selector select {
+    background-color: $color-gray;
+    border-radius: 5px;
+    border: none;
+    padding: .5rem;
+    font-size: .9rem;
+    max-width: 500px;
+  }
+
+  .step4-form {
+    .preview-card {
+      border: 1px solid $color-primary;
+      border-radius: 5px;
+      padding: .5rem;
+    }
+
+    .preview-img img {
+      max-height: 250px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    .green {
+      color: $color-primary;
+      font-size: .9rem;
+    }
+
+    .price {
+      font-size: .9rem;
+    }
+
+    .subdescription {
+      font-size: .8rem;
+    }
+
+    .condition {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: $color-gray;
+      padding: .3rem .7rem;
+      border-radius: 5px;
+      font-size: .8rem;
+    }
+
+    .option-description {
+      background-color: $color-gray;
+      padding: .3rem .7rem;
+      border-radius: 5px;
+      font-size: .8rem;
+      margin-bottom: .5rem;
+    }
+
+    .terms-and-condition {
+      background-color: $color-white;
+      margin-top: .7rem;
+
+      .subtitle {
+        margin-bottom: 1rem;
+      }
+
+      label {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 1rem;
+      }
+
+      input {
+        font-size: 3rem;
+        border: 1rem solid $color-primary;
+      }
+
+      // input[type="checkbox"] {
+      //   width: 16px;
+      //   height: 16px;
+      //   transform: scale(1.5);
+      //   appearance: none;
+      //   -webkit-appearance: none;
+      //   border: 2px solid $color-primary;
+      //   border-radius: 3px;
+      //   margin-top: .2rem;
+      //   cursor: pointer;
+      // }
+
+      .term-check {
+        color: $color-text;
+        font-size: .75rem;
+        margin-left: 1rem;
+      }
+
 
     }
 
