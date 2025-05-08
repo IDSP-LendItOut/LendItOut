@@ -28,8 +28,9 @@ model User {
 model Category {
   id       Int       @id @default(autoincrement())
   name     String    @unique
-  type     String   
+  type     String
   listings Listing[]
+
   @@unique([name, type])
 }
 
@@ -38,19 +39,20 @@ model Listing {
   title          String
   description    String
   type           ListingType
-  price          Float
-  available      Boolean           @default(true)
-  createdAt      DateTime          @default(now())
-  userId         Int
-  categoryId     Int?
-
-  user           User              @relation(fields: [userId], references: [id])
-  category       Category?         @relation(fields: [categoryId], references: [id])
-  condition      Condition?
+  group          Groups
+  salePrice      Float?
+  rentalPrice    Float?
   rentalDuration RentalDuration?
-  conversations  Conversation[]
+  available      Boolean           @default(true)
+  condition      Condition
+  userId         Int
+  createdAt      DateTime          @default(now())
+  user           User              @relation(fields: [userId], references: [id])
   media          Media[]
   reviews        ReviewOnListing[]
+  conversations  Conversation[]
+  categoryId     Int?
+  category       Category?         @relation(fields: [categoryId], references: [id])
 }
 
 model ReviewOnUser {
@@ -110,6 +112,21 @@ enum ListingType {
 enum MediaType {
   IMAGE
   VIDEO
+}
+
+enum Groups {
+  ELECTRONICS
+  FASHION
+  HOME
+  FURNITURE
+  BOOKS
+  BABY
+  CLOTHING
+  OFFICE
+  SPORTS
+  TOOLS
+  TOYS
+  BEAUTY
 }
 
 enum Condition {
