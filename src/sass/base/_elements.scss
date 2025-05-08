@@ -1,5 +1,15 @@
-// home - filter category
+.error-msg {
+  color: $color-red;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: .5rem;
+}
 
+.hidden {
+  display: none;
+}
+
+// home - filter category
 .filter-rent-and-buy {
   width: 100%;
   // margin: auto;
@@ -78,8 +88,6 @@
 }
 
 // profile - user image, info
-// edit profile
-
 .profile-header {
   // position: relative;
 
@@ -259,8 +267,8 @@
   }
 }
 
-// explore
 
+// explore
 .explore_top {
   position: relative;
 
@@ -295,9 +303,7 @@
   }
 }
 
-
 // login
-
 .main-content {
 
   background-color: $color-background;
@@ -383,13 +389,6 @@
     font-weight: bold;
   }
 
-  .error-msg {
-    color: $color-red;
-    font-style: italic;
-  }
-
-
-
   .checkbox-label {
     display: flex;
     align-items: flex-start;
@@ -404,6 +403,27 @@
 
     span {
       flex: 8;
+    }
+  }
+}
+
+// logout btn
+.logout-section {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+
+  .logout-btn {
+    background-color: $color-primary;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-primary-light
     }
   }
 }
@@ -465,31 +485,6 @@
   }
 }
 
-.hidden {
-  display: none;
-}
-
-.logout-section {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-
-  .logout-btn {
-    background-color: #5b6d45;
-    color: white;
-    border: none;
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #495837;
-    }
-  }
-
-}
-
 .forgot-password2 {
   position: fixed;
   top: 26rem;
@@ -546,6 +541,242 @@
 
 }
 
-.hidden {
-  display: none;
+
+// posting
+.posting {
+  background-color: $color-background;
+
+  .posting-header {
+    display: flex;
+    flex-direction: column;
+    background-color: $color-background;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    margin-top: 2rem;
+    z-index: 10;
+  }
+
+  .posting-header .stage-back {
+    position: absolute;
+    left: 1rem;
+    top: 1.2rem;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: $color-text;
+    cursor: pointer;
+  }
+
+  .posting-header .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .posting-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: $color-text;
+  }
+
+  .stage-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0.5rem;
+  }
+
+  .stage-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: $color-gray;
+    color: $color-text;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 2.5rem;
+  }
+
+  .stage-circle.active {
+    background-color: $color-green;
+    color: $color-white;
+  }
+
+  .stage-line {
+    width: 2.5rem;
+    height: .2rem;
+    background-color: $color-gray;
+  }
+
+  .stage-line.active {
+    background-color: $color-green;
+  }
+
+}
+
+
+// posting form
+.main-content-posting {
+
+  .subtitle {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .subdescription {
+    color: $color-text;
+    font-size: .8rem;
+  }
+
+  form {
+    min-width: 300px;
+    margin: 0 auto;
+    padding: .5rem 2rem 2rem 2rem;
+    border-radius: 8px;
+    background-color: $color-background;
+
+    .next-btn {
+      width: 94%;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      background-color: $color-primary;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .next-btn:hover {
+      background-color: $color-primary-light;
+    }
+  }
+
+  .step1-form {
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+
+      label {
+        font-size: .9rem;
+      }
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+
+      .category-option {
+        background-color: $color-gray;
+        display: flex;
+        align-items: center;
+        border: 1.5px solid $color-primary;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .category-option input {
+        display: none;
+      }
+
+      .category-option span {
+        width: 100%;
+        text-align: center;
+        padding: .7rem;
+      }
+
+      .category-option input:checked+span {
+        font-weight: bold;
+        color: $color-white;
+        background-color: $color-primary;
+      }
+
+    }
+
+  }
+
+  .step2-form {
+    .form-group {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .photo-section {
+      text-align: left;
+      margin-bottom: 1rem;
+
+    }
+
+    .photo-grid {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .photo-slot {
+      width: 100px;
+      height: 100px;
+      background-color: $color-gray;
+      border: 1px solid $color-primary;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-slot img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="number"],
+    select {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      background-color: $color-gray;
+      font-size: .8rem;
+    }
+
+    .price-range {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .duration-selection {
+      display: flex;
+      gap: 0.5rem;
+
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin: 0.5rem 0;
+
+    }
+
+    .condition-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+
+    }
+
+  }
 }

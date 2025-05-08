@@ -1,5 +1,10 @@
 import { faker } from "@faker-js/faker";
-import { PrismaClient } from "@prisma/client";
+import {
+  Condition,
+  Groups,
+  PrismaClient,
+  RentalDuration,
+} from "@prisma/client";
 
 export const prisma = new PrismaClient();
 
@@ -58,6 +63,24 @@ async function main() {
   const allUsers = [];
   const allListings = [];
 
+  const groups: Groups[] = [
+    "ELECTRONICS",
+    "FASHION",
+    "HOME",
+    "FURNITURE",
+    "BOOKS",
+    "BABY",
+    "CLOTHING",
+    "OFFICE",
+    "SPORTS",
+    "TOOLS",
+    "TOYS",
+    "BEAUTY",
+  ];
+
+  const conditions: Condition[] = ["BAD", "ADEQUATE", "GOOD", "GREAT", "NEW"];
+  const durations: RentalDuration[] = ["HOUR", "DAY", "WEEK", "MONTH", "YEAR"];
+
   // Create 15 users, each with 2 listings
   for (let i = 0; i < 15; i++) {
     const user = await prisma.user.create({
@@ -85,7 +108,11 @@ async function main() {
           title: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
           type: j % 2 === 0 ? "RENT" : "PURCHASE",
-          price: parseFloat(faker.commerce.price()),
+          group: faker.helpers.arrayElement(groups),
+          rentalDuration: faker.helpers.arrayElement(durations),
+          condition: faker.helpers.arrayElement(conditions),
+          salePrice: parseFloat(faker.commerce.price()),
+          rentalPrice: parseFloat(faker.commerce.price()),
           available: true,
           userId: user.id,
           categoryId: category.id,
@@ -110,7 +137,7 @@ async function main() {
       await prisma.media.createMany({ data: mediaData });
 
       const filteredUsers = allUsers.filter((u) => u.id !== user.id);
-      const fallbackReviewer = allUsers[0]; 
+      const fallbackReviewer = allUsers[0];
       const reviewer = filteredUsers.length
         ? faker.helpers.arrayElement(filteredUsers)
         : fallbackReviewer;
