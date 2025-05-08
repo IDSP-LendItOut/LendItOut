@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script></head>
+<body>
+  <div class="checkout-container">
+    <header class="header">
+        <div class="header-bar">
+            <a href="/cart">
+                <span class="fa back-arrow">&#8592;</span>
+            </a>
+            <span class="header-title">Checkout</span>
+        </div>      
+    </header>    
+
+    <% checkoutItems.forEach(item => { %>
+        <div class="checkout-item">
+          <img src="<%= item.image %>" alt="<%= item.name %>">
+          <div class="details">
+            <strong><%= item.name %></strong>
+            <p><%= item.desc %></p>
+            <div class="price">
+              <%= item.price %><br />
+              <% if (item.insurance) { %>Insurance: <%= item.insurance %><br /> <% } %>
+              Total: <strong><%= item.total %></strong>
+            </div>
+          </div>
+          <button class="remove">X</button>
+        </div>
+      <% }) %>
+      
+
+    <form class="shipping-form">
+      <h3>Shipping information</h3>
+      <p class="subtitle">We ship within 2 working days</p>
+
+      <label>Full Name</label>
+      <input type="text" placeholder="Value" />
+
+      <label>Location</label>
+      <select>
+        <option>Value</option>
+      </select>
+
+      <label>Delivery note</label>
+      <textarea placeholder="Value"></textarea>
+
+      <div class="terms">
+        <input type="checkbox" id="terms" checked />
+        <label for="terms">I accept the terms <a href="/termsconditions">Read our T&Cs</a></label>
+      </div>
+
+      <button type="button" class="save-btn">Save shipping information</button>
+    </form>
+
+    <div class="footer">
+      <div class="total-row">
+        <span>Total</span>
+        <span><%= total %></span>
+    </div>
+      <button class="place-order">Place order</button>
+    </div>
+  </div>
+</body>
+</html>
