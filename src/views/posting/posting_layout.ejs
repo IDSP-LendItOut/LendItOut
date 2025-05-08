@@ -9,6 +9,7 @@
   <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/style.css">
   <script defer src="/scripts/posting.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= api %>&callback=initMap" async defer></script>
 
 </head>
 
@@ -36,7 +37,7 @@
 
 
       <main class="main-content-posting">
-        <%- include(`./partials/step${currentStep}`, { categories }) %>
+        <%- include(`./partials/step${currentStep}`, { categories, api }) %>
 
       </main>
 

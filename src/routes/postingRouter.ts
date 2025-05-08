@@ -7,6 +7,7 @@ const postingRouter = express.Router();
 
 postingRouter.get("/create", requireLogin, (req, res) => {
   const currentStep = parseInt((req.query.step as string) || "1");
+  const googleMapAPI = process.env.GOOGLE_MAP;
   console.log("*");
   console.log(currentStep);
   res.render("posting/posting_layout", {
@@ -15,11 +16,13 @@ postingRouter.get("/create", requireLogin, (req, res) => {
     categories: Object.values(Groups),
     listingType: req.session.listingData?.type || [],
     error: null,
+    api: googleMapAPI,
   });
 });
 
 postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
   const step = parseInt(req.params.step);
+  const googleMapAPI = process.env.GOOGLE_MAP;
   try {
     if (!req.session.listingData) {
       req.session.listingData = {};
@@ -33,6 +36,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
           currentStep: 1,
           categories: Object.values(Groups),
           error: "Please select at least one listing type.",
+          api: googleMapAPI,
         });
       }
 
@@ -42,6 +46,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
           currentStep: 1,
           categories: Object.values(Groups),
           error: "Please select a category.",
+          api: googleMapAPI,
         });
       }
       req.session.listingData.type = type;
@@ -58,12 +63,12 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
         rentalDuration,
         condition,
       } = req.body;
-
       if (!title || !description) {
         return res.render("posting/posting_layout", {
           title: "Create post",
           currentStep: 2,
           error: "Title and description are required.",
+          api: googleMapAPI,
         });
       }
 
@@ -75,6 +80,34 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
       req.session.listingData.condition = condition;
     }
 
+    if (step === 3) {
+      const { showInOtherAreas, delivery, payment, promote, city } = req.body;
+
+      req.session.listingData.showInOtherAreas = showInOtherAreas;
+      req.session.listingData.delivery = delivery;
+      req.session.listingData.payment = payment;
+      req.session.listingData.promote = promote;
+      req.session.listingData.city = city;
+
+      if (!delivery) {
+        return res.render("posting/posting_layout", {
+          title: "Create post",
+          currentStep: 3,
+          categories: Object.values(Groups),
+          error: "Please select at least one delivery option.",
+          api: googleMapAPI,
+        });
+      }
+      if (!payment) {
+        return res.render("posting/posting_layout", {
+          title: "Create post",
+          currentStep: 3,
+          categories: Object.values(Groups),
+          error: "Please select at least one payment option.",
+          api: googleMapAPI,
+        });
+      }
+    }
     console.log("Current Form Data:", req.session.listingData);
 
     const nextStep = step + 1;
@@ -90,13 +123,4 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
   }
 });
 
-postingRouter.get("/preview", (req, res) => {
-  res.render("posting/posting_layout", {
-    title: "preview",
-    // formData: req.session.listingData || {},
-    errors: {},
-    currentStep: 5,
-    categories: Object.values(Groups),
-  });
-});
 export { postingRouter };
