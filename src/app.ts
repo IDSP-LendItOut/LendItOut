@@ -12,10 +12,9 @@ import { fileURLToPath } from "url";
 
 import { authRouter } from "./routes/authRouter";
 import { homeRouter } from "./routes/homeRouter";
+import messagesRouter from "./routes/messagesRouter";
+import { postingRouter } from "./routes/postingRouter";
 import { profileRouter } from "./routes/profileRouter";
-import messagesRouter from "./routes/messagesRouter"
-import listingsRouter from "./routes/listingsRouter"
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,10 +42,10 @@ app.use(
 );
 
 app.use("/", homeRouter);
-app.use("/profile", profileRouter);app.use("/messages", messagesRouter)
-
+app.use("/profile", profileRouter);
+app.use("/messages", messagesRouter);
 app.use("/auth", authRouter);
-app.use("/listings", listingsRouter)
+app.use("/posting", postingRouter);
 
 const items = [
   {
@@ -119,19 +118,19 @@ app.get("/onboarding", (req, res) => {
   res.render("onboarding/onboardLayout", { title: "Onboarding" });
 });
 
-
 // interests view and notifications view
 app.get("/interestsview", (req, res) => {
   res.render("interests/interestsview", { title: "Interests" });
-})
+});
 
 app.get("/notifications", (req, res) => {
   res.render("notifications/notifications", { title: "Notifications" });
-})
+});
 
 // cart with fake data for now
 app.get("/cart", (req, res) => {
-  res.render('cart/cart', {title: "Cart",
+  res.render("cart/cart", {
+    title: "Cart",
     cartItems: [
       {
         name: "Tennis Rocket",
@@ -142,7 +141,7 @@ app.get("/cart", (req, res) => {
         canBuy: true,
         contracts: ["Rental Contract", "Buying Contract"],
         insurance: 10,
-        insuranceSelected: false
+        insuranceSelected: false,
       },
       {
         name: "Viral Sneakers",
@@ -153,7 +152,7 @@ app.get("/cart", (req, res) => {
         canBuy: false,
         contracts: ["Rental Contract"],
         insurance: 10,
-        insuranceSelected: true
+        insuranceSelected: true,
       },
       {
         name: "Vintage printing machine",
@@ -164,16 +163,16 @@ app.get("/cart", (req, res) => {
         canBuy: true,
         contracts: ["Purchase Contract"],
         insurance: 20,
-        insuranceSelected: false
-      }
+        insuranceSelected: false,
+      },
     ],
     subtotalRent: 40,
     subtotalBuy: 100,
     totalInsurance: 10,
     shipping: 30,
-    total: 180
+    total: 180,
   });
-  });
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

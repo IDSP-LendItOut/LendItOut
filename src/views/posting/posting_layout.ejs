@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <script defer src="/scripts/posting.js"></script>
+
+</head>
+
+<body>
+  <div class="page-container">
+
+    <div class="posting">
+
+      <header class="posting-header">
+        <button class="stage-back" id="posting-back"><i class="fas fa-chevron-left"></i></button>
+        <div class="top">
+          <p class="posting-title">Create Listing</p>
+
+          <div class="stage-indicator">
+            <% [1, 2, 3, 4].forEach((step) => { %>
+            <div class="stage-circle <%= step <= currentStep ? 'active' : '' %>"> <%= step < currentStep ? '✓' : step %></div>
+            <% if (step !== 4) { %>
+            <div class="stage-line <%= step < currentStep ? 'active' : '' %>"></div>
+            <% } %>
+            <% }); %>
+
+          </div>
+        </div>
+      </header>
+
+
+      <main class="main-content-posting">
+        <%- include(`./partials/step${currentStep}`, { categories }) %>
+
+      </main>
+
+    </div>
+
+
+  </div>
+</body>
+
+</html>

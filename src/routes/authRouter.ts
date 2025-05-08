@@ -96,138 +96,151 @@ authRouter.get("/forgot-password", (req, res) => {
 });
 
 authRouter.post("/forgot-password", async (req, res) => {
-  const { email } = req.body;
-  console.log(email);
+  try {
+    const { email } = req.body;
 
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
-  if (!user) {
-    res.render("auth/forgot-password", {
-      title: "forgot",
-      error: "Invalid Email address",
-    });
-    // render error page email not exists
-  } else {
-    const now = new Date();
-    const oneDayLater = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    const code = Math.floor(10000 + Math.random() * 90000);
-    console.log("password reset code:" + code);
-    await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        passwordResetCode: String(code), // random 5 digit
-        passwordResetCodeExpirations: oneDayLater,
-      },
-    });
-    // 1. send email(TODO)
-    // try {
-    //   await sendResetEmail(email, String(code));
-    // } catch (err) {
-    //   console.error("Email sending failed:", err);
-    //   return res.render("auth/forgot-password", {
-    //     title: "forgot",
-    //     error: "Failed to send email. Try again later.",
-    //   });
-    // }
+    if (!user) {
+      return res.render("auth/forgot-password", {
+        title: "forgot-password",
+        error: "Invalid Email address",
+      });
+    } else {
+      const now = new Date();
+      const oneDayLater = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+      const code = Math.floor(10000 + Math.random() * 90000);
+      console.log("password reset code:" + code);
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          passwordResetCode: String(code), // random 5 digit
+          passwordResetCodeExpirations: oneDayLater,
+        },
+      });
+      // 1. send email(TODO)
+      // try {
+      //   await sendResetEmail(email, String(code));
+      // } catch (err) {
+      //   console.error("Email sending failed:", err);
+      //   return res.render("auth/forgot-password", {
+      //     title: "forgot",
+      //     error: "Failed to send email. Try again later.",
+      //   });
+      // }
 
-    res.render("auth/forgot-password-validation", {
-      title: "forgot",
-      email: email,
-      error: null,
-    });
+      res.render("auth/forgot-password-validation", {
+        title: "forgot-password",
+        email: email,
+        error: null,
+      });
+    }
+  } catch (err) {
+    console.error("Error in forgot password:", err);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 authRouter.post("/forgot-password-validation", async (req, res) => {
-  const { email } = req.body;
-  const code =
-    (req.body["code_0"] || "") +
-    (req.body["code_1"] || "") +
-    (req.body["code_2"] || "") +
-    (req.body["code_3"] || "") +
-    (req.body["code_4"] || "");
-  console.log(email);
-  console.log(code);
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
-
-  if (!user) {
-    // render errors
-    res.render("auth/forgot-password", {
-      title: "forgot",
-      error: "Invalid Email address",
+  try {
+    const { email } = req.body;
+    const code =
+      (req.body["code_0"] || "") +
+      (req.body["code_1"] || "") +
+      (req.body["code_2"] || "") +
+      (req.body["code_3"] || "") +
+      (req.body["code_4"] || "");
+    console.log(email);
+    console.log(code);
+    const user = await prisma.user.findUnique({
+      where: { email },
     });
-  } else {
-    if (
-      user.passwordResetCodeExpirations &&
-      new Date() < user.passwordResetCodeExpirations
-    ) {
-      if (user.passwordResetCode == code) {
-        res.render("auth/password-reset", {
-          title: "forgot",
-          email,
-          code,
-          error: null,
-        });
+
+    if (!user) {
+      // render errors
+      res.render("auth/forgot-password", {
+        title: "forgot-password",
+        error: "Invalid Email address",
+      });
+    } else {
+      if (
+        user.passwordResetCodeExpirations &&
+        new Date() < user.passwordResetCodeExpirations
+      ) {
+        if (user.passwordResetCode == code) {
+          res.render("auth/password-reset", {
+            title: "forgot",
+            email,
+            code,
+            error: null,
+          });
+        } else {
+          res.render("auth/forgot-password-validation", {
+            title: "forgot",
+            error: "Invalid code number",
+          });
+          //render wrong code error
+        }
       } else {
         res.render("auth/forgot-password-validation", {
           title: "forgot",
           error: "Invalid code number",
         });
-        //render wrong code error
+        //render code expiration error
       }
-    } else {
-      res.render("auth/forgot-password-validation", {
-        title: "forgot",
-        error: "Invalid code number",
-      });
-      //render code expiration error
     }
+  } catch (err) {
+    console.error("Error in password validation:", err);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 authRouter.post("/password-reset", async (req, res) => {
-  const { password, email, code } = req.body;
+  try {
+    const { password, email, code } = req.body;
 
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
-
-  if (!user) {
-    // render errors
-    res.render("auth/forgot-password", {
-      title: "forgot",
-      error: "Invalid Email address",
+    const user = await prisma.user.findUnique({
+      where: { email },
     });
-  } else {
-    if (
-      user.passwordResetCodeExpirations &&
-      new Date() < user.passwordResetCodeExpirations
-    ) {
-      if (user.passwordResetCode == code) {
-        await prisma.user.update({
-          where: { id: user.id },
-          data: {
-            password: await bcrypt.hash(password, 10),
-          },
-        });
-        req.session.userId = user.id;
-        res.redirect("/auth/login");
+
+    if (!user) {
+      // render errors
+      res.render("auth/forgot-password", {
+        title: "forgot-password",
+        error: "Invalid Email address",
+      });
+    } else {
+      if (
+        user.passwordResetCodeExpirations &&
+        new Date() < user.passwordResetCodeExpirations
+      ) {
+        if (user.passwordResetCode == code) {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: {
+              password: await bcrypt.hash(password, 10),
+            },
+          });
+          req.session.userId = user.id;
+          res.redirect("/auth/login");
+        } else {
+          res.render("auth/forgot-password", {
+            title: "forgot",
+            error: "password-reset is failed",
+          });
+        }
       } else {
         res.render("auth/forgot-password", {
           title: "forgot",
           error: "password-reset is failed",
         });
       }
-    } else {
-      res.render("auth/forgot-password", {
-        title: "forgot",
-        error: "password-reset is failed",
-      });
     }
+  } catch (err) {
+    console.error("Error during password reset:", err);
+    res.status(500).send("Internal Server Error");
   }
 });
 
