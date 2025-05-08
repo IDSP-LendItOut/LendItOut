@@ -12,6 +12,11 @@ declare module "express-session" {
       rentalPrice?: number;
       rentalDuration?: string;
       condition?: string;
+      showInOtherAreas?: string;
+      delivery?: string;
+      payment?: string;
+      promote?: string;
+      city?: string;
       // Add other fields for other steps here
     };
   }
