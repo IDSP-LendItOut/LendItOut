@@ -3,31 +3,41 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("MONGO_DB")
 }
 
 model User {
-  id                           Int               @id @default(autoincrement())
-  email                        String            @unique
+  id                           String             @id @default(auto()) @map("_id") @db.ObjectId
+  email                        String             @unique
   name                         String
-  createdAt                    DateTime          @default(now())
+  createdAt                    DateTime           @default(now())
   password                     String?
   banner                       String?
   profilePic                   String?
   passwordResetCode            String?
   passwordResetCodeExpirations DateTime?
   listings                     Listing[]
-  messagesSent                 Message[]         @relation("MessageSender")
+  messagesSent                 Message[]          @relation("MessageSender")
   ReviewOnListing              ReviewOnListing[]
-  reviewsGiven                 ReviewOnUser[]    @relation("Reviewer")
-  reviewsReceived              ReviewOnUser[]    @relation("Target")
-  conversations                Conversation[]    @relation("ConversationParticipants")
+  reviewsGiven                 ReviewOnUser[]     @relation("Reviewer")
+  reviewsReceived              ReviewOnUser[]     @relation("Target")
+  conversations                UserConversation[]
 }
 
+
+model UserConversation {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String        @db.ObjectId
+  conversationId String        @db.ObjectId
+  user           User          @relation(fields: [userId], references: [id])
+  conversation   Conversation  @relation(fields: [conversationId], references: [id])
+}
+
+
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  name     String     @unique
   type     String
   listings Listing[]
 
@@ -35,7 +45,7 @@ model Category {
 }
 
 model Listing {
-  id             Int               @id @default(autoincrement())
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   description    String
   type           ListingType
@@ -43,22 +53,22 @@ model Listing {
   salePrice      Float?
   rentalPrice    Float?
   rentalDuration RentalDuration?
-  available      Boolean           @default(true)
+  available      Boolean          @default(true)
   condition      Condition
-  userId         Int
-  createdAt      DateTime          @default(now())
-  user           User              @relation(fields: [userId], references: [id])
+  userId         String           @db.ObjectId
+  createdAt      DateTime         @default(now())
+  user           User             @relation(fields: [userId], references: [id])
   media          Media[]
   reviews        ReviewOnListing[]
   conversations  Conversation[]
-  categoryId     Int?
-  category       Category?         @relation(fields: [categoryId], references: [id])
+  categoryId     String?          @db.ObjectId
+  category       Category?        @relation(fields: [categoryId], references: [id])
 }
 
 model ReviewOnUser {
-  id         Int      @id @default(autoincrement())
-  reviewerId Int
-  targetId   Int
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  reviewerId String   @db.ObjectId
+  targetId   String   @db.ObjectId
   rating     Int
   comment    String
   createdAt  DateTime @default(now())
@@ -67,9 +77,9 @@ model ReviewOnUser {
 }
 
 model ReviewOnListing {
-  id         Int      @id @default(autoincrement())
-  reviewerId Int
-  listingId  Int
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  reviewerId String   @db.ObjectId
+  listingId  String   @db.ObjectId
   rating     Int
   comment    String
   createdAt  DateTime @default(now())
@@ -78,28 +88,29 @@ model ReviewOnListing {
 }
 
 model Media {
-  id        Int       @id @default(autoincrement())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   url       String
   type      MediaType
-  listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
+  listingId String   @db.ObjectId
+  listing   Listing  @relation(fields: [listingId], references: [id])
 }
 
 model Conversation {
-  id           Int       @id @default(autoincrement())
-  listingId    Int
-  createdAt    DateTime  @default(now())
-  listing      Listing   @relation(fields: [listingId], references: [id])
-  messages     Message[]
-  participants User[]    @relation("ConversationParticipants")
+  id             String             @id @default(auto()) @map("_id") @db.ObjectId
+  listingId      String             @db.ObjectId
+  createdAt      DateTime           @default(now())
+  listing        Listing            @relation(fields: [listingId], references: [id])
+  messages       Message[]
+  participants   UserConversation[]
 }
 
+
 model Message {
-  id             Int          @id @default(autoincrement())
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
   text           String
   createdAt      DateTime     @default(now())
-  senderId       Int
-  conversationId Int
+  senderId       String       @db.ObjectId
+  conversationId String       @db.ObjectId
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   sender         User         @relation("MessageSender", fields: [senderId], references: [id])
 }
