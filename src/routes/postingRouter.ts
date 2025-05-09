@@ -17,6 +17,7 @@ postingRouter.get("/create", requireLogin, (req, res) => {
     listingType: req.session.listingData?.type || [],
     error: null,
     api: googleMapAPI,
+    posting: req.session.listingData,
   });
 });
 
@@ -37,6 +38,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
           categories: Object.values(Groups),
           error: "Please select at least one listing type.",
           api: googleMapAPI,
+          posting: req.session.listingData,
         });
       }
 
@@ -47,13 +49,13 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
           categories: Object.values(Groups),
           error: "Please select a category.",
           api: googleMapAPI,
+          posting: req.session.listingData,
         });
       }
       req.session.listingData.type = type;
       req.session.listingData.category = category;
     }
 
-    // Step 2: Details and Pricing
     if (step === 2) {
       const {
         title,
@@ -69,6 +71,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
           currentStep: 2,
           error: "Title and description are required.",
           api: googleMapAPI,
+          posting: req.session.listingData,
         });
       }
 
@@ -84,10 +87,12 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
       const { showInOtherAreas, delivery, payment, promote, city } = req.body;
 
       req.session.listingData.showInOtherAreas = showInOtherAreas;
-      req.session.listingData.delivery = delivery;
-      req.session.listingData.payment = payment;
       req.session.listingData.promote = promote;
       req.session.listingData.city = city;
+      req.session.listingData.delivery =
+        typeof delivery === "string" ? [delivery] : delivery;
+      req.session.listingData.payment =
+        typeof payment === "string" ? [payment] : payment;
 
       if (!delivery) {
         return res.render("posting/posting_layout", {
@@ -96,6 +101,7 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
           categories: Object.values(Groups),
           error: "Please select at least one delivery option.",
           api: googleMapAPI,
+          posting: req.session.listingData,
         });
       }
       if (!payment) {
@@ -105,20 +111,34 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
           categories: Object.values(Groups),
           error: "Please select at least one payment option.",
           api: googleMapAPI,
+          posting: req.session.listingData,
         });
       }
+    }
+
+    if (step === 4) {
+      // todo :  add database to prisma
+      console.log("44");
+      console.log(req.session.listingData);
+      res.status(200).json({
+        message: "Listing created successfully!",
+        data: req.session.listingData,
+      });
+      return;
     }
     console.log("Current Form Data:", req.session.listingData);
 
     const nextStep = step + 1;
-    res.redirect(`/posting/create?step=${nextStep}`);
+    return res.redirect(`/posting/create?step=${nextStep}`);
   } catch (error) {
     console.error("Error in form submission:", error);
-    res.status(500).render("posting/posting_layout", {
+    return res.status(500).render("posting/posting_layout", {
       title: "Create post",
       currentStep: step,
       categories: Object.values(Groups),
       error: "An unexpected error occurred. Please try again.",
+      api: googleMapAPI,
+      posting: req.session.listingData,
     });
   }
 });
