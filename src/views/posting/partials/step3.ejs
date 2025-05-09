@@ -12,7 +12,7 @@
   </div>
 
   <div class="city-selector form-group">
-    <select name="city" id="city" onchange="updateMapLocation()">
+    <select name="city" id="city" onchange="updateMapLocation()" required>
       <option value="" disabled selected>Choose By City</option>
       <option value="Burnaby">Burnaby</option>
       <option value="Vancouver">Vancouver</option>
@@ -20,6 +20,7 @@
       <option value="Surrey">Surrey</option>
     </select>
   </div>
+
 
   <div class="toggle-switch form-group">
     <label>
