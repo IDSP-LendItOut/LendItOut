@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form1 = document.getElementById("step1-form");
-  const form2 = document.getElementById("step2-form");
+  const form4 = document.getElementById("step4-form");
   const nextBtn = document.getElementById("posting-next");
   const backBtn = document.getElementById("posting-back");
+  const postBtn = document.getElementById("post-btn");
+  const confirmationOverlay = document.getElementById("confirmationOverlay");
+  const backToHomeBtn = document.getElementById("backToHomeButton");
 
   // Back button handling
   if (backBtn) {
@@ -18,25 +21,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // if (form1) {
-  //   form1.addEventListener("submit", (event) => {
-  //     const checkboxes = form.querySelectorAll('input[name="type"]');
-  //     const category = form.querySelector('input[name="category"]:checked');
+  // postBtn.addEventListener("click", (e) => {
+  //   e.preventDefault();
 
-  //     const isTypeChecked = [...checkboxes].some(
-  //       (checkbox) => checkbox.checked
-  //     );
-  //     if (!isTypeChecked) {
-  //       event.preventDefault();
-  //       alert("Please select at least one listing type.");
-  //       return;
-  //     }
+  //   confirmationOverlay.classList.remove("hidden");
+  // });
 
-  //     if (!category) {
-  //       event.preventDefault();
-  //       alert("Please select a category.");
-  //       return;
-  //     }
-  //   });
-  // }
+  backToHomeBtn.addEventListener("click", (e) => {
+    window.location.href = "/";
+  });
+
+  form4.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    console.log(formData);
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      });
+
+      if (response.ok) {
+        confirmationOverlay.classList.remove("hidden");
+      } else {
+        alert("There was an issue creating the listing. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An unexpected error occurred.");
+    }
+  });
 });

@@ -1,1 +1,170 @@
-<h1>step4</h1>
+<form action="/posting/create/step/4" method="POST" class="step4-form" id="step4-form">
+
+  <h4 class="subtitle">Preview</h4>
+
+
+  <div class="preview-card">
+    <div class="preview-img form-group">
+      <img src="https://picsum.photos/300/300" alt="Posting image" class="posting-image">
+    </div>
+
+    <div class="form-group">
+      <h3><%= posting.title %></h3>
+
+      <% if (posting.salePrice !== 0 && posting.rentalPrice !== 0) { %>
+      <p class="price">$<%= posting.rentalPrice %> / <%= posting.rentalDuration %></p>
+      <p class="green">Rental available</p>
+      <p class="price">$<%= posting.salePrice %></p>
+      <p class="green">Purchase available</p>
+      <% } else if (posting.salePrice !== 0) { %>
+      <p class="price">$<%= posting.salePrice %></p>
+      <p class="green">Purchase available</p>
+      <% } else if (posting.rentalPrice !== 0) { %>
+      <p class="price">$<%= posting.rentalPrice %> / <%= posting.rentalDuration %></p>
+      <p class="green">Rental available</p>
+      <% } %>
+
+      <p class="subdescription"><%= posting.description %></p>
+    </div>
+
+    <div class="condition form-group">
+      <p>Condition</p>
+      <% if (posting.condition === "1") { %><span><strong>Bad</strong></span>
+      <% } else if (posting.condition === "2") { %><span><strong>Adequate</strong></span>
+      <% } else if (posting.condition === "3") { %><span><strong>Good</strong></span>
+      <% } else if (posting.condition === "4") { %><span><strong>Great</strong></span>
+      <% } else if (posting.condition === "5") { %><span><strong>New</strong></span>
+      <% } %>
+    </div>
+
+
+    <p class="subtitle">Location</p>
+    <div class="location-map form-group">
+      <div id="map" style="height: 300px; width: 100%;"></div>
+      <input type="hidden" id="latitude" name="latitude" value="49.2827">
+      <input type="hidden" id="longitude" name="longitude" value="-123.1207">
+    </div>
+
+    <p class="subtitle">Delivery Options</p>
+    <div class="option-description">
+      <% if (posting.delivery.length) { %>
+      <% for (let option of posting.delivery) { %>
+      <p class="subdescription"><%= option %></p>
+      <% } %>
+      <% } else { %>
+      <p class="subdescription">No delivery options selected.</p>
+      <% } %>
+    </div>
+
+    <p class="subtitle">Payment Options</p>
+    <div class="option-description">
+      <% if (posting.payment) { %>
+      <% for (let option of posting.payment) { %>
+      <p class="subdescription"><%= option %></p>
+      <% } %>
+      <% } else { %>
+      <p class="subdescription">No payment options selected.</p>
+      <% } %>
+    </div>
+
+  </div>
+
+  <div class="terms-and-condition">
+    <p class="subtitle">Terms and Conditions</p>
+    <div class="checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="agree1" name="terms" class="checkbox" required>
+        <span class="term-check">I accept my responsibilities as a seller under the contract. </span>
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="agree2" name="terms" class="checkbox" required>
+        <span class="term-check">I accept the terms and conditions. See <a href="/" class="blueText">Terms and Conditions...</a></span>
+      </label>
+
+
+    </div>
+  </div>
+
+  <%if(error) {%>
+  <p class="error-msg"><%= error %></p>
+  <%}%>
+  <button type="submit" class="next-btn" id="post-btn">Post</button>
+</form>
+
+
+<div id="confirmationOverlay" class="confirmation hidden">
+  <div class="confirmation-box">
+    <h2>Listing Created Successfully!</h2>
+    <i class="fas fa-check-circle green-check"></i>
+    <p>Your item is now visible to users. We will alert you when there’s interest.</p>
+    <button id="backToHomeButton" class="back-btn">Back to Home</button>
+  </div>
+</div>
+
+
+
+
+<script>
+  window.addEventListener('load', function() {
+    const script = document.createElement('script');
+    script.src = "https://maps.googleapis.com/maps/api/js?key=<%= api %>&callback=initMap";
+  script.async = true;
+  script.defer = true;
+  document.head.appendChild(script);
+  });
+
+  function initMap() {
+  const defaultLocation = {
+  lat: 49.2827,
+  lng: -123.1207
+  };
+  window.map = new google.maps.Map(document.getElementById("map"), {
+  center: defaultLocation,
+  zoom: 12,
+  });
+
+  window.marker = new google.maps.Marker({
+  position: defaultLocation,
+  map: map,
+  draggable: true,
+  title: "Drag to choose your location"
+  });
+
+  google.maps.event.addListener(marker, 'dragend', function() {
+  const position = marker.getPosition();
+  document.getElementById("latitude").value = position.lat();
+  document.getElementById("longitude").value = position.lng();
+  });
+  }
+
+  function updateMapLocation() {
+  const cityCoordinates = {
+  "Burnaby": {
+  lat: 49.2488,
+  lng: -122.9805
+  },
+  "Vancouver": {
+  lat: 49.2827,
+  lng: -123.1207
+  },
+  "Richmond": {
+  lat: 49.1666,
+  lng: -123.1336
+  },
+  "Surrey": {
+  lat: 49.1913,
+  lng: -122.8490
+  }
+  };
+
+  const selectedCity = document.getElementById("city").value;
+  const location = cityCoordinates[selectedCity];
+
+  if (location) {
+  map.setCenter(location);
+  marker.setPosition(location);
+  document.getElementById("latitude").value = location.lat;
+  document.getElementById("longitude").value = location.lng;
+  }
+  }
+  </script>
