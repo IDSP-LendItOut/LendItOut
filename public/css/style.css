@@ -729,6 +729,13 @@ video {
 .main-content-posting .checkbox-group label {
   font-size: 0.9rem;
 }
+.main-content-posting input[type=checkbox] {
+  width: 16px;
+  height: 16px;
+  transform: scale(1.2);
+  background-color: #EEF0EC;
+  cursor: pointer;
+}
 .main-content-posting .detailUrl {
   font-size: 0.7rem;
 }
@@ -756,6 +763,12 @@ video {
 }
 .main-content-posting form .next-btn:hover {
   background-color: #8D9D7F;
+}
+.main-content-posting .step1-form .checkbox-group input[type=checkbox] {
+  margin-top: 0.9rem;
+}
+.main-content-posting .step1-form .checkbox-group span {
+  margin-left: 0.6rem;
 }
 .main-content-posting .step1-form .category-grid {
   display: grid;
@@ -865,6 +878,15 @@ video {
   margin-top: 0.4rem;
   margin-left: 0.7rem;
 }
+.main-content-posting .step3-form input[type=radio] {
+  width: 20px;
+  /* Set the desired width */
+  height: 20px;
+  /* Set the desired height */
+  transform: scale(1.5);
+  /* Adjust the scale factor for size */
+  cursor: pointer;
+}
 .main-content-posting .city-selector select {
   background-color: #EEF0EC;
   border-radius: 5px;
@@ -893,6 +915,7 @@ video {
 }
 .main-content-posting .step4-form .subdescription {
   font-size: 0.8rem;
+  overflow-wrap: anywhere;
 }
 .main-content-posting .step4-form .condition {
   display: flex;
@@ -924,12 +947,53 @@ video {
 }
 .main-content-posting .step4-form .terms-and-condition input {
   font-size: 3rem;
-  border: 1rem solid #556C40;
 }
 .main-content-posting .step4-form .terms-and-condition .term-check {
   color: black;
   font-size: 0.75rem;
   margin-left: 1rem;
+}
+.main-content-posting .confirmation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.main-content-posting .confirmation-box {
+  background-color: white;
+  padding: 20px 5px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 300px;
+}
+.main-content-posting .confirmation-box h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.main-content-posting .confirmation-box i {
+  color: #4CAF50;
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+}
+.main-content-posting .confirmation-box p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.main-content-posting .confirmation-box .back-btn {
+  width: 80%;
+  background-color: #556C40;
+  color: white;
+  padding: 0.3rem;
+  border-radius: 7px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 /* 8. Cards ======================= */

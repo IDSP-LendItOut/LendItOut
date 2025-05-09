@@ -2,6 +2,7 @@
   <div class="photo-section">
     <p class="section-title subtitle">Photos</p>
     <p class="section-description subdescription">Add up to 8 photos.</p>
+    <!-- todo : need to implement image upload -->
     <div class="photo-grid">
       <div class="photo-slot">
         <img src="https://picsum.photos/300/300" alt="Photo 1">
@@ -29,7 +30,7 @@
   <div class="form-group" id="saleOnly">
     <label class="subtitle">Choose a price for sale</label>
     <p class="section-description subdescription">The price range of your product is determined by the category you selected</p>
-    <input type="number" name="salePrice" placeholder="$ 0.00" required>
+    <input type="number" name="salePrice" placeholder="$ 0.00" min="0" required>
   </div>
   <% }%>
   <% if(listingType.includes("RENT")){ %>
@@ -37,7 +38,7 @@
     <label class=" subtitle">Choose a price for rental and specify the rental duration</label>
     <p class="section-description subdescription">This helps renters understand availability and pricing.</p>
     <div class="duration-selection">
-      <input type="number" name="rentalPrice" placeholder="$ 0.00" required>
+      <input type="number" name="rentalPrice" placeholder="$ 0.00" min="0" required>
       <select name="rentalDuration">
         <option value="Per Hour">Per Hour</option>
         <option value="Per Day">Per Day</option>
