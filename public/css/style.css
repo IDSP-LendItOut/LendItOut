@@ -1936,7 +1936,8 @@ body {
 
 /* 19. Messages =============== */
 .messages-page {
-  width: 430px;
+  max-width: 430px;
+  width: 100%;
   margin: 0 auto;
   overflow: hidden;
   background-color: white;
