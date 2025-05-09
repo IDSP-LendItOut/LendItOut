@@ -2,66 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout</title>
   <link rel="stylesheet" href="/css/style.css">
-  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script></head>
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+</head>
 <body>
   <div class="checkout-container">
     <header class="header">
-        <div class="header-bar">
-            <a href="/cart">
-                <span class="fa back-arrow">&#8592;</span>
-            </a>
-            <span class="header-title">Checkout</span>
-        </div>      
-    </header>    
+      <div class="header-bar">
+        <a href="/cart" aria-label="Go back to cart">
+          <span class="fa back-arrow">&#8592;</span>
+        </a>
+        <span class="header-title">Checkout</span>
+      </div>
+    </header>
 
     <% checkoutItems.forEach(item => { %>
-        <div class="checkout-item">
-          <img src="<%= item.image %>" alt="<%= item.name %>">
-          <div class="details">
-            <strong><%= item.name %></strong>
-            <p><%= item.desc %></p>
-            <div class="price">
-              <%= item.price %><br />
-              <% if (item.insurance) { %>Insurance: <%= item.insurance %><br /> <% } %>
-              Total: <strong><%= item.total %></strong>
-            </div>
+      <div class="checkout-item">
+        <img src="<%= item.image %>" alt="<%= item.name %>" />
+        <div class="details">
+          <strong><%= item.name %></strong>
+          <p><%= item.desc %></p>
+          <div class="price">
+            <span>Price: <%= item.price %></span><br />
+            <% if (item.insurance) { %>
+              <span>Insurance: <%= item.insurance %></span><br />
+            <% } %>
+            <span>Total: <strong><%= item.total %></strong></span>
           </div>
-          <button class="remove">X</button>
         </div>
-      <% }) %>
-      
+        <button class="remove" aria-label="Remove <%= item.name %> from checkout">X</button>
+      </div>
+    <% }) %>
 
     <form class="shipping-form">
-      <h3>Shipping information</h3>
+      <h3>Shipping Information</h3>
       <p class="subtitle">We ship within 2 working days</p>
 
-      <label>Full Name</label>
-      <input type="text" placeholder="Value" />
+      <label for="full-name">Full Name</label>
+      <input type="text" id="full-name" placeholder="Enter your full name" />
 
-      <label>Location</label>
-      <select>
-        <option>Value</option>
+      <label for="location">Location</label>
+      <select id="location">
+        <option value="">Select your location</option>
+        <option value="city1">City 1</option>
+        <option value="city2">City 2</option>
       </select>
 
-      <label>Delivery note</label>
-      <textarea placeholder="Value"></textarea>
+      <label for="delivery-note">Delivery Note</label>
+      <textarea id="delivery-note" placeholder="Enter any delivery notes"></textarea>
 
       <div class="terms">
         <input type="checkbox" id="terms" checked />
-        <label for="terms">I accept the terms <a href="/termsconditions">Read our T&Cs</a></label>
+        <label for="terms">
+          I accept the terms <a href="/termsconditions">Read our T&Cs</a>
+        </label>
       </div>
 
-      <button type="button" class="save-btn">Save shipping information</button>
+      <button type="button" class="save-btn" aria-label="Save shipping information">Save Shipping Information</button>
     </form>
 
     <div class="footer">
       <div class="total-row">
         <span>Total</span>
         <span><%= total %></span>
-    </div>
-      <button class="place-order">Place order</button>
+      </div>
+      <a href="/cart/checkout/payment" class="place-order" aria-label="Place your order">Place Order</a>
     </div>
   </div>
 </body>

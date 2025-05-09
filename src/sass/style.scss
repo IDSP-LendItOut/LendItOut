@@ -24,6 +24,7 @@ Table of Contents
 22. Checkout
 23. Listings
 24. Settings
+25. Checkout Payment
 */
 
 /* 1. Variables =================== */
@@ -91,8 +92,12 @@ Table of Contents
 
 /* 22. Checkout =========== */
 @import "components/checkout";
+
 /* 23. Listings =========== */
 @import "media/listings";
 
 /* 24. settings =========== */
 @import "layout/settings";
+
+/* 25. Checkout Payment =========== */
+@import "components/paymentcheck";
