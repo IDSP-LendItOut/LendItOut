@@ -1,11 +1,72 @@
-<% layout('layout') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Listing</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+  
 
-<h1>All Listings</h1>
+</head>
+<body>
+  <section class="buy-page">
+    <!-- Header -->
+    <header class="buy-header">
+      <a href="/" class="header-btn back">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <h1 class="buy-title">Listing</h1>
+      <button class="header-btn menu">
+        
+      </button>
+    </header>
+  
+    <div class="product-box">
+      <!-- Categories -->
+      <h2>Categories</h2>
+      <div class="category-image">
+        <div>
+          <a href="/"><img src="https://picsum.photos/300/300" alt="Electronics & Gadgets" /></a>
+          <p>Electronics & Gadgets</p>
+        </div>
+        <div>
+          <a href="/"><img src="https://picsum.photos/300/300" alt="Fashion & Apparel" /></a>
+          <p>Fashion & Apparel</p>
+        </div>
+        <div>
+          <a href="/"><img src="https://picsum.photos/300/300" alt="Home & Furniture" /></a>
+          <p>Home & Furniture</p>
+        </div>
+        <div>
+          <a href="/"><img src="https://picsum.photos/300/300" alt="Beauty & Personal Care" /></a>
+          <p>Beauty & Personal Care</p>
+        </div>
+      </div>
+  
+      <!-- Listings -->
+      <h3 style="margin-top: 1.5rem;">Most popular listings</h3>
+      <div class="related-grid">
+        <% listings.forEach(listing => { %>
+          <div class="related-card">
+            <a href="/listings/<%= listing.id %>">
+              <img src="<%= listing.media[0]?.url %>" alt="<%= listing.title %>" />
+              <p><%= listing.title %></p>
+              <p>$<%= listing.price %><%= listing.rentAvailable ? '/day' : '' %></p>
+              <small>
+                <%= listing.rentAvailable && listing.purchaseAvailable
+                  ? 'Rent and Purchase available'
+                  : listing.rentAvailable
+                  ? 'Rent available'
+                  : 'Purchase available'
+                %>
+              </small>
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
 
-<ul>
-  <% listings.forEach(listing => { %>
-    <li>
-      <a href="/listings/<%= listing.id %>"><%= listing.title %> - $<%= listing.price %></a>
-    </li>
-  <% }) %>
-</ul>
+</body>
+</html>

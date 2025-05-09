@@ -15,6 +15,10 @@ import { homeRouter } from "./routes/homeRouter";
 import messagesRouter from "./routes/messagesRouter";
 import { postingRouter } from "./routes/postingRouter";
 import { profileRouter } from "./routes/profileRouter";
+import listingsRouter from "./routes/listingsRouter";
+
+
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -46,6 +50,7 @@ app.use("/profile", profileRouter);
 app.use("/messages", messagesRouter);
 app.use("/auth", authRouter);
 app.use("/posting", postingRouter);
+app.use("/listings", listingsRouter);
 
 const items = [
   {
