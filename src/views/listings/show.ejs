@@ -12,17 +12,29 @@
 <body>
 
 <section class="buy-page">
-
   <!-- Header -->
   <header class="buy-header">
-    <button class="header-btn back">
+    <a href="/listings" class="header-btn back">
       <i class="fas fa-times"></i>
-    </button>
+    </a>
     <h1 class="buy-title">View Listing</h1>
     <button class="header-btn menu">
       <i class="fas fa-ellipsis-h"></i>
     </button>
   </header>
+  <div class="more-options-modal" style="display: none;">
+    <div class="modal-header">
+      <span>More Options</span>
+      <button class="close-icon" aria-label="Close Menu">&times;</button>
+    </div>
+    <hr />
+    <ul>
+      <li><a href="#">FAQ’s</a></li>
+      <li><a href="#">Help Center</a></li>
+      <li><a href="#">Report Listing</a></li>
+    </ul>
+  </div>
+  
 
   <%- include("carousel", { listing }) %>
 
@@ -100,7 +112,7 @@
   <% }) %>
 </div>
 
-<script src="/js/carousel.js"></script> 
+<script src="/scripts/carousel.js"></script> 
 
 </body>
 </html>
