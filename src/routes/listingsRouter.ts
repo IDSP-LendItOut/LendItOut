@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 
 router.get("/", async (req, res) => {
   const listings = await prisma.listing.findMany({
+    take: 50,
     include: {
       user: true,
       media: true,
