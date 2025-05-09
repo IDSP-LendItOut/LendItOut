@@ -38,7 +38,7 @@
     .checkout-item {
       display: flex;
       align-items: center;
-      background-color: rgb(249, 244, 244);
+      background-color: rgb(253, 253, 253);
       border-radius: $border-radius;
       padding: 12px;
       margin-bottom: 20px;
@@ -63,7 +63,7 @@
   
         p {
           font-size: 13px;
-          color: $color-gray;
+          color: black;
           margin-bottom: 2px;
           line-height: 1.4;
         }
@@ -83,7 +83,7 @@
         background: none;
         border: none;
         font-size: 18px;
-        color: $color-gray;
+        color: black;
         position: absolute;
         right: 12px;
         top: 12px;
@@ -115,7 +115,7 @@
   
       .subtitle {
         font-size: 13px;
-        color: $color-gray;
+        color: black;
         margin-bottom: 16px;
       }
   
@@ -195,7 +195,7 @@
   
       .save-btn {
         display: block;
-        margin: 0 auto;
+        margin: -10px;
         width: 100%;
         max-width: 300px;
         padding: 12px;
@@ -234,21 +234,22 @@
       }
   
       .place-order {
+        display: block;
+        margin: 0 auto;
+        padding: 0.7rem 1.5rem;
         background-color: $color-primary;
         color: white;
-        width: 100%;
-        padding: 5px;
-        font-size: 16px;
-        font-weight: 600;
-        border: none;
-        border-radius: $border-radius;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
         text-align: center;
-  
-        &:hover {
-          background-color: darken($color-primary, 6%);
-        }
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      
+      .place-order:hover {
+        background-color: #4e5d36;
+      }
   
         &:focus {
           outline: 2px solid lighten($color-primary, 20%);
@@ -256,4 +257,3 @@
         }
       }
     }
-  }
