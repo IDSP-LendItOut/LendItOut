@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("MONGO_DB")
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -25,19 +25,17 @@ model User {
   conversations                UserConversation[]
 }
 
-
 model UserConversation {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
-  userId         String        @db.ObjectId
-  conversationId String        @db.ObjectId
-  user           User          @relation(fields: [userId], references: [id])
-  conversation   Conversation  @relation(fields: [conversationId], references: [id])
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String       @db.ObjectId
+  conversationId String       @db.ObjectId
+  user           User         @relation(fields: [userId], references: [id])
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
 }
 
-
 model Category {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  name     String     @unique
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String    @unique
   type     String
   listings Listing[]
 
@@ -45,7 +43,7 @@ model Category {
 }
 
 model Listing {
-  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  id             String            @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   description    String
   type           ListingType
@@ -53,16 +51,16 @@ model Listing {
   salePrice      Float?
   rentalPrice    Float?
   rentalDuration RentalDuration?
-  available      Boolean          @default(true)
+  available      Boolean           @default(true)
   condition      Condition
-  userId         String           @db.ObjectId
-  createdAt      DateTime         @default(now())
-  user           User             @relation(fields: [userId], references: [id])
+  userId         String            @db.ObjectId
+  createdAt      DateTime          @default(now())
+  user           User              @relation(fields: [userId], references: [id])
   media          Media[]
   reviews        ReviewOnListing[]
   conversations  Conversation[]
-  categoryId     String?          @db.ObjectId
-  category       Category?        @relation(fields: [categoryId], references: [id])
+  categoryId     String?           @db.ObjectId
+  category       Category?         @relation(fields: [categoryId], references: [id])
 }
 
 model ReviewOnUser {
@@ -88,22 +86,21 @@ model ReviewOnListing {
 }
 
 model Media {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   url       String
   type      MediaType
-  listingId String   @db.ObjectId
-  listing   Listing  @relation(fields: [listingId], references: [id])
+  listingId String    @db.ObjectId
+  listing   Listing   @relation(fields: [listingId], references: [id])
 }
 
 model Conversation {
-  id             String             @id @default(auto()) @map("_id") @db.ObjectId
-  listingId      String             @db.ObjectId
-  createdAt      DateTime           @default(now())
-  listing        Listing            @relation(fields: [listingId], references: [id])
-  messages       Message[]
-  participants   UserConversation[]
+  id           String             @id @default(auto()) @map("_id") @db.ObjectId
+  listingId    String             @db.ObjectId
+  createdAt    DateTime           @default(now())
+  listing      Listing            @relation(fields: [listingId], references: [id])
+  messages     Message[]
+  participants UserConversation[]
 }
-
 
 model Message {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
