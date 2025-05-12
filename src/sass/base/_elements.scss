@@ -42,16 +42,20 @@
       border-radius: 100%;
       width: 4rem;
       height: 4rem;
+      object-fit: cover;
     }
 
     p {
       width: 5rem;
-      font-size: 10px;
+      font-size: 12px;
       justify-content: center;
       text-align: center;
+      line-height: 1.2;
     }
   }
-
+  #content{
+    padding: 10px;
+  }
 
   .tab-buttons {
     display: flex;
