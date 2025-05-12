@@ -12,14 +12,11 @@ import { fileURLToPath } from "url";
 
 import { authRouter } from "./routes/authRouter";
 import { homeRouter } from "./routes/homeRouter";
+import listingsRouter from "./routes/listingsRouter";
 import messagesRouter from "./routes/messagesRouter";
 import { postingRouter } from "./routes/postingRouter";
 import { profileRouter } from "./routes/profileRouter";
-import listingsRouter from "./routes/listingsRouter";
 import settingsRouter from "./routes/settingsRouter";
-
-
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -52,7 +49,7 @@ app.use("/messages", messagesRouter);
 app.use("/auth", authRouter);
 app.use("/posting", postingRouter);
 app.use("/listings", listingsRouter);
-app.use("/settings", settingsRouter)
+app.use("/settings", settingsRouter);
 
 const items = [
   {
@@ -108,7 +105,6 @@ app.get("/", (req, res) => {
     showSearchbar: true,
   });
 });
-
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

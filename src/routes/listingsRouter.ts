@@ -1,11 +1,12 @@
-import express from "express";
 import { PrismaClient } from "@prisma/client";
+import express from "express";
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
 router.get("/", async (req, res) => {
   const listings = await prisma.listing.findMany({
+    take: 50,
     include: {
       user: true,
       media: true,
@@ -51,6 +52,5 @@ router.get("/:id", async (req, res) => {
     res.status(404).send("Listing not found");
   }
 });
-
 
 export default router;
