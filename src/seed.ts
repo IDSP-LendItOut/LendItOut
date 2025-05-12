@@ -45,10 +45,13 @@ async function main() {
   ];
 
   // Seed categories
-  await prisma.category.createMany({
-    data: allCategories,
-    skipDuplicates: true,
-  });
+  for (const category of allCategories) {
+    await prisma.category.upsert({
+      where: { name: category.name },
+      update: {},
+      create: category,
+    });
+  }
 
   const rentCats = await prisma.category.findMany({ where: { type: "Rent" } });
   const purchaseCats = await prisma.category.findMany({
