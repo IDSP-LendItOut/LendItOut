@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
   <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
-  <script src="/scripts/chat.js"></script>
+  <script src="/socket.io/socket.io.js"></script> 
+  <script src="/scripts/chat.js" defer></script> 
   <title>Chat</title>
 </head>
 <body>
@@ -72,7 +73,7 @@
         </div>
       </div>
 
-      <div class="chat-messages">
+      <div class="chat-messages" id="chat-messages">
         <% conversation.messages.forEach(msg => { %>
           <div class="message <%= msg.senderId === userId ? 'sent' : 'received' %>">
             <%= msg.text %>
@@ -93,6 +94,50 @@
       </div>
     <% } %>
   </div>
-  
+
+  <script>
+    const socket = io();
+
+    // Join the conversation room
+    const conversationId = "<%= conversation.id %>";
+    socket.emit("joinConversation", conversationId);
+
+    // handle sending messages
+    const chatForm = document.getElementById("chat-form");
+    const messageInput = document.getElementById("messageInput");
+    const chatMessages = document.getElementById("chat-messages");
+
+    chatForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const message = messageInput.value.trim();
+
+      if (message) {
+        // emit the message to the server
+        socket.emit("sendMessage", {
+          conversationId,
+          senderId: "<%= userId %>",
+          text: message,
+        });
+
+        //append the message to the chat window
+        appendMessage("sent", message);
+        messageInput.value = "";
+      }
+    });
+
+    // Listen for incoming messages
+    socket.on("receiveMessage", (data) => {
+      appendMessage("received", data.text);
+    });
+
+    //append a message to the chat window
+    function appendMessage(type, text) {
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message", type);
+      messageElement.textContent = text;
+      chatMessages.appendChild(messageElement);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  </script>
 </body>
 </html>
