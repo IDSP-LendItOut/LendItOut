@@ -1,24 +1,40 @@
+import { Condition, Groups, ListingType, RentalDuration } from "@prisma/client";
 import express from "express";
 import { requireLogin } from "../middleware/requireLogin";
-// import { prisma } from "../seed";
-import { Groups } from "@prisma/client";
+import { prisma } from "../seed";
 
 const postingRouter = express.Router();
 
-postingRouter.get("/create", requireLogin, (req, res) => {
+postingRouter.get("/create", requireLogin, async (req, res) => {
   const currentStep = parseInt((req.query.step as string) || "1");
   const googleMapAPI = process.env.GOOGLE_MAP;
   console.log("*");
   console.log(currentStep);
-  res.render("posting/posting_layout", {
-    title: "Create post",
-    currentStep,
-    categories: Object.values(Groups),
-    listingType: req.session.listingData?.type || [],
-    error: null,
-    api: googleMapAPI,
-    posting: req.session.listingData,
-  });
+
+  try {
+    // const categories = await prisma.category.findMany();
+    // console.log(categories);
+    res.render("posting/posting_layout", {
+      title: "Create post",
+      currentStep,
+      // categories: categories,
+      categories: Object.values(Groups),
+      listingType: req.session.listingData?.type || [],
+      error: null,
+      api: googleMapAPI,
+      posting: req.session.listingData,
+    });
+  } catch (err) {
+    console.error("Error loading categories:", err);
+    res.status(500).render("posting/posting_layout", {
+      title: "Create post",
+      currentStep,
+      categories: [],
+      error: "Failed to load categories. Please try again later.",
+      api: googleMapAPI,
+      posting: req.session.listingData,
+    });
+  }
 });
 
 postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
@@ -117,9 +133,54 @@ postingRouter.post("/create/step/:step", requireLogin, async (req, res) => {
     }
 
     if (step === 4) {
-      // todo :  add database to prisma
-      console.log("44");
-      console.log(req.session.listingData);
+      const userId = Number(req.session.userId);
+      const data = req.session.listingData;
+
+      if (!req.session.userId) {
+        res.status(401).json({ message: "Need to login first!" });
+        return;
+      }
+
+      const conditionMap: Record<number, Condition> = {
+        1: "BAD",
+        2: "ADEQUATE",
+        3: "GOOD",
+        4: "GREAT",
+        5: "NEW",
+      };
+
+      const numericCondition = Number(data.condition);
+      const mappedCondition = conditionMap[numericCondition];
+      // category id??
+      // console.log(req.session.listingData.category);
+
+      // const category = await prisma.category.findFirst({
+      //   where: {
+      //     name: data.category,
+      //   },
+      // });
+
+      // if (!category) {
+      //   res.status(400).json({ message: "Invalid category name." });
+      //   return;
+      // }
+
+      const createPost = await prisma.listing.create({
+        data: {
+          title: data.title ?? "",
+          description: data.description ?? "",
+          type: data.type as ListingType,
+          group: data.category as Groups,
+          salePrice: data.salePrice ?? 0,
+          rentalPrice: data.rentalPrice ?? 0,
+          rentalDuration: data.rentalDuration as RentalDuration,
+          condition: mappedCondition,
+          userId: userId,
+        },
+      });
+
+      console.log("New post created:", createPost);
+      // req.session.categoryId = createPost.id;
       res.status(200).json({
         message: "Listing created successfully!",
         data: req.session.listingData,

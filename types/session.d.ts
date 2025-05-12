@@ -17,6 +17,9 @@ declare module "express-session" {
       payment?: string;
       promote?: string;
       city?: string;
+      category?: string;
+      categoryId?: number;
+      // categoryId: number;
       // Add other fields for other steps here
     };
   }

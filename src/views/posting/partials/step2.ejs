@@ -40,11 +40,11 @@
     <div class="duration-selection">
       <input type="number" name="rentalPrice" placeholder="$ 0.00" min="0" required>
       <select name="rentalDuration">
-        <option value="Per Hour">Per Hour</option>
-        <option value="Per Day">Per Day</option>
-        <option value="Per Week">Per Week</option>
-        <option value="Per Month">Per Month</option>
-        <option value="Per Year">Per Year</option>
+        <option value="HOUR">Per Hour</option>
+        <option value="DAY">Per Day</option>
+        <option value="WEEK">Per Week</option>
+        <option value="MONTH">Per Month</option>
+        <option value="YEAR">Per Year</option>
       </select>
     </div>
   </div>
@@ -53,7 +53,7 @@
   <div class="form-group">
     <label class="subtitle">Condition</label>
     <p class="section-description subdescription">This can enhance the appeal of your listing.</p>
-    <input type="range" name="condition" min="1" max="5" step="1">
+    <input type="range" name="condition" min="1" max="5" step="1" onchange="updateConditionValue">
     <div class="condition-labels">
       <span>Bad</span>
       <span>Adequate</span>
@@ -68,3 +68,17 @@
 </form>
 
 <input type="hidden" id="listingType" value="<%= JSON.stringify(listingType) %>">
+
+<script>
+  function updateConditionValue(rangeInput) {
+    const conditionMap = {
+      1: "BAD",
+      2: "ADEQUATE",
+      3: "GOOD",
+      4: "GREAT",
+      5: "NEW"
+    };
+    const conditionValue = conditionMap[rangeInput.value];
+    document.getElementById("condition-labels").value = conditionValue;
+  }
+</script>
