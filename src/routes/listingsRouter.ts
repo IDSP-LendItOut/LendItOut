@@ -5,17 +5,25 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 router.get("/", async (req, res) => {
-  const listings = await prisma.listing.findMany({
-    take: 50,
-    include: {
-      user: true,
-      media: true,
-      reviews: { include: { reviewer: true } },
-      category: true,
-    },
-  });
-  res.render("listings/index", { title: "All Listings", listings });
+  try {
+    const listings = await prisma.listing.findMany({
+      include: {
+        media: true,
+        user: { select: { name: true, profilePic: true } },
+        reviews: {
+          include: {
+            reviewer: { select: { name: true, profilePic: true } }
+          }
+        }
+      }
+    });
+    res.render("listings/index", { title: "All Listings", listings });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to load listings");
+  }
 });
+
 
 router.get("/:id", async (req, res) => {
   const listing = await prisma.listing.findUnique({

@@ -105,15 +105,15 @@ video {
 }
 .header .header-top .header-left .page-title {
   font-family: "Helvetica Neue", sans-serif;
-  font-size: 2rem;
+  font-size: 48px;
   font-weight: bold;
   margin-top: 0.2rem;
 }
 .header .header-top .header-icons {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin-top: 0.5rem;
+  gap: 1.8rem;
+  margin-top: 1rem;
   margin-right: 1rem;
 }
 .header .header-top .header-icons .icon {
@@ -124,13 +124,13 @@ video {
 }
 .header .search-bar {
   margin-top: 1rem;
-  padding: 0 1rem;
+  padding: 0 0.5rem 1.3rem;
 }
 .header .search-bar input {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0.8rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 16px;
   font-size: 1rem;
   font-family: "Helvetica Neue", sans-serif;
   background-color: white;
@@ -238,12 +238,17 @@ video {
   border-radius: 100%;
   width: 4rem;
   height: 4rem;
+  object-fit: cover;
 }
 .filter-rent-and-buy .category-image p {
   width: 5rem;
-  font-size: 10px;
+  font-size: 12px;
   justify-content: center;
   text-align: center;
+  line-height: 1.2;
+}
+.filter-rent-and-buy #content {
+  padding: 10px;
 }
 .filter-rent-and-buy .tab-buttons {
   display: flex;
@@ -2558,6 +2563,7 @@ body {
   background: #556C40;
   color: white;
   border-bottom: 1px solid #eee;
+  position: sticky;
 }
 .buy-page .buy-header .header-btn {
   background: none;
