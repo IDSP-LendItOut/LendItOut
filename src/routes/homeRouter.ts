@@ -73,7 +73,7 @@ homeRouter.get("/cart", (req, res) => {
     cartItems: [
       {
         name: "Tennis Rocket",
-        image: "https://picsum.photos/300/300",
+        image: "images/tennis.png",
         priceLabel: "$10/hour x 2 = $20",
         quantity: 2,
         canRent: true,
@@ -84,7 +84,7 @@ homeRouter.get("/cart", (req, res) => {
       },
       {
         name: "Viral Sneakers",
-        image: "https://picsum.photos/300/300",
+        image: "images/sneakers.png",
         priceLabel: "$10/hour x 2 = $20",
         quantity: 2,
         canRent: true,
@@ -95,7 +95,7 @@ homeRouter.get("/cart", (req, res) => {
       },
       {
         name: "Vintage machine",
-        image: "https://picsum.photos/300/300",
+        image: "images/machine.png",
         priceLabel: "$100",
         quantity: 1,
         canRent: false,
@@ -121,14 +121,14 @@ homeRouter.get("/cart/checkout", (req, res) => {
       {
         name: "Tennis Rocket and Balls",
         desc: "Good condition tennis rocket with balls",
-        image: "https://picsum.photos/300/100",
+        image: "/images/tennis.png",
         price: "$10/hour x 2",
         total: "$20",
       },
       {
         name: "Viral Sneakers",
         desc: "TikTok trending sneakers in pink ...",
-        image: "https://picsum.photos/300/100",
+        image: "/images/sneakers.png",
         price: "$10/hour x 2",
         insurance: "$10",
         total: "$30",
@@ -136,7 +136,7 @@ homeRouter.get("/cart/checkout", (req, res) => {
       {
         name: "Vintage machine",
         desc: "Still working printing machine from ...",
-        image: "https://picsum.photos/300/100",
+        image: "/images/machine.png",
         price: "$100",
         total: "$100",
       },
@@ -194,5 +194,19 @@ const items = [
     statusClass: "for-rent",
   },
 ];
+
+homeRouter.get("/cart/checkout/payment/pay", (req, res) => {
+  res.render("cart/purchase", { title: "Purchase" });
+});
+
+// home
+homeRouter.get("/", (req, res) => {
+  res.render("home", {
+    title: "Home",
+    content: "buying",
+    items,
+    showSearchbar: true,
+  });
+});
 
 export { homeRouter };
