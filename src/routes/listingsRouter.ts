@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const listing = await prisma.listing.findUnique({
-    where: { id: req.params.id },
+    where: { id: Number(req.params.id) },
     include: {
       media: true,
       user: true,
