@@ -47,7 +47,6 @@ async function main() {
   // Seed categories
   await prisma.category.createMany({
     data: allCategories,
-    skipDuplicates: true,
   });
 
   const rentCats = await prisma.category.findMany({ where: { type: "Rent" } });
