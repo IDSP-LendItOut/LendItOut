@@ -8,7 +8,7 @@ profileRouter.get("/", requireLogin, async (req, res) => {
   const userId = req.session.userId;
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
-
+    const listing = await prisma.listing.findMany({ where: { id: userId} });
     if (!user) {
       return res.render("auth/login", {
         title: "login",
