@@ -2,7 +2,7 @@ import "express-session";
 
 declare module "express-session" {
   interface SessionData {
-    userId?: number;
+    userId?: string;
     listingData?: {
       type?: string;
       category?: string;
@@ -19,6 +19,7 @@ declare module "express-session" {
       city?: string;
       category?: string;
       categoryId?: number;
+      images?: string[];
       // categoryId: number;
       // Add other fields for other steps here
     };
