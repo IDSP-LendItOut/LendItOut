@@ -4,29 +4,28 @@ import express from "express";
 const router = express.Router();
 const prisma = new PrismaClient();
 
-
 const fallbackImages = {
   ELECTRONICS: [
-    "/images/fallbacks/cleaner.jpg", 
-    "/images/fallbacks/electronic.jpg", 
+    "/images/fallbacks/cleaner.jpg",
+    "/images/fallbacks/electronic.jpg",
     "/images/fallbacks/electronic2.jpg",
     "/images/fallbacks/electronic3.jpg",
     "/images/fallbacks/electronic4.jpg",
   ],
   FASHION: [
-    "/images/fallbacks/cloth.jpg", 
+    "/images/fallbacks/cloth.jpg",
     "/images/fallbacks/fashion2.jpg",
     "/images/fallbacks/fashion3.jpg",
     "/images/fallbacks/fashion4.jpg",
   ],
   HOME: [
-    "/images/fallbacks/home.jpg", 
+    "/images/fallbacks/home.jpg",
     "/images/fallbacks/home2.jpeg",
     "/images/fallbacks/home3.jpeg",
     "/images/fallbacks/home4.jpg",
   ],
   BEAUTY: [
-    "/images/fallbacks/beauty1.jpg", 
+    "/images/fallbacks/beauty1.jpg",
     "/images/fallbacks/beauty2.jpg",
     "/images/fallbacks/beauty3.jpg",
     "/images/fallbacks/beauty4.jpg",
@@ -35,7 +34,7 @@ const fallbackImages = {
     "/images/fallbacks/lambo.jpg",
     "/images/fallbacks/lambo2.jpg",
     "/images/fallbacks/lambo3.jpg",
-  ]
+  ],
 };
 
 function getRandomFallback(group: string): string {
@@ -43,8 +42,6 @@ function getRandomFallback(group: string): string {
   if (images.length === 0) return "/images/fallbacks/lambo3.jpg";
   return images[Math.floor(Math.random() * images.length)];
 }
-
-
 
 router.get("/", async (req, res) => {
   try {
@@ -54,22 +51,24 @@ router.get("/", async (req, res) => {
 
         reviews: {
           include: {
-            reviewer: { select: { name: true, profilePic: true } }
-          }
-        }
-      }
+            reviewer: { select: { name: true, profilePic: true } },
+          },
+        },
+      },
     });
-    const listingsWithFallback = listings.map(listing => ({
+    const listingsWithFallback = listings.map((listing) => ({
       ...listing,
-      fallbackImage: getRandomFallback(listing.group)
+      fallbackImage: getRandomFallback(listing.group ?? "DEFAULT"),
     }));
-    res.render("listings/index", { title: "All Listings", listings: listingsWithFallback });
+    res.render("listings/index", {
+      title: "All Listings",
+      listings: listingsWithFallback,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Failed to load listings");
   }
 });
-
 
 router.get("/:id", async (req, res) => {
   const listing = await prisma.listing.findUnique({

@@ -4,9 +4,23 @@
 
 
   <div class="preview-card">
-    <div class="preview-img form-group">
-      <img src="https://picsum.photos/300/300" alt="Posting image" class="posting-image">
+
+    <div class="carousel">
+      <div class="carousel-images" id="carouselImages">
+        <% if (images && images.length > 0) { %>
+        <% images.forEach(image => { %>
+        <div class="carousel-slide">
+          <img src="/uploads/<%= image %>" alt="Carousel Image">
+        </div>
+        <% }) %>
+        <% } %>
+      </div>
+
+      <button type="button" class="carousel-btn prev" onclick="prevSlide()">&#10094;</button>
+      <button type="button" class="carousel-btn next" onclick="nextSlide()">&#10095;</button>
     </div>
+
+
 
     <div class="form-group">
       <h3><%= posting.title %></h3>
@@ -37,12 +51,26 @@
       <% } %>
     </div>
 
-
+    <h2><%= city %></h2>
     <p class="subtitle">Location</p>
     <div class="location-map form-group">
       <div id="map" style="height: 300px; width: 100%;"></div>
+      <% if (city === "Vancouver") { %>
       <input type="hidden" id="latitude" name="latitude" value="49.2827">
       <input type="hidden" id="longitude" name="longitude" value="-123.1207">
+      <% } else if (city === "Burnaby") { %>
+      <input type="hidden" id="latitude" name="latitude" value="49.2488">
+      <input type="hidden" id="longitude" name="longitude" value="-122.9805">
+      <% } else if (city === "Richmond") { %>
+      <input type="hidden" id="latitude" name="latitude" value="49.1666">
+      <input type="hidden" id="longitude" name="longitude" value="-123.1336">
+      <% } else if (city === "Surrey") { %>
+      <input type="hidden" id="latitude" name="latitude" value="49.1913">
+      <input type="hidden" id="longitude" name="longitude" value="-122.8490">
+      <% } else { %>
+      <input type="hidden" id="latitude" name="latitude" value="49.2827">
+      <input type="hidden" id="longitude" name="longitude" value="-123.1207">
+      <% } %>
     </div>
 
     <p class="subtitle">Delivery Options</p>
@@ -114,10 +142,11 @@
   });
 
   function initMap() {
-  const defaultLocation = {
-  lat: 49.2827,
-  lng: -123.1207
-  };
+  const latitude = parseFloat(document.getElementById("latitude").value);
+  const longitude = parseFloat(document.getElementById("longitude").value);
+
+  const defaultLocation = { lat: latitude, lng: longitude };
+
   window.map = new google.maps.Map(document.getElementById("map"), {
   center: defaultLocation,
   zoom: 12,
@@ -135,36 +164,5 @@
   document.getElementById("latitude").value = position.lat();
   document.getElementById("longitude").value = position.lng();
   });
-  }
-
-  function updateMapLocation() {
-  const cityCoordinates = {
-  "Burnaby": {
-  lat: 49.2488,
-  lng: -122.9805
-  },
-  "Vancouver": {
-  lat: 49.2827,
-  lng: -123.1207
-  },
-  "Richmond": {
-  lat: 49.1666,
-  lng: -123.1336
-  },
-  "Surrey": {
-  lat: 49.1913,
-  lng: -122.8490
-  }
-  };
-
-  const selectedCity = document.getElementById("city").value;
-  const location = cityCoordinates[selectedCity];
-
-  if (location) {
-  map.setCenter(location);
-  marker.setPosition(location);
-  document.getElementById("latitude").value = location.lat;
-  document.getElementById("longitude").value = location.lng;
-  }
   }
   </script>
