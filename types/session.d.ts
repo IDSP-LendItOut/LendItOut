@@ -5,7 +5,6 @@ declare module "express-session" {
     userId?: string;
     listingData?: {
       type?: string;
-      category?: string;
       title?: string;
       description?: string;
       salePrice?: number;
@@ -20,8 +19,6 @@ declare module "express-session" {
       category?: string;
       categoryId?: number;
       images?: string[];
-      // categoryId: number;
-      // Add other fields for other steps here
     };
   }
 }

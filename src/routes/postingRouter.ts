@@ -1,24 +1,24 @@
-import { Condition, Groups, ListingType, RentalDuration } from "@prisma/client";
+import { Condition, ListingType, RentalDuration } from "@prisma/client";
+import { ObjectId } from "bson";
 import express from "express";
 import upload from "../middleware/multerConfig";
 import { requireLogin } from "../middleware/requireLogin";
 import { prisma } from "../seed";
 
 const postingRouter = express.Router();
+
 postingRouter.get("/create", requireLogin, async (req, res) => {
   const currentStep = parseInt((req.query.step as string) || "1");
   const googleMapAPI = process.env.GOOGLE_MAP;
   console.log("*");
   console.log(currentStep);
 
+  const categories = await prisma.category.findMany();
   try {
-    // const categories = await prisma.category.findMany();
-    // console.log(categories);
     res.render("posting/posting_layout", {
       title: "Create post",
       currentStep,
-      // categories: categories,
-      categories: Object.values(Groups),
+      categories: categories,
       listingType: req.session.listingData?.type || [],
       error: null,
       api: googleMapAPI,
@@ -31,7 +31,7 @@ postingRouter.get("/create", requireLogin, async (req, res) => {
     res.status(500).render("posting/posting_layout", {
       title: "Create post",
       currentStep,
-      categories: [],
+      categories: categories,
       error: "Failed to load categories. Please try again later.",
       api: googleMapAPI,
       posting: req.session.listingData,
@@ -48,6 +48,7 @@ postingRouter.post(
   async (req, res) => {
     const step = parseInt(req.params.step);
     const googleMapAPI = process.env.GOOGLE_MAP;
+    const categories = await prisma.category.findMany();
 
     try {
       if (!req.session.listingData) {
@@ -60,7 +61,7 @@ postingRouter.post(
           return res.render("posting/posting_layout", {
             title: "Create post",
             currentStep: 1,
-            categories: Object.values(Groups),
+            categories: categories,
             error: "Please select a listing type and category.",
             api: googleMapAPI,
             posting: req.session.listingData,
@@ -87,6 +88,7 @@ postingRouter.post(
             error: "Title and description are required.",
             api: googleMapAPI,
             posting: req.session.listingData,
+            categories: categories,
           });
         }
 
@@ -121,8 +123,20 @@ postingRouter.post(
           res.status(401).json({ message: "Need to login first!" });
           return;
         }
-        const userId = String(req.session.userId);
+        const userId = req.session.userId;
+        const userIdObjectId = new ObjectId(userId);
         const data = req.session.listingData;
+        const categoryId = data.category;
+        console.log("***");
+        console.log(categoryId);
+        const category = await prisma.category.findUnique({
+          where: { id: categoryId },
+        });
+
+        if (!category || !categoryId) {
+          res.status(400).json({ message: "Category is not exist" });
+          return;
+        }
 
         const conditionMap: Record<number, Condition> = {
           1: "BAD",
@@ -140,18 +154,20 @@ postingRouter.post(
             title: data.title ?? "",
             description: data.description ?? "",
             type: data.type as ListingType,
-            group: data.category as Groups,
             salePrice: data.salePrice ?? 0,
             rentalPrice: data.rentalPrice ?? 0,
             rentalDuration: data.rentalDuration as RentalDuration,
             condition: mappedCondition,
-            userId: userId,
+            userId: userIdObjectId.toString(),
+            categoryId: categoryId,
             media: {
               create: (data.images || []).map((imageUrl: string) => ({
                 url: imageUrl,
                 type: "IMAGE",
               })),
             },
+            // ignore
+            // group: "TOYS",
           },
         });
 
@@ -170,7 +186,7 @@ postingRouter.post(
       return res.status(500).render("posting/posting_layout", {
         title: "Create post",
         currentStep: step,
-        categories: Object.values(Groups),
+        categories: categories,
         error: "An unexpected error occurred. Please try again.",
         api: googleMapAPI,
         posting: req.session.listingData,
