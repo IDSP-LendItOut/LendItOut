@@ -58,7 +58,7 @@ router.get("/", async (req, res) => {
     });
     const listingsWithFallback = listings.map((listing) => ({
       ...listing,
-      fallbackImage: getRandomFallback(listing.group ?? "DEFAULT"),
+      fallbackImage: getRandomFallback(listing.group),
     }));
     res.render("listings/index", {
       title: "All Listings",

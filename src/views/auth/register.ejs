@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
-
   <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/style.css">
   <script defer src="/scripts/event.js"></script>
@@ -14,7 +13,6 @@
 <body>
   <div class="page-container">
     <main class="main-content">
-
       <div class="login-content">
         <div class="login_logo">
           <img src="/images/logo.png" alt="Lend It Out Logo" class="logo">
@@ -22,29 +20,62 @@
 
         <div class="login-form">
           <form action="/auth/register" method="POST">
-            <input type="text" name="email" placeholder="Email" required>
+            <input type="text" name="email" id="email-input" placeholder="Email" required oninput="checkEmail()">
+            <div id="email-feedback" class="email-feedback"></div>
+
             <input type="text" name="name" placeholder="Name" required>
             <input type="password" name="password" placeholder="Password" required>
+
             <label for="agree" class="checkbox-label">
               <input type="checkbox" id="agree" name="agree" class="checkbox" required>
               <span>I agree to the <a href="/termsconditions" class="underline">Terms of Service &amp; Privacy Policy</a></span>
             </label>
 
-
             <% if(error) {%>
             <p class="error-msg"><%= error %></p>
             <%}%>
-            <button>Create Account</button>
+
+            <button type="submit">Create Account</button>
           </form>
 
           <div class="register-link">
             Already have an account? <a href="/auth/login" class="underline">Login</a>
           </div>
         </div>
-
       </div>
     </main>
   </div>
+
+  <script>
+    async function checkEmail() {
+      const emailInput = document.getElementById("email-input");
+      const emailFeedback = document.getElementById("email-feedback");
+      const email = emailInput.value.trim();
+      
+      if (email.length < 5) {
+        emailFeedback.textContent = ""; 
+        emailFeedback.className = "email-feedback";
+        emailInput.classList.remove("input-error", "input-success");
+        return;
+      }
+
+      const response = await fetch(`/auth/check-email?email=${encodeURIComponent(email)}`);
+      const data = await response.json();
+
+      if (data.exists) {
+        emailFeedback.textContent = "This email is already taken";
+        emailFeedback.className = "email-feedback error";
+        emailInput.classList.add("input-error");
+        emailInput.classList.remove("input-success");
+      } else {
+        emailFeedback.textContent = "This email is available";
+        emailFeedback.className = "email-feedback success";
+        emailInput.classList.add("input-success");
+        emailInput.classList.remove("input-error");
+      }
+    }
+  </script>
+  
 </body>
 
 </html>

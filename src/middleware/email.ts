@@ -1,21 +1,31 @@
+import dotenv from "dotenv";
+
 import nodemailer from "nodemailer";
+dotenv.config();
 
-export const sendResetEmail = async (to: string, code: string) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+const transporter = nodemailer.createTransport({
+  host: "smtp.sendgrid.net",
+  port: 587,
+  secure: false, // TLS (recommended)
+  auth: {
+    user: "apikey", // Always "apikey" for SendGrid
+    pass: process.env.SENDGRID_API_KEY,
+  },
+});
 
-  const mailOptions = {
-    from: `"Lend It Out Support" <${process.env.EMAIL_USER}>`,
-    to,
-    subject: "Password Reset Code",
-    text: `Your password reset code is: ${code}`,
-    html: `<p>Your password reset code is: <strong>${code}</strong></p>`,
-  };
-
-  await transporter.sendMail(mailOptions);
+const sendEmail = async (to: string, subject: string, html: string) => {
+  try {
+    await transporter.sendMail({
+      from: `"LendItOut" <${process.env.EMAIL_USER}>`,
+      to,
+      subject,
+      html,
+    });
+    console.log("✅ Email sent successfully to:", to);
+  } catch (error) {
+    console.error("❌ Error sending email:", error);
+    throw new Error("Email sending failed");
+  }
 };
+
+export { sendEmail };

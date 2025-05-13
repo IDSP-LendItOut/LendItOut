@@ -9,14 +9,16 @@
 
   <p class="subtitle">Select a Category</p>
   <p class="subdescription">Choose one option—this will set your price range limits</p>
+
   <div class="category-grid">
     <% categories.forEach(category => { %>
     <label class="category-option">
-      <input type="radio" name="category" value="<%= category %>">
-      <span><%= category.charAt(0) + category.slice(1).toLowerCase().replace(/_/g, ' ') %></span>
+      <input type="radio" name="category" value="<%= category.id %>">
+      <span><%= category.name %></span>
     </label>
     <% }) %>
   </div>
+
   <%if(error) {%>
   <p class="error-msg"><%= error %></p>
   <%}%>

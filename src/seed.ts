@@ -71,7 +71,6 @@ const staticImages: Record<Groups, string[]> = {
   ],
 };
 
-
 async function main() {
   // await prisma.message.deleteMany();
   // await prisma.reviewOnListing.deleteMany();
@@ -85,19 +84,23 @@ async function main() {
   const groups: Groups[] = [
     "ELECTRONICS",
     "FASHION",
+    "HOME",
+    "FURNITURE",
     "BOOKS",
+    "BABY",
+    "CLOTHING",
+    "OFFICE",
+    "SPORTS",
     "TOOLS",
+    "TOYS",
     "BEAUTY",
   ];
-
+  const rentCats = await prisma.category.findMany({ where: { type: "Rent" } });
+  const purchaseCats = await prisma.category.findMany({
+    where: { type: "Purchase" },
+  });
   const conditions: Condition[] = ["BAD", "ADEQUATE", "GOOD", "GREAT", "NEW"];
-  const durations: RentalDuration[] = [
-    "HOUR",
-    "DAY",
-    "WEEK",
-    "MONTH",
-    "YEAR",
-  ];
+  const durations: RentalDuration[] = ["HOUR", "DAY", "WEEK", "MONTH", "YEAR"];
 
   for (let i = 0; i < 10; i++) {
     const user = await prisma.user.create({
@@ -113,19 +116,26 @@ async function main() {
 
     for (let j = 0; j < 2; j++) {
       const group = faker.helpers.arrayElement(groups);
+      const categoryArray = j % 2 === 0 ? rentCats : purchaseCats;
+      if (!categoryArray.length) {
+        console.error("❌ categoryArray is empty!");
+        process.exit(1);
+      }
 
+      const category = faker.helpers.arrayElement(categoryArray);
       const listing = await prisma.listing.create({
         data: {
           title: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
           type: j % 2 === 0 ? "RENT" : "PURCHASE",
-          group,
+
           rentalDuration: faker.helpers.arrayElement(durations),
           condition: faker.helpers.arrayElement(conditions),
           salePrice: parseFloat(faker.commerce.price()),
           rentalPrice: parseFloat(faker.commerce.price()),
           available: true,
           userId: user.id,
+          categoryId: category.id,
         },
       });
 
@@ -160,7 +170,6 @@ async function main() {
       });
     }
   }
-  
 
   console.log("✅ Seed complete.");
 }

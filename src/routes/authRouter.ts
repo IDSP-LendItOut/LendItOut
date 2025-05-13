@@ -68,10 +68,7 @@ authRouter.post("/register", async (req, res) => {
       where: { email },
     });
     if (userWithSameEmailExists) {
-      return res.render("auth/register", {
-        title: "register",
-        error: "That email has already been taken. Please try another one",
-      });
+      return res.redirect("/auth/register");
     } else {
       const createUser = await prisma.user.create({
         data: {
