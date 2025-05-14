@@ -1761,7 +1761,8 @@ body {
 }
 /* 18. Chat view =============== */
 .chat-page {
-  width: 430px;
+  width: 100%; /* Full width for mobile */
+  max-width: 430px; /* Limit width for larger devices */
   margin: 0 auto;
   background-color: #fff;
   font-family: "Helvetica Neue", sans-serif;
@@ -1809,7 +1810,8 @@ body {
   padding: 0.5rem;
   width: 180px;
 }
-.chat-options a, .chat-options button {
+.chat-options a,
+.chat-options button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1821,7 +1823,8 @@ body {
   color: black;
   text-decoration: none;
 }
-.chat-options a:hover, .chat-options button:hover {
+.chat-options a:hover,
+.chat-options button:hover {
   background-color: #f3f3f3;
 }
 .chat-options .delete-link {
@@ -1975,34 +1978,31 @@ body {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
+/* Responsive Adjustments for Larger Screens */
+@media (min-width: 768px) {
+  .chat-page {
+    max-width: 600px; /* Adjust width for tablets and larger screens */
+  }
+  .chat-header {
+    padding: 1.5rem;
+  }
+  .chat-options {
+    width: 200px; /* Slightly larger options menu */
+  }
+  .chat-item-info img {
+    width: 100px;
+    height: 100px;
+  }
+  .chat-messages {
+    padding: 1.5rem;
+  }
+  .chat-input input {
+    font-size: 1.1rem;
+  }
+  .chat-input .send-btn {
+    font-size: 1.8rem;
+  }
 }
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  padding: 1rem;
-}
-
-.modal-box {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  width: 100%;
-  max-width: 90vw;
-  box-sizing: border-box;
-  text-align: center;
-}
-
 /* 19. Messages =============== */
 .messages-page {
   max-width: 430px;
@@ -3129,5 +3129,68 @@ body {
   .checkout-container .payment-form .pay-btn {
     padding: 0.8rem;
     font-size: 1rem;
+  }
+}
+
+/* 26. Payment =========== */
+html {
+  background-color: white;
+}
+
+.confirmation-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  position: relative;
+  background-color: white;
+}
+.confirmation-screen h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0;
+  position: absolute;
+  top: 3rem;
+}
+.confirmation-screen .close-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.confirmation-screen .logo img {
+  width: 250px;
+  margin: 2rem 0;
+}
+.confirmation-screen .action-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.confirmation-screen .action-buttons .btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.confirmation-screen .action-buttons .btn.primary {
+  background-color: #58663d;
+  color: #fff;
+}
+.confirmation-screen .action-buttons .btn.secondary {
+  background-color: #f2f3f0;
+  color: #111;
+}
+@media (min-width: 768px) {
+  .confirmation-screen .logo img {
+    width: 300px;
   }
 }/*# sourceMappingURL=style.css.map */
