@@ -3034,6 +3034,26 @@ body {
   color: red;
 }
 
+.cart-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #556C40;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+}
+
+.cart-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* 24. settings =========== */
 .settings-page {
   padding: 1rem;
