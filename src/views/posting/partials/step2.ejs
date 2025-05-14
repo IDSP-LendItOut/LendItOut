@@ -1,15 +1,11 @@
-<form action="/posting/create/step/2" method="POST" class="step2-form" id="step2-form">
+<form action="/posting/create/step/2" method="POST" class="step2-form" id="step2-form" enctype="multipart/form-data">
   <div class="photo-section">
     <p class="section-title subtitle">Photos</p>
     <p class="section-description subdescription">Add up to 8 photos.</p>
     <!-- todo : need to implement image upload -->
-    <div class="photo-grid">
-      <div class="photo-slot">
-        <img src="https://picsum.photos/300/300" alt="Photo 1">
-      </div>
-      <div class="photo-slot">
-        <img src="https://picsum.photos/300/300" alt="Photo 2">
-      </div>
+    <div class="photo-grid" id="photoGrid">
+
+      <input type="file" name="images" accept="image/*" multiple onchange="previewImages(this)" required>
 
     </div>
   </div>
@@ -80,5 +76,50 @@
     };
     const conditionValue = conditionMap[rangeInput.value];
     document.getElementById("condition-labels").value = conditionValue;
+  }
+
+  function previewImages(input) {
+    const photoGrid = document.getElementById("photoGrid");
+    const files = input.files;
+
+    if (files.length + photoGrid.children.length > 8) {
+      alert("You can only upload up to 8 images.");
+      input.value = "";
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        const imgElement = document.createElement("div");
+        imgElement.classList.add("photo-slot");
+        imgElement.innerHTML = `
+          <img src="${e.target.result}" alt="Photo">
+          <button type="button" class="remove-btn" onclick="removeImage(this)">Remove</button>
+        `;
+        photoGrid.appendChild(imgElement);
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    if (photoGrid.children.length >= 8) {
+      document.getElementById("imageInput").style.display = "none";
+    } else {
+      document.getElementById("imageInput").style.display = "block";
+    }
+
+    input.value = "";
+  }
+
+  function removeImage(button) {
+    const photoGrid = document.getElementById("photoGrid");
+    button.parentElement.remove();
+
+    if (photoGrid.children.length < 8) {
+      document.getElementById("imageInput").style.display = "block";
+    }
   }
 </script>
