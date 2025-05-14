@@ -95,10 +95,60 @@ async function main() {
     "TOYS",
     "BEAUTY",
   ];
+
+  const rentCategories = [
+    "Real Estate & Property",
+    "Vehicles & Transportation",
+    "Equipment & Tools",
+    "Furniture & Home Goods",
+    "Clothing & Fashion",
+    "Technology & Gadgets",
+    "Leisure & Recreation",
+    "Events & Parties",
+    "Photography & Videography",
+    "Health & Fitness",
+    "Office & Business Equipment",
+  ];
+
+  const purchaseCategories = [
+    "Electronics & Gadgets",
+    "Fashion & Apparel",
+    "Home & Furniture",
+    "Beauty & Personal Care",
+    "Health & Wellness",
+    "Sports & Outdoors",
+    "Automotive & Motorcycles",
+    "Baby & Kids",
+    "Groceries & Household Essentials",
+    "Books, Music & Entertainment",
+    "Office & School Supplies",
+    "Hobbies & Collectibles",
+    "Digital Products & Services",
+  ];
+
+  const allCategories = [
+    ...rentCategories.map((name) => ({ name, type: "Rent" })),
+    ...purchaseCategories.map((name) => ({ name, type: "Purchase" })),
+  ];
+
+  // Seed categories
+  for (const category of allCategories) {
+    await prisma.category.upsert({
+      where: { name: category.name },
+      update: {},
+      create: category,
+    });
+  }
   const rentCats = await prisma.category.findMany({ where: { type: "Rent" } });
   const purchaseCats = await prisma.category.findMany({
     where: { type: "Purchase" },
   });
+
+  if (!rentCats.length || !purchaseCats.length) {
+    console.error("❌ rentCats or purchaseCats is empty!");
+    process.exit(1);
+  }
+
   const conditions: Condition[] = ["BAD", "ADEQUATE", "GOOD", "GREAT", "NEW"];
   const durations: RentalDuration[] = ["HOUR", "DAY", "WEEK", "MONTH", "YEAR"];
 
@@ -135,7 +185,6 @@ async function main() {
           available: true,
           userId: user.id,
           categoryId: category.id,
-          group: group, 
         },
       });
 
@@ -150,6 +199,14 @@ async function main() {
       // await prisma.media.createMany({
       //   data: fallbackImages.map((url) => ({
       //     url,
+      //     type: "IMAGE",
+      //     listingId: listing.id,
+      //   })),
+      // });
+
+      // await prisma.media.createMany({
+      //   data: Array.from({ length: 2 }).map(() => ({
+      //     url: `https://picsum.photos/300/300?random=${Math.random()}`,
       //     type: "IMAGE",
       //     listingId: listing.id,
       //   })),
