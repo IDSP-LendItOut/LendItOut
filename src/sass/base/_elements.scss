@@ -410,6 +410,43 @@
       flex: 8;
     }
   }
+
+  // register
+
+  .error-msg {
+    margin-bottom: .5rem;
+  }
+
+  .email-feedback {
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+    color: gray;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .email-feedback.error {
+    color: red;
+  }
+
+  .email-feedback.success {
+    color: green;
+  }
+
+  .email-div {
+    position: relative;
+  }
+
+  .check_icon {
+    position: absolute;
+    top: .2rem;
+    right: 1rem;
+    font-size: 1.3rem;
+  }
+
+
+
 }
 
 // logout btn
@@ -544,38 +581,6 @@
     margin: 1rem auto;
   }
 
-}
-
-
-// register error
-
-.error-msg {
-  margin-bottom: .5rem;
-}
-
-.email-feedback {
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
-  color: gray;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.email-feedback.error {
-  color: red;
-}
-
-.email-feedback.success {
-  color: green;
-}
-
-.input-error {
-  border-color: red;
-}
-
-.input-success {
-  border-color: green;
 }
 
 // posting

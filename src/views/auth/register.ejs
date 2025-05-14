@@ -20,8 +20,12 @@
 
         <div class="login-form">
           <form action="/auth/register" method="POST">
-            <input type="text" name="email" id="email-input" placeholder="Email" required oninput="checkEmail()">
-            <div id="email-feedback" class="email-feedback"></div>
+            <div class="email-div">
+              <input type="text" name="email" id="email-input" placeholder="Email" required oninput="checkEmail()">
+              <div class="check_icon hidden" id="icon-success" style="color: green"><i class="fa-regular fa-circle-check"></i></div>
+              <div class="check_icon hidden" id="icon-error" style="color: red"><i class="fa-regular fa-circle-xmark"></i></div>
+              <div id="email-feedback" class="email-feedback"></div>
+            </div>
 
             <input type="text" name="name" placeholder="Name" required>
             <input type="password" name="password" placeholder="Password" required>
@@ -50,6 +54,8 @@
     async function checkEmail() {
       const emailInput = document.getElementById("email-input");
       const emailFeedback = document.getElementById("email-feedback");
+      const errorIcon = document.getElementById("icon-error");
+      const successIcon = document.getElementById("icon-success");
       const email = emailInput.value.trim();
       
       if (email.length < 5) {
@@ -65,11 +71,15 @@
       if (data.exists) {
         emailFeedback.textContent = "This email is already taken";
         emailFeedback.className = "email-feedback error";
+        errorIcon.classList.remove("hidden")
+        successIcon.classList.add("hidden")
         emailInput.classList.add("input-error");
         emailInput.classList.remove("input-success");
       } else {
         emailFeedback.textContent = "This email is available";
         emailFeedback.className = "email-feedback success";
+        errorIcon.classList.add("hidden")
+        successIcon.classList.remove("hidden")
         emailInput.classList.add("input-success");
         emailInput.classList.remove("input-error");
       }
