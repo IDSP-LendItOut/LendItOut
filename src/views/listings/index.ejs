@@ -46,17 +46,23 @@
         <% listings.forEach(listing => { %>
           <div class="related-card">
             <a href="/listings/<%= listing.id %>">
-              <img src="<%= listing.media[0]?.url %>" alt="<%= listing.title %>" />
+              <img
+                src="<%= listing.media[0]?.url || listing.fallbackImage %>"
+                alt="<%= listing.title %>"
+                onerror="this.onerror=null;this.src='<%= listing.fallbackImage %>'"
+              />
+
+
               <p><%= listing.title %></p>
-              <p>$<%= listing.price %><%= listing.rentAvailable ? '/day' : '' %></p>
-              <small>
-                <%= listing.rentAvailable && listing.purchaseAvailable
-                  ? 'Rent and Purchase available'
-                  : listing.rentAvailable
-                  ? 'Rent available'
-                  : 'Purchase available'
-                %>
-              </small>
+              <p>
+                <% if (listing.type === 'RENT') { %>
+                  $<%= listing.rentalPrice %> / <%= listing.rentalDuration.toLowerCase() %>
+                <% } else { %>
+                  $<%= listing.salePrice %>
+                <% } %>
+              </p>
+              <small><%= listing.type === 'RENT' ? 'Rent available' : 'Purchase available' %></small>
+
             </a>
           </div>
         <% }) %>
