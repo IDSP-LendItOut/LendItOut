@@ -53,9 +53,9 @@ model Listing {
   rentalDuration RentalDuration?
   available      Boolean           @default(true)
   condition      Condition
-  userId         String            @db.ObjectId
+  userId         String?           @db.ObjectId
   createdAt      DateTime          @default(now())
-  user           User              @relation(fields: [userId], references: [id])
+  user           User?             @relation(fields: [userId], references: [id])
   media          Media[]
   reviews        ReviewOnListing[]
   conversations  Conversation[]

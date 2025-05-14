@@ -1,56 +1,80 @@
 <main class="listings">
-    <div class="section-header">
-        <h2>Suggested Listings</h2>
-        <a href="/listings">See more</a>
-    </div>
-    <div class="scroll-container">
-        <div class="item-grid">
-            <% items.forEach(item => { %>
-                <div class="item-card">
-                    <img src="<%= item.image %>" alt="<%= item.name %>">
-                    <div class="item-details">
-                        <p class="item-name"><%= item.name %></p>
-                        <p class="item-price"><%= item.price %></p>
-                        <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
-                    </div>
-                </div>
-            <% }); %>
+  <div class="section-header">
+    <h2>Suggested Listings</h2>
+    <a href="/listings">See more</a>
+  </div>
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% listing.forEach(item => { %>
+      <div class="item-card">
+        <img src="https://picsum.photos/300/300?random=<%= Math.random() %>" alt="<%= item.title %>">
+        <div class="item-details">
+          <p class="item-name"><%= item.title %></p>
+          <% if (item.salePrice === 0) { %>
+          <p class="item-price">$<%= item.rentalPrice %></p>
+          <% } else { %>
+          <p class="item-price">$<%= item.salePrice %></p>
+          <% } %>
+          <% if (item.type === "RENT") { %>
+          <p class="item-status" style="color: orange;">For Rent</p>
+          <% } else { %>
+          <p class="item-status" style="color: green;">For Sale</p>
+          <% } %>
         </div>
+      </div>
+      <% }); %>
     </div>
-    <div class="section-header">
-        <h2>Recently Viewed</h2>
-        <a href="/listings">See more</a>
-    </div>
-    <div class="scroll-container">
-        <div class="item-grid">
-            <% items.forEach(item => { %>
-                <div class="item-card">
-                    <img src="<%= item.image %>" alt="<%= item.name %>">
-                    <div class="item-details">
-                        <p class="item-name"><%= item.name %></p>
-                        <p class="item-price"><%= item.price %></p>
-                        <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
-                    </div>
-                </div>
-            <% }); %>
+  </div>
+  <div class="section-header">
+    <h2>Recently Viewed</h2>
+    <a href="/listings">See more</a>
+  </div>
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% listing2.forEach(item => { %>
+      <div class="item-card">
+        <img src="https://picsum.photos/300/300?random=<%= Math.random() %>" alt="<%= item.title %>">
+        <div class="item-details">
+          <p class="item-name"><%= item.title %></p>
+          <% if (item.salePrice === 0) { %>
+          <p class="item-price">$<%= item.rentalPrice %></p>
+          <% } else { %>
+          <p class="item-price">$<%= item.salePrice %></p>
+          <% } %>
+          <% if (item.type === "RENT") { %>
+          <p class="item-status" style="color: orange;">For Rent</p>
+          <% } else { %>
+          <p class="item-status" style="color: green;">For Sale</p>
+          <% } %>
         </div>
+      </div>
+      <% }); %>
     </div>
-    <div class="section-header">
-        <h2>Bookmarked Listings</h2>
-        <a href="/listings">See more</a>
-    </div>
-    <div class="scroll-container">
-        <div class="item-grid">
-            <% items.forEach(item => { %>
-                <div class="item-card">
-                    <img src="<%= item.image %>" alt="<%= item.name %>">
-                    <div class="item-details">
-                        <p class="item-name"><%= item.name %></p>
-                        <p class="item-price"><%= item.price %></p>
-                        <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
-                    </div>
-                </div>
-            <% }); %>
+  </div>
+  <div class="section-header">
+    <h2>Bookmarked Listings</h2>
+    <a href="/listings">See more</a>
+  </div>
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% listing.forEach(item => { %>
+      <div class="item-card">
+        <img src="https://picsum.photos/300/300?random=<%= Math.random() %>" alt="<%= item.title %>">
+        <div class="item-details">
+          <p class="item-name"><%= item.title %></p>
+          <% if (item.salePrice === 0) { %>
+          <p class="item-price">$<%= item.rentalPrice %></p>
+          <% } else { %>
+          <p class="item-price">$<%= item.salePrice %></p>
+          <% } %>
+          <% if (item.type === "RENT") { %>
+          <p class="item-status" style="color: orange;">For Rent</p>
+          <% } else { %>
+          <p class="item-status" style="color: green;">For Sale</p>
+          <% } %>
         </div>
+      </div>
+      <% }); %>
     </div>
+  </div>
 </main>

@@ -3,12 +3,29 @@ import { requireLogin } from "../middleware/requireLogin";
 import { prisma } from "../seed";
 
 const profileRouter = express.Router();
-
+const listing = await prisma.listing.findMany({
+  include: {
+    user: true,
+    media: true,
+  },
+  orderBy: {
+    salePrice: "asc",
+  },
+  take: 10,
+});
+console.log(listing[9]);
 profileRouter.get("/", requireLogin, async (req, res) => {
   const userId = req.session.userId;
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
-    const listing = await prisma.listing.findMany({ where: { id: userId} });
+    const myListing = await prisma.listing.findMany({
+      where: { userId: userId },
+      include: {
+        user: true,
+        media: true,
+      },
+    });
+
     if (!user) {
       return res.render("auth/login", {
         title: "login",
@@ -25,6 +42,8 @@ profileRouter.get("/", requireLogin, async (req, res) => {
         showSearchbar: false,
         user: user,
         joinedYear,
+        myListing,
+        listing,
       });
     }
   } catch (err) {
@@ -45,16 +64,38 @@ profileRouter.get("/editProfile", requireLogin, async (req, res) => {
         error: null,
       });
     } else {
-      res.render("profile/editProfile", { title: "Edit Profile", user: user });
+      res.render("profile/editProfile", {
+        title: "Edit Profile",
+        user: user,
+        successMessage: null,
+      });
     }
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
   }
 });
-profileRouter.post("/editProfile", requireLogin, (req, res) => {
-  console.log(req.body);
-  res.redirect("/");
+
+profileRouter.post("/editProfile", requireLogin, async (req, res) => {
+  const userId = req.session.userId;
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+
+  const { name, username, pronouns, location } = req.body;
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      name,
+    },
+  });
+  res.render("profile/editProfile", {
+    title: "Edit Profile",
+    successMessage: "Profile has been updated.",
+    user: user,
+    name: updatedUser.name,
+    username,
+    pronouns,
+    location,
+  });
 });
 
 profileRouter.get("/insight", requireLogin, (req, res) => {
