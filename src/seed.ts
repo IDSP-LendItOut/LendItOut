@@ -128,7 +128,6 @@ async function main() {
           title: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
           type: j % 2 === 0 ? "RENT" : "PURCHASE",
-
           rentalDuration: faker.helpers.arrayElement(durations),
           condition: faker.helpers.arrayElement(conditions),
           salePrice: parseFloat(faker.commerce.price()),
@@ -136,6 +135,7 @@ async function main() {
           available: true,
           userId: user.id,
           categoryId: category.id,
+          group: group, 
         },
       });
 
