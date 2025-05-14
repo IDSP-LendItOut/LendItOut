@@ -2705,7 +2705,7 @@ body {
   font-weight: 600;
 }
 .buy-page .product-box {
-  padding: 1rem;
+  padding: 0 1rem 0;
 }
 .buy-page .product-box h2,
 .buy-page .product-box h3 {
@@ -3011,6 +3011,27 @@ body {
 }
 .carousel-container .carousel-dots .dot.active {
   background: #2d2c2c;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+  margin: 10px;
+}
+
+.heart-button,
+.add-to-cart-button {
+  font-size: 1.7rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  gap: 6px;
+  transition: background 0.3s;
+}
+
+.heart-button:hover {
+  color: red;
 }
 
 /* 24. settings =========== */
