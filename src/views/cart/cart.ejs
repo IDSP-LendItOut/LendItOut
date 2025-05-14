@@ -19,6 +19,7 @@
 
   <div class="cart-container">
     <% cartItems.forEach(item => { %>
+      <!-- Item Card -->
       <div class="item-card">
         <div class="checkbox">
           <input type="checkbox" id="select-item-<%= item.id %>" checked aria-label="Select item <%= item.name %>" />
@@ -40,21 +41,26 @@
               <button aria-label="Buy <%= item.name %>">Buy</button>
             <% } %>
           </div>
-          <a href="/termsconditions">
-            <div class="contracts">
-              <% item.contracts.forEach(contract => { %>
-                <span><%= contract %></span>
-              <% }) %>
-            </div>
-          </a>
-          <div class="insurance">
-            <input type="checkbox" id="insurance-<%= item.id %>" <%= item.insuranceSelected ? 'checked' : '' %> aria-label="Add insurance for <%= item.name %>" />
-            <label for="insurance-<%= item.id %>">Insurance $<%= item.insurance %></label>
-          </div>
         </div>
       </div>
+
+      <!-- Contracts Section -->
+      <div class="contracts">
+        <a href="/termsconditions">
+          <% item.contracts.forEach(contract => { %>
+            <span><%= contract %></span>
+          <% }) %>
+        </a>
+      </div>
+
+      <!-- Insurance Section -->
+    <div class="insurance">
+      <span> Insurance $<%= item.insurance %></span>
+      <input type="checkbox" id="insurance-<%= item.id %>" <%= item.insuranceSelected ? 'checked' : '' %> aria-label="Add insurance for <%= item.name %>" />
+    </div>
     <% }) %>
 
+    <!-- Summary Section -->
     <div class="summary">
       <div class="total-line">
         <span>Subtotal Rent</span>

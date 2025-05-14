@@ -3,38 +3,6 @@
   margin: auto;
   padding: 15px;
 
-  .header {
-    background-color: #4b5e33;
-    color: white;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-  
-    .header-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-  
-      .back-arrow {
-        position: absolute;
-        left: 15px;
-        font-size: 20px;
-        color: white;
-        text-decoration: none;
-        cursor: pointer;
-  
-        &:hover {
-          color: #d4d4d4;
-        }
-      }
-  
-      .header-title {
-        font-size: 20px;
-        font-weight: bold;
-      }
-    }
-  }
-
   .item-card {
     background: white;
     border-radius: 10px;
@@ -46,45 +14,18 @@
     align-items: center;
     width: 100%;
     position: relative;
-  
+
     img {
       width: 80px;
       height: 80px;
       margin-right: 15px;
       object-fit: cover;
     }
-  
-    .checkbox {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      margin: 0;
-      z-index: 1;
-  
-      input[type="checkbox"] {
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border: 2px solid #ddd;
-        background-color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-  
-        &:checked {
-          background-color: $color-primary;
-          border-color: $color-primary;
-        }
-  
-        &:hover {
-          border-color: #999;
-        }
-      }
-    }
-  
+
     .details {
       flex: 1;
       overflow: hidden;
-  
+
       h4 {
         margin: 0;
         font-size: 16px;
@@ -92,18 +33,18 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-  
+
       .price {
         font-size: 14px;
         color: #666;
         margin-top: 5px;
       }
-  
+
       .quantity-control {
         margin-top: 10px;
         display: flex;
         align-items: center;
-  
+
         button {
           background: $color-primary;
           color: white;
@@ -113,30 +54,33 @@
           border-radius: 5px;
         }
       }
-  
+
       .actions {
-        margin-top: 10px;
-  
+        margin-top: 15px; /* Added spacing above the Rent/Buy buttons */
+
         button {
           background: $color-primary;
           color: white;
           border: none;
-          padding: 5px 10px;
-          margin-right: 5px;
+          padding: 8px 15px;
+          margin-right: 10px; /* Added spacing between buttons */
           border-radius: 5px;
+          font-size: 14px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+
+          &:hover {
+            background: darken($color-primary, 10%); /* Slightly darker on hover */
+          }
         }
       }
     }
-  
-    .checkbox {
-      margin-left: auto;
-    }
 
-    .insurance {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-    
+    .checkbox {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+
       input[type="checkbox"] {
         appearance: none;
         width: 20px;
@@ -145,35 +89,83 @@
         background-color: white;
         cursor: pointer;
         transition: all 0.3s ease;
-    
+        position: relative;
+
         &:checked {
-          background-color: $color-primary;
+          background-color: $color-primary; 
           border-color: $color-primary;
         }
-    
+
+        &:checked::after {
+          content: "✔";
+          color: white;
+          font-size: 14px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
         &:hover {
           border-color: #999;
         }
       }
-    
-      label {
-        margin-left: 10px;
-        font-size: 14px;
-        color: #333;
-        cursor: pointer;
-      }
+    }
+  }
+
+  .contracts {
+    margin-top: 20px; /* Added spacing above the contracts section */
+    margin-bottom: 20px; /* Added spacing below the contracts section */
+
+    span {
+      display: inline-block;
+      background: #eee;
+      padding: 5px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+  }
+
+  .insurance {
+    margin-bottom: 15px; /* Increased spacing above the insurance section */
+
+    span {
+      display: inline-block;
+      background: #eee;
+      padding: 5px 8px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-right: 10px; /* Added spacing between the button and the checkbox */
     }
 
-    .contracts {
-      margin-top: 10px;
+    input[type="checkbox"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ddd;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
 
-      span {
-        display: inline-block;
-        background: #eee;
-        padding: 5px 8px;
-        border-radius: 5px;
-        font-size: 12px;
-        margin-right: 5px;
+      &:checked {
+        background-color: $color-primary; 
+        border-color: $color-primary;
+      }
+
+      &:checked::after {
+        content: "✔";
+        color: white;
+        font-size: 14px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:hover {
+        border-color: #999;
       }
     }
   }
@@ -186,13 +178,13 @@
     text-align: center;
     margin: 0 auto;
     width: 100%;
-  
+
     .total-line {
       display: flex;
       justify-content: space-between;
       margin: 5px 0;
     }
-  
+
     .checkout-btn {
       margin-top: 10px;
       background: $color-primary;
