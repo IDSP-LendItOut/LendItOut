@@ -15,6 +15,8 @@ profileRouter.get("/", requireLogin, async (req, res) => {
         error: null,
       });
     } else {
+      const joinedYear = user.createdAt.getFullYear();
+
       res.render("profile", {
         title: "Profile",
         content: "profile",
@@ -22,6 +24,7 @@ profileRouter.get("/", requireLogin, async (req, res) => {
         users,
         showSearchbar: false,
         user: user,
+        joinedYear,
       });
     }
   } catch (err) {
