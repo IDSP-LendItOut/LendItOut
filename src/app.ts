@@ -4,6 +4,8 @@ import ejsMate from "ejs-mate";
 import express from "express";
 import session from "express-session";
 import path from "path";
+import http from "http"; 
+import { Server } from "socket.io"; 
 
 dotenv.config();
 
@@ -22,6 +24,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+const server = http.createServer(app); 
+const io = new Server(server);
+
 const port = 6563;
 
 app.engine("ejs", ejsMate as any);
@@ -52,61 +57,26 @@ app.use("/posting", postingRouter);
 app.use("/listings", listingsRouter);
 app.use("/settings", settingsRouter);
 
-const items = [
-  {
-    image: "https://picsum.photos/300/300",
-    name: "Item 4",
-    price: "$69.99",
-    status: "For Sale",
-    statusClass: "for-sale",
-  },
-  {
-    image: "https://picsum.photos/300/300",
-    name: "Item 5",
-    price: "$190",
-    status: "For Sale",
-    statusClass: "for-sale",
-  },
-  {
-    image: "https://picsum.photos/300/300",
-    name: "Item 6",
-    price: "$80/day",
-    status: "For Rent",
-    statusClass: "for-rent",
-  },
-  {
-    image: "https://picsum.photos/300/300",
-    name: "Item 6",
-    price: "$80/day",
-    status: "For Rent",
-    statusClass: "for-rent",
-  },
-  {
-    image: "https://picsum.photos/300/300",
-    name: "Item 6",
-    price: "$80/day",
-    status: "For Rent",
-    statusClass: "for-rent",
-  },
-  {
-    image: "https://picsum.photos/300/300",
-    name: "Item 6",
-    price: "$80/day",
-    status: "For Rent",
-    statusClass: "for-rent",
-  },
-];
+// Socket.IO logic
+io.on("connection", (socket) => {
+  console.log("A user connected:", socket.id);
 
-// home
-app.get("/", (req, res) => {
-  res.render("home", {
-    title: "Home",
-    content: "buying",
-    items,
-    showSearchbar: true,
+  socket.on("joinConversation", (conversationId) => {
+    socket.join(conversationId);
+    console.log(`User joined conversation: ${conversationId}`);
+  });
+
+  socket.on("sendMessage", (data) => {
+    console.log("Message received:", data);
+
+    socket.to(data.conversationId).emit("receiveMessage", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected:", socket.id);
   });
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
