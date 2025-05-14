@@ -42,14 +42,14 @@ const fallbackImages: Record<string, string[]> = {
 };
 
 async function main() {
-  console.log("🧹 Clearing database...");
+
   await prisma.reviewOnListing.deleteMany();
   await prisma.media.deleteMany();
   await prisma.listing.deleteMany();
   await prisma.user.deleteMany();
   await prisma.category.deleteMany();
 
-  console.log("🪪 Seeding categories...");
+
   await prisma.category.createMany({
     data: [
       { name: "Appliances", type: "RENT" },
@@ -64,7 +64,6 @@ async function main() {
   const rentCats = await prisma.category.findMany({ where: { type: "RENT" } });
 const purchaseCats = await prisma.category.findMany({ where: { type: "PURCHASE" } });
 
-console.log("✅ RENT:", rentCats.length, " | PURCHASE:", purchaseCats.length);
 
 
   
@@ -74,7 +73,6 @@ console.log("✅ RENT:", rentCats.length, " | PURCHASE:", purchaseCats.length);
 
   const allUsers = [];
 
-  console.log("👤 Seeding users and listings...");
   for (let i = 0; i < 5; i++) {
     const user = await prisma.user.create({
       data: {
@@ -109,13 +107,18 @@ console.log("✅ RENT:", rentCats.length, " | PURCHASE:", purchaseCats.length);
       });
 
       const images = fallbackImages[group] || fallbackImages.DEFAULT;
-      await prisma.media.createMany({
-        data: images.map((url) => ({
-          url,
+      const imageToUse = images[(i * 2 + j) % images.length];
+
+
+      await prisma.media.create({
+        data: {
+          url: imageToUse,
           type: "IMAGE",
           listingId: listing.id,
-        })),
+        },
       });
+
+
 
       const filtered = allUsers.filter((u) => u.id !== user.id);
       const reviewer = filtered.length ? faker.helpers.arrayElement(filtered) : user;

@@ -56,13 +56,13 @@ router.get("/", async (req, res) => {
         },
       },
     });
-    const listingsWithFallback = listings.map((listing) => ({
-      ...listing,
-      fallbackImage: getRandomFallback(listing.group || "DEFAULT"),
-    }));
+    // const listingsWithFallback = listings.map((listing) => ({
+    //   ...listing,
+    //   fallbackImage: getRandomFallback(listing.group || "DEFAULT"),
+    // }));
     res.render("listings/index", {
       title: "All Listings",
-      listings: listingsWithFallback,
+      listings,
     });
   } catch (err) {
     console.error(err);
