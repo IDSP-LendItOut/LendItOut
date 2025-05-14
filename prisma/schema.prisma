@@ -47,7 +47,7 @@ model Listing {
   title          String
   description    String
   type           ListingType
-  group          Groups
+  group          Groups?
   salePrice      Float?
   rentalPrice    Float?
   rentalDuration RentalDuration?

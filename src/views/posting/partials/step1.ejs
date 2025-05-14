@@ -3,20 +3,22 @@
   <p class="subdescription">Make a selection: One or both option are available</p>
 
   <div class="checkbox-group">
-    <label><input type="checkbox" name="type" value="RENT"><span>For Renting</span></label>
-    <label><input type="checkbox" name="type" value="PURCHASE"><span>For Sale</span></label>
+    <label><input type="radio" name="type" value="RENT" required><span>For Renting</span></label>
+    <label><input type="radio" name="type" value="PURCHASE"><span>For Sale</span></label>
   </div>
 
   <p class="subtitle">Select a Category</p>
   <p class="subdescription">Choose one option—this will set your price range limits</p>
+
   <div class="category-grid">
     <% categories.forEach(category => { %>
     <label class="category-option">
-      <input type="radio" name="category" value="<%= category %>">
-      <span><%= category.charAt(0) + category.slice(1).toLowerCase().replace(/_/g, ' ') %></span>
+      <input type="radio" name="category" value="<%= category.id %>">
+      <span><%= category.name %></span>
     </label>
     <% }) %>
   </div>
+
   <%if(error) {%>
   <p class="error-msg"><%= error %></p>
   <%}%>
