@@ -68,7 +68,11 @@ authRouter.post("/register", async (req, res) => {
       where: { email },
     });
     if (userWithSameEmailExists) {
-      return res.redirect("/auth/register");
+      // return res.redirect("/auth/register");
+      return res.render("auth/register", {
+        title: "register",
+        error: "That email has already been taken. Please try another one",
+      });
     } else {
       const createUser = await prisma.user.create({
         data: {
@@ -85,6 +89,32 @@ authRouter.post("/register", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+authRouter.get("/check-email", async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    if (!email || email.length === 0) {
+      res.status(400).json({ error: "Email cannot be empty" });
+      return;
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: email as string },
+    });
+
+    if (user) {
+      res.json({ exists: true });
+      return;
+    } else {
+      res.json({ exists: false });
+      return;
+    }
+  } catch (err) {
+    console.error("Error in email check:", err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

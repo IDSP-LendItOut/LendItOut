@@ -166,8 +166,6 @@ postingRouter.post(
                 type: "IMAGE",
               })),
             },
-            // ignore
-            // group: "TOYS",
           },
         });
 
