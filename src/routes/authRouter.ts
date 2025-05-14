@@ -1,7 +1,9 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import express from "express";
-import { prisma } from "../seed";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 dotenv.config();
 
 const authRouter = express.Router();
