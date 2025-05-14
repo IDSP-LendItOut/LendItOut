@@ -1,4 +1,5 @@
 import express from "express";
+import { prisma } from "../seed";
 
 const homeRouter = express.Router();
 
@@ -20,20 +21,38 @@ homeRouter.get("/renting", (req, res) => {
   });
 });
 
-homeRouter.get("/buying-page", (req, res) => {
-  res.render("home/buying", {
-    title: "Buying",
-    content: "buying",
-    showSearchbar: true,
-  });
+homeRouter.get("/buying-page", async (req, res) => {
+  try {
+    const categories = await prisma.category.findMany({
+      where: {
+        type: "Purchase",
+      },
+    });
+
+    res.render("home/buying", {
+      categories,
+    });
+  } catch (err) {
+    console.error("Error fetching purchase categories:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-homeRouter.get("/renting-page", (req, res) => {
-  res.render("home/renting", {
-    title: "Renting",
-    content: "renting",
-    showSearchbar: true,
-  });
+homeRouter.get("/renting-page", async (req, res) => {
+  try {
+    const categories = await prisma.category.findMany({
+      where: {
+        type: "Rent",
+      },
+    });
+
+    res.render("home/renting", {
+      categories,
+    });
+  } catch (err) {
+    console.error("Error fetching rent categories:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 homeRouter.get("/explore", (req, res) => {
