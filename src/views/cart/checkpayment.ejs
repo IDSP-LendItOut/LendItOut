@@ -16,14 +16,14 @@
     <div class="secure-info">
       <i class="icon-lock" aria-hidden="true"></i> Secure Payments Only
     </div>
-    <form class="payment-form" method="POST" action="/pay">
+    <form class="payment-form" method="POST" action="/pay" id="paymentForm">
       <section class="payment-info">
         <h3>Payment Information</h3>
         <p>Choose the option below</p>
         <fieldset class="payment-methods">
           <legend class="sr-only">Payment Methods</legend>
           <label class="payment-option">
-            <input type="radio" name="paymentMethod" value="mastercard" aria-label="Pay with MasterCard">
+            <input type="radio" name="paymentMethod" value="mastercard" aria-label="Pay with MasterCard" required>
             <img src="/images/mastercard.png" alt="MasterCard Logo">
             MasterCard
           </label>
@@ -53,26 +53,94 @@
         </div>
         <div class="input-group">
           <label for="cardNumber">Card Number</label>
-          <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required pattern="[0-9 ]+" inputmode="numeric" autocomplete="cc-number">
+          <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required pattern="[0-9 ]{13,19}" inputmode="numeric" autocomplete="cc-number">
         </div>
         <div class="input-row">
           <div class="input-group">
             <label for="expDate">Expiration Date</label>
-            <input type="text" id="expDate" name="expDate" placeholder="MM/YY" required autocomplete="cc-exp">
+            <input type="text" id="expDate" name="expDate" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/[0-9]{2}" autocomplete="cc-exp">
           </div>
           <div class="input-group">
             <label for="cvv">CVV</label>
             <input type="text" id="cvv" name="cvv" placeholder="123" required pattern="[0-9]{3,4}" inputmode="numeric" autocomplete="cc-csc">
           </div>
         </div>
-        <button type="submit" class="confirm-btn" aria-label="Confirm payment details">Confirm</button>
+        <button type="submit" class="confirm-btn" aria-label="Confirm payment details" id="confirmButton">Confirm</button>
       </section>
       <div class="total-row">
         <span>Total</span>
         <span class="total-amount">$330</span>
       </div>
-        <button type="submit" class="pay-btn" aria-label="Pay $330">Pay</button>
+      <a href="/cart/checkout/payment/pay" class="pay-btn" aria-label="Pay $330">Pay</a>
     </form>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const paymentForm = document.getElementById('paymentForm');
+      const confirmButton = document.getElementById('confirmButton');
+  
+      paymentForm.addEventListener('submit', (event) => {
+        if (!paymentForm.checkValidity()) {
+          event.preventDefault(); 
+          alert('Please fill out all required fields correctly.');
+          return;
+        }
+  
+        confirmButton.disabled = true; 
+        confirmButton.textContent = 'Processing...'; 
+      });
+  
+      const cardNumberInput = document.getElementById('cardNumber');
+      cardNumberInput.addEventListener('input', () => {
+        const value = cardNumberInput.value.replace(/\s+/g, '');
+        if (value.length > 0 && !/^[0-9]{13,19}$/.test(value)) {
+          cardNumberInput.setCustomValidity('Please enter a valid card number.');
+        } else {
+          cardNumberInput.setCustomValidity('');
+        }
+      });
+  
+      const expDateInput = document.getElementById('expDate');
+      expDateInput.addEventListener('input', () => {
+        const value = expDateInput.value;
+        if (!/^(0[1-9]|1[0-2])\/[0-9]{2}$/.test(value)) {
+          expDateInput.setCustomValidity('Please enter a valid expiration date (MM/YY).');
+        } else {
+          expDateInput.setCustomValidity('');
+        }
+      });
+  
+      const cvvInput = document.getElementById('cvv');
+      cvvInput.addEventListener('input', () => {
+        const value = cvvInput.value;
+        if (!/^[0-9]{3,4}$/.test(value)) {
+          cvvInput.setCustomValidity('Please enter a valid CVV.');
+        } else {
+          cvvInput.setCustomValidity('');
+        }
+      });
+  
+      const firstNameInput = document.getElementById('firstName');
+      firstNameInput.addEventListener('input', () => {
+        const value = firstNameInput.value;
+        if (!/^[a-zA-Z\s]+$/.test(value)) {
+          firstNameInput.setCustomValidity('First name must only contain letters.');
+        } else {
+          firstNameInput.setCustomValidity('');
+        }
+      });
+  
+      const lastNameInput = document.getElementById('lastName');
+      lastNameInput.addEventListener('input', () => {
+        const value = lastNameInput.value;
+        if (!/^[a-zA-Z\s]+$/.test(value)) {
+          lastNameInput.setCustomValidity('Last name must only contain letters.');
+        } else {
+          lastNameInput.setCustomValidity('');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
