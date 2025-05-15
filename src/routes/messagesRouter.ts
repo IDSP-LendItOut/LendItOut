@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
   const conversationId = parseInt(req.params.id);
 
   const conversation = await prisma.conversation.findUnique({
-    where: { id: conversationId },
+    where: { id: conversationId.toString() },
     include: {
       participants: true,
       listing: {
@@ -51,7 +51,7 @@ router.get('/:id', async (req, res) => {
   if (!conversation) {
      res.status(404).send('Conversation not found');
   }
-  const receiver = conversation?.participants.find(p => p.id !== userId);
+  const receiver = conversation?.participants.find(p => parseInt(p.id) !== userId);
   const receiverId = receiver?.id || null;
 
   res.render('messages/show', {
@@ -79,10 +79,10 @@ router.post('/:id/send', express.json(), async (req, res, next) => {
     const message = await prisma.message.create({
       data: {
         text,
-        conversationId,
-        senderId: userId
+        conversationId: conversationId.toString(),
+        senderId: userId.toString()
       }
-    });
+    }); 
 
     res.json(message);
   } catch (error) {
