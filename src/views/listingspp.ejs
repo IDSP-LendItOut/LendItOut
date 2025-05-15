@@ -31,7 +31,7 @@
     <div class="item-grid">
       <% myListing.forEach(item => { %>
       <div class="item-card">
-        <a href="/listings/<%= item.id %>">
+        <a href="/listings/my/<%= item.id %>">
           <img src="<%= item.media[0].url %>" alt="<%= item.title %>">
         </a>
         <div class="item-details">

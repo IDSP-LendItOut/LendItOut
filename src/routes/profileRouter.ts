@@ -1,8 +1,7 @@
+import { PrismaClient } from "@prisma/client";
 import express from "express";
 import { requireLogin } from "../middleware/requireLogin";
-import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-
 
 const profileRouter = express.Router();
 const listing = await prisma.listing.findMany({
@@ -15,7 +14,7 @@ const listing = await prisma.listing.findMany({
   },
   take: 10,
 });
-console.log(listing[9]);
+
 profileRouter.get("/", requireLogin, async (req, res) => {
   const userId = req.session.userId;
   try {
