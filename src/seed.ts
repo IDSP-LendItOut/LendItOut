@@ -1,14 +1,10 @@
-import { faker } from "@faker-js/faker";
-import {
-  Condition,
-  Groups,
-  PrismaClient,
-  RentalDuration,
-} from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
+import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
 
-const fallbackImages: Record<string, string[]> = {
+const fallbackImages = {
   ELECTRONICS: [
     "/images/fallbacks/cleaner.jpg",
     "/images/fallbacks/electronic.jpg",
@@ -42,137 +38,116 @@ const fallbackImages: Record<string, string[]> = {
 };
 
 async function main() {
-  // Clean up previous data if needed
+  // // console.log('🧹 Clearing old data...');
   // await prisma.message.deleteMany();
-  // await prisma.reviewOnListing.deleteMany();
+  // await prisma.userConversation.deleteMany();
+  // await prisma.conversation.deleteMany();x
   // await prisma.media.deleteMany();
   // await prisma.listing.deleteMany();
   // await prisma.user.deleteMany();
-
-  const groups: Groups[] = [
-    "ELECTRONICS",
-    "FASHION",
-    "HOME",
-    "FURNITURE",
-    "BOOKS",
-    "BABY",
-    "CLOTHING",
-    "OFFICE",
-    "SPORTS",
-    "TOOLS",
-    "TOYS",
-    "BEAUTY",
-  ];
-  const rentCats = await prisma.category.findMany({ where: { type: "Rent" } });
-  const purchaseCats = await prisma.category.findMany({
-    where: { type: "Purchase" },
-  });
-  const conditions: Condition[] = ["BAD", "ADEQUATE", "GOOD", "GREAT", "NEW"];
-  const durations: RentalDuration[] = ["HOUR", "DAY", "WEEK", "MONTH", "YEAR"];
-
-  const allUsers = [];
-
-  // Create users
-  for (let i = 0; i < 5; i++) {
+  // await prisma.category.deleteMany();
+ 
+  console.log('👤 Creating fake users...');
+  const users = [];
+  for (let i = 0; i < 10; i++) {
+    const hashed = await bcrypt.hash('test1234', 10);
     const user = await prisma.user.create({
       data: {
         name: faker.person.fullName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        profilePic: faker.image.avatar(),
-        banner: `https://source.unsplash.com/1200x400/?abstract&sig=${i}`,
+        email: faker.internet.email().toLowerCase(),
+        password: hashed,
       },
     });
-    allUsers.push(user);
+    users.push(user);
   }
 
-  // Create listings, reviews, conversations, and messages
-  for (const user of allUsers) {
-    for (let j = 0; j < 2; j++) {
-      const group = faker.helpers.arrayElement(groups);
-      const categoryArray = j % 2 === 0 ? rentCats : purchaseCats;
-      const category = faker.helpers.arrayElement(categoryArray);
+  const groupNames = [
+    "ELECTRONICS", "FASHION", "HOME", "FURNITURE", "BOOKS", "BABY",
+    "CLOTHING", "OFFICE", "SPORTS", "TOOLS", "TOYS", "BEAUTY"
+  ];
+  
+  console.log("📚 Creating categories from enum...");
+  await prisma.category.createMany({
+    data: groupNames.map(group => ({
+      name: group.charAt(0) + group.slice(1).toLowerCase(), // Capitalize nicely
+      type: "RENT", // or "PURCHASE" — or even randomize
+    })),
 
-      const listing = await prisma.listing.create({
-        data: {
-          title: faker.commerce.productName(),
-          description: faker.commerce.productDescription(),
-          type: j % 2 === 0 ? "RENT" : "PURCHASE",
-          rentalDuration: faker.helpers.arrayElement(durations),
-          condition: faker.helpers.arrayElement(conditions),
-          salePrice: parseFloat(faker.commerce.price()),
-          rentalPrice: parseFloat(faker.commerce.price()),
-          available: true,
-          userId: user.id,
-          categoryId: category.id,
-          group,
+  });
+  const allCategories = await prisma.category.findMany();
+
+
+  console.log('📦 Creating fake listings...');
+  const listings = [];
+  for (let i = 0; i < 5; i++) {
+    const owner = users[Math.floor(Math.random() * users.length)];
+    const category = faker.helpers.arrayElement(allCategories);
+    const listing = await prisma.listing.create({
+      data: {
+        title: faker.commerce.productName(),
+        description: faker.lorem.sentences(2),
+        type: "RENT",
+        condition: "GOOD",
+        rentalPrice: 25,
+        rentalDuration: "DAY",
+        available: true,
+        userId: owner.id,
+        categoryId: category.id,
+        media: {
+          create: [{
+            url: fallbackImages.DEFAULT[i % fallbackImages.DEFAULT.length],
+            type: 'IMAGE',
+          }],
         },
-      });
+      },
+    });
+    
+    listings.push(listing);
+  }
 
-      const images = fallbackImages[group] || fallbackImages.DEFAULT;
-      const imageToUse = images[(Math.random() * images.length) | 0];
+  console.log('💬 Creating fake conversations with messages...');
+  for (let i = 0; i < 5; i++) {
+    const listing = listings[i % listings.length];
+    const user1 = users[i % users.length];
+    let user2 = users[(i + 1) % users.length];
+    if (user1.id === user2.id) user2 = users[(i + 2) % users.length];
 
-      await prisma.media.create({
-        data: {
-          url: imageToUse,
-          type: "IMAGE",
-          listingId: listing.id,
-        },
-      });
-
-      const filtered = allUsers.filter((u) => u.id !== user.id);
-      const reviewer = filtered.length
-        ? faker.helpers.arrayElement(filtered)
-        : user;
-
-      await prisma.reviewOnListing.create({
-        data: {
-          reviewerId: reviewer.id,
-          listingId: listing.id,
-          rating: faker.number.int({ min: 4, max: 5 }),
-          comment: faker.lorem.sentence(),
-        },
-      });
-
-      // Create conversation and messages
-      if (filtered.length) {
-        const randomUser = faker.helpers.arrayElement(filtered);
-
-        const conversation = await prisma.conversation.create({
-          data: {
-            listingId: listing.id,
-            participants: {
-              create: [
-                { userId: user.id },
-                { userId: randomUser.id },
-              ],
-            },
-          },
-        });
-
-        const messageCount = faker.number.int({ min: 2, max: 5 });
-
-        for (let m = 0; m < messageCount; m++) {
-          const sender = m % 2 === 0 ? user : randomUser;
-          await prisma.message.create({
-            data: {
-              text: faker.lorem.sentence(),
-              conversationId: conversation.id,
-              senderId: sender.id,
-              createdAt: faker.date.recent({ days: 10 }),
-            },
-          });
-        }
+    const conversation = await prisma.conversation.create({
+      data: {
+        listingId: listing.id
       }
+    });
+
+    await prisma.userConversation.createMany({
+      data: [
+        { userId: user1.id, conversationId: conversation.id },
+        { userId: user2.id, conversationId: conversation.id }
+      ]
+    });
+
+    for (let j = 0; j < faker.number.int({ min: 4, max: 7 }); j++) {
+      const sender = Math.random() > 0.5 ? user1 : user2;
+      await prisma.message.create({
+        data: {
+          text: faker.lorem.sentence(),
+          senderId: sender.id,
+          conversationId: conversation.id
+        }
+      });
     }
+    const messageCount = await prisma.message.count();
+console.log(`📨 Total messages created: ${messageCount}`);
+
   }
 
-  console.log("✅ Seed complete.");
+  console.log('✅ Seeding complete! Check your Prisma Studio or MongoDB Atlas.');
 }
 
 main()
   .catch((e) => {
-    console.error("❌ Seed error:", e);
+    console.error('❌ Seeding failed:', e);
     process.exit(1);
   })
-  .finally(() => prisma.$disconnect());
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
