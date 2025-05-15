@@ -1,5 +1,7 @@
 import express from "express";
-import { prisma } from "../seed";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 
 const homeRouter = express.Router();
 

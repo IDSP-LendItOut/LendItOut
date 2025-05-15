@@ -47,10 +47,11 @@
           <div class="related-card">
             <a href="/listings/<%= listing.id %>">
               <img
-                src="<%= listing.media[0]?.url || listing.fallbackImage %>"
-                alt="<%= listing.title %>"
-                onerror="this.onerror=null;this.src='<%= listing.fallbackImage %>'"
-              />
+              src="<%= listing.media[0]?.url || '/images/fallbacks/lambo.jpg' %>"
+              alt="<%= listing.title %>"
+              onerror="this.onerror=null;this.src='/images/fallbacks/lambo2.jpg'"
+            />
+            
 
 
               <p><%= listing.title %></p>
