@@ -42,14 +42,12 @@ const fallbackImages: Record<string, string[]> = {
 };
 
 async function main() {
+  // Clean up previous data if needed
   // await prisma.message.deleteMany();
   // await prisma.reviewOnListing.deleteMany();
   // await prisma.media.deleteMany();
   // await prisma.listing.deleteMany();
   // await prisma.user.deleteMany();
-
-  const allUsers = [];
-  const allListings = [];
 
   const groups: Groups[] = [
     "ELECTRONICS",
@@ -74,6 +72,7 @@ async function main() {
 
   const allUsers = [];
 
+  // Create users
   for (let i = 0; i < 5; i++) {
     const user = await prisma.user.create({
       data: {
@@ -85,7 +84,10 @@ async function main() {
       },
     });
     allUsers.push(user);
+  }
 
+  // Create listings, reviews, conversations, and messages
+  for (const user of allUsers) {
     for (let j = 0; j < 2; j++) {
       const group = faker.helpers.arrayElement(groups);
       const categoryArray = j % 2 === 0 ? rentCats : purchaseCats;
@@ -103,25 +105,25 @@ async function main() {
           available: true,
           userId: user.id,
           categoryId: category.id,
-          group: group, 
+          group,
         },
       });
 
       const images = fallbackImages[group] || fallbackImages.DEFAULT;
-      const imageToUse = images[(i * 2 + j) % images.length];
+      const imageToUse = images[(Math.random() * images.length) | 0];
 
-
-      // await prisma.media.createMany({
-      //   data: fallbackImages.map((url) => ({
-      //     url,
-      //     type: "IMAGE",
-      //     listingId: listing.id,
-      //   })),
-      // });
+      await prisma.media.create({
+        data: {
+          url: imageToUse,
+          type: "IMAGE",
+          listingId: listing.id,
+        },
+      });
 
       const filtered = allUsers.filter((u) => u.id !== user.id);
-      const reviewer = filtered.length ? faker.helpers.arrayElement(filtered) : user;
-
+      const reviewer = filtered.length
+        ? faker.helpers.arrayElement(filtered)
+        : user;
 
       await prisma.reviewOnListing.create({
         data: {
@@ -131,6 +133,37 @@ async function main() {
           comment: faker.lorem.sentence(),
         },
       });
+
+      // Create conversation and messages
+      if (filtered.length) {
+        const randomUser = faker.helpers.arrayElement(filtered);
+
+        const conversation = await prisma.conversation.create({
+          data: {
+            listingId: listing.id,
+            participants: {
+              create: [
+                { userId: user.id },
+                { userId: randomUser.id },
+              ],
+            },
+          },
+        });
+
+        const messageCount = faker.number.int({ min: 2, max: 5 });
+
+        for (let m = 0; m < messageCount; m++) {
+          const sender = m % 2 === 0 ? user : randomUser;
+          await prisma.message.create({
+            data: {
+              text: faker.lorem.sentence(),
+              conversationId: conversation.id,
+              senderId: sender.id,
+              createdAt: faker.date.recent({ days: 10 }),
+            },
+          });
+        }
+      }
     }
   }
 
