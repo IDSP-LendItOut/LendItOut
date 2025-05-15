@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
+
 const homeRouter = express.Router();
 
 const listing = await prisma.listing.findMany({
