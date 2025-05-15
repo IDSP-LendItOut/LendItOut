@@ -6,28 +6,30 @@
 <body>
 
   <div class="banner">
-    <img src=<%= user.profilePic %> alt="Profile" class="profile-pic" />
+    <img src="<%= user.profilePic ? user.profilePic : 'https://picsum.photos/300/300' %>" alt="Profile" class="profile-pic">
     <img src="https://picsum.photos/300/100" alt="header" class="header-pic" />
   </div>
 
   <main class="main">
-    <form action="/profile/save" method="POST">
+    <form action="/profile/editProfile" method="POST">
       <label for="name">Name</label>
-      <input id="name" name="name" type="text" placeholder="Name" />
+      <input id="name" name="name" type="text" placeholder="Name" required />
 
       <label for="username">Username</label>
-      <input id="username" name="username" type="text" placeholder="Username" />
+      <input id="username" name="username" type="text" placeholder="Username" required />
 
       <label for="pronouns">Pronouns</label>
-      <input id="pronouns" name="pronouns" type="text" placeholder="They/Them" />
+      <input id="pronouns" name="pronouns" type="text" placeholder="They/Them" required />
 
       <label for="location">Location</label>
-      <input id="location" name="location" type="text" placeholder="Richmond, BC" />
+      <input id="location" name="location" type="text" placeholder="Richmond, BC" required />
 
       <button type="submit">Save Changes</button>
     </form>
+    <div class="successMessage" style="color: green; margin-top: 10px; text-align: center;"><%= successMessage %></div>
   </main>
 
 </body>
+
 
 </html>

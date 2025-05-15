@@ -129,8 +129,7 @@ postingRouter.post(
         const userIdObjectId = new ObjectId(userId);
         const data = req.session.listingData;
         const categoryId = data.category;
-        console.log("***");
-        console.log(categoryId);
+
         const category = await prisma.category.findUnique({
           where: { id: categoryId },
         });
@@ -164,13 +163,13 @@ postingRouter.post(
             categoryId: categoryId,
             media: {
               create: (data.images || []).map((imageUrl: string) => ({
-                url: imageUrl,
+                url: `/uploads/${imageUrl}`,
                 type: "IMAGE",
               })),
             },
           },
         });
-
+        console.log(data.images);
         console.log("New post created:", createPost);
         res.status(200).json({
           message: "Listing created successfully!",

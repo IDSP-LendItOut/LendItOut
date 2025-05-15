@@ -42,32 +42,33 @@ const fallbackImages: Record<string, string[]> = {
 };
 
 async function main() {
+  // await prisma.message.deleteMany();
+  // await prisma.reviewOnListing.deleteMany();
+  // await prisma.media.deleteMany();
+  // await prisma.listing.deleteMany();
+  // await prisma.user.deleteMany();
 
-  await prisma.reviewOnListing.deleteMany();
-  await prisma.media.deleteMany();
-  await prisma.listing.deleteMany();
-  await prisma.user.deleteMany();
-  await prisma.category.deleteMany();
+  const allUsers = [];
+  const allListings = [];
 
-
-  await prisma.category.createMany({
-    data: [
-      { name: "Appliances", type: "RENT" },
-      { name: "Furniture", type: "RENT" },
-      { name: "Electronics", type: "RENT" },
-      { name: "Books", type: "PURCHASE" },
-      { name: "Clothing", type: "PURCHASE" },
-      { name: "Beauty", type: "PURCHASE" },
-    ],
+  const groups: Groups[] = [
+    "ELECTRONICS",
+    "FASHION",
+    "HOME",
+    "FURNITURE",
+    "BOOKS",
+    "BABY",
+    "CLOTHING",
+    "OFFICE",
+    "SPORTS",
+    "TOOLS",
+    "TOYS",
+    "BEAUTY",
+  ];
+  const rentCats = await prisma.category.findMany({ where: { type: "Rent" } });
+  const purchaseCats = await prisma.category.findMany({
+    where: { type: "Purchase" },
   });
-
-  const rentCats = await prisma.category.findMany({ where: { type: "RENT" } });
-const purchaseCats = await prisma.category.findMany({ where: { type: "PURCHASE" } });
-
-
-
-  
-  const groups: Groups[] = ["ELECTRONICS", "FASHION", "HOME", "BEAUTY"];
   const conditions: Condition[] = ["BAD", "ADEQUATE", "GOOD", "GREAT", "NEW"];
   const durations: RentalDuration[] = ["HOUR", "DAY", "WEEK", "MONTH", "YEAR"];
 
@@ -102,7 +103,7 @@ const purchaseCats = await prisma.category.findMany({ where: { type: "PURCHASE" 
           available: true,
           userId: user.id,
           categoryId: category.id,
-          group: group,
+          group: group, 
         },
       });
 
@@ -110,15 +111,13 @@ const purchaseCats = await prisma.category.findMany({ where: { type: "PURCHASE" 
       const imageToUse = images[(i * 2 + j) % images.length];
 
 
-      await prisma.media.create({
-        data: {
-          url: imageToUse,
-          type: "IMAGE",
-          listingId: listing.id,
-        },
-      });
-
-
+      // await prisma.media.createMany({
+      //   data: fallbackImages.map((url) => ({
+      //     url,
+      //     type: "IMAGE",
+      //     listingId: listing.id,
+      //   })),
+      // });
 
       const filtered = allUsers.filter((u) => u.id !== user.id);
       const reviewer = filtered.length ? faker.helpers.arrayElement(filtered) : user;

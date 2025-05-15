@@ -27,7 +27,7 @@
       <div class="user-stats">
 
         <div>
-          <p>40</p>
+          <p><%= myListing.length %></p>
           <p>Listings</p>
         </div>
 
@@ -54,7 +54,7 @@
 
 </div>
 
-<%- include('listingspp', { items }) %>
+<%- include('listingspp', { items, listing, myListing }) %>
 
 
 
