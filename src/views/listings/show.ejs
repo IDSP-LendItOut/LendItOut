@@ -38,35 +38,34 @@
     </div>
 
 
-    <%- include("carousel", { listing }) %>
+  <%- include("carousel", { listing }) %>
 
-    <div class="product-box">
-      <h2 class="product-title"><%= listing.title %></h2>
-      <% if (listing.salePrice === 0) { %>
-      <p class="product-price">$<%= listing.rentalPrice %></p>
-      <% } else { %>
-      <p class="product-price">$<%= listing.salePrice %></p>
-      <% } %>
-
-      <div class="product-description">
-        <strong>Description</strong>
-        <p><%= listing.description %></p>
-        <a href="#">Read more</a>
+  <div class="product-box">
+    <h2 class="product-title">Samo Ondoh Large pocket bag with keychains</h2>
+    <p class="product-price">$150</p>
+  
+    <div class="product-description">
+      <strong>Description</strong>
+      <p>SIZE</p>
+      <small>Approx. 32 length × 14.5 height × 9 width (cm)</small>
+      <p>STRAP LENGTH</p>
+      <small>Approx. 62–78cm</small>
+      <a href="#">Read more</a>
+    </div>
+  
+    <div class="message-box">
+      <p><strong>Send Eva a Message</strong></p>
+      <div class="message-inner">
+        <input type="text" placeholder="Is this available?" />
+        <button>Send</button>
       </div>
-
-      <div class="message-box">
-        <p><strong>Send Eva a Message</strong></p>
-        <div class="message-inner">
-          <input type="text" placeholder="Is this available?" />
-          <button>Send</button>
-        </div>
-      </div>
-
-      <div class="condition-box">
-        <strong>Condition</strong>
-        <span class="badge"><%= listing.condition.toLowerCase() %></span>
-      </div>
-
+    </div>
+  
+    <div class="condition-box">
+      <strong>Condition</strong>
+      <span class="badge">Great</span>
+    </div>
+  
 
       <div class="seller-box">
         <img src="<%= listing.user.profilePic %>" class="seller-avatar" />
@@ -103,21 +102,20 @@
         <% }) %>
       </div>
 
-      <h4>You may also like</h4>
-      <div class="related-grid">
+<h4>You may also like</h4>
+<div class="related-grid">
+  <% related.forEach(r => { %>
+    <div class="related-card">
+      <img src="<%= r.media[0]?.url %>" />
+      <p><%= r.title %></p>
+      <p>$<%= r.price %></p>
+      <small><%= r.rentAvailable ? "Rent and Purchase available" : "Purchase available" %></small>
+    </div>
+  <% }) %>
+</div>
 
-        <% related.forEach(r => { %>
-        <div class="related-card">
-          <img src="/uploads/<%= r.media[0]?.url %>" onerror="this.src='/images/fallbacks/beauty1.jpg'" />
-          <p><%= r.title %></p>
-          <p>$<%= r.price %></p>
-          <small><%= r.rentAvailable ? "Rent and Purchase available" : "Purchase available" %></small>
-        </div>
-        <% }) %>
-      </div>
-
-      <script src="/scripts/carousel.js"></script>
-      <script src="/scripts/messages.js"></script>
+<script src="/scripts/carousel.js"></script> 
+<script src="/scripts/messages.js"></script>
 
 
 </body>

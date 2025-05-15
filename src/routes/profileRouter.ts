@@ -1,6 +1,8 @@
 import express from "express";
 import { requireLogin } from "../middleware/requireLogin";
-import { prisma } from "../seed";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 
 const profileRouter = express.Router();
 const listing = await prisma.listing.findMany({

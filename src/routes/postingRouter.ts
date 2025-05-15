@@ -3,7 +3,9 @@ import { ObjectId } from "bson";
 import express from "express";
 import upload from "../middleware/multerConfig";
 import { requireLogin } from "../middleware/requireLogin";
-import { prisma } from "../seed";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 
 const postingRouter = express.Router();
 
