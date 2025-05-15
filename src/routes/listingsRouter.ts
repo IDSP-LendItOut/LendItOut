@@ -76,41 +76,41 @@ router.get("/", async (req, res) => {
   }
 });
 
-// router.get("/:id", async (req, res) => {
-//   const listing = await prisma.listing.findUnique({
-//     where: { id: req.params.id },
-//     include: {
-//       media: true,
-//       user: true,
-//       reviews: {
-//         include: {
-//           reviewer: true,
-//         },
-//       },
-//     },
-//   });
+router.get("/:id", async (req, res) => {
+  const listing = await prisma.listing.findUnique({
+    where: { id: req.params.id },
+    include: {
+      media: true,
+      user: true,
+      reviews: {
+        include: {
+          reviewer: true,
+        },
+      },
+    },
+  });
 
-//   if (listing) {
-//     const related = await prisma.listing.findMany({
-//       where: {
-//         categoryId: listing.categoryId,
-//         NOT: { id: listing.id },
-//       },
-//       include: {
-//         media: true,
-//       },
-//       take: 6,
-//     });
+  if (listing) {
+    const related = await prisma.listing.findMany({
+      where: {
+        categoryId: listing.categoryId,
+        NOT: { id: listing.id },
+      },
+      include: {
+        media: true,
+      },
+      take: 6,
+    });
 
-//     res.render("listings/show", {
-//       title: "Listing Detail",
-//       listing,
-//       related,
-//     });
-//   } else {
-//     res.status(404).send("Listing not found");
-//   }
-// });
+    res.render("listings/show", {
+      title: "Listing Detail",
+      listing,
+      related,
+    });
+  } else {
+    res.status(404).send("Listing not found");
+  }
+});
 
 router.get("/:id", async (req, res) => {
   try {
