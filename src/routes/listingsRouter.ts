@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { ObjectId } from "bson";
 import express from "express";
 
 const router = express.Router();
@@ -56,10 +57,10 @@ router.get("/", async (req, res) => {
         },
       },
     });
-    // const listingsWithFallback = listings.map((listing) => ({
-    //   ...listing,
-    //   fallbackImage: getRandomFallback(listing.group || "DEFAULT"),
-    // }));
+    const listingsWithFallback = listings.map((listing) => ({
+      ...listing,
+      fallbackImage: getRandomFallback(listing.group || "DEFAULT"),
+    }));
     res.render("listings/index", {
       title: "All Listings",
       listings,
@@ -70,21 +71,69 @@ router.get("/", async (req, res) => {
   }
 });
 
+// router.get("/:id", async (req, res) => {
+//   const listing = await prisma.listing.findUnique({
+//     where: { id: req.params.id },
+//     include: {
+//       media: true,
+//       user: true,
+//       reviews: {
+//         include: {
+//           reviewer: true,
+//         },
+//       },
+//     },
+//   });
+
+//   if (listing) {
+//     const related = await prisma.listing.findMany({
+//       where: {
+//         categoryId: listing.categoryId,
+//         NOT: { id: listing.id },
+//       },
+//       include: {
+//         media: true,
+//       },
+//       take: 6,
+//     });
+
+//     res.render("listings/show", {
+//       title: "Listing Detail",
+//       listing,
+//       related,
+//     });
+//   } else {
+//     res.status(404).send("Listing not found");
+//   }
+// });
+
 router.get("/:id", async (req, res) => {
-  const listing = await prisma.listing.findUnique({
-    where: { id: req.params.id },
-    include: {
-      media: true,
-      user: true,
-      reviews: {
-        include: {
-          reviewer: true,
+  try {
+    const listingId = req.params.id;
+    if (!ObjectId.isValid(listingId)) {
+      res.status(400).send("listingId error");
+      return;
+    }
+
+    const listing = await prisma.listing.findUnique({
+      where: { id: listingId },
+      include: {
+        media: true,
+        user: true,
+        reviews: {
+          include: {
+            reviewer: true,
+          },
         },
       },
-    },
-  });
+    });
+    console.log("aaa");
+    console.log(listing);
+    if (!listing) {
+      res.status(404).send("Listing not found");
+      return;
+    }
 
-  if (listing) {
     const related = await prisma.listing.findMany({
       where: {
         categoryId: listing.categoryId,
@@ -101,8 +150,9 @@ router.get("/:id", async (req, res) => {
       listing,
       related,
     });
-  } else {
-    res.status(404).send("Listing not found");
+  } catch (error) {
+    console.error("listingsRouter:", error);
+    res.status(500).send("An listing error");
   }
 });
 
