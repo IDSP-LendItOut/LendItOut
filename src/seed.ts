@@ -41,12 +41,12 @@ async function main() {
   // // console.log('🧹 Clearing old data...');
   // await prisma.message.deleteMany();
   // await prisma.userConversation.deleteMany();
-  // await prisma.conversation.deleteMany();
+  // await prisma.conversation.deleteMany();x
   // await prisma.media.deleteMany();
   // await prisma.listing.deleteMany();
   // await prisma.user.deleteMany();
-  await prisma.category.deleteMany();
-
+  // await prisma.category.deleteMany();
+ 
   console.log('👤 Creating fake users...');
   const users = [];
   for (let i = 0; i < 10; i++) {
