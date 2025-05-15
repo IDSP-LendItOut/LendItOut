@@ -1,8 +1,6 @@
-import express from "express";
 import { PrismaClient } from "@prisma/client";
+import express from "express";
 const prisma = new PrismaClient();
-
-
 
 const homeRouter = express.Router();
 
@@ -49,11 +47,7 @@ homeRouter.get("/renting", (req, res) => {
 
 homeRouter.get("/buying-page", async (req, res) => {
   try {
-    const categories = await prisma.category.findMany({
-      where: {
-        type: "Purchase",
-      },
-    });
+    const categories = await prisma.category.findMany();
 
     res.render("home/buying", {
       categories,
@@ -66,11 +60,7 @@ homeRouter.get("/buying-page", async (req, res) => {
 
 homeRouter.get("/renting-page", async (req, res) => {
   try {
-    const categories = await prisma.category.findMany({
-      where: {
-        type: "Rent",
-      },
-    });
+    const categories = await prisma.category.findMany();
 
     res.render("home/renting", {
       categories,
