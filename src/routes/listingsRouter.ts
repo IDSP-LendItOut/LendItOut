@@ -12,18 +12,23 @@ const fallbackImages = {
     "/images/fallbacks/electronic2.jpg",
     "/images/fallbacks/electronic3.jpg",
     "/images/fallbacks/electronic4.jpg",
+    "images/honda.png"
   ],
   FASHION: [
     "/images/fallbacks/cloth.jpg",
     "/images/fallbacks/fashion2.jpg",
     "/images/fallbacks/fashion3.jpg",
     "/images/fallbacks/fashion4.jpg",
+    "images/chain.png",
+    "images/budshirt.png",
   ],
   HOME: [
     "/images/fallbacks/home.jpg",
     "/images/fallbacks/home2.jpeg",
     "/images/fallbacks/home3.jpeg",
     "/images/fallbacks/home4.jpg",
+    "images/home.png",
+    "images/housetent.png",
   ],
   BEAUTY: [
     "/images/fallbacks/beauty1.jpg",

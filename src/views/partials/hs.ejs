@@ -1,6 +1,6 @@
 <main class="listings">
     <div class="section-header">
-        <h2>Some Cats</h2>
+        <h2>Listings</h2>
         <a href="/listings">See more</a>
     </div>
     <div class="scroll-container">
@@ -17,4 +17,40 @@
             <% }); %>
         </div>
     </div>
+    <div class="section-header">
+        <h2>Recently Viewed</h2>
+        <a href="/listings">See more</a>
+      </div>
+      <div class="scroll-container">
+        <div class="item-grid">
+          <% items.forEach(item => { %>
+          <div class="item-card">
+            <img src="<%= item.image %>" alt="<%= item.name %>">
+            <div class="item-details">
+                        <p class="item-name"><%= item.name %></p>
+                        <p class="item-price"><%= item.price %></p>
+                        <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
+                </div>
+                </div>
+          <% }); %>
+        </div>
+      </div>
+      <div class="section-header">
+        <h2>Bookmarked Listings</h2>
+        <a href="/listings">See more</a>
+      </div>
+      <div class="scroll-container">
+        <div class="item-grid">
+          <% items.forEach(item => { %>
+          <div class="item-card">
+            <img src="<%= item.image %>" alt="<%= item.name %>">
+            <div class="item-details">
+                        <p class="item-name"><%= item.name %></p>
+                        <p class="item-price"><%= item.price %></p>
+                        <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
+                </div>
+                </div>
+          <% }); %>
+        </div>
+      </div>
 </main>

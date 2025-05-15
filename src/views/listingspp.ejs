@@ -55,11 +55,11 @@
   </div>
   <div class="scroll-container">
     <div class="item-grid">
-      <% listing.forEach(item => { %>
+      <% items.forEach(item => { %>
       <div class="item-card">
-        <img src="https://picsum.photos/300/300?random=<%= Math.random() %>" alt="<%= item.title %>">
+        <img src="<%= item.image %>" alt="<%= item.title %>">
         <div class="item-details">
-          <p class="item-name"><%= item.title %></p>
+          <p class="item-name"><%= item.name %></p>
           <% if (item.salePrice === 0) { %>
           <p class="item-price">$<%= item.rentalPrice %></p>
           <% } else { %>

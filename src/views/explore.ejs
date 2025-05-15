@@ -2,12 +2,12 @@
 
 <div class="explore_top">
   <img src="https://picsum.photos/600/400" alt="Explore image">
-  <p class="p_name"><%= listing2[1].title %></p>
-  <p class="p_description"><%= listing2[1].description %></p>
+  <p class="p_name"><%= items.title %></p>
+  <p class="p_description"><%= items.description %></p>
   <a href="/explore">View</a>
   <!-- <button id="explore_view">View</button> -->
 </div>
 
 <%- include('home_category', { content: "buying", listing, listing2 }) %>
 
-<%- include('hs', { items, listing, listing2 }) %>
+<%- include('partials/hs', { items, listing, listing2 }) %>
