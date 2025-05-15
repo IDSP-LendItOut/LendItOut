@@ -12,7 +12,7 @@ const fallbackImages = {
     "/images/fallbacks/electronic2.jpg",
     "/images/fallbacks/electronic3.jpg",
     "/images/fallbacks/electronic4.jpg",
-    "images/honda.png"
+    "images/honda.png",
   ],
   FASHION: [
     "/images/fallbacks/cloth.jpg",
@@ -161,4 +161,51 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/my/:id", async (req, res) => {
+  try {
+    const listingId = req.params.id;
+    if (!ObjectId.isValid(listingId)) {
+      res.status(400).send("listingId error");
+      return;
+    }
+
+    const listing = await prisma.listing.findUnique({
+      where: { id: listingId },
+      include: {
+        media: true,
+        user: true,
+        reviews: {
+          include: {
+            reviewer: true,
+          },
+        },
+      },
+    });
+
+    if (!listing) {
+      res.status(404).send("Listing not found");
+      return;
+    }
+
+    const related = await prisma.listing.findMany({
+      where: {
+        categoryId: listing.categoryId,
+        NOT: { id: listing.id },
+      },
+      include: {
+        media: true,
+      },
+      take: 6,
+    });
+
+    res.render("listings/show_sooah", {
+      title: "Listing Detail",
+      listing,
+      related,
+    });
+  } catch (error) {
+    console.error("listingsRouter:", error);
+    res.status(500).send("An listing error");
+  }
+});
 export default router;
