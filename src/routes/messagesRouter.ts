@@ -84,7 +84,7 @@ router.get('/:id', async (req, res) => {
     .find(user => user.id !== mockUserId) || null;
   
 
-    res.render('show', {
+    res.render('messages/show', {
       title: 'Messages',
       conversation: { ...conversation, messages },
       userId: mockUserId,
