@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 
 
-const mockUserId = '682568c4ab0e086874d0e0a8';
+const mockUserId = '68257d5bf3a70e053f9545ba';
 
 router.get('/', async (req, res) => {
   try {
@@ -28,18 +28,21 @@ router.get('/', async (req, res) => {
 
     // Extract conversations and fetch latest message for each
     const conversations = await Promise.all(userConversations.map(async (uc) => {
-      const conversation = uc.conversation;
-
+      const { conversation } = uc;
+    
       const lastMessage = await prisma.message.findFirst({
         where: { conversationId: conversation.id },
         orderBy: { createdAt: 'desc' },
       });
-
+    
       return {
-        ...conversation,
-        messages: lastMessage ? [lastMessage] : []
+        id: conversation.id,
+        listing: conversation.listing,
+        participants: conversation.participants,
+        messages: lastMessage ? [lastMessage] : [],
       };
     }));
+    
 
     res.render('messages/index', {
       title: 'Messages',
