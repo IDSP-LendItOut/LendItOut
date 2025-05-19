@@ -63,9 +63,7 @@
   }
 }
 
-
 .logout-section {
-
   form {
     display: flex;
     justify-content: center;
@@ -80,5 +78,15 @@
     padding: .7rem;
     margin: 1rem 0 2rem 0;
     width: 80%;
+  }
+}
+
+.item-status {
+  &.sale {
+    color: green;
+  }
+
+  &.rent {
+    color: orange;
   }
 }
