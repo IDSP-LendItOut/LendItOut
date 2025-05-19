@@ -66,11 +66,11 @@ async function main() {
     "CLOTHING", "OFFICE", "SPORTS", "TOOLS", "TOYS", "BEAUTY"
   ];
   
-  console.log("📚 Creating categories from enum...");
+
   await prisma.category.createMany({
     data: groupNames.map(group => ({
-      name: group.charAt(0) + group.slice(1).toLowerCase(), // Capitalize nicely
-      type: "RENT", // or "PURCHASE" — or even randomize
+      name: group.charAt(0) + group.slice(1).toLowerCase(), 
+      type: "RENT",
     })),
 
   });
