@@ -16,7 +16,8 @@ const listing = await prisma.listing.findMany({
 });
 
 profileRouter.get("/", requireLogin, async (req, res) => {
-  const userId = req.session.userId;
+  const userId = req.session.user?.id;
+
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
     const myListing = await prisma.listing.findMany({
@@ -54,7 +55,8 @@ profileRouter.get("/", requireLogin, async (req, res) => {
 });
 
 profileRouter.get("/editProfile", requireLogin, async (req, res) => {
-  const userId = req.session.userId;
+  const userId = req.session.user?.id;
+
 
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -78,7 +80,8 @@ profileRouter.get("/editProfile", requireLogin, async (req, res) => {
 });
 
 profileRouter.post("/editProfile", requireLogin, async (req, res) => {
-  const userId = req.session.userId;
+  const userId = req.session.user?.id;
+
   const user = await prisma.user.findUnique({ where: { id: userId } });
 
   const { name, username, pronouns, location } = req.body;
