@@ -34,7 +34,12 @@ authRouter.post("/login", async (req, res) => {
         error: "Invalid username or password",
       });
     } else {
-      req.session.userId = foundUser.id;
+      req.session.user = {
+        id: foundUser.id,
+        name: foundUser.name,
+        email: foundUser.email,
+      };
+      
       console.log("login complete");
       res.redirect("/");
     }
