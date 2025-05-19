@@ -90,7 +90,12 @@ authRouter.post("/register", async (req, res) => {
       });
       console.log("New user created:", createUser);
 
-      req.session.userId = createUser.id;
+      req.session.user = {
+        id: createUser.id,
+        name: createUser.name,
+        email: createUser.email,
+      };
+      
       res.redirect("/profilephoto");
     }
   } catch (err) {
@@ -257,7 +262,12 @@ authRouter.post("/password-reset", async (req, res) => {
               password: await bcrypt.hash(password, 10),
             },
           });
-          req.session.userId = user.id;
+          req.session.user = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          };
+          
           res.redirect("/auth/login");
         } else {
           res.render("auth/forgot-password", {
