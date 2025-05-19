@@ -1,19 +1,58 @@
 <footer class="footer">
   <nav class="nav-footer">
-    <a href="/" class="footer-link">
-      <i class="fa-solid fa-house"></i><br>Home
-    </a>
-    <a href="/explore" class="footer-link">
-      <i class="fa-solid fa-compass"></i><br>Explore
-    </a>
-    <a href="/posting/create" class="footer-link add-btn">
-      <i class="fa-solid fa-plus"></i>
-    </a>
-    <a href="/cart" class="footer-link">
-      <i class="fa-solid fa-cart-shopping"></i><br>Cart
-    </a>
-    <a href="/profile" class="footer-link">
-      <i class="fa-solid fa-user"></i><br>Profile
-    </a>
+    <div class="footer_box">
+      <div class="footer_bar olive" id="bar"></div>
+      <a href="/" class="footer-link">
+        <i class="fa-solid fa-house icon"></i>
+        <p>Home</p>
+      </a>
+    </div>
+    <div class="footer_box">
+      <div class="footer_bar olive" id="bar"></div>
+      <a href="/explore" class="footer-link">
+        <i class="fa-solid fa-compass icon"></i>
+        <p>Explore</p>
+      </a>
+    </div>
+    <div class="footer_plus">
+      <a href="/posting/create" class="footer-link add-btn">
+        <i class="fa-solid fa-plus"></i>
+      </a>
+    </div>
+    <div class="footer_box">
+      <div class="footer_bar olive" id="bar"></div>
+      <a href="/cart" class="footer-link">
+        <i class="fa-solid fa-cart-shopping icon"></i>
+        <p>Cart</p>
+      </a>
+    </div>
+    <div class="footer_box">
+      <div class="footer_bar olive" id="bar"></div>
+      <a href="/profile" class="footer-link">
+        <i class="fa-solid fa-user icon"></i>
+        <p>Profile</p>
+      </a>
+    </div>
   </nav>
 </footer>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const currentPath = window.location.pathname;
+    const links = document.querySelectorAll(".footer-link");
+
+    links.forEach(link => {
+      const footerBar = link.parentElement.querySelector(".footer_bar");
+      if (footerBar) {
+        if (currentPath === link.getAttribute("href")) {
+          footerBar.classList.remove("olive");
+          footerBar.classList.add("white")
+          console.log("Active:", link.getAttribute("href"));
+        } else {
+          footerBar.classList.add("olive");
+        }
+      }
+    });
+  });
+</script>
