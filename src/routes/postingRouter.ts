@@ -124,11 +124,11 @@ postingRouter.post(
       }
 
       if (step === 4) {
-        if (!req.session.userId) {
+        if (!req.session.user?.id) {
           res.status(401).json({ message: "Need to login first!" });
           return;
         }
-        const userId = req.session.userId;
+        const userId = req.session.user?.id;
         const userIdObjectId = new ObjectId(userId);
         const data = req.session.listingData;
         const categoryId = data.category;
