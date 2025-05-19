@@ -38,10 +38,10 @@
           <p class="item-name"><%= item.title %></p>
           <% if (item.salePrice === 0) { %>
           <p class="item-price">$<%= item.rentalPrice %></p>
-          <p class="item-status" style="color: orange;">For Rent</p>
+          <p class="item-status rent">For Rent</p>
           <% } else { %>
           <p class="item-price">$<%= item.salePrice %></p>
-          <p class="item-status" style="color: green;">For Sale</p>
+          <p class="item-status sale">For Sale</p>
           <% } %>
         </div>
       </div>
@@ -60,16 +60,8 @@
         <img src="<%= item.image %>" alt="<%= item.title %>">
         <div class="item-details">
           <p class="item-name"><%= item.name %></p>
-          <% if (item.salePrice === 0) { %>
-          <p class="item-price">$<%= item.rentalPrice %></p>
-          <% } else { %>
-          <p class="item-price">$<%= item.salePrice %></p>
-          <% } %>
-          <% if (item.type === "RENT") { %>
-          <p class="item-status" style="color: orange;">For Rent</p>
-          <% } else { %>
-          <p class="item-status" style="color: green;">For Sale</p>
-          <% } %>
+          <p class="item-price"><%= item.price %></p>
+          <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
         </div>
       </div>
       <% }); %>
