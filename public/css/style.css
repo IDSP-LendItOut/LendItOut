@@ -1816,7 +1816,7 @@ body {
 .top-bar {
   background: #556C40;
   color: white;
-  padding: 1rem;
+  padding: 2.5rem;
   display: flex;
   align-items: center;
 }
@@ -1837,26 +1837,25 @@ body {
 
 .tabs {
   display: flex;
-  border-bottom: 1px solid #ccc;
+  justify-content: center;
+  border-bottom: 3px solid rgb(157, 151, 151);
+  margin: 1.5rem 5rem 5rem;
 }
 .tabs button {
   flex: 1;
-  padding: 1.5rem;
+  padding: 1rem;
   border: none;
-  background: #8D9D7F;
+  background: none;
   font-weight: bold;
-  font-size: 1.5rem;
-  color: white;
+  font-size: 2rem;
+  color: gray;
+  text-decoration: none;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-.tabs button:hover {
-  background: darkgreen;
+  text-align: center;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 .tabs button.active {
-  background: white;
-  border-bottom: 3px solid #556C40;
-  color: #556C40;
+  color: rgb(70, 70, 70);
 }
 
 .section {
@@ -1869,26 +1868,26 @@ body {
 .section .notification, .section .listing {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 1.5rem;
   background: #fafafa;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 .section .notification:hover, .section .listing:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 .section .notification img, .section .listing img {
-  width: 120px !important;
-  height: 120px !important;
+  width: 180px !important;
+  height: 180px !important;
   object-fit: cover;
   border-radius: 8px;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
 }
 .section .notification p, .section .listing p {
-  font-size: 1.2rem;
-  line-height: 1.5;
+  font-size: 1.8rem;
+  line-height: 1.6;
   color: #333;
   margin: 0;
   flex: 1;
@@ -1909,22 +1908,22 @@ body {
     font-size: 1.5rem;
   }
   .tabs button {
-    font-size: 1.2rem;
-    padding: 1rem;
+    font-size: 1.4rem; /* Adjusted font size */
+    padding: 1.2rem; /* Adjusted padding */
   }
   .section h2 {
-    font-size: 1.4rem;
+    font-size: 1.6rem; /* Adjusted font size for section headers */
   }
   .section .notification img, .section .listing img {
-    width: 100px !important;
-    height: 100px !important;
+    width: 180px !important; /* Same size for mobile */
+    height: 180px !important; /* Same size for mobile */
   }
   .section .notification p, .section .listing p {
-    font-size: 1rem;
+    font-size: 1.4rem; /* Same font size for mobile */
   }
   .section .notification .dot, .section .listing .dot {
-    width: 8px;
-    height: 8px;
+    width: 12px; /* Same size for mobile */
+    height: 12px; /* Same size for mobile */
   }
 }
 /* 18. Chat view =============== */
