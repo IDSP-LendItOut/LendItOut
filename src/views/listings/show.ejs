@@ -37,6 +37,18 @@
 
     <%- include("carousel", { listing }) %>
 
+    <div class="action-buttons">
+      <button class="heart-button" aria-label="Add to favorites">
+        <i class="far fa-heart"></i>
+      </button>
+    
+      <button class="add-to-cart-button" id="addToCartBtn">
+        <i class="fas fa-cart-plus"></i>
+      </button>
+    </div>
+    <div id="cartPopup" class="cart-popup">Item added to cart!</div>
+
+
     <div class="product-box">
       <h2 class="product-title"><%= listing.title %></h2>
       <% if(listing.rentalPrice === 0){ %>
@@ -73,17 +85,6 @@
         </div>
         <span class="details-link">Seller Details</span>
       </div>
-
-      <div class="action-buttons">
-        <button class="add-to-cart-button" id="addToCartBtn">
-          <i class="fa fa-cart-plus"></i>
-        </button>
-        <button class="heart-button like-btn" data-id="<%= listing.id %>">
-          <i class="fa fa-heart"></i>
-        </button>
-      </div>
-      
-      <div id="cartPopup" class="cart-popup">Item added to cart!</div>
       
 
       <h4>Location</h4>
