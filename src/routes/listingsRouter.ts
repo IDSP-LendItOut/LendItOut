@@ -125,4 +125,54 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// connect to profile - mylistings - see more btn (by sooah)
+
+router.get("/my/:id", async (req, res) => {
+  try {
+    const listingId = req.params.id;
+    if (!ObjectId.isValid(listingId)) {
+      res.status(400).send("listingId error");
+      return;
+    }
+
+    const listing = await prisma.listing.findUnique({
+      where: { id: listingId },
+      include: {
+        media: true,
+        user: true,
+        reviews: {
+          include: {
+            reviewer: true,
+          },
+        },
+      },
+    });
+    if (!listing) {
+      res.status(404).send("Listing not found");
+      return;
+    }
+
+    const related = await prisma.listing.findMany({
+      where: {
+        categoryId: listing.categoryId,
+        NOT: { id: listing.id },
+      },
+      include: {
+        media: true,
+      },
+      take: 6,
+    });
+
+    const joinedYear = listing.user?.createdAt.getFullYear();
+    res.render("listings/show_myListing", {
+      title: "Listing Detail",
+      listing,
+      related,
+      joinedYear,
+    });
+  } catch (error) {
+    console.error("listingsRouter:", error);
+    res.status(500).send("An listing error");
+  }
+});
 export default router;
