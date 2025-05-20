@@ -1,140 +1,138 @@
 .top-bar {
-    background: $color-primary;
+  background: $color-primary;
+  color: white;
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+
+  h1 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  .back {
     color: white;
+    text-decoration: none;
+    font-size: 2rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  border-bottom: 3px solid rgb(157, 151, 151);
+  margin: 1.5rem 5rem 5rem; 
+
+  button {
+    flex: 1;
     padding: 1rem;
+    border: none;
+    background: none; 
+    font-weight: bold;
+    font-size: 2rem; 
+    color: gray;
+    text-decoration: none; 
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+
+    &.active {
+      color: rgb(70, 70, 70);
+    }
+  }
+}
+
+.section {
+  padding: 1rem;
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .notification, .listing {
     display: flex;
     align-items: center;
-  
-    h1 {
-      flex: 1;
-      text-align: center;
-      margin: 0;
-      font-size: 2rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
-  
-    .back {
-      color: white;
-      text-decoration: none;
-      font-size: 2rem;
-  
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-  
-  .tabs {
-    display: flex;
-    border-bottom: 1px solid #ccc;
-  
-    button {
-      flex: 1;
-      padding: 1.5rem;
-      border: none;
-      background: $color-primary-light;
-      font-weight: bold;
-      font-size: 1.5rem;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s ease, color 0.3s ease;
-  
-      &:hover {
-        background: darkgreen;
-      }
-  
-      &.active {
-        background: white;
-        border-bottom: 3px solid $color-primary;
-        color: $color-primary;
-      }
-    }
-  }
-  
-  .section {
-    padding: 1rem;
-  
-    h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-  
-    .notification, .listing {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background: #fafafa;
+
+    img {
+      width: 180px !important; 
+      height: 180px !important; 
+      object-fit: cover;
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      transition: box-shadow 0.3s ease;
-      margin-bottom: 1rem;
-  
-      &:hover {
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
-  
+      margin-right: 1.5rem;
+    }
+
+    p {
+      font-size: 1.8rem; 
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      flex: 1;
+    }
+
+    .dot {
+      width: 12px; 
+      height: 12px;
+      background: $color-primary;
+      border-radius: 50%;
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .back {
+      font-size: 1.5rem;
+    }
+  }
+
+  .tabs {
+    button {
+      font-size: 1.4rem; /* Adjusted font size */
+      padding: 1.2rem; /* Adjusted padding */
+    }
+  }
+
+  .section {
+    h2 {
+      font-size: 1.6rem; /* Adjusted font size for section headers */
+    }
+
+    .notification, .listing {
       img {
-        width: 120px !important;
-        height: 120px !important;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-right: 1rem;
+        width: 180px !important; /* Same size for mobile */
+        height: 180px !important; /* Same size for mobile */
       }
-  
+
       p {
-        font-size: 1.2rem;
-        line-height: 1.5;
-        color: #333;
-        margin: 0;
-        flex: 1;
+        font-size: 1.4rem; /* Same font size for mobile */
       }
-  
+
       .dot {
-        width: 12px;
-        height: 12px;
-        background: $color-primary;
-        border-radius: 50%;
-        margin-left: 0.5rem;
+        width: 12px; /* Same size for mobile */
+        height: 12px; /* Same size for mobile */
       }
     }
   }
-  
-  @media (max-width: 768px) {
-    .top-bar {
-      h1 {
-        font-size: 1.5rem;
-      }
-  
-      .back {
-        font-size: 1.5rem;
-      }
-    }
-  
-    .tabs {
-      button {
-        font-size: 1.2rem;
-        padding: 1rem;
-      }
-    }
-  
-    .section {
-      h2 {
-        font-size: 1.4rem;
-      }
-  
-      .notification, .listing {
-        img {
-          width: 100px !important;
-          height: 100px !important;
-        }
-  
-        p {
-          font-size: 1rem;
-        }
-  
-        .dot {
-          width: 8px;
-          height: 8px;
-        }
-      }
-    }
-  }
+}
