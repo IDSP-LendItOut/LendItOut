@@ -1,13 +1,13 @@
 <% layout('layout') %>
 
 <div class="explore_top">
-  <img src="https://picsum.photos/600/400" alt="Explore image">
-  <p class="p_name">Product Name</p>
-  <p class="p_description">Product Description Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore perspiciatis accusamus illum dicta qui recusandae quibusd.</p>
-  <a href="/explore">View</a>
+  <img src="/images/tennis.jpg" alt="Explore image">
+  <p class="p_name">Tennis Racket + Ball</p>
+  <p class="p_description">2 rackets + 3 tennis balls + bag. Can be sold separately. Rarely used</p>
+  <a href="#">View</a>
   <!-- <button id="explore_view">View</button> -->
 </div>
 
-<%- include('home_category', { content: "buying" }) %>
+<%- include('home_category', { content: "buying", listing, listing2 }) %>
 
-<%- include('hs', { items }) %>
+<%- include('partials/hs', { items, listing, listing2 }) %>

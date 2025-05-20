@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Listing</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+  <section class="buy-page">
+    <!-- Header -->
+    <header class="buy-header">
+      <a href="/profile" class="header-btn back">
+        <i class="fas fa-times"></i>
+      </a>
+      <h1 class="buy-title">View Listing</h1>
+      <button class="header-btn menu">
+        <i class="fas fa-ellipsis-h"></i>
+      </button>
+    </header>
+    <div class="more-options-modal" style="display: none;">
+      <div class="modal-header">
+        <span>More Options</span>
+        <button class="close-icon" aria-label="Close Menu">&times;</button>
+      </div>
+      <hr />
+      <ul>
+        <li><a href="#">FAQ’s</a></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Report Listing</a></li>
+      </ul>
+    </div>
+
+
+    <%- include("carousel", { listing }) %>
+
+    <div class="product-box">
+      <h2 class="product-title"><%= listing.title %></h2>
+      <% if(listing.rentalPrice === 0){ %>
+      <p class="product-price">$<%= listing.salePrice %></p>
+      <% } else { %>
+      <p class="product-price">$<%= listing.rentalPrice %></p>
+      <% } %>
+      <div class="product-description">
+        <strong>Description</strong>
+        <p><%= listing.description %></p>
+        <a href="#">Read more</a>
+      </div>
+
+      <div class="message-box">
+        <p><strong>Send Eva a Message</strong></p>
+        <div class="message-inner">
+          <input type="text" placeholder="Is this available?" />
+          <button>Send</button>
+        </div>
+      </div>
+
+      <div class="condition-box">
+        <strong>Condition</strong>
+        <span class="badge">Great</span>
+      </div>
+
+
+      <div class="seller-box">
+        <img src="<%= listing.user.profilePic %>" class="seller-avatar" />
+        <div>
+          <strong>Eva Baker <i class="fas fa-check-circle verified-icon"></i></strong><br />
+          <small>Joined in 2022</small><br />
+          <span class="stars">⭐⭐⭐⭐⭐</span> <small>(13)</small>
+        </div>
+        <span class="details-link">Seller Details</span>
+      </div>
+
+      <h4>Location</h4>
+      <div class="map-fake">
+        <img src="/images/map.png" alt="">
+      </div>
+
+      <h4>Delivery Options</h4>
+      <div class="info-box">Meet-up</div>
+
+      <h4>Payment Options</h4>
+      <div class="info-box">Cash<br />E-transfer</div>
+
+      <h4>Reviews</h4>
+      <div class="review-row">
+        <% listing.reviews.forEach(r => { %>
+        <div class="review-card">
+          <img src="<%=  r.reviewer.profilePic %>" class="review-avatar" />
+          <div>
+            <strong><%= r.reviewer.name %></strong><br />
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <p><%= r.comment %></p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+
+      <h4>You may also like</h4>
+      <div class="related-grid">
+        <% related.forEach(r => { %>
+        <div class="related-card">
+          <img src="<%= r.media[0]?.url %>" />
+          <p><%= r.title %></p>
+          <p>$<%= r.price %></p>
+          <small><%= r.rentAvailable ? "Rent and Purchase available" : "Purchase available" %></small>
+        </div>
+        <% }) %>
+      </div>
+
+      <script src="/scripts/carousel.js"></script>
+      <script src="/scripts/messages.js"></script>
+
+
+</body>
+
+</html>

@@ -12,7 +12,7 @@ model User {
   email                        String             @unique
   name                         String
   createdAt                    DateTime           @default(now())
-  password                     String?
+  password                     String
   banner                       String?
   profilePic                   String?
   passwordResetCode            String?
@@ -53,9 +53,9 @@ model Listing {
   rentalDuration RentalDuration?
   available      Boolean           @default(true)
   condition      Condition
-  userId         String            @db.ObjectId
+  userId         String?           @db.ObjectId
   createdAt      DateTime          @default(now())
-  user           User              @relation(fields: [userId], references: [id])
+  user           User?             @relation(fields: [userId], references: [id])
   media          Media[]
   reviews        ReviewOnListing[]
   conversations  Conversation[]
