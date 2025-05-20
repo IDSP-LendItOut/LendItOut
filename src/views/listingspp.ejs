@@ -1,62 +1,70 @@
 <link rel="stylesheet" href="/css/style.css">
 <main class="listings">
-    <div class="section-header">
-        <h3>Reviews (3)</h3>
-        <a href="/listings">See more</a>
-    </div>
-    <div class="reviews">
-        <div class="reviews-grid">
-          <% users.forEach(user => { %>
-            <div class="review-card">
-              <img class="review-avatar" src="<%= user.image %>" alt="<%= user.name %>">
-              <div class="review-details">
-                <p class="review-name"><%= user.name %></p>
-                <div class="review-rating">
-                  <% for (let i = 0; i < user.rating; i++) { %>
-                    ★
-                  <% } %>
-                </div>
-                <p class="review-text"><%= user.review %></p>
-              </div>
-            </div>
-          <% }); %>
+  <div class="section-header">
+    <h3>Reviews (3)</h3>
+    <a href="/listings">See more</a>
+  </div>
+  <div class="reviews">
+    <div class="reviews-grid">
+      <% users.forEach(user => { %>
+      <div class="review-card">
+        <img class="review-avatar" src="https://picsum.photos/300/300?random=<%= Math.random() %>" alt="<%= user.name %>">
+        <div class="review-details">
+          <p class="review-name"><%= user.name %></p>
+          <div class="review-rating">
+            <% for (let i = 0; i < user.rating; i++) { %>
+            ★
+            <% } %>
+          </div>
+          <p class="review-text"><%= user.review %></p>
         </div>
       </div>
-      <div class="section-header">
-        <h3>My Listings (10)</h3>
-        <a href="/listings">See more</a>
-      </div>
-    <div class="scroll-container">
-        <div class="item-grid">
-            <% items.forEach(item => { %>
-                <div class="item-card">
-                    <img src="<%= item.image %>" alt="<%= item.name %>">
-                    <div class="item-details">
-                        <p class="item-name"><%= item.name %></p>
-                        <p class="item-price"><%= item.price %></p>
-                        <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
-                    </div>
-                </div>
-            <% }); %>
-        </div>
+      <% }); %>
     </div>
+  </div>
+  <div class="section-header">
+    <h3>My Listings (<%= myListing.length %>)</h3>
+    <a href="/listings">See more</a>
+  </div>
 
-    <div class="section-header">
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% myListing.forEach(item => { %>
+      <div class="item-card">
+        <a href="/listings/my/<%= item.id %>">
+          <img src="<%= item.media[0].url %>" alt="<%= item.title %>">
+        </a>
+        <div class="item-details">
+          <p class="item-name"><%= item.title %></p>
+          <% if (item.salePrice === 0) { %>
+          <p class="item-price">$<%= item.rentalPrice %></p>
+          <p class="item-status rent">For Rent</p>
+          <% } else { %>
+          <p class="item-price">$<%= item.salePrice %></p>
+          <p class="item-status sale">For Sale</p>
+          <% } %>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <div class="section-header">
     <h3>My drafts</h3>
     <a href="/listings">See more</a>
-    </div>
-    <div class="scroll-container">
-        <div class="item-grid">
-            <% items.forEach(item => { %>
-                <div class="item-card">
-                    <img src="<%= item.image %>" alt="<%= item.name %>">
-                    <div class="item-details">
-                        <p class="item-name"><%= item.name %></p>
-                        <p class="item-price"><%= item.price %></p>
-                        <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
-                    </div>
-                </div>
-            <% }); %>
+  </div>
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% items.forEach(item => { %>
+      <div class="item-card">
+        <img src="<%= item.image %>" alt="<%= item.title %>">
+        <div class="item-details">
+          <p class="item-name"><%= item.name %></p>
+          <p class="item-price"><%= item.price %></p>
+          <p class="item-status <%= item.statusClass %>"><%= item.status %></p>
         </div>
+      </div>
+      <% }); %>
     </div>
+  </div>
 </main>

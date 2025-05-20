@@ -1,11 +1,14 @@
-import { Condition, ListingType, RentalDuration } from "@prisma/client";
+import {
+  Condition,
+  ListingType,
+  PrismaClient,
+  RentalDuration,
+} from "@prisma/client";
 import { ObjectId } from "bson";
 import express from "express";
 import upload from "../middleware/multerConfig";
 import { requireLogin } from "../middleware/requireLogin";
-import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-
 
 const postingRouter = express.Router();
 
@@ -121,16 +124,15 @@ postingRouter.post(
       }
 
       if (step === 4) {
-        if (!req.session.userId) {
+        if (!req.session.user?.id) {
           res.status(401).json({ message: "Need to login first!" });
           return;
         }
-        const userId = req.session.userId;
+        const userId = req.session.user?.id;
         const userIdObjectId = new ObjectId(userId);
         const data = req.session.listingData;
         const categoryId = data.category;
-        console.log("***");
-        console.log(categoryId);
+
         const category = await prisma.category.findUnique({
           where: { id: categoryId },
         });
@@ -164,13 +166,13 @@ postingRouter.post(
             categoryId: categoryId,
             media: {
               create: (data.images || []).map((imageUrl: string) => ({
-                url: imageUrl,
+                url: `/uploads/${imageUrl}`,
                 type: "IMAGE",
               })),
             },
           },
         });
-
+        console.log(data.images);
         console.log("New post created:", createPost);
         res.status(200).json({
           message: "Listing created successfully!",

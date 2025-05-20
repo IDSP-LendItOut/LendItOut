@@ -1,16 +1,36 @@
-import express from "express";
 import { PrismaClient } from "@prisma/client";
+import express from "express";
 const prisma = new PrismaClient();
-
 
 const homeRouter = express.Router();
 
+const listing = await prisma.listing.findMany({
+  include: {
+    user: true,
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+  take: 10,
+});
+const listing2 = await prisma.listing.findMany({
+  include: {
+    user: true,
+  },
+  orderBy: {
+    createdAt: "asc",
+  },
+  take: 10,
+});
 homeRouter.get("/buying", (req, res) => {
+  console.log(listing);
   res.render("home", {
     title: "Home",
     content: "buying",
     items,
     showSearchbar: true,
+    listing: listing,
+    listing2: listing2,
   });
 });
 
@@ -20,16 +40,14 @@ homeRouter.get("/renting", (req, res) => {
     content: "renting",
     items,
     showSearchbar: true,
+    listing: listing,
+    listing2: listing2,
   });
 });
 
 homeRouter.get("/buying-page", async (req, res) => {
   try {
-    const categories = await prisma.category.findMany({
-      where: {
-        type: "Purchase",
-      },
-    });
+    const categories = await prisma.category.findMany();
 
     res.render("home/buying", {
       categories,
@@ -42,11 +60,7 @@ homeRouter.get("/buying-page", async (req, res) => {
 
 homeRouter.get("/renting-page", async (req, res) => {
   try {
-    const categories = await prisma.category.findMany({
-      where: {
-        type: "Rent",
-      },
-    });
+    const categories = await prisma.category.findMany();
 
     res.render("home/renting", {
       categories,
@@ -58,7 +72,13 @@ homeRouter.get("/renting-page", async (req, res) => {
 });
 
 homeRouter.get("/explore", (req, res) => {
-  res.render("explore", { title: "Explore", items, showSearchbar: true });
+  res.render("explore", {
+    title: "Explore",
+    items,
+    showSearchbar: true,
+    listing,
+    listing2,
+  });
 });
 
 // Profile photo route
@@ -221,13 +241,20 @@ homeRouter.get("/cart/checkout/payment/pay", (req, res) => {
 });
 
 // home
-homeRouter.get("/", (req, res) => {
-  res.render("home", {
-    title: "Home",
-    content: "buying",
-    items,
-    showSearchbar: true,
-  });
+homeRouter.get("/", async (req, res) => {
+  try {
+    res.render("home", {
+      title: "Home",
+      content: "buying",
+      items,
+      showSearchbar: true,
+      listing: listing,
+      listing2: listing2,
+    });
+  } catch (err) {
+    console.error("Error fetching listings:", err);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 export { homeRouter };

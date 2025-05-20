@@ -26,7 +26,7 @@
   <div class="form-group" id="saleOnly">
     <label class="subtitle">Choose a price for sale</label>
     <p class="section-description subdescription">The price range of your product is determined by the category you selected</p>
-    <input type="number" name="salePrice" placeholder="$ 0.00" min="0" required>
+    <input type="number" name="salePrice" placeholder="$ 0.00" min="1" required>
   </div>
   <% }%>
   <% if(listingType.includes("RENT")){ %>
@@ -34,7 +34,7 @@
     <label class=" subtitle">Choose a price for rental and specify the rental duration</label>
     <p class="section-description subdescription">This helps renters understand availability and pricing.</p>
     <div class="duration-selection">
-      <input type="number" name="rentalPrice" placeholder="$ 0.00" min="0" required>
+      <input type="number" name="rentalPrice" placeholder="$ 0.00" min="1" required>
       <select name="rentalDuration">
         <option value="HOUR">Per Hour</option>
         <option value="DAY">Per Day</option>

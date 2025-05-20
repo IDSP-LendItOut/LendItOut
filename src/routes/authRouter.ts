@@ -1,7 +1,7 @@
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import express from "express";
-import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 dotenv.config();
@@ -34,7 +34,12 @@ authRouter.post("/login", async (req, res) => {
         error: "Invalid username or password",
       });
     } else {
-      req.session.userId = foundUser.id;
+      req.session.user = {
+        id: foundUser.id,
+        name: foundUser.name,
+        email: foundUser.email,
+      };
+
       console.log("login complete");
       res.redirect("/");
     }
@@ -61,7 +66,19 @@ authRouter.get("/register", (req, res) => {
 });
 
 authRouter.post("/register", async (req, res) => {
-  const { email, name, password } = req.body;
+  let { email, name, password } = req.body;
+
+  email = email.trim();
+  name = name.trim();
+  password = password.trim();
+
+  if (!email || !name || !password) {
+    return res.render("auth/register", {
+      title: "register",
+      error: "All fields are required. Please fill in all details.",
+    });
+  }
+
   try {
     console.log(req.body);
     const hashed = await bcrypt.hash(password, 10);
@@ -85,7 +102,12 @@ authRouter.post("/register", async (req, res) => {
       });
       console.log("New user created:", createUser);
 
-      req.session.userId = createUser.id;
+      req.session.user = {
+        id: createUser.id,
+        name: createUser.name,
+        email: createUser.email,
+      };
+
       res.redirect("/profilephoto");
     }
   } catch (err) {
@@ -252,7 +274,12 @@ authRouter.post("/password-reset", async (req, res) => {
               password: await bcrypt.hash(password, 10),
             },
           });
-          req.session.userId = user.id;
+          req.session.user = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          };
+
           res.redirect("/auth/login");
         } else {
           res.render("auth/forgot-password", {

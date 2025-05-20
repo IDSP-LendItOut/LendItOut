@@ -4,89 +4,117 @@ import { PrismaClient } from '@prisma/client';
 const router = express.Router();
 const prisma = new PrismaClient();
 
+
+
+const mockUserId = '68257d5bf3a70e053f9545ba';
+
 router.get('/', async (req, res) => {
-    const conversations = await prisma.conversation.findMany({
+  try {
+    const userConversations = await prisma.userConversation.findMany({
+      where: { userId: mockUserId },
       include: {
-        participants: true,
-        listing: {
+        conversation: {
           include: {
-            media: true, 
-          },
-        },
-        messages: {
-          orderBy: { createdAt: 'desc' },
-          take: 1,
-        },
-      },
+            listing: {
+              include: { media: true }
+            },
+            participants: {
+              include: { user: true }
+            }
+          }
+        }
+      }
     });
-  
+
+    // Extract conversations and fetch latest message for each
+    const conversations = await Promise.all(userConversations.map(async (uc) => {
+      const { conversation } = uc;
+    
+      const lastMessage = await prisma.message.findFirst({
+        where: { conversationId: conversation.id },
+        orderBy: { createdAt: 'desc' },
+      });
+    
+      return {
+        id: conversation.id,
+        listing: conversation.listing,
+        participants: conversation.participants,
+        messages: lastMessage ? [lastMessage] : [],
+      };
+    }));
+    
+
     res.render('messages/index', {
       title: 'Messages',
       conversations,
       showSearchbar: false,
-
     });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error loading messages');
+  }
 });
+
 
 router.get('/:id', async (req, res) => {
-  const userId = 1; // temporary
+  try {
+    const conversationId = req.params.id;
 
-  const conversationId = parseInt(req.params.id);
-
-  const conversation = await prisma.conversation.findUnique({
-    where: { id: conversationId },
-    include: {
-      participants: true,
-      listing: {
-        include: {
-          media: true,
+    const conversation = await prisma.conversation.findUnique({
+      where: { id: conversationId },
+      include: {
+        listing: {
+          include: { media: true }
         },
-      },
-      messages: {
-        orderBy: { createdAt: 'asc' },
-        include: { sender: true },
-      },
-    },
-  });
-  if (!conversation) {
-     res.status(404).send('Conversation not found');
-  }
-  const receiver = conversation?.participants.find(p => p.id !== userId);
-  const receiverId = receiver?.id || null;
+        participants: {
+          include: { user: true }
+        }
+      }
+    });
 
-  res.render('messages/show', {
-    title: 'Messages',
-    conversation,
-    userId,
-    receiverId,
-    layout: false
-  });
+
+    const messages = await prisma.message.findMany({
+      where: { conversationId },
+      orderBy: { createdAt: 'asc' }
+    });
+
+    const receiver = conversation?.participants
+    ?.map(p => p.user)
+    .find(user => user.id !== mockUserId) || null;
+  
+
+    res.render('messages/show', {
+      title: 'Messages',
+      conversation: { ...conversation, messages },
+      userId: mockUserId,
+      receiverId: receiver?.id || null,
+      layout: false
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Failed to load conversation');
+  }
 });
 
-
-
-router.post('/:id/send', express.json(), async (req, res, next) => {
+router.post('/:id/send', express.json(), async (req, res) => {
   try {
-    const userId = 1;
-    const conversationId = parseInt(req.params.id);
+    const conversationId = req.params.id;
     const { text } = req.body;
-
-    if (!text || !conversationId) {
-      res.status(400).json({ error: 'Invalid' });
-      return;
-    }
 
     const message = await prisma.message.create({
       data: {
         text,
+        senderId: mockUserId,
         conversationId,
-        senderId: userId
       }
     });
 
     res.json(message);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Failed to send message');
   }
 });
 
