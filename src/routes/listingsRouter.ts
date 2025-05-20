@@ -49,12 +49,12 @@ function getRandomFallback(group: string): string {
   return images[Math.floor(Math.random() * images.length)];
 }
 
+// GET all listings
 router.get("/", async (req, res) => {
   try {
     const listings = await prisma.listing.findMany({
       include: {
         media: true,
-
         reviews: {
           include: {
             reviewer: { select: { name: true, profilePic: true } },
@@ -62,13 +62,15 @@ router.get("/", async (req, res) => {
         },
       },
     });
+
     const listingsWithFallback = listings.map((listing) => ({
       ...listing,
       fallbackImage: getRandomFallback(listing.group || "DEFAULT"),
     }));
+
     res.render("listings/index", {
       title: "All Listings",
-      listings,
+      listings: listingsWithFallback,
     });
   } catch (err) {
     console.error(err);
@@ -76,47 +78,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
-  const listing = await prisma.listing.findUnique({
-    where: { id: req.params.id },
-    include: {
-      media: true,
-      user: true,
-      reviews: {
-        include: {
-          reviewer: true,
-        },
-      },
-    },
-  });
-
-  if (listing) {
-    const related = await prisma.listing.findMany({
-      where: {
-        categoryId: listing.categoryId,
-        NOT: { id: listing.id },
-      },
-      include: {
-        media: true,
-      },
-      take: 6,
-    });
-
-    res.render("listings/show", {
-      title: "Listing Detail",
-      listing,
-      related,
-    });
-  } else {
-    res.status(404).send("Listing not found");
-  }
-});
-
+// GET single listing by ID
 router.get("/:id", async (req, res) => {
   try {
     const listingId = req.params.id;
     if (!ObjectId.isValid(listingId)) {
-      res.status(400).send("listingId error");
+      res.status(400).send("Invalid listing ID");
       return;
     }
 
@@ -126,14 +93,11 @@ router.get("/:id", async (req, res) => {
         media: true,
         user: true,
         reviews: {
-          include: {
-            reviewer: true,
-          },
+          include: { reviewer: true },
         },
       },
     });
-    console.log("aaa");
-    console.log(listing);
+
     if (!listing) {
       res.status(404).send("Listing not found");
       return;
@@ -157,55 +121,8 @@ router.get("/:id", async (req, res) => {
     });
   } catch (error) {
     console.error("listingsRouter:", error);
-    res.status(500).send("An listing error");
+    res.status(500).send("Error loading listing");
   }
 });
 
-router.get("/my/:id", async (req, res) => {
-  try {
-    const listingId = req.params.id;
-    if (!ObjectId.isValid(listingId)) {
-      res.status(400).send("listingId error");
-      return;
-    }
-
-    const listing = await prisma.listing.findUnique({
-      where: { id: listingId },
-      include: {
-        media: true,
-        user: true,
-        reviews: {
-          include: {
-            reviewer: true,
-          },
-        },
-      },
-    });
-
-    if (!listing) {
-      res.status(404).send("Listing not found");
-      return;
-    }
-
-    const related = await prisma.listing.findMany({
-      where: {
-        categoryId: listing.categoryId,
-        NOT: { id: listing.id },
-      },
-      include: {
-        media: true,
-      },
-      take: 6,
-    });
-
-    res.render("listings/show_sooah", {
-      title: "Listing Detail",
-      listing,
-      related,
-    });
-  } catch (error) {
-    console.error("listingsRouter:", error);
-    res.status(500).send("An listing error");
-  }
-});
 export default router;
