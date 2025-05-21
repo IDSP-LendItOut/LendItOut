@@ -16,15 +16,15 @@
         <i class="fas fa-times"></i>
       </a>
       <h1 class="buy-title">View Listing</h1>
-      <button class="header-btn menu">
+      <button id="menuButton" class="header-btn menu">
         <i class="fas fa-ellipsis-h"></i>
       </button>
     </header>
 
-    <div class="more-options-modal" style="display: none;">
+    <div id="moreOptionsModal" class="more-options-modal" style="display: none;">
       <div class="modal-header">
         <span>More Options</span>
-        <button class="close-icon" aria-label="Close Menu">&times;</button>
+        <button id="closeOptionsBtn" class="close-icon" aria-label="Close Menu">&times;</button>
       </div>
       <hr />
       <ul>
@@ -124,6 +124,7 @@
       </div>
 
       <script src="/scripts/carousel.js"></script>
+      <script src="/scripts/listingHeader.js"></script>
       <script src="/scripts/messages.js"></script>
       <script src="/scripts/addToCart.js"></script>
 
