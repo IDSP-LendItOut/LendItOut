@@ -7,6 +7,7 @@ const homeRouter = express.Router();
 const listing = await prisma.listing.findMany({
   include: {
     user: true,
+    media: true,
   },
   orderBy: {
     createdAt: "desc",
