@@ -69,7 +69,11 @@
         <img src="<%= conversation.listing.media?.[0]?.url || '/images/default.jpg' %>" alt="Preview">
         <div class="item-details">
           <span class="title"><%= conversation.listing.title %></span>
-          <span class="price">$<%= conversation.listing.price %> /day</span>
+          <span class="price">
+            $<%= conversation.listing.rentalPrice ?? conversation.listing.salePrice ?? 'N/A' %>
+            /day
+          </span>
+          
         </div>
       </div>
 
