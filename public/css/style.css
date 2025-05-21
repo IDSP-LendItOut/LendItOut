@@ -1761,10 +1761,16 @@ body {
   color: black;
   font-weight: 500;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 .interests .options button:hover {
   background: #556C40;
   color: white;
+}
+.interests .options button.selected {
+  background: #556C40; /* Active background color */
+  color: white; /* Active text color */
+  border-color: #556C40; /* Match the border with the background */
 }
 .interests .continue {
   width: 100%;
@@ -1809,6 +1815,7 @@ body {
     width: 100%;
     max-width: 300px;
     margin: 2rem auto 0; /* Center the button horizontally */
+    margin-bottom: 2rem;
     font-size: 1rem;
   }
 }
@@ -1825,12 +1832,12 @@ body {
   flex: 1;
   text-align: center;
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 .top-bar .back {
   color: white;
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 .top-bar .back:hover {
   text-decoration: underline;

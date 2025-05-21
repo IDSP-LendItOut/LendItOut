@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up - Interests</title>
   <link rel="stylesheet" href="/css/style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const selectedCategories = new Set(); // To track selected categories
+  const buttons = document.querySelectorAll(".options button");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const category = button.textContent.trim();
+
+      // Toggle the selected state
+      if (selectedCategories.has(category)) {
+        selectedCategories.delete(category); // Remove from the set
+        button.classList.remove("selected"); // Remove the selected class
+      } else {
+        selectedCategories.add(category); // Add to the set
+        button.classList.add("selected"); // Add the selected class
+      }
+
+      console.log("Selected Categories:", Array.from(selectedCategories));
+    });
+  });
+
+  const continueButton = document.querySelector(".continue");
+  continueButton.addEventListener("click", () => {
+    console.log("Final Selected Categories:", Array.from(selectedCategories));
+    // You can send the selected categories to the server here
+  });
+});
+  </script>
 </head>
 <body>
   <div class="interests">
@@ -22,7 +51,7 @@
         'Stationery', 'Arts & Crafts', 'Beauty & Personal Care',
         'Season & Holiday'
       ].forEach(category => { %>
-        <button><%= category %></button>
+        <button type="button"><%= category %></button>
       <% }); %>
     </div>
 
