@@ -6,8 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (menuBtn && modal && closeBtn) {
       menuBtn.addEventListener("click", () => {
         modal.style.display = "block";
-      });
+      
+      const onScroll = () => {
+        modal.style.display = "none";
+        window.removeEventListener("scroll", onScroll);
+      };
 
+      window.addEventListener("scroll", onScroll);
+    });
       closeBtn.addEventListener("click", () => {
         modal.style.display = "none";
       });
