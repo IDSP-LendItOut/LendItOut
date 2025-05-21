@@ -2485,76 +2485,54 @@ body {
 
 /* 22. Checkout =========== */
 .checkout-container {
-  padding: 0px;
   font-family: "Helvetica Neue", sans-serif;
+  margin: 0px !important;
 }
-.checkout-container .header {
-  background-color: #556C40;
-  color: white;
+.checkout-container .items-box {
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  padding: 16px;
 }
-.checkout-container .header .header-bar {
+.checkout-container .items-box .checkout-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.checkout-container .header .header-bar a {
-  position: absolute;
-  left: 2px;
-  top: -15px;
-  color: white;
-  text-decoration: none;
-  font-size: 20px;
-}
-.checkout-container .header .header-bar a:hover {
-  color: white;
-}
-.checkout-container .header .header-bar .header-title {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-}
-.checkout-container .checkout-item {
-  display: flex;
-  align-items: center;
-  background-color: rgb(253, 253, 253);
+  background-color: rgb(237, 235, 235);
   border-radius: 14px;
   padding: 12px;
   margin-bottom: 20px;
   position: relative;
 }
-.checkout-container .checkout-item img {
+.checkout-container .items-box .checkout-item img {
   width: 64px;
   height: 64px;
   border-radius: 10px;
   object-fit: cover;
   margin-right: 12px;
 }
-.checkout-container .checkout-item .details {
+.checkout-container .items-box .checkout-item .details {
   flex: 1;
 }
-.checkout-container .checkout-item .details strong {
+.checkout-container .items-box .checkout-item .details strong {
   font-size: 15px;
   display: block;
   margin-bottom: 4px;
 }
-.checkout-container .checkout-item .details p {
+.checkout-container .items-box .checkout-item .details p {
   font-size: 13px;
   color: black;
   margin-bottom: 2px;
   line-height: 1.4;
 }
-.checkout-container .checkout-item .details .price {
+.checkout-container .items-box .checkout-item .details .price {
   font-size: 13px;
   font-weight: 500;
   color: black;
 }
-.checkout-container .checkout-item .details .price strong {
+.checkout-container .items-box .checkout-item .details .price strong {
   font-weight: bold;
 }
-.checkout-container .checkout-item .remove {
+.checkout-container .items-box .checkout-item .remove {
   background: none;
   border: none;
   font-size: 18px;
@@ -2565,10 +2543,10 @@ body {
   cursor: pointer;
   transition: color 0.3s ease;
 }
-.checkout-container .checkout-item .remove:hover {
+.checkout-container .items-box .checkout-item .remove:hover {
   color: #bbc3b3;
 }
-.checkout-container .checkout-item .remove:focus {
+.checkout-container .items-box .checkout-item .remove:focus {
   outline: 2px solid #556C40;
   outline-offset: 2px;
 }
@@ -2656,7 +2634,7 @@ body {
 }
 .checkout-container .shipping-form .save-btn {
   display: block;
-  margin: -10px;
+  margin: 0px;
   width: 100%;
   max-width: 300px;
   padding: 12px;
@@ -2708,6 +2686,13 @@ body {
 .checkout-container .footer:focus {
   outline: 2px solid #88a76b;
   outline-offset: 2px;
+}
+.checkout-container html,
+.checkout-container body {
+  margin: -20px !important;
+  padding: -20px !important;
+  background-color: transparent;
+  height: 100%;
 }
 
 /* 23. Listings =========== */
@@ -3160,7 +3145,7 @@ body {
 }
 
 /* 25. Checkout Payment =========== */
-.checkout-container {
+.payment-container {
   max-width: 400px;
   margin: 2rem auto;
   background: #fff;
@@ -3168,49 +3153,49 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   padding: 1.5rem;
 }
-.checkout-container .checkout-header {
+.payment-container .checkout-header {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-.checkout-container .checkout-header h2 {
+.payment-container .checkout-header h2 {
   flex: 1;
   text-align: center;
   font-size: 1.5rem;
   color: #3a4a2b;
 }
-.checkout-container .checkout-header .back-arrow {
+.payment-container .checkout-header .back-arrow {
   font-size: 1.2rem;
   color: #3a4a2b;
   text-decoration: none;
 }
-.checkout-container .secure-info {
+.payment-container .secure-info {
   margin: 1rem 0;
   color: #6b7a4b;
   font-size: 1rem;
   display: flex;
   align-items: center;
 }
-.checkout-container .secure-info .icon-lock {
+.payment-container .secure-info .icon-lock {
   margin-right: 0.5rem;
   background: url("/img/lock.svg") no-repeat center;
   width: 1rem;
   height: 1rem;
   display: inline-block;
 }
-.checkout-container .payment-form .payment-info {
+.payment-container .payment-form .payment-info {
   margin-bottom: 1.5rem;
 }
-.checkout-container .payment-form .payment-info h3 {
+.payment-container .payment-form .payment-info h3 {
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
 }
-.checkout-container .payment-form .payment-info .payment-methods {
+.payment-container .payment-form .payment-info .payment-methods {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-.checkout-container .payment-form .payment-info .payment-methods .payment-option {
+.payment-container .payment-form .payment-info .payment-methods .payment-option {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -3218,26 +3203,26 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
-.checkout-container .payment-form .payment-info .payment-methods .payment-option:hover,
-.checkout-container .payment-form .payment-info .payment-methods .payment-option input:checked + img {
+.payment-container .payment-form .payment-info .payment-methods .payment-option:hover,
+.payment-container .payment-form .payment-info .payment-methods .payment-option input:checked + img {
   background: #f4f8f0;
 }
-.checkout-container .payment-form .payment-info .payment-methods .payment-option input[type=radio] {
+.payment-container .payment-form .payment-info .payment-methods .payment-option input[type=radio] {
   accent-color: #6b7a4b;
 }
-.checkout-container .payment-form .payment-info .payment-methods .payment-option img {
+.payment-container .payment-form .payment-info .payment-methods .payment-option img {
   width: 32px;
   height: 32px;
 }
-.checkout-container .payment-form .payment-info .input-group {
+.payment-container .payment-form .payment-info .input-group {
   margin: 0.5rem 0;
 }
-.checkout-container .payment-form .payment-info .input-group label {
+.payment-container .payment-form .payment-info .input-group label {
   display: block;
   font-size: 0.95rem;
   color: #6b7a4b;
 }
-.checkout-container .payment-form .payment-info .input-group input {
+.payment-container .payment-form .payment-info .input-group input {
   width: 100%;
   padding: 0.5rem;
   border-radius: 6px;
@@ -3245,15 +3230,15 @@ body {
   margin-top: 0.2rem;
   font-size: 1rem;
 }
-.checkout-container .payment-form .payment-info .input-row {
+.payment-container .payment-form .payment-info .input-row {
   display: flex;
   gap: 1rem;
 }
-.checkout-container .payment-form .payment-info .input-row .input-group {
+.payment-container .payment-form .payment-info .input-row .input-group {
   flex: 1;
 }
-.checkout-container .payment-form .payment-info .confirm-btn {
-  margin: 0 auto; /* Center the Confirm button */
+.payment-container .payment-form .payment-info .confirm-btn {
+  margin: 0 auto;
   width: 100%;
   max-width: 280px;
   padding: 0.7rem;
@@ -3267,18 +3252,18 @@ body {
   display: block;
   text-align: center;
 }
-.checkout-container .payment-form .total-row {
+.payment-container .payment-form .total-row {
   display: flex;
   justify-content: space-between;
   font-size: 1.1rem;
   font-weight: 500;
   margin: 1.5rem 0 1rem 0;
 }
-.checkout-container .payment-form .total-row .total-amount {
+.payment-container .payment-form .total-row .total-amount {
   color: #3a4a2b;
 }
-.checkout-container .payment-form .pay-btn {
-  margin: 0 auto; /* Center the Pay button */
+.payment-container .payment-form .pay-btn {
+  margin: 0 auto;
   width: 100%;
   max-width: 280px;
   padding: 1rem;
@@ -3293,56 +3278,56 @@ body {
   display: block;
   text-align: center;
 }
-.checkout-container .payment-form .pay-btn:hover {
+.payment-container .payment-form .pay-btn:hover {
   background: #4e5d36;
 }
 @media (max-width: 768px) {
-  .checkout-container {
+  .payment-container {
     max-width: 100%;
     margin: 1rem;
     padding: 1rem;
   }
-  .checkout-container .checkout-header h2 {
+  .payment-container .checkout-header h2 {
     font-size: 1.2rem;
   }
-  .checkout-container .checkout-header .back-arrow {
+  .payment-container .checkout-header .back-arrow {
     font-size: 1rem;
   }
-  .checkout-container .secure-info {
+  .payment-container .secure-info {
     font-size: 0.9rem;
   }
-  .checkout-container .secure-info .icon-lock {
+  .payment-container .secure-info .icon-lock {
     width: 0.8rem;
     height: 0.8rem;
   }
-  .checkout-container .payment-form .payment-info h3 {
+  .payment-container .payment-form .payment-info h3 {
     font-size: 1rem;
   }
-  .checkout-container .payment-form .payment-info .payment-methods .payment-option {
+  .payment-container .payment-form .payment-info .payment-methods .payment-option {
     padding: 0.4rem;
   }
-  .checkout-container .payment-form .payment-info .payment-methods .payment-option img {
+  .payment-container .payment-form .payment-info .payment-methods .payment-option img {
     width: 28px;
     height: 28px;
   }
-  .checkout-container .payment-form .payment-info .input-group label {
+  .payment-container .payment-form .payment-info .input-group label {
     font-size: 0.85rem;
   }
-  .checkout-container .payment-form .payment-info .input-group input {
+  .payment-container .payment-form .payment-info .input-group input {
     font-size: 0.9rem;
     padding: 0.4rem;
   }
-  .checkout-container .payment-form .payment-info .input-row {
+  .payment-container .payment-form .payment-info .input-row {
     gap: 0.5rem;
   }
-  .checkout-container .payment-form .payment-info .confirm-btn {
+  .payment-container .payment-form .payment-info .confirm-btn {
     padding: 0.6rem;
     font-size: 0.9rem;
   }
-  .checkout-container .payment-form .total-row {
+  .payment-container .payment-form .total-row {
     font-size: 1rem;
   }
-  .checkout-container .payment-form .pay-btn {
+  .payment-container .payment-form .pay-btn {
     padding: 0.8rem;
     font-size: 1rem;
   }
