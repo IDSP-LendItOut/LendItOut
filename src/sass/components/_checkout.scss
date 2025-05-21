@@ -1,49 +1,22 @@
 .checkout-container {
-    padding: 0px;
-    font-family: $font-body;
-  
-    .header {
-      background-color: $color-primary;
-      color: white;
-      margin-bottom: 20px;
-      padding: 16px;
-  
-      .header-bar {
-        display: flex; 
-        align-items: center; 
-        justify-content: center;
-        position: relative; 
-  
-        a {
-          position:absolute; 
-          left: 2px; 
-          top: -15px;
-          color: white;
-          text-decoration: none;
-          font-size: 20px;
-  
-          &:hover {
-            color: lighten(white, 20%);
-          }
-        }
-  
-        .header-title {
-          font-size: 18px;
-          font-weight: bold;
-          text-align: center;
-        }
-      }
-    }
-  
+  font-family: $font-body;
+  margin: 0px !important;
+
+  .items-box {
+    border-radius: $border-radius;
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px; 
+
     .checkout-item {
       display: flex;
       align-items: center;
-      background-color: rgb(253, 253, 253);
+      background-color: rgb(237, 235, 235);
       border-radius: $border-radius;
       padding: 12px;
       margin-bottom: 20px;
       position: relative;
-  
+
       img {
         width: 64px;
         height: 64px;
@@ -51,34 +24,34 @@
         object-fit: cover;
         margin-right: 12px;
       }
-  
+
       .details {
         flex: 1;
-  
+
         strong {
           font-size: 15px;
           display: block;
           margin-bottom: 4px;
         }
-  
+
         p {
           font-size: 13px;
           color: black;
           margin-bottom: 2px;
           line-height: 1.4;
         }
-  
+
         .price {
           font-size: 13px;
           font-weight: 500;
           color: black;
-  
+
           strong {
             font-weight: bold;
           }
         }
       }
-  
+
       .remove {
         background: none;
         border: none;
@@ -89,171 +62,180 @@
         top: 12px;
         cursor: pointer;
         transition: color 0.3s ease;
-  
+
         &:hover {
           color: darken($color-gray, 20%);
         }
-  
+
         &:focus {
           outline: 2px solid $color-primary;
           outline-offset: 2px;
         }
       }
     }
-  
-    .shipping-form {
-      background-color: $color-white;
-      border-radius: $border-radius;
-      padding: 16px;
-      margin-top: 20px;
-  
-      h3 {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 8px;
+  }
+
+  .shipping-form {
+    background-color: $color-white;
+    border-radius: $border-radius;
+    padding: 16px;
+    margin-top: 20px;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: black;
+      margin-bottom: 16px;
+    }
+
+    label {
+      font-size: 13px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 16px;
+      font-family: $font-body;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: $color-primary;
+        outline: none;
       }
-  
-      .subtitle {
-        font-size: 13px;
-        color: black;
-        margin-bottom: 16px;
-      }
-  
-      label {
-        font-size: 13px;
-        display: block;
-        margin-bottom: 4px;
-      }
-  
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        font-size: 14px;
-        margin-bottom: 16px;
-        font-family: $font-body;
-        transition: border-color 0.3s ease;
-  
-        &:focus {
-          border-color: $color-primary;
-          outline: none;
-        }
-      }
-  
-      .terms {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        margin-bottom: 16px;
-      
-        input[type='checkbox'] {
-          width: 16px;
-          height: 16px;
-          cursor: pointer;
-          appearance: none; 
-          -webkit-appearance: none; 
-          border: 2px solid #ccc; 
-          border-radius: 4px; 
-          background-color: white; 
-          transition: all 0.3s ease;
-      
-          &:checked {
-            background-color: black; 
-            border-color: black; 
-          }
-      
-          &:checked::after {
-            content: ''; 
-            display: block;
-            width: 6px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-            margin: -5px; 
-          }
-      
-          &:hover {
-            border-color: darken(#ccc, 20%);
-          }
-        }
-      
-        a {
-          color: $color-primary;
-          text-decoration: underline;
-          font-weight: 500;
-      
-          &:hover {
-            color: darken($color-primary, 10%);
-          }
-        }
-      }
-  
-      .save-btn {
-        display: block;
-        margin: -10px;
-        width: 100%;
-        max-width: 300px;
-        padding: 12px;
-        background-color: $color-primary;
-        border: none;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        color: white;
+    }
+
+    .terms {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      margin-bottom: 16px;
+
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-  
+        appearance: none;
+        -webkit-appearance: none;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: white;
+        transition: all 0.3s ease;
+
+        &:checked {
+          background-color: black;
+          border-color: black;
+        }
+
+        &:checked::after {
+          content: "";
+          display: block;
+          width: 6px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+          margin: -5px;
+        }
+
         &:hover {
-          background-color: darken($color-primary, 6%);
-        }
-  
-        &:focus {
-          outline: 2px solid lighten($color-primary, 20%);
-          outline-offset: 2px;
+          border-color: darken(#ccc, 20%);
         }
       }
-    }
-  
-    .footer {
-      margin-top: 20px;
-      background-color: $color-white;
-      border-radius: $border-radius;
-      padding: 16px;
-  
-      .total-row {
-        display: flex;
-        justify-content: space-between;
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-  
-      .place-order {
-        display: block;
-        margin: 0 auto;
-        padding: 0.7rem 1.5rem;
-        background-color: $color-primary;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      
-      .place-order:hover {
-        background-color: #4e5d36;
-      }
-  
-        &:focus {
-          outline: 2px solid lighten($color-primary, 20%);
-          outline-offset: 2px;
+
+      a {
+        color: $color-primary;
+        text-decoration: underline;
+        font-weight: 500;
+
+        &:hover {
+          color: darken($color-primary, 10%);
         }
       }
     }
+
+    .save-btn {
+      display: block;
+      margin: 0px;
+      width: 100%;
+      max-width: 300px;
+      padding: 12px;
+      background-color: $color-primary;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken($color-primary, 6%);
+      }
+
+      &:focus {
+        outline: 2px solid lighten($color-primary, 20%);
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 20px;
+    background-color: $color-white;
+    border-radius: $border-radius;
+    padding: 16px;
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .place-order {
+      display: block;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      background-color: $color-primary;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .place-order:hover {
+      background-color: #4e5d36;
+    }
+
+    &:focus {
+      outline: 2px solid lighten($color-primary, 20%);
+      outline-offset: 2px;
+    }
+  }
+
+  html,
+  body {
+    margin: -20px !important;
+    padding: -20px !important;
+    background-color: transparent;
+    height: 100%;
+  }
+}
