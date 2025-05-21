@@ -120,8 +120,8 @@
         <div class="related-card">
           <img src="<%= r.media[0]?.url %>" />
           <p><%= r.title %></p>
-          <p>$<%= r.price %></p>
-          <small><%= r.rentAvailable ? "Rent and Purchase available" : "Purchase available" %></small>
+          <p>$<%= r.salePrice !== null ? r.salePrice : r.rentalPrice + ' / ' + r.rentalDuration %></p>
+          <small><%=  r.salePrice !== null ? "Purchase available" : "Rent available" %></small>
         </div>
         <% }) %>
       </div>

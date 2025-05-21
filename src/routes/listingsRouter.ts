@@ -162,7 +162,8 @@ router.get("/my/:id", async (req, res) => {
       },
       take: 6,
     });
-
+    console.log("*");
+    console.log(related);
     const joinedYear = listing.user?.createdAt.getFullYear();
     res.render("listings/show_myListing", {
       title: "Listing Detail",
