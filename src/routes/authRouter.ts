@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import express from "express";
+import { sendEmail } from "../middleware/email";
 const prisma = new PrismaClient();
 
 dotenv.config();
@@ -171,16 +172,24 @@ authRouter.post("/forgot-password", async (req, res) => {
           passwordResetCodeExpirations: oneDayLater,
         },
       });
-      // 1. send email(TODO)
-      // try {
-      //   await sendResetEmail(email, String(code));
-      // } catch (err) {
-      //   console.error("Email sending failed:", err);
-      //   return res.render("auth/forgot-password", {
-      //     title: "forgot",
-      //     error: "Failed to send email. Try again later.",
-      //   });
-      // }
+      try {
+        const html = `
+          <p>Hello ${user.name || "user"},</p>
+          <p>You requested a password reset for your LendItOut account.</p>
+          <p>Your verification code is:</p>
+          <h2>${code}</h2>
+          <p>This code will expire in 24 hours.</p>
+          <p>If you didn’t request this, please ignore this email.</p>
+        `;
+
+        await sendEmail(email, "LendItOut Password Reset Code", html);
+      } catch (err) {
+        console.error("Email sending failed:", err);
+        return res.render("auth/forgot-password", {
+          title: "forgot",
+          error: "Failed to send email. Try again later.",
+        });
+      }
 
       res.render("auth/forgot-password-validation", {
         title: "forgot-password",
