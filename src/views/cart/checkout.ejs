@@ -8,8 +8,7 @@
   <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="checkout-container">
-    <header class="header">
+   <header class="header">
       <div class="header-bar">
         <a href="/cart" aria-label="Go back to cart">
           <span class="fa back-arrow">&#8592;</span>
@@ -17,24 +16,28 @@
         <span class="header-title">Checkout</span>
       </div>
     </header>
-
-    <% checkoutItems.forEach(item => { %>
-      <div class="checkout-item">
-        <img src="<%= item.image %>" alt="<%= item.name %>" />
-        <div class="details">
-          <strong><%= item.name %></strong>
-          <p><%= item.desc %></p>
-          <div class="price">
-            <span>Price: <%= item.price %></span><br />
-            <% if (item.insurance) { %>
-              <span>Insurance: <%= item.insurance %></span><br />
-            <% } %>
-            <span>Total: <strong><%= item.total %></strong></span>
+    
+  <div class="checkout-container">
+    <!-- Items Box -->
+    <div class="items-box">
+      <% checkoutItems.forEach(item => { %>
+        <div class="checkout-item">
+          <img src="<%= item.image %>" alt="<%= item.name %>" />
+          <div class="details">
+            <strong><%= item.name %></strong>
+            <p><%= item.desc %></p>
+            <div class="price">
+              <span>Price: <%= item.price %></span><br />
+              <% if (item.insurance) { %>
+                <span>Insurance: <%= item.insurance %></span><br />
+              <% } %>
+              <span>Total: <strong><%= item.total %></strong></span>
+            </div>
           </div>
+          <button class="remove" aria-label="Remove <%= item.name %> from checkout">X</button>
         </div>
-        <button class="remove" aria-label="Remove <%= item.name %> from checkout">X</button>
-      </div>
-    <% }) %>
+      <% }) %>
+    </div>
 
     <form class="shipping-form">
       <h3>Shipping Information</h3>
