@@ -32,7 +32,7 @@
       <% myListing.forEach(item => { %>
       <div class="item-card">
         <a href="/listings/my/<%= item.id %>">
-          <img src="<%= item.media[0].url %>" alt="<%= item.title %>">
+          <img src="<%= item.media && item.media[0] ? item.media[0].url : 'https://picsum.photos/300/300' %>" alt="<%= item.title %>">
         </a>
         <div class="item-details">
           <p class="item-name"><%= item.title %></p>

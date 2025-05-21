@@ -14,6 +14,9 @@ const listing = await prisma.listing.findMany({
   },
   take: 10,
 });
+console.log("***");
+console.log(listing[0].media);
+console.log("***");
 
 profileRouter.get("/", requireLogin, async (req, res) => {
   const userId = req.session.user?.id;
