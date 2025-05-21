@@ -17,7 +17,7 @@
           <i class="fa-solid fa-arrow-left"></i>
         </a>
         <span class="chat-user">
-          <%= conversation.participants.find(p => p.id !== userId)?.name || 'Unknown User' %>
+          <%= conversation.participants.find(p => p.user.id !== userId)?.user.name || 'Unknown User' %>
         </span>
         <div class="chat-actions">
           <i class="fa-solid fa-ellipsis-h" id="options-toggle"></i>
