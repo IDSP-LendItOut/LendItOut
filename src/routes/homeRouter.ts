@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { name } from "ejs";
 import express from "express";
 const prisma = new PrismaClient();
 
@@ -75,6 +76,8 @@ homeRouter.get("/explore", (req, res) => {
   res.render("explore", {
     title: "Explore",
     items,
+    items2,
+    items3,
     showSearchbar: true,
     listing,
     listing2,
@@ -236,6 +239,68 @@ const items = [
   },
 ];
 
+const items2 = [
+  {
+    image: "images/tennis.png",
+    name: "Tennis Rocket",
+    price: "$10/hour",
+    status: "For Rent",
+    statusClass: "for-rent",
+  },
+  {
+    image: "images/sneakers.png",
+    name: "Viral Sneakers",
+    price: "$10/hour",
+    status: "For Rent",
+    statusClass: "for-rent",
+  },
+  {
+    image: "images/machine.png",
+    name: "Vintage machine",
+    price: "$100",
+    status: "For Sale",
+    statusClass: "for-sale",
+  },
+  {
+    image: "images/childseat.png",
+    name: "Child seat",
+    price: "$100/day",
+    status: "For Rent",
+    statusClass: "for-rent",
+  },
+  {
+    image: "images/tent.png",
+    name: "Camping tent",
+    price: "$30/day",
+    status: "For Rent",
+    statusClass: "for-rent",
+  }
+]
+
+const items3 = [
+  {
+    image: "images/fallbacks/lambo.jpg",
+    name: "Lamborghini",
+    price: "$1,000,000",
+    status: "For Sale",
+    statusClass: "for-sale",
+  },
+  {
+    image: "images/fallbacks/lambo2.jpg",
+    name: "Teddy Bear",
+    price: "$15",
+    status: "For Sale",
+    statusClass: "for-sale",
+  },
+  {
+    image: "images/fallbacks/fashion3.jpg",
+    name: "Samba Sneakers",
+    price: "$100",
+    status: "For Sale",
+    statusClass: "for-sale",
+  } 
+]
+
 homeRouter.get("/cart/checkout/payment/pay", (req, res) => {
   res.render("cart/purchase", { title: "Purchase" });
 });
@@ -247,6 +312,8 @@ homeRouter.get("/", async (req, res) => {
       title: "Home",
       content: "buying",
       items,
+      items2,
+      items3,
       showSearchbar: true,
       listing: listing,
       listing2: listing2,

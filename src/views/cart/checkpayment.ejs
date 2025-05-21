@@ -8,13 +8,18 @@
   <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="checkout-container">
-    <header class="checkout-header">
-      <a href="/cart/checkout" class="fa back-arrow" aria-label="Go back to the previous page">&#8592;</a>
-      <h2>Checkout</h2>
-    </header>
+  <header class="header">
+    <div class="header-bar">
+      <a href="/cart/checkout" aria-label="Go back to the previous page">
+        <span class="fa back-arrow">&#8592;</span>
+      </a>
+      <span class="header-title">Checkout</span>
+    </div>
+  </header>
+  <div class="payment-container">
     <div class="secure-info">
-      <i class="icon-lock" aria-hidden="true"></i> Secure Payments Only
+      <i class="fa-solid fa-circle-info"></i>
+      <p>Secure Payments Only</p>
     </div>
     <form class="payment-form" method="POST" action="/pay" id="paymentForm">
       <section class="payment-info">
