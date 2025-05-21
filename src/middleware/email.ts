@@ -6,9 +6,9 @@ dotenv.config();
 const transporter = nodemailer.createTransport({
   host: "smtp.sendgrid.net",
   port: 587,
-  secure: false, // TLS (recommended)
+  secure: false,
   auth: {
-    user: "apikey", // Always "apikey" for SendGrid
+    user: "apikey",
     pass: process.env.SENDGRID_API_KEY,
   },
 });
@@ -21,9 +21,9 @@ const sendEmail = async (to: string, subject: string, html: string) => {
       subject,
       html,
     });
-    console.log("✅ Email sent successfully to:", to);
+    console.log("Email sent successfully to:", to);
   } catch (error) {
-    console.error("❌ Error sending email:", error);
+    console.error("Error sending email:", error);
     throw new Error("Email sending failed");
   }
 };
