@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { name } from "ejs";
 import express from "express";
 const prisma = new PrismaClient();
 
@@ -18,21 +17,52 @@ const listing = await prisma.listing.findMany({
 const listing2 = await prisma.listing.findMany({
   include: {
     user: true,
+    media: true,
   },
   orderBy: {
     createdAt: "asc",
   },
   take: 10,
 });
+const buyListing = await prisma.listing.findMany({
+  where: {
+    type: "PURCHASE",
+  },
+  include: {
+    user: true,
+    media: true,
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+  take: 10,
+});
+const rentListing = await prisma.listing.findMany({
+  where: {
+    type: "RENT",
+  },
+  include: {
+    user: true,
+    media: true,
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+  take: 10,
+});
+
 homeRouter.get("/buying", (req, res) => {
-  console.log(listing);
   res.render("home", {
     title: "Home",
     content: "buying",
     items,
+    items2,
+    items3,
     showSearchbar: true,
-    listing: listing,
-    listing2: listing2,
+    listing,
+    listing2,
+    buyListing,
+    rentListing,
   });
 });
 
@@ -41,9 +71,13 @@ homeRouter.get("/renting", (req, res) => {
     title: "Home",
     content: "renting",
     items,
+    items2,
+    items3,
     showSearchbar: true,
-    listing: listing,
-    listing2: listing2,
+    listing,
+    listing2,
+    buyListing,
+    rentListing,
   });
 });
 
@@ -76,12 +110,15 @@ homeRouter.get("/renting-page", async (req, res) => {
 homeRouter.get("/explore", (req, res) => {
   res.render("explore", {
     title: "Explore",
+    content: "buying",
     items,
     items2,
     items3,
     showSearchbar: true,
     listing,
     listing2,
+    buyListing,
+    rentListing,
   });
 });
 
@@ -275,8 +312,8 @@ const items2 = [
     price: "$30/day",
     status: "For Rent",
     statusClass: "for-rent",
-  }
-]
+  },
+];
 
 const items3 = [
   {
@@ -299,8 +336,8 @@ const items3 = [
     price: "$100",
     status: "For Sale",
     statusClass: "for-sale",
-  } 
-]
+  },
+];
 
 homeRouter.get("/cart/checkout/payment/pay", (req, res) => {
   res.render("cart/purchase", { title: "Purchase" });
@@ -316,8 +353,10 @@ homeRouter.get("/", async (req, res) => {
       items2,
       items3,
       showSearchbar: true,
-      listing: listing,
-      listing2: listing2,
+      listing,
+      listing2,
+      buyListing,
+      rentListing,
     });
   } catch (err) {
     console.error("Error fetching listings:", err);

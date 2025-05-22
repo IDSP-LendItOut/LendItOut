@@ -1,0 +1,74 @@
+<main class="listings">
+  <div class="section-header">
+    <h2>Listings</h2>
+    <a href="/listings">See more</a>
+  </div>
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% rentListing.forEach(item => { %>
+      <div class="item-card">
+        <a href="listings/my/<%= item.id %>"><img src="<%= item.media[0].url %>" alt="<%= item.title %>"></a>
+        <div class="item-details">
+          <p class="item-name"><%= item.title %></p>
+          <p class="item-price">$ <%= `${item.rentalPrice} / ${item.rentalDuration}` %></p>
+          <p class="item-status" style="color: orange;">For Rent</p>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+  <div class="section-header">
+    <h2>Recently Viewed</h2>
+    <a href="/listings">See more</a>
+  </div>
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% listing.forEach(item => { %>
+      <div class="item-card">
+        <a href="listings/my/<%= item.id %>"><img src="<%= item.media[0].url %>" alt="<%= item.title %>"></a>
+        <div class="item-details">
+          <p class="item-name"><%= item.title %></p>
+          <% if (item.rentalDuration === null) { %>
+          <p class="item-price">$ <%= item.salePrice %></p>
+          <% } else { %>
+          <p class="item-price">$ <%= `${item.rentalPrice} / ${item.rentalDuration}` %></p>
+          <% } %>
+
+          <% if (item.type === "RENT") { %>
+          <p class="item-status" style="color: orange;">For Rent</p>
+          <% } else { %>
+          <p class="item-status" style="color: green;">For Sale</p>
+          <% } %>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+  <div class="section-header">
+    <h2>Bookmarked Listings</h2>
+    <a href="/listings">See more</a>
+  </div>
+  <div class="scroll-container">
+    <div class="item-grid">
+      <% listing2.forEach(item => { %>
+      <div class="item-card">
+        <a href="listings/my/<%= item.id %>"><img src="<%= item.media[0].url %>" alt="<%= item.title %>"></a>
+        <div class="item-details">
+          <p class="item-name"><%= item.title %></p>
+          <% if (item.type === "PURCHASE") { %>
+          <p class="item-price">$ <%= item.salePrice %></p>
+          <% } else { %>
+          <p class="item-price">$ <%= `${item.rentalPrice} / ${item.rentalDuration}` %></p>
+          <% } %>
+
+          <% if (item.type === "RENT") { %>
+          <p class="item-status" style="color: orange;">For Rent</p>
+          <% } else { %>
+          <p class="item-status" style="color: green;">For Sale</p>
+          <% } %>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</main>
