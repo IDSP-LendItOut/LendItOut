@@ -172,7 +172,7 @@ postingRouter.post(
             },
           },
         });
-        console.log(data.images);
+
         console.log("New post created:", createPost);
         res.status(200).json({
           message: "Listing created successfully!",

@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { ObjectId } from "bson";
 import express from "express";
+import { requireLogin } from "../middleware/requireLogin";
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -162,8 +163,7 @@ router.get("/my/:id", async (req, res) => {
       },
       take: 6,
     });
-    console.log("*");
-    console.log(related);
+
     const joinedYear = listing.user?.createdAt.getFullYear();
     res.render("listings/show_myListing", {
       title: "Listing Detail",
@@ -177,4 +177,25 @@ router.get("/my/:id", async (req, res) => {
     res.status(500).send("An listing error");
   }
 });
+
+// delete listing in my listing
+router.delete("/my/:id", requireLogin, async (req, res) => {
+  const userId = req.session.user?.id;
+  const listing = await prisma.listing.findUnique({
+    where: { id: req.params.id },
+  });
+
+  if (!listing || listing.userId !== userId) {
+    res.status(403).send("You do not have delete permission.");
+    return;
+  }
+  await prisma.media.deleteMany({
+    where: { listingId: listing.id },
+  });
+
+  await prisma.listing.delete({ where: { id: listing.id } });
+
+  res.redirect("/profile");
+});
+
 export default router;
