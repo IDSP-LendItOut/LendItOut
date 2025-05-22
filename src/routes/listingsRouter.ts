@@ -170,6 +170,7 @@ router.get("/my/:id", async (req, res) => {
       listing,
       related,
       joinedYear,
+      currentUser: req.session.user,
     });
   } catch (error) {
     console.error("listingsRouter:", error);
