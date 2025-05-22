@@ -3061,7 +3061,8 @@ body {
 }
 
 .heart-button,
-.add-to-cart-button {
+.add-to-cart-button,
+.bin-btn form button {
   font-size: 1.7rem;
   padding: 8px 12px;
   cursor: pointer;
