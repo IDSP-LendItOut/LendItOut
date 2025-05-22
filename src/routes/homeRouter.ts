@@ -108,7 +108,7 @@ homeRouter.get("/renting-page", async (req, res) => {
 });
 
 homeRouter.get("/explore", (req, res) => {
-  res.render("explore", {
+  res.render("explore_withDB", {
     title: "Explore",
     content: "buying",
     items,
