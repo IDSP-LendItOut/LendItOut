@@ -17,22 +17,50 @@ const listing = await prisma.listing.findMany({
 const listing2 = await prisma.listing.findMany({
   include: {
     user: true,
+    media: true,
   },
   orderBy: {
     createdAt: "asc",
   },
   take: 10,
 });
+const buyListing = await prisma.listing.findMany({
+  where: {
+    type: "PURCHASE",
+  },
+  include: {
+    user: true,
+    media: true,
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+  take: 10,
+});
+const rentListing = await prisma.listing.findMany({
+  where: {
+    type: "RENT",
+  },
+  include: {
+    user: true,
+    media: true,
+  },
+  orderBy: {
+    createdAt: "desc",
+  },
+  take: 10,
+});
+
 homeRouter.get("/buying", (req, res) => {
   res.render("home", {
     title: "Home",
     content: "buying",
     items,
+    items2,
+    items3,
     showSearchbar: true,
     listing: listing,
     listing2: listing2,
-    items2,
-    items3,
   });
 });
 
@@ -41,11 +69,11 @@ homeRouter.get("/renting", (req, res) => {
     title: "Home",
     content: "renting",
     items,
+    items2,
+    items3,
     showSearchbar: true,
     listing: listing,
     listing2: listing2,
-    items2,
-    items3,
   });
 });
 
@@ -78,12 +106,15 @@ homeRouter.get("/renting-page", async (req, res) => {
 homeRouter.get("/explore", (req, res) => {
   res.render("explore", {
     title: "Explore",
+    content: "buying",
     items,
     items2,
     items3,
     showSearchbar: true,
     listing,
     listing2,
+    buyListing,
+    rentListing,
   });
 });
 
@@ -318,8 +349,10 @@ homeRouter.get("/", async (req, res) => {
       items2,
       items3,
       showSearchbar: true,
-      listing: listing,
-      listing2: listing2,
+      listing,
+      listing2,
+      buyListing,
+      rentListing,
     });
   } catch (err) {
     console.error("Error fetching listings:", err);
