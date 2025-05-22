@@ -16,13 +16,17 @@
   <section class="buy-page">
     <!-- Header -->
     <header class="buy-header">
+      <% if (currentUser) { %>
       <a href="/profile" class="header-btn back">
-        <i class="fas fa-times"></i>
-      </a>
-      <h1 class="buy-title">View Listing</h1>
-      <button class="header-btn menu">
-        <i class="fas fa-ellipsis-h"></i>
-      </button>
+        <% } else { %>
+        <a href="/" class="header-btn back">
+          <% } %>
+          <i class="fas fa-times"></i>
+        </a>
+        <h1 class="buy-title">View Listing</h1>
+        <button class="header-btn menu">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
     </header>
     <div class="more-options-modal" style="display: none;">
       <div class="modal-header">
