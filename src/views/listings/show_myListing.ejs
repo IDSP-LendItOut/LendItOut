@@ -41,6 +41,18 @@
     <%- include("carousel", { listing }) %>
 
     <div class="action-buttons">
+
+      <% if (currentUser && currentUser.id === listing.user?.id) { %>
+      <div class="bin-btn">
+        <form action="/listings/my/<%= listing.id %>" method="POST" onsubmit="return confirm('Are you sure delete this listing?');" enctype="application/x-www-form-urlencoded">
+          <input type="hidden" name="_method" value="DELETE" />
+          <button class="delete-btn" type="submit">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </form>
+      </div>
+      <% } %>
+
       <button class="heart-button" aria-label="Add to favorites">
         <i class="far fa-heart"></i>
       </button>
