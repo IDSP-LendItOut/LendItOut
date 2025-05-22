@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { name } from "ejs";
 import express from "express";
 const prisma = new PrismaClient();
 
@@ -25,7 +24,6 @@ const listing2 = await prisma.listing.findMany({
   take: 10,
 });
 homeRouter.get("/buying", (req, res) => {
-  console.log(listing);
   res.render("home", {
     title: "Home",
     content: "buying",
@@ -33,6 +31,8 @@ homeRouter.get("/buying", (req, res) => {
     showSearchbar: true,
     listing: listing,
     listing2: listing2,
+    items2,
+    items3,
   });
 });
 
@@ -44,6 +44,8 @@ homeRouter.get("/renting", (req, res) => {
     showSearchbar: true,
     listing: listing,
     listing2: listing2,
+    items2,
+    items3,
   });
 });
 
@@ -275,8 +277,8 @@ const items2 = [
     price: "$30/day",
     status: "For Rent",
     statusClass: "for-rent",
-  }
-]
+  },
+];
 
 const items3 = [
   {
@@ -299,8 +301,8 @@ const items3 = [
     price: "$100",
     status: "For Sale",
     statusClass: "for-sale",
-  } 
-]
+  },
+];
 
 homeRouter.get("/cart/checkout/payment/pay", (req, res) => {
   res.render("cart/purchase", { title: "Purchase" });
