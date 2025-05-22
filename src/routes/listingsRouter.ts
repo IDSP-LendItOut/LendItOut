@@ -189,12 +189,30 @@ router.delete("/my/:id", requireLogin, async (req, res) => {
     res.status(403).send("You do not have delete permission.");
     return;
   }
-  await prisma.media.deleteMany({
+
+  const conversations = await prisma.conversation.findMany({
     where: { listingId: listing.id },
+    select: { id: true },
   });
+  const conversationIds = conversations.map((c) => c.id);
 
-  await prisma.listing.delete({ where: { id: listing.id } });
-
+  await prisma.$transaction([
+    prisma.media.deleteMany({
+      where: { listingId: listing.id },
+    }),
+    prisma.reviewOnListing.deleteMany({
+      where: { listingId: listing.id },
+    }),
+    prisma.message.deleteMany({
+      where: { conversationId: { in: conversationIds } },
+    }),
+    prisma.conversation.deleteMany({
+      where: { id: { in: conversationIds } },
+    }),
+    prisma.listing.delete({
+      where: { id: listing.id },
+    }),
+  ]);
   res.redirect("/profile");
 });
 

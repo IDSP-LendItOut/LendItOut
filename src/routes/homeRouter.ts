@@ -52,7 +52,7 @@ const rentListing = await prisma.listing.findMany({
 });
 
 homeRouter.get("/buying", (req, res) => {
-  res.render("home", {
+  res.render("home_withDB", {
     title: "Home",
     content: "buying",
     items,
@@ -65,7 +65,7 @@ homeRouter.get("/buying", (req, res) => {
 });
 
 homeRouter.get("/renting", (req, res) => {
-  res.render("home", {
+  res.render("home_withDB", {
     title: "Home",
     content: "renting",
     items,
@@ -342,7 +342,7 @@ homeRouter.get("/cart/checkout/payment/pay", (req, res) => {
 // home
 homeRouter.get("/", async (req, res) => {
   try {
-    res.render("home", {
+    res.render("home_withDB", {
       title: "Home",
       content: "buying",
       items,
