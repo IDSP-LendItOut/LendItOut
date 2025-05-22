@@ -3,9 +3,10 @@ import dotenv from "dotenv";
 import ejsMate from "ejs-mate";
 import express from "express";
 import session from "express-session";
+import http from "http";
+import methodOverride from "method-override";
 import path from "path";
-import http from "http"; 
-import { Server } from "socket.io"; 
+import { Server } from "socket.io";
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const server = http.createServer(app); 
+const server = http.createServer(app);
 const io = new Server(server);
 
 const port = 6563;
@@ -36,8 +37,16 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  methodOverride(function (req, res) {
+    if (req.body && typeof req.body === "object" && "_method" in req.body) {
+      return req.body._method;
+    }
+  })
+);
+
 app.use(express.json());
-// app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 app.use(
   session({
@@ -49,6 +58,11 @@ app.use(
     },
   })
 );
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.user;
+  next();
+});
 
 app.use("/", homeRouter);
 app.use("/profile", profileRouter);
