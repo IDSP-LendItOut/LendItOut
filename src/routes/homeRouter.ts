@@ -59,10 +59,8 @@ homeRouter.get("/buying", (req, res) => {
     items2,
     items3,
     showSearchbar: true,
-    listing,
-    listing2,
-    buyListing,
-    rentListing,
+    listing: listing,
+    listing2: listing2,
   });
 });
 
@@ -74,10 +72,8 @@ homeRouter.get("/renting", (req, res) => {
     items2,
     items3,
     showSearchbar: true,
-    listing,
-    listing2,
-    buyListing,
-    rentListing,
+    listing: listing,
+    listing2: listing2,
   });
 });
 
