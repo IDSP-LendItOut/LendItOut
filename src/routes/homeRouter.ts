@@ -61,6 +61,8 @@ homeRouter.get("/buying", (req, res) => {
     showSearchbar: true,
     listing: listing,
     listing2: listing2,
+    buyListing,
+    rentListing,
   });
 });
 
@@ -74,6 +76,8 @@ homeRouter.get("/renting", (req, res) => {
     showSearchbar: true,
     listing: listing,
     listing2: listing2,
+    buyListing,
+    rentListing,
   });
 });
 
