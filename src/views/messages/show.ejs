@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script> 
+  <script src="/scripts/chat.js" defer></script> 
+  <title>Chat</title>
+</head>
+<body>
+  <div class="chat-page">
+    <% if (conversation && conversation.participants) { %>
+      <div class="chat-header">
+        <a href="/messages" class="back-btn">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <span class="chat-user">
+          <%= conversation.participants.find(p => p.user.id !== userId)?.user.name || 'Unknown User' %>
+        </span>
+        <div class="chat-actions">
+          <i class="fa-solid fa-ellipsis-h" id="options-toggle"></i>
+          <div class="chat-options hidden" id="chat-options">
+            <a href="/profile/<%= userId %>">
+              <i class="fa-solid fa-user"></i> View profile
+            </a>
+            <a href="#" id="mute-btn">
+              <i class="fa-solid fa-bell-slash"></i> Mute conversation
+            </a>
+            <a href="#" id="block-btn">
+              <i class="fa-solid fa-ban"></i> Block user
+            </a>
+            <button id="delete-btn" class="delete-link">
+              <i class="fa-solid fa-trash"></i> Delete conversation
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay hidden" id="mute-modal">
+        <div class="modal-box">
+          <p>This conversation is now muted.</p>
+          <button class="modal-close" onclick="closeModal('mute-modal')">OK</button>
+        </div>
+      </div>
+
+      <div class="overlay hidden" id="block-modal">
+        <div class="modal-box">    
+          <p>This user has been blocked.</p>
+          <button class="modal-close" onclick="closeModal('block-modal')">OK</button>
+        </div>
+      </div>
+
+      <div class="overlay hidden" id="delete-modal">
+        <div class="modal-box">
+          <h3>Are you sure you want to delete this conversation?</h3>
+          <p>This cannot be undone!</p>
+          <div class="modal-actions">
+            <button class="modal-cancel" onclick="closeModal('delete-modal')">Cancel</button>
+            <form method="POST" action="/messages/<%= conversation.id %>/delete">
+              <button type="submit" class="modal-delete">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-item-info">
+        <img src="<%= conversation.listing.media?.[0]?.url || '/images/default.jpg' %>" alt="Preview">
+        <div class="item-details">
+          <span class="title"><%= conversation.listing.title %></span>
+          <span class="price">
+            $<%= conversation.listing.rentalPrice ?? conversation.listing.salePrice ?? 'N/A' %>
+            /day
+          </span>
+          
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <% conversation.messages.forEach(msg => { %>
+          <div class="message <%= msg.senderId === userId ? 'sent' : 'received' %>">
+            <%= msg.text %>
+          </div>
+        <% }) %>
+      </div>
+
+      <form id="chat-form" class="chat-input">
+        <input type="text" name="text" id="messageInput" placeholder="Type message here..." required>
+        <button type="submit" class="send-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+      
+    <% } else { %>
+      <div class="chat-header">
+        <p class="error-msg">Conversation not found or missing data.</p>
+      </div>
+    <% } %>
+  </div>
+
+  <script>
+    const socket = io();
+
+    // Join the conversation room
+    const conversationId = "<%= conversation.id %>";
+    socket.emit("joinConversation", conversationId);
+
+    // handle sending messages
+    const chatForm = document.getElementById("chat-form");
+    const messageInput = document.getElementById("messageInput");
+    const chatMessages = document.getElementById("chat-messages");
+
+    chatForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const message = messageInput.value.trim();
+
+      if (message) {
+        // emit the message to the server
+        socket.emit("sendMessage", {
+          conversationId,
+          senderId: "<%= userId %>",
+          text: message,
+        });
+
+        //append the message to the chat window
+        appendMessage("sent", message);
+        messageInput.value = "";
+      }
+    });
+
+    // Listen for incoming messages
+    socket.on("receiveMessage", (data) => {
+      appendMessage("received", data.text);
+    });
+
+    //append a message to the chat window
+    function appendMessage(type, text) {
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message", type);
+      messageElement.textContent = text;
+      chatMessages.appendChild(messageElement);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  </script>
+</body>
+</html>

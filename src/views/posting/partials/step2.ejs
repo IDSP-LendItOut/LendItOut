@@ -1,0 +1,125 @@
+<form action="/posting/create/step/2" method="POST" class="step2-form" id="step2-form" enctype="multipart/form-data">
+  <div class="photo-section">
+    <p class="section-title subtitle">Photos</p>
+    <p class="section-description subdescription">Add up to 8 photos.</p>
+    <!-- todo : need to implement image upload -->
+    <div class="photo-grid" id="photoGrid">
+
+      <input type="file" name="images" accept="image/*" multiple onchange="previewImages(this)" required>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="subtitle">Add a title</label>
+    <input type="text" name="title" required>
+  </div>
+
+  <div class="form-group">
+    <label class="subtitle">Provide a description</label>
+    <p class="subdescription">Add details about your item</p>
+    <textarea name="description" rows="4" required></textarea>
+  </div>
+
+  <% if(listingType.includes("PURCHASE")){ %>
+
+  <div class="form-group" id="saleOnly">
+    <label class="subtitle">Choose a price for sale</label>
+    <p class="section-description subdescription">The price range of your product is determined by the category you selected</p>
+    <input type="number" name="salePrice" placeholder="$ 0.00" min="1" required>
+  </div>
+  <% }%>
+  <% if(listingType.includes("RENT")){ %>
+  <div class="form-group rental-duration-group" id="rentalOnly">
+    <label class=" subtitle">Choose a price for rental and specify the rental duration</label>
+    <p class="section-description subdescription">This helps renters understand availability and pricing.</p>
+    <div class="duration-selection">
+      <input type="number" name="rentalPrice" placeholder="$ 0.00" min="1" required>
+      <select name="rentalDuration">
+        <option value="HOUR">Per Hour</option>
+        <option value="DAY">Per Day</option>
+        <option value="WEEK">Per Week</option>
+        <option value="MONTH">Per Month</option>
+        <option value="YEAR">Per Year</option>
+      </select>
+    </div>
+  </div>
+  <% }%>
+
+  <div class="form-group">
+    <label class="subtitle">Condition</label>
+    <p class="section-description subdescription">This can enhance the appeal of your listing.</p>
+    <input type="range" name="condition" min="1" max="5" step="1" onchange="updateConditionValue">
+    <div class="condition-labels">
+      <span>Bad</span>
+      <span>Adequate</span>
+      <span>Good</span>
+      <span>Great</span>
+      <span>New</span>
+    </div>
+  </div>
+
+
+  <button type="submit" class="next-btn" id="posting-next">Next</button>
+</form>
+
+<input type="hidden" id="listingType" value="<%= JSON.stringify(listingType) %>">
+
+<script>
+  function updateConditionValue(rangeInput) {
+    const conditionMap = {
+      1: "BAD",
+      2: "ADEQUATE",
+      3: "GOOD",
+      4: "GREAT",
+      5: "NEW"
+    };
+    const conditionValue = conditionMap[rangeInput.value];
+    document.getElementById("condition-labels").value = conditionValue;
+  }
+
+  function previewImages(input) {
+    const photoGrid = document.getElementById("photoGrid");
+    const files = input.files;
+
+    if (files.length + photoGrid.children.length > 8) {
+      alert("You can only upload up to 8 images.");
+      input.value = "";
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        const imgElement = document.createElement("div");
+        imgElement.classList.add("photo-slot");
+        imgElement.innerHTML = `
+          <img src="${e.target.result}" alt="Photo">
+          <button type="button" class="remove-btn" onclick="removeImage(this)">Remove</button>
+        `;
+        photoGrid.appendChild(imgElement);
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    if (photoGrid.children.length >= 8) {
+      document.getElementById("imageInput").style.display = "none";
+    } else {
+      document.getElementById("imageInput").style.display = "block";
+    }
+
+    input.value = "";
+  }
+
+  function removeImage(button) {
+    const photoGrid = document.getElementById("photoGrid");
+    button.parentElement.remove();
+
+    if (photoGrid.children.length < 8) {
+      document.getElementById("imageInput").style.display = "block";
+    }
+  }
+</script>

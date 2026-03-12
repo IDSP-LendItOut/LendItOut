@@ -1,0 +1,26 @@
+<form action="/posting/create/step/1" method="POST" class="step1-form" id="step1-form">
+  <p class="subtitle">Choose a listing type</p>
+  <p class="subdescription">Make a selection: One or both option are available</p>
+
+  <div class="checkbox-group">
+    <label><input type="radio" name="type" value="RENT" required><span>For Renting</span></label>
+    <label><input type="radio" name="type" value="PURCHASE"><span>For Sale</span></label>
+  </div>
+
+  <p class="subtitle">Select a Category</p>
+  <p class="subdescription">Choose one option—this will set your price range limits</p>
+
+  <div class="category-grid">
+    <% categories.forEach(category => { %>
+    <label class="category-option">
+      <input type="radio" name="category" value="<%= category.id %>">
+      <span><%= category.name %></span>
+    </label>
+    <% }) %>
+  </div>
+
+  <%if(error) {%>
+  <p class="error-msg"><%= error %></p>
+  <%}%>
+  <button type="submit" class="next-btn" id="posting-next">Next</button>
+</form>

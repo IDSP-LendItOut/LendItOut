@@ -1,0 +1,92 @@
+.listings {
+  padding: 20px;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    a {
+      font-size: 14px;
+      color: black;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.headerEP {
+  display: flex;
+  justify-content: center;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.profile-settings-card {
+  margin: 1.5rem;
+  overflow: hidden;
+
+  .profile-setting-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    text-decoration: none;
+    border-bottom: 1px solid lightgray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    span:hover {
+      color: #495837;
+    }
+
+    i {
+      color: grey;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.logout-section {
+  form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  button {
+    color: $color-white;
+    background-color: $color-primary;
+    border-radius: .5rem;
+    text-align: center;
+    padding: .7rem;
+    margin: 1rem 0 2rem 0;
+    width: 80%;
+  }
+}
+
+.item-status {
+  &.sale {
+    color: green;
+  }
+
+  &.rent {
+    color: orange;
+  }
+}

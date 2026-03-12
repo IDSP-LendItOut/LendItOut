@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-bar">
+      <a href="/" aria-label="Go back to homepage">
+        <span class="fa back-arrow">&#8592;</span>
+      </a>
+      <span class="header-title">Cart</span>
+    </div>
+  </header>
+
+  <div class="cart-container">
+    <% cartItems.forEach(item => { %>
+      <!-- Item Card -->
+      <div class="item-card">
+        <div class="checkbox">
+          <input type="checkbox" id="select-item-<%= item.id %>" checked aria-label="Select item <%= item.name %>" />
+        </div>
+        <img src="<%= item.image %>" alt="<%= item.name %>" />
+        <div class="details">
+          <h4><%= item.name %></h4>
+          <div class="price"><%= item.priceLabel %></div>
+          <div class="quantity-control">
+            <button class="decrease-btn" data-id="<%= item.id %>" aria-label="Decrease quantity for <%= item.name %>">-</button>
+            <span class="quantity" id="quantity-<%= item.id %>"><%= item.quantity %></span>
+            <button class="increase-btn" data-id="<%= item.id %>" aria-label="Increase quantity for <%= item.name %>">+</button>
+          </div>
+          <div class="actions">
+            <% if (item.canRent) { %>
+              <button aria-label="Rent <%= item.name %>">Rent</button>
+            <% } %>
+            <% if (item.canBuy) { %>
+              <button aria-label="Buy <%= item.name %>">Buy</button>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contracts Section -->
+      <div class="contracts">
+        <a href="/termsconditions">
+          <% item.contracts.forEach(contract => { %>
+            <span><%= contract %></span>
+          <% }) %>
+        </a>
+      </div>
+
+      <!-- Insurance Section -->
+    <div class="insurance">
+      <span> Insurance $<%= item.insurance %></span>
+      <input type="checkbox" id="insurance-<%= item.id %>" <%= item.insuranceSelected ? 'checked' : '' %> aria-label="Add insurance for <%= item.name %>" />
+    </div>
+    <% }) %>
+
+    <!-- Summary Section -->
+    <div class="summary">
+      <div class="total-line">
+        <span>Subtotal Rent</span>
+        <span>$<%= subtotalRent %></span>
+      </div>
+      <div class="total-line">
+        <span>Subtotal Buy</span>
+        <span>$<%= subtotalBuy %></span>
+      </div>
+      <div class="total-line">
+        <span>Insurance</span>
+        <span>$<%= totalInsurance %></span>
+      </div>
+      <div class="total-line">
+        <span>Shipping</span>
+        <span>$<%= shipping %></span>
+      </div>
+      <hr />
+      <div class="total-line">
+        <strong>Total</strong>
+        <strong>$<%= total %></strong>
+      </div>
+      <a href="/cart/checkout" class="checkout-btn" aria-label="Proceed to checkout">Check out</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartContainer = document.querySelector('.cart-container');
+
+      cartContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('increase-btn')) {
+          const itemId = event.target.getAttribute('data-id');
+          const quantityElement = document.getElementById(`quantity-${itemId}`);
+          let currentQuantity = parseInt(quantityElement.textContent);
+          quantityElement.textContent = currentQuantity + 1;
+        }
+
+        if (event.target.classList.contains('decrease-btn')) {
+          const itemId = event.target.getAttribute('data-id');
+          const quantityElement = document.getElementById(`quantity-${itemId}`);
+          let currentQuantity = parseInt(quantityElement.textContent);
+          if (currentQuantity > 1) {
+            quantityElement.textContent = currentQuantity - 1;
+          }
+        }
+      });
+    });
+  </script>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

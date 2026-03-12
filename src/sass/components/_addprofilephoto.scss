@@ -1,0 +1,84 @@
+.add-profile-photo-page {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+  }
+
+  .skip {
+    position: absolute;
+    top: -80px;
+    right: 20px;
+
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .page-title {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .photo-icon {
+    margin: 20px auto 50px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg, img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    margin: 20px auto; 
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+
+    &.add-photo {
+      background-color: $color-primary;
+      color: white;
+
+      &:hover {
+        background-color: $color-primary-light;
+      }
+    }
+
+    &.continue {
+      background-color: $color-light;
+      color: black;
+      border: 1px solid black;
+
+      &:hover {
+        background-color: $color-line;
+      }
+    }
+  }
+}

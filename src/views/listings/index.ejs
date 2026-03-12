@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Listing</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+  
+
+</head>
+<body>
+  <section class="buy-page">
+    <header class="buy-header">
+      <a href="/" class="header-btn back">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <h1 class="buy-title">Listing</h1>
+      <button class="header-btn menu">
+        
+      </button>
+    </header>
+  
+    <div class="product-box">
+      <h2>Categories</h2>
+      <div class="category-image">
+        <div>
+          <a href="/"><img src="/images/electronic.png" alt="Electronics & Gadgets"></a>
+          <p>Electronics & Gadgets</p>
+        </div>
+        <div>
+          <a href="/"><img src="/images/fashion.png" alt="Fashion & Apparel"></a>
+          <p>Fashion & Apparel</p>
+        </div>
+        <div>
+          <a href="/"><img src="/images/home.png" alt="Home &      Furniture"></a>
+          <p>Home & Furniture</p>
+        </div>
+        <div>
+          <a href="/"><img src="/images/beauty.png" alt="Beauty & Personal Care"></a>
+          <p>Beauty & Personal Care</p>
+        </div>
+      </div>
+        <h3 style="margin-top: 1.5rem;">Most popular listings</h3>
+      <div class="related-grid">
+        <% listings.forEach(listing => { %>
+          <div class="related-card">
+            <a href="/listings/<%= listing.id %>">
+              <img
+              src="<%= listing.media[0]?.url || '/images/fallbacks/lambo.jpg' %>"
+              alt="<%= listing.title %>"
+              onerror="this.onerror=null;this.src='/images/fallbacks/lambo2.jpg'"
+            />
+            
+
+
+              <p><%= listing.title %></p>
+              <p>
+                <% if (listing.type === 'RENT') { %>
+                  $<%= listing.rentalPrice %> / <%= listing.rentalDuration.toLowerCase() %>
+                <% } else { %>
+                  $<%= listing.salePrice %>
+                <% } %>
+              </p>
+              <small><%= listing.type === 'RENT' ? 'Rent available' : 'Purchase available' %></small>
+
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
