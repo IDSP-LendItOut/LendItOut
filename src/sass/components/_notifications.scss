@@ -1,138 +1,155 @@
-.top-bar {
-  background: $color-primary;
-  color: white;
-  padding: 2.5rem;
+.notif-page {
   display: flex;
-  align-items: center;
-
-  h1 {
-    flex: 1;
-    text-align: center;
-    margin: 0;
-    font-size: 2.5rem;
-  }
-
-  .back {
-    color: white;
-    text-decoration: none;
-    font-size: 2.5rem;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  flex-direction: column;
+  background: #f2f2f2;
+  min-height: 100%;
 }
 
-.tabs {
+// ── Tabs ──────────────────────────────────────────────
+.notif-tabs {
   display: flex;
-  justify-content: center;
-  border-bottom: 3px solid rgb(157, 151, 151);
-  margin: 1.5rem 5rem 5rem; 
+  background: #fff;
+  border-bottom: 1.5px solid #ececec;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
-  button {
+  .notif-tab {
     flex: 1;
-    padding: 1rem;
+    padding: 1.3rem 1rem;
     border: none;
-    background: none; 
-    font-weight: bold;
-    font-size: 2rem; 
-    color: gray;
-    text-decoration: none; 
+    background: none;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #aaa;
     cursor: pointer;
-    text-align: center;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    border-bottom: 2.5px solid transparent;
+    margin-bottom: -1.5px;
+    transition: color 0.2s, border-color 0.2s;
 
     &.active {
-      color: rgb(70, 70, 70);
+      color: $color-primary;
+      border-bottom-color: $color-primary;
     }
   }
 }
 
-.section {
-  padding: 1rem;
+// ── Day label ─────────────────────────────────────────
+.notif-day-label {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1.8rem 1.6rem 0.7rem;
+}
 
-  h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+// ── Notification row ──────────────────────────────────
+.notif-section {
+  flex: 1;
+}
+
+.notif-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.6rem;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+  transition: background 0.15s;
+
+  &:active {
+    background: #f7f7f7;
   }
 
-  .notification, .listing {
+  &.unread {
+    .notif-title {
+      font-weight: 700;
+      color: #111;
+    }
+  }
+}
+
+// ── Thumbnail with badge ───────────────────────────────
+.notif-icon-wrap {
+  position: relative;
+  flex-shrink: 0;
+
+  img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .notif-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    background: $color-primary;
+    border-radius: 50%;
+    border: 2px solid #fff;
     display: flex;
     align-items: center;
-    padding: 1.5rem;
-    background: #fafafa;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.3s ease;
-    margin-bottom: 1.5rem;
+    justify-content: center;
 
-    &:hover {
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    &.warning {
+      background: #e07b00;
     }
 
-    img {
-      width: 180px !important; 
-      height: 180px !important; 
-      object-fit: cover;
-      border-radius: 8px;
-      margin-right: 1.5rem;
-    }
-
-    p {
-      font-size: 1.8rem; 
-      line-height: 1.6;
-      color: #333;
-      margin: 0;
-      flex: 1;
-    }
-
-    .dot {
-      width: 12px; 
-      height: 12px;
-      background: $color-primary;
-      border-radius: 50%;
-      margin-left: 0.5rem;
+    i {
+      font-size: 0.7rem;
+      color: #fff;
     }
   }
 }
 
-@media (max-width: 768px) {
-  .top-bar {
-    h1 {
-      font-size: 1.5rem;
-    }
+// ── Text content ──────────────────────────────────────
+.notif-content {
+  flex: 1;
+  min-width: 0;
 
-    .back {
-      font-size: 1.5rem;
-    }
+  .notif-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #222;
+    margin: 0 0 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .tabs {
-    button {
-      font-size: 1.4rem; /* Adjusted font size */
-      padding: 1.2rem; /* Adjusted padding */
-    }
+  .notif-desc {
+    font-size: 1.2rem;
+    color: #777;
+    margin: 0 0 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .section {
-    h2 {
-      font-size: 1.6rem; /* Adjusted font size for section headers */
-    }
-
-    .notification, .listing {
-      img {
-        width: 180px !important; /* Same size for mobile */
-        height: 180px !important; /* Same size for mobile */
-      }
-
-      p {
-        font-size: 1.4rem; /* Same font size for mobile */
-      }
-
-      .dot {
-        width: 12px; /* Same size for mobile */
-        height: 12px; /* Same size for mobile */
-      }
-    }
+  .notif-time {
+    font-size: 1.1rem;
+    color: #bbb;
   }
+}
+
+// ── Unread dot ────────────────────────────────────────
+.notif-dot {
+  width: 8px;
+  height: 8px;
+  background: $color-primary;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+// ── Listing chevron ───────────────────────────────────
+.notif-arrow {
+  font-size: 1.2rem;
+  color: #ccc;
+  flex-shrink: 0;
 }

@@ -1,107 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Notifications</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+<% layout('layout') %>
 
-</head>
-<body>
-  <div class="top-bar">
-    <a href="/" class="back">
-      <span class="fa back-arrow">&#8592;</span>
-    </a>
-    <h1>Notifications</h1>
+<div class="notif-page">
+
+  <div class="notif-tabs">
+    <button id="notifications-tab" class="notif-tab active" onclick="showSection('notifications')">Notifications</button>
+    <button id="listings-tab" class="notif-tab" onclick="showSection('listings')">Listings</button>
   </div>
 
-  <div class="tabs">
-    <button id="notifications-tab" class="active" onclick="showSection('notifications')">Notifications</button>
-    <button id="listings-tab" onclick="showSection('listings')">Listings</button>
+  <div id="notifications" class="notif-section">
+
+    <p class="notif-day-label">Today</p>
+
+    <div class="notif-item unread">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/house/80/80" alt="item">
+        <span class="notif-badge"><i class="fa-solid fa-dollar-sign"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Upcoming payment due</p>
+        <p class="notif-desc">Item #453432 — 3 Bed, 2 Bath house — $2,500/month</p>
+        <p class="notif-time">2h ago</p>
+      </div>
+      <span class="notif-dot"></span>
+    </div>
+
+    <div class="notif-item unread">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/laptop/80/80" alt="item">
+        <span class="notif-badge"><i class="fa-solid fa-check"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Rental confirmed</p>
+        <p class="notif-desc">MacBook Pro 16" — pickup scheduled for tomorrow</p>
+        <p class="notif-time">4h ago</p>
+      </div>
+      <span class="notif-dot"></span>
+    </div>
+
+    <div class="notif-item unread">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/camera/80/80" alt="item">
+        <span class="notif-badge warning"><i class="fa-solid fa-clock"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Return due in 2 days</p>
+        <p class="notif-desc">Canon EOS R5 — please prepare for drop-off</p>
+        <p class="notif-time">6h ago</p>
+      </div>
+      <span class="notif-dot"></span>
+    </div>
+
+    <div class="notif-item unread">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/bike/80/80" alt="item">
+        <span class="notif-badge"><i class="fa-solid fa-check"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Payment processed</p>
+        <p class="notif-desc">Mountain Bike rental — payment successful</p>
+        <p class="notif-time">8h ago</p>
+      </div>
+      <span class="notif-dot"></span>
+    </div>
+
+    <p class="notif-day-label">Yesterday</p>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/speaker/80/80" alt="item">
+        <span class="notif-badge"><i class="fa-solid fa-bell"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Back in stock</p>
+        <p class="notif-desc">JBL Go 4 is available again — grab yours now</p>
+        <p class="notif-time">1d ago</p>
+      </div>
+    </div>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/console/80/80" alt="item">
+        <span class="notif-badge"><i class="fa-solid fa-truck"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Order shipped</p>
+        <p class="notif-desc">PlayStation 5 — delivery in 3–5 business days</p>
+        <p class="notif-time">1d ago</p>
+      </div>
+    </div>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/furniture/80/80" alt="item">
+        <span class="notif-badge"><i class="fa-solid fa-rotate-left"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Return complete</p>
+        <p class="notif-desc">Dining table set returned successfully</p>
+        <p class="notif-time">1d ago</p>
+      </div>
+    </div>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/headphones/80/80" alt="item">
+        <span class="notif-badge"><i class="fa-solid fa-check"></i></span>
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Payment received</p>
+        <p class="notif-desc">Bose Noise Cancelling Headphones 700</p>
+        <p class="notif-time">1d ago</p>
+      </div>
+    </div>
+
   </div>
 
-  <div id="notifications" class="section">
-    <h2>Today</h2>
-    <div class="notification">
-      <img src="https://picsum.photos/300/100" alt="House">
-      <p>You have an upcoming payment for renting item #453432, 3 Bed, 2 Bath house for $2,500/month.</p>
-      <span class="dot"></span>
-    </div>
-    <div class="notification">
-      <img src="https://picsum.photos/300/100" alt="Laptop">
-      <p>Your rental for the MacBook Pro 16" has been confirmed. Pickup is scheduled for tomorrow.</p>
-      <span class="dot"></span>
-    </div>
-    <div class="notification">
-      <img src="https://picsum.photos/300/100" alt="Camera">
-      <p>The Canon EOS R5 camera you rented is due for return in 2 days. Please prepare for drop-off.</p>
-      <span class="dot"></span>
-    </div>
-    <div class="notification">
-      <img src="https://picsum.photos/300/100" alt="Bike">
-      <p>Your payment for the Mountain Bike rental has been successfully processed.</p>
-      <span class="dot"></span>
+  <div id="listings" class="notif-section" style="display:none;">
+
+    <p class="notif-day-label">Your Active Listings</p>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/house/80/80" alt="item">
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">3 Bed, 2 Bath House</p>
+        <p class="notif-desc">$2,500 / month</p>
+      </div>
+      <i class="fa-solid fa-chevron-right notif-arrow"></i>
     </div>
 
-    <h2>Yesterday</h2>
-    <div class="notification">
-      <img src="https://picsum.photos/300/200" alt="JBL Speaker">
-      <p>Good news! The JBL Go 4 is now back in stock. Grab yours while supplies last.</p>
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/speaker/80/80" alt="item">
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">JBL Go 4 Speaker</p>
+        <p class="notif-desc">$50</p>
+      </div>
+      <i class="fa-solid fa-chevron-right notif-arrow"></i>
     </div>
-    <div class="notification">
-      <img src="https://picsum.photos/300/200" alt="Gaming Console">
-      <p>Your pre-order for the PlayStation 5 has been shipped. Expected delivery: 3-5 business days.</p>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/camera/80/80" alt="item">
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Canon EOS R5 Camera</p>
+        <p class="notif-desc">$150 / day</p>
+      </div>
+      <i class="fa-solid fa-chevron-right notif-arrow"></i>
     </div>
-    <div class="notification">
-      <img src="https://picsum.photos/300/200" alt="Furniture">
-      <p>The dining table set you rented has been successfully returned. Thank you!</p>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/bike/80/80" alt="item">
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">Mountain Bike</p>
+        <p class="notif-desc">$20 / day</p>
+      </div>
+      <i class="fa-solid fa-chevron-right notif-arrow"></i>
     </div>
-    <div class="notification">
-      <img src="https://picsum.photos/300/200" alt="Headphones">
-      <p>Your payment for the Bose Noise Cancelling Headphones 700 has been received.</p>
+
+    <div class="notif-item">
+      <div class="notif-icon-wrap">
+        <img src="https://picsum.photos/seed/console/80/80" alt="item">
+      </div>
+      <div class="notif-content">
+        <p class="notif-title">PlayStation 5</p>
+        <p class="notif-desc">$30 / day</p>
+      </div>
+      <i class="fa-solid fa-chevron-right notif-arrow"></i>
     </div>
-    <div class="notification">
-      <img src="https://picsum.photos/300/200" alt="Drone">
-      <p>The DJI Mavic Air 2 drone you rented is now overdue. Please return it as soon as possible.</p>
-    </div>
+
   </div>
 
-  <div id="listings" class="section" style="display: none;">
-    <h2>Your Listings</h2>
-    <div class="listing">
-      <img src="https://picsum.photos/300/150" alt="Listing Image">
-      <p>3 Bed, 2 Bath house available for $2,500/month.</p>
-    </div>
-    <div class="listing">
-      <img src="https://picsum.photos/300/150" alt="Listing Image">
-      <p>JBL Go 4 Speaker available for $50.</p>
-    </div>
-    <div class="listing">
-      <img src="https://picsum.photos/300/150" alt="Listing Image">
-      <p>Canon EOS R5 Camera available for $150/day.</p>
-    </div>
-    <div class="listing">
-      <img src="https://picsum.photos/300/150" alt="Listing Image">
-      <p>Mountain Bike available for $20/day.</p>
-    </div>
-    <div class="listing">
-      <img src="https://picsum.photos/300/150" alt="Listing Image">
-      <p>PlayStation 5 available for $30/day.</p>
-    </div>
-  </div>
+</div>
 
-  <script>
-    function showSection(sectionId) {
-      document.getElementById('notifications').style.display = 'none';
-      document.getElementById('listings').style.display = 'none';
-
-      document.getElementById('notifications-tab').classList.remove('active');
-      document.getElementById('listings-tab').classList.remove('active');
-
-      document.getElementById(sectionId).style.display = 'block';
-
-      document.getElementById(sectionId + '-tab').classList.add('active');
-    }
-  </script>
-</body>
-</html>
+<script>
+  function showSection(sectionId) {
+    document.getElementById('notifications').style.display = 'none';
+    document.getElementById('listings').style.display = 'none';
+    document.getElementById('notifications-tab').classList.remove('active');
+    document.getElementById('listings-tab').classList.remove('active');
+    document.getElementById(sectionId).style.display = 'block';
+    document.getElementById(sectionId + '-tab').classList.add('active');
+  }
+</script>

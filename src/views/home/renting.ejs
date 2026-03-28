@@ -1,53 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout('layout') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-  <header class="header">
-    <div class="header-bar">
-      <a href="/" aria-label="Go back to homepage">
-        <span class="fa back-arrow">&#8592;</span>
-      </a>
-      <span class="header-title">Categories</span>
-    </div>
-  </header>
-
-  <div class="page-container">
-
-    <main class="main-content">
-      <div class="buying buying-grid">
-        <h3>For Renting</h3>
-        <div class="category-container">
-          <% categories.forEach(category => { %>
-          <a href="/">
-            <div class="category-card">
-              <img src="https://picsum.photos/300/300?random=<%= Math.random() %>" alt="<%= category.name %>" class="category-image">
-              <div class="category-overlay">
-                <span class="category-text"><%= category.name %></span>
-              </div>
-            </div>
-          </a>
-          <% }) %>
+<div class="buying">
+  <h3>For Renting</h3>
+  <div class="category-container">
+    <% categories.forEach(category => { %>
+    <a href="/">
+      <div class="category-card">
+        <img src="https://picsum.photos/300/300?random=<%= Math.random() %>" alt="<%= category.name %>" class="category-image">
+        <div class="category-overlay">
+          <span class="category-text"><%= category.name %></span>
         </div>
       </div>
-
-    </main>
-
-
-    <%- include('../partials/footer') %>
-
+    </a>
+    <% }) %>
   </div>
-
-
-
-
-</body>
-
-</html>
+</div>

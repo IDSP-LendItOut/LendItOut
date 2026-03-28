@@ -71,6 +71,7 @@ router.get("/", async (req, res) => {
 
     res.render("listings/index", {
       title: "All Listings",
+      showSearchbar: false,
       listings: listingsWithFallback,
     });
   } catch (err) {
@@ -117,6 +118,7 @@ router.get("/:id", async (req, res) => {
 
     res.render("listings/show", {
       title: "Listing Detail",
+      showSearchbar: false,
       listing,
       related,
     });

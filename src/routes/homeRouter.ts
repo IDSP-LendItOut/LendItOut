@@ -86,6 +86,8 @@ homeRouter.get("/buying-page", async (req, res) => {
     const categories = await prisma.category.findMany();
 
     res.render("home/buying", {
+      title: "Categories",
+      showSearchbar: false,
       categories,
     });
   } catch (err) {
@@ -99,6 +101,8 @@ homeRouter.get("/renting-page", async (req, res) => {
     const categories = await prisma.category.findMany();
 
     res.render("home/renting", {
+      title: "Categories",
+      showSearchbar: false,
       categories,
     });
   } catch (err) {
@@ -145,13 +149,14 @@ homeRouter.get("/interestsview", (req, res) => {
 });
 
 homeRouter.get("/notifications", (req, res) => {
-  res.render("notifications/notifications", { title: "Notifications" });
+  res.render("notifications/notifications", { title: "Notifications", showSearchbar: false });
 });
 
 // Cart route
 homeRouter.get("/cart", (req, res) => {
   res.render("cart/cart", {
     title: "Cart",
+    showSearchbar: false,
     cartItems: [
       {
         name: "Tennis Rocket",
@@ -199,6 +204,7 @@ homeRouter.get("/cart", (req, res) => {
 homeRouter.get("/cart/checkout", (req, res) => {
   res.render("cart/checkout", {
     title: "Checkout",
+    showSearchbar: false,
     checkoutItems: [
       {
         name: "Tennis Rocket and Balls",
@@ -229,7 +235,7 @@ homeRouter.get("/cart/checkout", (req, res) => {
 
 // Checkout payment route
 homeRouter.get("/cart/checkout/payment", (req, res) => {
-  res.render("cart/checkpayment", { title: "Checkout Payment" });
+  res.render("cart/checkpayment", { title: "Payment", showSearchbar: false });
 });
 
 const items = [

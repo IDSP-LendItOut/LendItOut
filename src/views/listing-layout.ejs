@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="page-container">
+
+    <header class="buy-header">
+      <a href="/" class="buy-header-btn" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </a>
+      <h1 class="buy-header-title">View Listing</h1>
+      <div class="buy-header-menu-wrap">
+        <button id="menuButton" class="buy-header-btn" aria-label="More options">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- More Options overlay -->
+    <div id="moreOptionsOverlay" class="more-options-overlay" style="display:none;">
+      <div class="more-options-card">
+        <div class="more-options-header">
+          <span>More Options</span>
+          <button id="closeMoreOptions" class="more-options-close" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <hr class="more-options-divider" />
+        <ul>
+          <li><a href="#">FAQ's</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Report Listing</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <main class="main-content">
+      <%- body %>
+    </main>
+
+  </div>
+
+  <script src="/scripts/carousel.js"></script>
+  <script src="/scripts/listingHeader.js"></script>
+  <script src="/scripts/messages.js"></script>
+</body>
+</html>

@@ -75,7 +75,7 @@
 
     <p class="subtitle">Delivery Options</p>
     <div class="option-description">
-      <% if (posting.delivery.length) { %>
+      <% if (posting.delivery && posting.delivery.length) { %>
       <% for (let option of posting.delivery) { %>
       <p class="subdescription"><%= option %></p>
       <% } %>

@@ -2,12 +2,17 @@
 
 <div class="carousel-container">
   <div class="carousel-main-wrapper">
+    <% if (images.length > 1) { %>
     <button class="carousel-nav left" id="prevBtn">&#10094;</button>
+    <% } %>
 
     <img src="<%= images[0]?.url || '/images/fallback.jpg' %>" id="mainImage" class="carousel-main-image" />
 
+    <% if (images.length > 1) { %>
     <button class="carousel-nav right" id="nextBtn">&#10095;</button>
+    <% } %>
   </div>
+
 
   <% if (images.length > 1) { %>
     <div class="carousel-dots" id="carouselDots">

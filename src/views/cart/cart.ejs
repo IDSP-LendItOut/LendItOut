@@ -1,116 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="https://kit.fontawesome.com/380ad8a69c.js" crossorigin="anonymous"></script>
-</head>
-<body>
-  <header class="header">
-    <div class="header-bar">
-      <a href="/" aria-label="Go back to homepage">
-        <span class="fa back-arrow">&#8592;</span>
-      </a>
-      <span class="header-title">Cart</span>
-    </div>
-  </header>
+<% layout('layout') %>
 
-  <div class="cart-container">
+<div class="cart-page">
+
+  <div class="cart-items">
     <% cartItems.forEach(item => { %>
-      <!-- Item Card -->
-      <div class="item-card">
-        <div class="checkbox">
-          <input type="checkbox" id="select-item-<%= item.id %>" checked aria-label="Select item <%= item.name %>" />
-        </div>
-        <img src="<%= item.image %>" alt="<%= item.name %>" />
-        <div class="details">
-          <h4><%= item.name %></h4>
-          <div class="price"><%= item.priceLabel %></div>
-          <div class="quantity-control">
-            <button class="decrease-btn" data-id="<%= item.id %>" aria-label="Decrease quantity for <%= item.name %>">-</button>
-            <span class="quantity" id="quantity-<%= item.id %>"><%= item.quantity %></span>
-            <button class="increase-btn" data-id="<%= item.id %>" aria-label="Increase quantity for <%= item.name %>">+</button>
-          </div>
-          <div class="actions">
-            <% if (item.canRent) { %>
-              <button aria-label="Rent <%= item.name %>">Rent</button>
-            <% } %>
-            <% if (item.canBuy) { %>
-              <button aria-label="Buy <%= item.name %>">Buy</button>
-            <% } %>
+
+      <div class="cart-card">
+        <div class="cart-card-top">
+          <img src="/<%= item.image %>" alt="<%= item.name %>" />
+          <div class="cart-card-info">
+            <div class="cart-card-header">
+              <h4><%= item.name %></h4>
+              <input type="checkbox" class="cart-checkbox" id="select-<%= item.id %>" checked aria-label="Select <%= item.name %>" />
+            </div>
+            <p class="cart-price"><%= item.priceLabel %></p>
+            <div class="cart-qty">
+              <button class="decrease-btn" data-id="<%= item.id %>">−</button>
+              <span class="quantity" id="quantity-<%= item.id %>"><%= item.quantity %></span>
+              <button class="increase-btn" data-id="<%= item.id %>">+</button>
+            </div>
           </div>
         </div>
+
+        <div class="cart-card-bottom">
+          <div class="cart-tags">
+            <% item.contracts.forEach(contract => { %>
+              <a href="/termsconditions" class="cart-tag"><i class="fa-solid fa-file-lines"></i> <%= contract %></a>
+            <% }) %>
+          </div>
+          <label class="cart-insurance">
+            <input type="checkbox" id="insurance-<%= item.id %>" <%= item.insuranceSelected ? 'checked' : '' %> />
+            <span>Add insurance — $<%= item.insurance %></span>
+          </label>
+        </div>
+
+        <% if (item.canRent || item.canBuy) { %>
+          <div class="cart-toggle">
+            <% if (item.canRent) { %><button class="cart-toggle-btn active" data-mode="rent">Rent</button><% } %>
+            <% if (item.canBuy) { %><button class="cart-toggle-btn" data-mode="buy">Buy</button><% } %>
+          </div>
+        <% } %>
       </div>
 
-      <!-- Contracts Section -->
-      <div class="contracts">
-        <a href="/termsconditions">
-          <% item.contracts.forEach(contract => { %>
-            <span><%= contract %></span>
-          <% }) %>
-        </a>
-      </div>
-
-      <!-- Insurance Section -->
-    <div class="insurance">
-      <span> Insurance $<%= item.insurance %></span>
-      <input type="checkbox" id="insurance-<%= item.id %>" <%= item.insuranceSelected ? 'checked' : '' %> aria-label="Add insurance for <%= item.name %>" />
-    </div>
     <% }) %>
-
-    <!-- Summary Section -->
-    <div class="summary">
-      <div class="total-line">
-        <span>Subtotal Rent</span>
-        <span>$<%= subtotalRent %></span>
-      </div>
-      <div class="total-line">
-        <span>Subtotal Buy</span>
-        <span>$<%= subtotalBuy %></span>
-      </div>
-      <div class="total-line">
-        <span>Insurance</span>
-        <span>$<%= totalInsurance %></span>
-      </div>
-      <div class="total-line">
-        <span>Shipping</span>
-        <span>$<%= shipping %></span>
-      </div>
-      <hr />
-      <div class="total-line">
-        <strong>Total</strong>
-        <strong>$<%= total %></strong>
-      </div>
-      <a href="/cart/checkout" class="checkout-btn" aria-label="Proceed to checkout">Check out</a>
-    </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cartContainer = document.querySelector('.cart-container');
+  <div class="cart-summary">
+    <div class="cart-summary-rows">
+      <div class="summary-row"><span>Subtotal (Rent)</span><span>$<%= subtotalRent %></span></div>
+      <div class="summary-row"><span>Subtotal (Buy)</span><span>$<%= subtotalBuy %></span></div>
+      <div class="summary-row"><span>Insurance</span><span>$<%= totalInsurance %></span></div>
+      <div class="summary-row"><span>Shipping</span><span>$<%= shipping %></span></div>
+      <div class="summary-row total"><strong>Total</strong><strong>$<%= total %></strong></div>
+    </div>
+    <a href="/cart/checkout" class="cart-checkout-btn">Proceed to Checkout</a>
+  </div>
 
-      cartContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('increase-btn')) {
-          const itemId = event.target.getAttribute('data-id');
-          const quantityElement = document.getElementById(`quantity-${itemId}`);
-          let currentQuantity = parseInt(quantityElement.textContent);
-          quantityElement.textContent = currentQuantity + 1;
-        }
+</div>
 
-        if (event.target.classList.contains('decrease-btn')) {
-          const itemId = event.target.getAttribute('data-id');
-          const quantityElement = document.getElementById(`quantity-${itemId}`);
-          let currentQuantity = parseInt(quantityElement.textContent);
-          if (currentQuantity > 1) {
-            quantityElement.textContent = currentQuantity - 1;
-          }
-        }
-      });
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.cart-items').addEventListener('click', (e) => {
+      if (e.target.classList.contains('cart-toggle-btn')) {
+        const toggle = e.target.closest('.cart-toggle');
+        toggle.querySelectorAll('.cart-toggle-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+      if (e.target.classList.contains('increase-btn')) {
+        const qty = document.getElementById(`quantity-${e.target.dataset.id}`);
+        qty.textContent = parseInt(qty.textContent) + 1;
+      }
+      if (e.target.classList.contains('decrease-btn')) {
+        const qty = document.getElementById(`quantity-${e.target.dataset.id}`);
+        if (parseInt(qty.textContent) > 1) qty.textContent = parseInt(qty.textContent) - 1;
+      }
     });
-  </script>
-
-  <%- include('../partials/footer') %>
-</body>
-</html>
+  });
+</script>

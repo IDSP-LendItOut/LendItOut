@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const userId = req.session?.userId;
-    if (!userId) return res.redirect('/login');
+    const userId = req.session?.user?.id;
+    if (!userId) return res.redirect('/auth/login');
 
     const user = await prisma.user.findUnique({ where: { id: userId } });
 

@@ -1,200 +1,270 @@
-.cart-container {
-  max-width: 100%;
-  margin: auto;
-  padding: 15px;
+.cart-page {
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+  min-height: 100%;
+  padding-bottom: 1rem;
+}
 
-  .item-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: $shadow;
-    padding: 15px;
-    margin-bottom: 20px;
+// ── Item list ─────────────────────────────────────────
+.cart-items {
+  flex: 1;
+  padding: 1.2rem 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// ── Item card ─────────────────────────────────────────
+.cart-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.4rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+
+  .cart-card-top {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    position: relative;
+    gap: 1.2rem;
 
     img {
-      width: 80px;
-      height: 80px;
-      margin-right: 15px;
+      width: 72px;
+      height: 72px;
+      border-radius: 10px;
       object-fit: cover;
+      flex-shrink: 0;
+      background: #eee;
     }
+  }
 
-    .details {
-      flex: 1;
+  .cart-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cart-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    h4 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #111;
+      margin: 0;
+      white-space: nowrap;
       overflow: hidden;
-
-      h4 {
-        margin: 0;
-        font-size: 16px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .price {
-        font-size: 14px;
-        color: #666;
-        margin-top: 5px;
-      }
-
-      .quantity-control {
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-
-        button {
-          background: $color-primary;
-          color: white;
-          border: none;
-          padding: 5px 10px;
-          margin: 0 5px;
-          border-radius: 5px;
-        }
-      }
-
-      .actions {
-        margin-top: 15px; /* Added spacing above the Rent/Buy buttons */
-
-        button {
-          background: $color-primary;
-          color: white;
-          border: none;
-          padding: 8px 15px;
-          margin-right: 10px; /* Added spacing between buttons */
-          border-radius: 5px;
-          font-size: 14px;
-          cursor: pointer;
-          transition: background 0.3s ease;
-
-          &:hover {
-            background: darken($color-primary, 10%); /* Slightly darker on hover */
-          }
-        }
-      }
-    }
-
-    .checkbox {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-
-      input[type="checkbox"] {
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border: 2px solid #ddd;
-        background-color: white;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-
-        &:checked {
-          background-color: $color-primary; 
-          border-color: $color-primary;
-        }
-
-        &:checked::after {
-          content: "✔";
-          color: white;
-          font-size: 14px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-
-        &:hover {
-          border-color: #999;
-        }
-      }
+      text-overflow: ellipsis;
     }
   }
 
-  .contracts {
-    margin-top: 20px; /* Added spacing above the contracts section */
-    margin-bottom: 20px; /* Added spacing below the contracts section */
-
-    span {
-      display: inline-block;
-      background: #eee;
-      padding: 5px 8px;
-      border-radius: 5px;
-      font-size: 12px;
-      margin-right: 5px;
-    }
+  .cart-price {
+    font-size: 1.2rem;
+    color: $color-primary;
+    font-weight: 600;
+    margin: 0.3rem 0 0.8rem;
   }
 
-  .insurance {
-    margin-bottom: 15px; /* Increased spacing above the insurance section */
+  .cart-qty {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: #f4f4f4;
+    border-radius: 8px;
+    width: fit-content;
 
-    span {
-      display: inline-block;
-      background: #eee;
-      padding: 5px 8px;
-      border-radius: 5px;
-      font-size: 12px;
-      margin-right: 10px; /* Added spacing between the button and the checkbox */
-    }
-
-    input[type="checkbox"] {
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border: 2px solid #ddd;
-      background-color: white;
+    button {
+      width: 30px;
+      height: 30px;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: $color-primary;
       cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      &:checked {
-        background-color: $color-primary; 
-        border-color: $color-primary;
-      }
+    .quantity {
+      min-width: 28px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #222;
+    }
+  }
 
-      &:checked::after {
+  // ── Checkbox ────────────────────────────────────────
+  .cart-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.2s;
+
+    &:checked {
+      background: $color-primary;
+      border-color: $color-primary;
+
+      &::after {
         content: "✔";
-        color: white;
-        font-size: 14px;
+        color: #fff;
+        font-size: 1.1rem;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
       }
-
-      &:hover {
-        border-color: #999;
-      }
     }
   }
 
-  .summary {
-    background: white;
-    padding: 15px;
-    box-shadow: $shadow;
+  // ── Bottom row ──────────────────────────────────────
+  .cart-card-bottom {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .cart-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .cart-tag {
+      font-size: 1.15rem;
+      color: #555;
+      background: #f0f0f0;
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      text-decoration: none;
+
+      i { margin-right: 0.3rem; }
+    }
+  }
+
+  .cart-insurance {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      background: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      transition: all 0.2s;
+
+      &:checked {
+        background: $color-primary;
+        border-color: $color-primary;
+
+        &::after {
+          content: "✔";
+          color: #fff;
+          font-size: 1rem;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+    span {
+      font-size: 1.2rem;
+      color: #555;
+    }
+  }
+
+  // ── Rent / Buy toggle ────────────────────────────────
+  .cart-toggle {
+    display: flex;
+    margin-top: 1.2rem;
+    background: #f0f0f0;
     border-radius: 10px;
-    text-align: center;
-    margin: 0 auto;
+    padding: 3px;
+    gap: 3px;
+  }
+
+  .cart-toggle-btn {
+    flex: 1;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: #999;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+
+    &.active {
+      background: #fff;
+      color: $color-primary;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+  }
+}
+
+// ── Summary card ──────────────────────────────────────
+.cart-summary {
+  margin: 1.2rem;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.4rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+
+  .cart-summary-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    color: #555;
+
+    &.total {
+      padding-top: 0.8rem;
+      border-top: 1px solid #eee;
+      font-size: 1.5rem;
+      color: #111;
+    }
+  }
+
+  .cart-checkout-btn {
+    display: block;
     width: 100%;
+    text-align: center;
+    background: $color-primary;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1.3rem;
+    border-radius: 12px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background 0.2s;
 
-    .total-line {
-      display: flex;
-      justify-content: space-between;
-      margin: 5px 0;
-    }
-
-    .checkout-btn {
-      margin-top: 10px;
-      background: $color-primary;
-      color: white;
-      border: none;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      box-sizing: border-box;
-    }
+    &:active { background: darken($color-primary, 10%); }
   }
 }
